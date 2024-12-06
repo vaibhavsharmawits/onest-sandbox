@@ -12,7 +12,7 @@ export const bapRouter = Router();
 
 bapRouter.post(
 	"/on_search",
-	// jsonSchemaValidator({ domain: "onest", action: "on_search" }),
+	jsonSchemaValidator({ domain: "onest", action: "on_search" }),
 	redisRetriever,
 	onSearchController
 );

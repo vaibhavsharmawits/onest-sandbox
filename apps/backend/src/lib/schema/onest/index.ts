@@ -56,9 +56,12 @@ export const onestSchemaValidator =
 
 		switch (schema) {
 			case "search":
+				console.log("hello1")
 				validate = ajv.compile(searchSchema);
 				break;
 			case "on_search":
+				console.log("hello2")
+				// console.log(JSON.stringify(onSearchSchema, null, 2));
 				validate = ajv.compile(onSearchSchema);
 				break;
 			// case "select":

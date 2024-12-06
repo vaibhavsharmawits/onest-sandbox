@@ -261,6 +261,7 @@ value:
                 #       value: "1200000"
                 - descriptor:
                     code: NP_FEES
+                    name: NP_FEES
                   list:
                     - code: ID
                       value: "1"
@@ -274,6 +275,7 @@ value:
                       value: OFFER_ACCEPTED
                 - descriptor:
                     code: NP_FEES
+                    name: NP_FEES
                   list:
                     - code: ID
                       value: "2"
@@ -287,6 +289,7 @@ value:
                       value: OFFER_EXTENDED
                 - descriptor:
                     code: NP_FEES
+                    name: NP_FEES
                   list:
                     - code: ID
                       value: "3"
@@ -508,6 +511,7 @@ value:
                       value: "1200000"
                 - descriptor:
                     code: NP_FEES
+                    name: NP_FEES
                   list:
                     - code: ID
                       value: "1"
@@ -521,6 +525,7 @@ value:
                       value: OFFER_ACCEPTED
                 - descriptor:
                     code: NP_FEES
+                    name: NP_FEES
                   list:
                     - code: ID
                       value: "2"
@@ -534,6 +539,7 @@ value:
                       value: OFFER_EXTENDED
                 - descriptor:
                     code: NP_FEES
+                    name: NP_FEES
                   list:
                     - code: ID
                       value: "3"
@@ -747,6 +753,7 @@ value:
                       value: "900000"
                 - descriptor:
                     code: NP_FEES
+                    name: NP_FEES
                   list:
                     - code: ID
                       value: "1"
@@ -760,6 +767,7 @@ value:
                       value: OFFER_ACCEPTED
                 - descriptor:
                     code: NP_FEES
+                    name: NP_FEES
                   list:
                     - code: ID
                       value: "2"
@@ -773,6 +781,7 @@ value:
                       value: OFFER_EXTENDED
                 - descriptor:
                     code: NP_FEES
+                    name: NP_FEES
                   list:
                     - code: ID
                       value: "3"
