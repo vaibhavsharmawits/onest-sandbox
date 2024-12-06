@@ -1,0 +1,207 @@
+title:
+  - code: type
+    description: Depending upon the context, it can take the value of the discount, tax, misc or item type value.
+    reference: <PR/Issue/Discussion Links md format text>
+breakup_type:
+  - code: item
+    description: item/service level
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: tax
+    description: Any kind of tax
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: discount
+    description: Any kind of discount/offer deduction
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: convenience_fee
+    description: Convenience Fee (fulfillment level)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: refund
+    description: Refund in case of cancellation
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: misc
+    description: Any miscellanous cost
+    reference: <PR/Issue/Discussion Links md format text>
+selection_params:
+  - code: ITEM_IDS
+    description: Comma-separated list of item IDs that are to be selected for this fulfillment
+    reference: <PR/Issue/Discussion Links md format text>
+Settlement_Details:
+  - code: Counterparty
+    description: Counterparty involved; Can be BAP/BPP
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: Mode
+    description: Mode of Payment. E.g. UPI
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: Beneficiary_Name
+    description: Description of the Tag
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: Bank_Account_No
+    description: Bank Account of the counterpart
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: Ifsc_Code
+    description: IFSC Code for the Bank Account of the Counter party.
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: UPI_Address
+    description: Description of the Tag
+    reference: <PR/Issue/Discussion Links md format text>
+Buyer_Finder_Fee:
+  - code: FINDER_FEE_TYPE
+    description: Type of the finder fee. eg. "percent"
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: FINDER_FEE_AMOUNT
+    description: Amount for the finder fee
+    reference: <PR/Issue/Discussion Links md format text>
+schedule:
+  - code: ttl
+    description: ISO8601 type format for time to live of the fulfillment
+    reference: <PR/Issue/Discussion Links md format text>
+serviceability:
+  - code: location
+    description: Description of the Tag
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: category
+    description: Description of the Tag
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: type
+    description: Description of the Tag
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: val
+    description: Description of the Tag
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: unit
+    description: Description of the Tag
+    reference: <PR/Issue/Discussion Links md format text>
+attributes:
+  - code: color
+    description: Hex Code for color
+    reference: <PR/Issue/Discussion Links md format text>
+BAP_TERMS:
+  - code: FINDER_FEE_TYPE
+    description: Type of the finder fee. eg. "percent"
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: FINDER_FEE_AMOUNT
+    description: Amount for the finder fee
+    reference: <PR/Issue/Discussion Links md format text>
+BAP_DETAILS:
+  - code: BUYER_TYPE
+    description: Type of buyer - FARMER, TRADER or FPO
+    reference: <PR/Issue/Discussion Links md format text>
+SELECTION:
+  - code: SEQ
+    description: Sequence of the category
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: MANDATORY_SELECTION
+    description: Whether it is a mandatory selection
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: MIN_SELECTION
+    description: Number of minimum selections allowed for this category
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: MAX_SELECTION
+    description: Number of maximum selections allowed for this category
+    reference: <PR/Issue/Discussion Links md format text>
+SERVICE_INFORMATION:
+  - code: PICKUP_TAT
+    description: TAT for picking up the sample, only required if Seller-Fulfilled
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: COMPLETION_TAT
+    description: TAT for completing the whole test including pickup TAT, if applicable
+    reference: <PR/Issue/Discussion Links md format text>
+RESCHEDULE_TERMS:
+  - code: FULFILLMENT_STATE
+    description: Describing the fulfilment state for which reschdule will be applicable
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: RESCHEDULE_ELIGIBLE
+    description: Whether reschedule is available at this fulfillment state
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: RESCHEDULE_FEE
+    description: Fees that will be charged if rescheduled at this fulfillment state
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: RESCHEDULE_WITHIN
+    description: Time within which it should be rescheduled after the fulfilment has been changed
+    reference: <PR/Issue/Discussion Links md format text>
+SETTLEMENT_DETAILS:
+  - code: COUNTERPARTY
+    description: The counterparty to which the settlement needs to be done - BAP/BPP
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: MODE
+    description: The settlement mode - RTGS, NEFT, UPI
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: BENEFICIARY_NAME
+    description: Name of the beneficiary
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: BANK_ACCOUNT_NO
+    description: Account number of the settlement party
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: IFSC_CODE
+    description: IFSC code of the bank
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: UPI_ADDRESS
+    description: UPI address where the settlement needs to be done
+    reference: <PR/Issue/Discussion Links md format text>
+REPORT_REQUIREMENT:
+  - code: REPORT_DEADLINE
+    description: The deadline within which report is required
+    reference: <PR/Issue/Discussion Links md format text>
+ATTRIBUTE:
+  - code: TYPE
+    description: The type of item - PACKAGE or TEST
+  - code: CHILD_TEST_IDS
+    description: A comma separated list of items that are in this package
+  - code: PARENT_PACKAGE_IDS
+    description: A comma separated list of items/packages that this test is also included in
+ADDITIONAL_TEST_INFORMATION:
+  - code: ALIAS
+    description: Common other names of the test
+  - code: RISK_ASSESSMENT
+    description: Risk assessment of the test, can be - LOW, MEDIUM, HIGH
+TEST_CRITERIA:
+  - code: GENDER
+    description: If the test is gender-specific - Optional
+  - code: AGE_RANGE
+    description: Comma separated list of age range groups - 0-7,8-19,20-59,60+
+  - code: PRESCRIPTION_REQUIRED
+    description: Whether a prescription will be required at the time of conducting the test or collecting sample
+  - code: SAMPLE_COLLECTION
+    description: Whether sample collection will be done for this test
+TEST_PARAMETERS:
+  - code: <Parameters>
+    description: Paramteres that will be checked under a test
+PRE_TEST_PREPARATION:
+  - code: FASTING
+    description: Whether fasting is required under this test or not
+  - code: PRE_INTAKE
+    description: Whether some kind of pre-intake of medicine or any other things is required or not
+FASTING:
+  - code: DURATION
+    description: Duration for which fasting must be done
+PRE_INTAKE:
+  - code: DURATION_GAP
+    description: Duration between the intake and the test
+  - code: CONSUMTION_TYPE_INSTRUCTION
+    description: Instructions to follow for pre-intake
+PATIENT_DETAILS:
+  - code: ~PATIENT_ID_CODE
+    description: Patient ID code by which another tag group is defined
+  - code: CONTACT_PREFERENCE
+    description: ID of the preference of contact
+BENEFIT:
+  - code: VALUE_TYPE
+    description: Type of value - percent or amount
+  - code: VALUE
+    description: The value of discount
+  - code: VALUE_CAP
+    description: If there is a cap to the discount
+META:
+  - code: ADDITIVE
+    description: If the offer can be applicable more than once
+  - code: AUTO
+    description: If the offer code will be auto-applied
+PI1:
+  - code: NAME
+    description: Name of the patient
+  - code: GENDER
+    description: Gender of the patient
+  - code: AGE
+    description: Age of the patient
+  - code: MOBILE_NUMBER
+    description: Mobile number of the patient

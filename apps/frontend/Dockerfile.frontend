@@ -1,0 +1,52 @@
+FROM node:20-alpine AS base
+
+FROM base AS pruner
+RUN apk update
+RUN apk add --no-cache libc6-compat
+# Set working directory
+WORKDIR /app
+RUN npm install global turbo
+COPY . .
+RUN npx turbo prune frontend --docker
+
+
+FROM base AS builder
+RUN apk update
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+
+COPY .gitignore .gitignore
+COPY --from=pruner /app/out/json/ .
+COPY --from=pruner /app/out/package-lock.json ./package-lock.json
+RUN npm i --force
+COPY --from=pruner /app/out/full/ .
+COPY turbo.json turbo.json
+ENV NODE_OPTIONS=--max_old_space_size=4096
+RUN npm run build
+
+# Stage 2: Production Image
+FROM nginx:alpine AS ondc-mock-web
+# RUN addgroup --system --gid 1001 vite
+# RUN adduser --system --uid 1001 react
+# USER react
+
+# Copy the build output to the nginx html directory
+COPY --from=builder /app/apps/frontend/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Expose port 80
+EXPOSE 80
+
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
+
+# FROM base AS ondc-mock-web
+
+# WORKDIR /app
+# RUN npm i -g serve
+
+# COPY --from=builder /app/apps/frontend/dist .
+
+# EXPOSE 5173
+
+# CMD [ "serve", "-s", "dist" ]

@@ -1,0 +1,15 @@
+order:
+  status:
+    - code: Created or Accepted
+      description: When order is placed 
+      reference: <PR/Issue/Discussion Links md format text>
+    - code: In-progress
+      description: All the intermediate fulfillment state is managed with in-progress state in order
+      reference: <PR/Issue/Discussion Links md format text>
+    - code: Completed
+      description: When Order has been delivered
+      reference: <PR/Issue/Discussion Links md format text>
+    - code: Cancelled
+      description: When Order has been cancelled
+      reference: <PR/Issue/Discussion Links md format text>
+ 

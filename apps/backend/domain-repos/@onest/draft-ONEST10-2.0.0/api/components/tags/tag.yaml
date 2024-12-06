@@ -1,0 +1,285 @@
+title:
+  - code: type
+    description: Depending upon the context, it can take the value of the discount, tax, misc, refundable security or item type value. (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+Payment_Details:
+  - code: Reason
+    description: Reason for payment request, check the possible enum from enum list (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+Settlement_Details:
+  - code: Counterparty
+    description: Counterparty involved; Can be BAP/BPP (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: Mode
+    description: Mode of Payment. E.g. UPI, NEFT, RTGS (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: Beneficiary_Name
+    description: Description of the Tag (Required in case of neft and rtgs)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: Bank_Account_No
+    description: Bank Account of the counterpart (Required in case of neft and rtgs)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: Ifsc_Code
+    description: IFSC Code for the Bank Account of the Counter party (Required in case of neft and rtgs)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: UPI_Address
+    description: Description of the Tag (Required in case of UPI mode)
+    reference: <PR/Issue/Discussion Links md format text>
+Buyer_Finder_Fee:
+  - code: FINDER_FEE_TYPE
+    description: Type of the finder fee. eg. "percent" (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: FINDER_FEE_AMOUNT
+    description: Amount for the finder fee (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+schedule:
+  - code: ttl
+    description: ISO8601 type format for time to live of the fulfillment (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+serviceability:
+  - code: location
+    description: Location id (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: category
+    description: Category id for equipment (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: type
+    description: Serviceability type id (10 - hyperlocal, 11 - intercity, 12 - pan india, 13 - polygon) (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: val
+    description: Serviceability type values like radius, pincode or poligon co-ordinates (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: unit
+    description: Unit of serviceability type values like KM, geojson (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+qualifier:
+  - code: min_value
+    description: Minimum value which offer can apply (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+benefit:
+  - code: item_count
+    description: Benefit equipment count which offer can avail (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: item_id
+    description: Equipment id which offer can avail (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: item_value
+    description: Equipment Value which can avail (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+meta:
+  - code: additive
+    description: Offer additive (i.e yes, no) (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: auto
+    description: Offer auto applied (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+attributes:
+  - code: color
+    description: Hex Code for color (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+EMPLOYMENT_TYPE:
+  - code: full-time
+    description: Type of EMPLOYMENT_TYPE
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: part-time
+    description: Type of EMPLOYMENT_TYPE
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: contractual 
+    description: Type of EMPLOYMENT_TYPE
+    reference: <PR/Issue/Discussion Links md format text>
+CATALOG_FULL:
+    - code: PAYLOAD_TYPE
+      description: The format in which the buyer Np wants the catalog
+      reference: <PR/Issue/Discussion Links md format text>
+CATALOG_INC:
+    - code: START_TIME
+      description: Effective start time of pull based incremental catalog refresh
+      reference: <PR/Issue/Discussion Links md format text>
+    - code: END_TIME
+      description: Cutoff time of pull based incremental catalog refresh
+      reference: <PR/Issue/Discussion Links md format text>
+    - code: MODE
+      description: Used for starting or stopping async incremental catalog refresh
+      reference: <PR/Issue/Discussion Links md format text>
+SELECTION:
+  - code: SEQ
+    description: Sequence of the category (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: MANDATORY_SELECTION
+    description: Whether it is a mandatory selection (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: MIN_SELECTION
+    description: Number of minimum selections allowed for this category (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: MAX_SELECTION
+    description: Number of maximum selections allowed for this category (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+SERVICE_INFORMATION:
+  - code: PICKUP_TAT
+    description: TAT for picking up the sample, only required if Seller-Fulfilled (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+ADDITIONAL_CHARGES:
+  - code: CURRENCY_UNIT
+    description: Currency of the aditional charges that may apply on item (Required in case of amount have in tags)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: REFUNDABLE_SECURITY
+    description: Refundable security amount that may applicable on item (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: SURCHARGES
+    description: Applicable charges if buyer use the equipment for extra time (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: SURCHARGES_FREQUENCY
+    description: Frequency how the surcharges going to apply on item like hourly, daily or weekly (Required if SURCHARGES selected)
+    reference: <PR/Issue/Discussion Links md format text>
+RESCHEDULE_TERMS:
+  - code: FULFILLMENT_STATE
+    description: Describing the fulfilment state for which reschdule will be applicable (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: RESCHEDULE_ELIGIBLE
+    description: Whether reschedule is available at this fulfillment state (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: RESCHEDULE_FEE_TYPE
+    description: Fees type (i.e. percent, amount) that will be charged if rescheduled at this fulfillment state (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: RESCHEDULE_FEE
+    description: Fees that will be charged if rescheduled at this fulfillment state (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: RESCHEDULE_WITHIN
+    description: Time within which it should be rescheduled after the fulfilment has been changed (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+INSURANCE:
+  - code: INSURANCE_ID
+    description: Insurance  Id for equipment uses if applicable (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: INSURANCE_MIME_TYPE
+    description: Insurance  mime type for equipment uses if applicable (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: INSURANCE_COPY
+    description: Insurance  copy for equipment uses if applicable (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+CHECKLIST_DOCUMENTS:
+  - code: TERMS_AND_CONDITION
+    description: Terms and condition for equipment uses if applicable (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: LEASE_POLICY
+    description: Lease policy for equipment hiring if applicable (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: AGREEMENT_POLICY
+    description: Agreement policy for equipment hiring if applicable (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: ID_VERIFICATION_POLICY
+    description: Id verification policy for equipment hiring if applicable (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: INSPECTION_REQUIREMENTS
+    description: Inspection requirements for equipment hiring if applicable (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: OBLIGATIONS
+    description: Obligations for equipment hiring if applicable (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: TERMS_OF_USAGE
+    description: Terms of uses for equipment hiring if applicable (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+
+NP_FEES:
+  - code: COMMERCIAL_TYPE
+    description: commercial type - [percent, value]
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: COMMERCIAL_VALUE
+    description: commercial value - [percentage, number]
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: COMMERCIAL_NAME
+    description: commercial name - [verified, recruitment, qualified]
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: COMMERCIAL_TRIGGERING_STATE
+    description: commercial triggering - [APPLICATION_SUBMITTED, OFFER_ACCEPTED, OFFER_EXTENDED]
+    reference: <PR/Issue/Discussion Links md format text>
+
+SALARY:
+  - code: GROSS_MIN
+    description: Minimum gross pay
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: GROSS_MAX
+    description: Maximum gross pay
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: AVERAGE
+    description: Average gross pay
+    reference: <PR/Issue/Discussion Links md format text>  
+  
+LISTING_DETAILS:
+  - code: INDUSTRY_TYPE
+    description: Industry Type - ["Information Technology", "Healthcare", "Education", "Finance", "Manufacturing", "Retail", "Hospitality", "Transportation", "Real Estate", "Media & Entertainment"]
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: DEPARTMENT
+    description: Department - ["Engineering", "Sales", "Marketing", "Human Resources", "Operations", "Finance", "Legal", "Customer Support", "IT Support", "Research & Development", "Logistics", "Design"]
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: JOB_LEVEL
+    description: Job Level - ["Administration", "Facility Management", "Cosmetology", "Skin Care", "Beauty Consulting", "Permanent Makeup", "Body Art", "Personal Training", "Sports Coaching", "Health and Wellness Coaching", "Rehabilitation and Therapy", "Personal Styling", "Wellness and Relaxation", "Nutrition and Diet", "Spa and Wellness Services", "Household Maintenance and Cleaning", "Child Care", "Elderly Care", "Cooking", "Gardening", "Transportation", "Pet Care", "Software Development", "Quality Assurance and Testing", "DBA/Data Warehousing", "IT Infrastructure Services", "IT and Information Security", "IT Support", "IT Network", "DevOps", "Hardware and Networks", "Editing", "Artists", "Animation/Effects", "Production", "Direction", "Sounds/Lights/Technical Support", "Makeup/Beauty", "CSR and Sustainability", "Social and Public Service", "Restaurant Management", "Culinary Staff", "Serving Staff", "Catering and Events", "Hotel Management", "Housekeeping", "Guest Services", "Maintenance Services", "Travel Services", "Personal Security", "Corporate Security", "Security Management", "Event Security", "Law Enforcement and Public Safety", "Cybersecurity", "Fire Safety", "Emergency Medical Services", "Surveillance and Investigation", "Security Consulting and Risk Management", "Military and Defense", "Specialised Security Services", "Health and Safety Inspector", "Fashion Design", "Pattern Making", "Textile Design", "Product Development", "Tailoring", "Seamstress and Sewers", "Garment Technologists", "Cutting and Machining", "Customisations and Alterations", "Fashion Merchandising", "Styling and Fashion Consultants", "Sustainability and Ethical Fashion", "Technology and Innovation", "Education and Training", "Fashion Journalism and Media", "Quality Assurance and Control", "Specialised Roles", "Copywriting", "Graphic Design", "Content Creation", "Video Production", "Brand Management", "Marketing Strategy", "Media Planning and Buying", "Digital Marketing", "Social Media Management", "Email Marketing", "Public Relations Management", "Media Relations", "Crisis Communication", "Account Management and Client Services", "Market Research", "Data Analytics", "UI/UX Research", "Advertising/Broadcast Production", "Sales and Business Development", "Event Planning and Management", "Internal and Corporate Communications", "Education and Training", "Customer Service", "Technical Support", "Sales Support", "Client Relations", "Product Support", "Field Support", "Financial Services", "Healthcare Support", "Software Support", "E-commerce", "Telecommunication", "Retail", "Travel and Hospitality", "Exploration and Production", "Renewable Energy", "Power Generation", "Transmission and Distribution", "Environment and Safety", "Support Services", "Exploration", "Extraction", "Processing and Refining", "Health, Safety and Environment", "Mine Planning and Development", "Research and Development", "Physicians and Surgeons", "Nursing", "Pharmacy", "Mental Health and Wellbeing", "Medical Technologists and Technicians", "Dentistry", "Veterinary Medicine", "Naturopathy", "Diet and Nutrition", "Homecare", "Medical Research and Education", "Biomedicine", "Alternative Medicine", "Rehabilitation", "Public Health", "Administration", "Financial Analysis", "Financial Planning", "Treasury", "Investor Relations", "Public Accounting", "Corporate Accounting", "Financial Reporting", "Accounts Payable and Receivable", "Payroll", "Internal Auditing", "External Auditing", "Taxation", "Risk Management and Compliance", "Corporate Finance", "Mergers and Acquisitions", "Portfolio Management", "Wealth Management", "Retail Banking", "Commercial Banking", "Underwriting", "Claims", "Actuarial", "Financial Technology", "Treasury and Capital Markets", "Credit Analysis and Lending", "Financial Consulting", "Store Management", "Sales and Customer Service", "Inventory and Stock Management", "Visual Merchandising", "E-commerce Management", "Product Management", "Digital Marketing", "Customer Experience", "Supply Chain Management", "Warehouse Operations", "Transportation and Delivery", "Buying and Merchandising", "Marketing and Sales", "Information Technology (IT)", "Design and Product Development", "Customer Support", "Human Resources", "Business Development", "Compliance and Risk Management", "Luxury Retail", "Pop-up Shops and Events", "Production Management", "Machine Operations", "Quality Control and Operations", "Maintenance and Repair", "Manufacturing Engineering", "Product Design and Development", "Automation and Robotics", "Supply Chain Management", "Warehouse Management", "Transportation and Distribution", "Lean Manufacturing and Continuous Improvement", "Procurement and Purchasing", "Planning and Scheduling", "Specialised Roles", "Deck Department", "Shipping Department", "Engineering Department", "Steward Department", "Navigation", "Logistics Management", "Port Operations", "Cargo Management", "Maritime Safety and Security", "Marine Engineering and Technical Services", "Maritime Law and Administration", "Maritime Education and Training", "Offshore Operations", "Cruise Industry", "Fisheries and Aquaculture", "Information Technology (IT)", "Specialised Roles", "Preschool Education", "Daycare Services", "Elementary Education", "Middle School Education", "High School Education", "University and College Faculty", "Academic Administration", "Research and Development", "Vocational Instructors", "Apprenticeship Programs", "Adult Education", "Training and Development Specialists", "Instructional Design", "Organizational Development", "Special Education", "Counselling", "Tutoring", "Library and Media Services", "Ed Tech Developers", "Technology Integration Specialists", "School Administration", "Curriculum Development", "Policy and Advocacy", "After School Programs", "Summer Camp", "Academic Advising", "Student Affairs", "Financial Aid and Admissions", "Professional and Personal Development", "Language Education", "Health and Physical Education", "Music and Arts Education", "Science and Technology Education", "Flight Crew", "Air Traffic Control", "Airport Operations", "Aerospace Engineering", "Aircraft Design and Manufacturing", "Spacecraft Design and Engineering", "Aircraft Maintenance", "Line Maintenance", "Component Overhaul and Repair", "Aviation Security and Safety", "Airline and Airport Management", "Aerospace Manufacturing and Production", "Aviation Research and Development", "Airline Customer Management", "Space Exploration and Satellite Operations", "Aviation Education and Training", "Aerospace Finance and Administration", "Aerospace Laws and Regulations", "Unmanned Aerial Systems (UAS) and Drones", "Aerospace Medicine and Health", "Specialised Roles", "Strategy Consulting", "Operations Consulting", "Financial Consulting", "Technology Advisory", "ERP Consulting", "Software Implementation", "HR Strategy Consulting", "Recruitment Consulting", "Employee Benefit Consulting", "Market Research Consulting", "Sales Strategy Consulting", "Digital Marketing Consulting", "Healthcare Consulting", "Environmental Consulting", "Legal Consulting", "Education Consulting", "Real Estate Consulting", "Public Sector Consulting", "Risk Management and Compliance Consulting", "Organizational Consulting"]
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: GENDER
+    description: Gender - ["Male", "Female", "Transgender", "Others"]
+    reference: <PR/Issue/Discussion Links md format text>
+
+ACADEMIC_ELIGIBILITY:
+  - code: COURSE_NAME
+    description: Course name - ["Class X", "Class-XII", "Bachelor of Arts (B.A.)", "Bachelor of Fine Arts (BFA)", "Bachelor of Design (B.Des)", "Bachelor of Science (B.Sc.)", "Bachelor of Commerce (B.Com)", "Bachelor of Business Administration (BBA)", "Bachelor of Technology (B.Tech)", "Bachelor of Engineering (B.E.)", "Bachelor of Architecture (B.Arch)", "Bachelor of Computer Applications (BCA)", "Bachelor of Pharmacy (B.Pharm)", "Bachelor of Laws (LLB)", "Bachelor of Medicine and Bachelor of Surgery (MBBS)", "Bachelor of Dental Surgery (BDS)", "Bachelor of Education (B.Ed)", "Master of Arts (M.A.)", "Master of Science (M.Sc.)", "Master of Fine Arts (MFA)", "Master of Design (M.Des)", "Master of Commerce (M.Com)", "Master of Business Administration (MBA)", "Master of Technology (M.Tech)", "Master of Engineering (M.E.)", "Master of Computer Applications (MCA)", "Master of Pharmacy (M.Pharm)", "Master of Laws (LLM)", "Doctor of Medicine (MD)", "Master of Surgery (MS)", "Master of Education (M.Ed)"]
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: COURSE_LEVEL
+    description: Course level - ["Primary Education", "Secondary Education", "Under Graduate", "Post Graduate", "Doctoral"]
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: MIN_PERCENTAGE
+    description: Minimum percentage of marks to be obtained in the course for eligibility
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: MIN_CGPA
+    description: Minimum CGPA of marks to be obtained in the course for eligibility
+    reference: <PR/Issue/Discussion Links md format text>
+EQUIPMENT_ATTRIBUTES:
+  - code: ALIAS
+    description: Item alias name or alternate name (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: TYPE
+    description: Type of the item, mandatory only when the item is a customization (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: CONDITION
+    description: Equipment condition (it can be rating like 5) if applicable (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: OWNERSHIP
+    description: Ownership status for the equipment (1st owner, 2nd owner) if applicable (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: RUNNING_HOURS
+    description: Running hours status for the equipment (Ex - 500) if applicable  (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: RUNNING_HOURS
+    description: Running hours status for the equipment (500 hours) if applicable (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: MODEL_YEAR
+    description: Equipment model year if applicable (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: MODEL
+    description: Equipment model if applicable (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: BRAND
+    description: Equipment brand name if applicable (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: MISCELLANEOUS_INFO
+    description: Equipment miscellaneous value like airbag, bluetooth if applicable (Optional)
+    reference: <PR/Issue/Discussion Links md format text>
+SETTLEMENT_DETAILS:
+  - code: COUNTERPARTY
+    description: The counterparty to which the settlement needs to be done - BAP/BPP (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: MODE
+    description: The settlement mode - RTGS, NEFT, UPI (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: BENEFICIARY_NAME
+    description: Name of the beneficiary (Required in case of bank transfer)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: BANK_ACCOUNT_NO
+    description: Account number of the settlement party (Required in case of bank transfer)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: IFSC_CODE
+    description: IFSC code of the bank (Required in case of bank transfer)
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: UPI_ADDRESS
+    description: UPI address where the settlement needs to be done (Required in case of UPI mode)
+    reference: <PR/Issue/Discussion Links md format text>
+

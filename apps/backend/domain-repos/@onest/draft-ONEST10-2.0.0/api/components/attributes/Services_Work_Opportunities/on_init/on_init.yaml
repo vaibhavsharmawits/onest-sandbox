@@ -1,0 +1,297 @@
+context:
+  parent: true
+  domain:
+    description: Updated domain namespace defined here
+    required: mandatory
+    usage: ONDC:ONEST10
+    reference: if any
+  action:
+    description: Enum
+    required: mandatory
+    usage: on_init
+    reference: if any
+  version:
+    description: Current live version
+    required: mandatory
+    usage: 2.0.0
+    reference: if any
+  bap_id:
+    description: Subscriber ID of buyer app
+    required: mandatory
+    usage: worker-hub.bap.io
+    reference: if any
+  bap_uri:
+    description: Subscriber URI of buyer app
+    required: mandatory
+    usage: https://worker-hub.bap.io
+    reference: if any
+  bpp_id:
+    description: Subscriber ID of BPP
+    required: mandatory
+    usage: job-hub.bpp.io
+    reference: if any
+  bpp_uri:
+    description: Subscriber URI of BPP
+    required: mandatory
+    usage: https://job-hub.bpp.io
+    reference: if any
+  transaction_id:
+    description: Unique string for each request trail
+    required: mandatory
+    usage: a9aaecca-10b7-4d19-b640-b047a7c62195
+    reference: if any
+  message_id:
+    description: Unique string for each message
+    required: mandatory
+    usage: af58aa7b-6745-47d0-9b0d-62dcb262ee87
+    reference: if any
+  location:
+    city:
+      code:
+        description: City code for location
+        required: mandatory
+        usage: std:080
+        reference: if any
+    country:
+      code:
+        description: Country code in ISO standard
+        required: mandatory
+        usage: IND
+        reference: if any
+  timestamp:
+    description: RFC3339 compliant timestamp
+    required: mandatory
+    usage: '2023-02-23T10:14:05Z'
+    reference: if any
+  ttl:
+    description: Time-to-live for the message
+    required: mandatory
+    usage: PT30S
+    reference: if any
+message:
+  parent: true
+  order:
+    parent: true
+    provider:
+      parent: true
+      id:
+        description: Unique identifier for the provider
+        required: mandatory
+        usage: 1
+        reference: if any
+      descriptor:
+        name:
+          description: Provider name
+          required: mandatory
+          usage: Affinidi
+          reference: if any
+      locations:
+        id:
+          description: Provider location ID
+          required: mandatory
+          usage: L1
+          reference: if any
+        city:
+          name:
+            description: City name
+            required: mandatory
+            usage: Pune
+            reference: if any
+          code:
+            description: City code
+            required: mandatory
+            usage: std:020
+            reference: if any
+        state:
+          name:
+            description: State name
+            required: mandatory
+            usage: Maharastra
+            reference: if any
+          code:
+            description: State code
+            required: mandatory
+            usage: MH
+            reference: if any
+    items:
+      parent: true
+      id:
+        description: Item ID
+        required: mandatory
+        usage: 0253719F295521CED39EC9C2F3C8DCDE
+        reference: if any
+      fulfillment_ids:
+        description: Fulfillment ID associated with the item
+        required: mandatory
+        usage: 1
+        reference: if any
+      xinput: 
+        "'required'":
+          description: Indicates if input is required
+          required: mandatory
+          usage: TRUE
+          reference: if any
+        head:
+          descriptor:
+            name:
+              description: Form descriptor name
+              required: mandatory
+              usage: Application Form
+              reference: if any
+          index:
+            min:
+              description: Minimum index value
+              required: mandatory
+              usage: 1
+              reference: if any
+            cur:
+              description: Current index value
+              required: mandatory
+              usage: 1
+              reference: if any
+            max:
+              description: Maximum index value
+              required: mandatory
+              usage: 2
+              reference: if any
+          headings:
+              description: Heading title
+              required: mandatory
+              usage: Candidate Details
+              reference: if any
+        form:
+          mime_type:
+            description: MIME type of the form
+            required: mandatory
+            usage: text/html
+            reference: if any
+          url:
+            description: Form URL
+            required: mandatory
+            usage: https://6vs8xnx5i7.jobhub.co.in/loans-kyc/xinput/formid/a23f2fdfbbb8ac402bfd54f-1
+            reference: if any
+          resubmit:
+            description: Indicates if resubmission is allowed
+            required: mandatory
+            usage: FALSE
+            reference: if any
+    quote:
+      parent: true
+      ttl:
+        description: Time-to-live for the quote
+        required: mandatory
+        usage: P1D
+        reference: if any
+      price:
+        currency:
+          description: Currency of the quote price
+          required: mandatory
+          usage: INR
+          reference: if any
+        value:
+          description: Value of the quote price
+          required: mandatory
+          usage: 1100
+          reference: if any
+      breakup:
+        item:
+          id:
+            description: Breakup item ID
+            required: mandatory
+            usage: 0253719F295521CED39EC9C2F3C8DCDE
+            reference: if any
+          price:
+            currency:
+              description: Currency of the item price
+              required: mandatory
+              usage: INR
+              reference: if any
+            value:
+              description: Value of the item price
+              required: mandatory
+              usage: 1100
+              reference: if any
+        price:
+          currency:
+            description: Currency of the breakup price
+            required: mandatory
+            usage: INR
+            reference: if any
+          value:
+            description: Value of the breakup price
+            required: mandatory
+            usage: 1100
+            reference: if any
+        title:
+          description: Breakup title
+          required: mandatory
+          usage: Fullstack Engineer
+          reference: if any
+    fulfillments:
+      parent: true
+      id:
+        description: Fulfillment ID
+        required: mandatory
+        usage: 1
+        reference: if any
+      type:
+        description: Fulfillment type
+        required: mandatory
+        usage: REMOTE
+        reference: if any
+      state:
+        descriptor:
+          code:
+            description: Fulfillment state code
+            required: mandatory
+            usage: APPLICATION_STARTED
+            reference: if any
+          name:
+            description: Fulfillment state name
+            required: mandatory
+            usage: Application started
+            reference: if any
+        updated_at:
+          description: Last state update timestamp
+          required: mandatory
+          usage: 2023-02-06T09:55:41.161Z
+          reference: if any
+      customer:
+          person:
+            name:
+              description: Customer's name
+              required: mandatory
+              usage: Sanjay
+              reference: if any
+            gender:
+              description: Customer's gender
+              required: mandatory
+              usage: Male
+              reference: if any
+            age:
+              description: Customer's age
+              required: mandatory
+              usage: 35
+              reference: if any
+            skills:
+              code:
+                description: Skill code
+                required: mandatory
+                usage: Android
+                reference: if any
+              name:
+                description: Skill name
+                required: mandatory
+                usage: Android
+                reference: if any
+            languages:
+              code:
+                description: Language code
+                required: mandatory
+                usage: en
+                reference: if any
+              name:
+                description: Language name
+                required: mandatory
+                usage: english
+                reference: if any

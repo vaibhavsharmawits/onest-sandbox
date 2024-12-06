@@ -1,0 +1,97 @@
+value:
+  context:
+    domain: ONDC:ONEST10
+    action: on_search_inc
+    version: 2.0.0
+    bap_id: worker-hub.bap.io
+    bap_uri: https://worker-hub.bap.io
+    transaction_id: a9aaecca-10b7-4d19-b640-b047a7c62195
+    message_id: 672f774c-4281-44dd-b1c2-84222a3d771e
+    location:
+      city:
+        code: std:080
+      country:
+        code: IND
+    timestamp: "2023-02-22T11:45:10.171Z"
+    ttl: PT30S
+  message:
+    catalog:
+      descriptor:
+        name: Affindi Jobs
+      providers:
+        - id: "1"
+          items:
+            - id: A1B2C3D4E5F67890GHIJK1LMNOPQ2RS
+              descriptor:
+                name: Data Scientist
+                long_desc: >-
+                  We are looking for a Data Scientist who has strong
+                  analytical skills, with experience in machine learning,
+                  statistical analysis, and data modeling. You should be
+                  comfortable working with large datasets, identifying trends,
+                  and creating predictive models. This role requires the
+                  ability to apply data-driven insights to business problems.
+                media:
+                  - mimetype: audio/mp4
+                    url: http://url-to-audio-about-data-scientist-job
+                  - mimetype: video/mp4
+                    url: http://url-to-video-about-data-scientist-job
+              quantity:
+                available:
+                  count: 30
+              application_validity_time:
+                range:
+                  start: "2023-01-04T09:32:10.560Z"
+                  end: "2023-02-04T08:20:00.230Z"
+              location_ids:
+                - L3
+              fulfillment_ids:
+                - "4"
+                - "5"
+                - "6"
+              tags:
+                # - descriptor:
+                #     code: SALARY_INFO
+                #     name: Salary information
+                #   list:
+                #     - descriptor:
+                #         code: GROSS_MIN
+                #         name: Minimum gross pay
+                #       value: "800000"
+                #     - descriptor:
+                #         code: GROSS_MAX
+                #         name: Maximum gross pay
+                #       value: "1000000"
+                - descriptor:
+                    code: NP_FEES
+                  list:
+                    - code: ID
+                      value: "1"
+                    - code: COMMERCIAL_TYPE
+                      value: percentage
+                    - code: COMMERCIAL_VALUE
+                      value: "2"
+                    - code: COMMERCIAL_NAME
+                      value: recruitment
+                    - code: COMMERCIAL_TRIGGERING_STATE
+                      value: OFFER_ACCEPTED
+                - descriptor:
+                    code: LISTING_DETAILS
+                    name: Listing details
+                  list:
+                    - descriptor:
+                        code: INDUSTRY_TYPE
+                        name: Industry type
+                      value: Data Science
+                    - descriptor:
+                        code: DEPARTMENT
+                        name: Department
+                      value: Data Science & Analytics
+                    - descriptor:
+                        code: EMPLOYMENT_TYPE
+                        name: Employment type
+                      value: full-time
+                    - descriptor:
+                        code: JOB_ROLE
+                        name: Job role
+                      value: Data Scientist

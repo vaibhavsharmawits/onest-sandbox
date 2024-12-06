@@ -1,0 +1,4 @@
+Agricultural product - Agri I/O Products:
+  attribute_set:
+    $ref: "./Agri_Products/index.yaml"
+

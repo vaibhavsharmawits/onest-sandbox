@@ -1,0 +1,21 @@
+breakup:
+  title:
+    - code: item
+      description: Item price 
+      reference: <PR/Issue/Discussion Links md format text>
+    - code: tax
+      description: tax
+      reference: <PR/Issue/Discussion Links md format text>
+    - code: discount
+      description: discount
+      reference: <PR/Issue/Discussion Links md format text>
+    - code: Convenience Fee
+      description: Convenience Fee
+      reference: <PR/Issue/Discussion Links md format text>
+    - code: Delivery Charges
+      description: Delivery Charges
+      reference: <PR/Issue/Discussion Links md format text>
+    - code: Misc
+      description: Misc Charges
+      reference: <PR/Issue/Discussion Links md format text>
+

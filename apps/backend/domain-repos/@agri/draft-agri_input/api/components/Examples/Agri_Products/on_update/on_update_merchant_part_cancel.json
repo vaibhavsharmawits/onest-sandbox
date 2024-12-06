@@ -1,0 +1,417 @@
+{
+    "context": {
+        "ttl": "PT30S",
+        "city": "std:011",
+        "action": "on_update",
+        "bap_id": "buyer-app.com",
+        "bpp_id": "seller-app.com",
+        "domain": "ONDC:AGR10",
+        "bap_uri": "https://buyer-app.com/v1/ondc",
+        "bpp_uri": "https://seller-app.com/v1/ondc",
+        "country": "IND",
+        "timestamp": "2024-03-15T13:16:07.660Z",
+        "message_id": "558b397f-b696-4cab-addd-fea0b1cc2ddd",
+        "core_version": "1.2.0",
+        "transaction_id": "fb7fba10-0c0e-4059-9050-584e5a770d4e"
+    },
+    "message": {
+        "order": {
+            "id": "2024-03-15-26012",
+            "items": [
+                {
+                    "id": "14574",
+                    "quantity": {
+                        "count": 2
+                    },
+                    "fulfillment_id": "5009-Delivery"
+                },
+                {
+                    "id": "14108",
+                    "quantity": {
+                        "count": 2
+                    },
+                    "fulfillment_id": "5009-Partial-Cancellation"
+                },
+                {
+                    "id": "14194",
+                    "quantity": {
+                        "count": 2
+                    },
+                    "fulfillment_id": "5009-Delivery"
+                },
+                {
+                    "id": "14682",
+                    "quantity": {
+                        "count": 2
+                    },
+                    "fulfillment_id": "5009-Delivery"
+                }
+            ],
+            "quote": {
+                "ttl": "P1D",
+                "price": {
+                    "value": "4930.00",
+                    "currency": "INR"
+                },
+                "breakup": [
+                    {
+                        "item": {
+                            "price": {
+                                "value": "820.00",
+                                "currency": "INR"
+                            }
+                        },
+                        "price": {
+                            "value": "1640.00",
+                            "currency": "INR"
+                        },
+                        "title": "ONION EAST WEST PREMA",
+                        "@ondc/org/item_id": "14574",
+                        "@ondc/org/title_type": "item",
+                        "@ondc/org/item_quantity": {
+                            "count": 2
+                        }
+                    },
+                    {
+                        "price": {
+                            "value": "0.00",
+                            "currency": "INR"
+                        },
+                        "title": "Tax",
+                        "@ondc/org/item_id": "14574",
+                        "@ondc/org/title_type": "tax"
+                    },
+                    {
+                        "price": {
+                            "value": "0",
+                            "currency": "INR"
+                        },
+                        "title": "Discount",
+                        "@ondc/org/item_id": "14574",
+                        "@ondc/org/title_type": "discount"
+                    },
+                    {
+                        "item": {
+                            "price": {
+                                "value": "820.00",
+                                "currency": "INR"
+                            }
+                        },
+                        "price": {
+                            "value": "0.00",
+                            "currency": "INR"
+                        },
+                        "title": "BOTTLEGOURD NUNHEMS ANOKHI",
+                        "@ondc/org/item_id": "14108",
+                        "@ondc/org/title_type": "item",
+                        "@ondc/org/item_quantity": {
+                            "count": 0
+                        }
+                    },
+                    {
+                        "price": {
+                            "value": "0.00",
+                            "currency": "INR"
+                        },
+                        "title": "Tax",
+                        "@ondc/org/item_id": "14108",
+                        "@ondc/org/title_type": "tax"
+                    },
+                    {
+                        "price": {
+                            "value": "0",
+                            "currency": "INR"
+                        },
+                        "title": "Discount",
+                        "@ondc/org/item_id": "14108",
+                        "@ondc/org/title_type": "discount"
+                    },
+                    {
+                        "item": {
+                            "price": {
+                                "value": "820.00",
+                                "currency": "INR"
+                            }
+                        },
+                        "price": {
+                            "value": "1640.00",
+                            "currency": "INR"
+                        },
+                        "title": "RADISH SUNGRO PUSA CHETKI",
+                        "@ondc/org/item_id": "14194",
+                        "@ondc/org/title_type": "item",
+                        "@ondc/org/item_quantity": {
+                            "count": 2
+                        }
+                    },
+                    {
+                        "price": {
+                            "value": "0.00",
+                            "currency": "INR"
+                        },
+                        "title": "Tax",
+                        "@ondc/org/item_id": "14194",
+                        "@ondc/org/title_type": "tax"
+                    },
+                    {
+                        "price": {
+                            "value": "0",
+                            "currency": "INR"
+                        },
+                        "title": "Discount",
+                        "@ondc/org/item_id": "14194",
+                        "@ondc/org/title_type": "discount"
+                    },
+                    {
+                        "item": {
+                            "price": {
+                                "value": "820.00",
+                                "currency": "INR"
+                            }
+                        },
+                        "price": {
+                            "value": "1640.00",
+                            "currency": "INR"
+                        },
+                        "title": "TOMATO US SW-1504",
+                        "@ondc/org/item_id": "14682",
+                        "@ondc/org/title_type": "item",
+                        "@ondc/org/item_quantity": {
+                            "count": 2
+                        }
+                    },
+                    {
+                        "price": {
+                            "value": "0.00",
+                            "currency": "INR"
+                        },
+                        "title": "Tax",
+                        "@ondc/org/item_id": "14682",
+                        "@ondc/org/title_type": "tax"
+                    },
+                    {
+                        "price": {
+                            "value": "0",
+                            "currency": "INR"
+                        },
+                        "title": "Discount",
+                        "@ondc/org/item_id": "14682",
+                        "@ondc/org/title_type": "discount"
+                    },
+                    {
+                        "price": {
+                            "value": "10.00",
+                            "currency": "INR"
+                        },
+                        "title": "Delivery Charges",
+                        "@ondc/org/item_id": "5009-Delivery",
+                        "@ondc/org/title_type": "delivery"
+                    },
+                    {
+                        "price": {
+                            "value": "0",
+                            "currency": "INR"
+                        },
+                        "title": "Packing charges",
+                        "@ondc/org/item_id": "5009-Delivery",
+                        "@ondc/org/title_type": "packing"
+                    },
+                    {
+                        "price": {
+                            "value": "0",
+                            "currency": "INR"
+                        },
+                        "title": "Convenience Fee",
+                        "@ondc/org/item_id": "5009-Delivery",
+                        "@ondc/org/title_type": "misc"
+                    }
+                ]
+            },
+            "state": "Accepted",
+            "billing": {
+                "name": "Ramu",
+                "phone": "9900000000",
+                "address": {
+                    "city": "Bengaluru",
+                    "name": "SCO1, Avenue road",
+                    "state": "Karnataka",
+                    "country": "IND",
+                    "building": "Wework",
+                    "locality": "Shiv dham",
+                    "area_code": "800007"
+                },
+                "created_at": "2024-03-15T13:15:28.531Z",
+                "updated_at": "2024-03-15T13:15:28.531Z"
+            },
+            "payment": {
+                "type": "ON-FULFILLMENT",
+                "params": {
+                    "amount": "6570.00",
+                    "currency": "INR"
+                },
+                "status": "NOT-PAID",
+                "collected_by": "BPP",
+                "@ondc/org/settlement_basis": "delivery",
+                "@ondc/org/settlement_window": "P7D",
+                "@ondc/org/settlement_details": [
+                    {
+                        "bank_name": "HDFC",
+                        "branch_name": "Gurugram",
+                        "settlement_type": "neft",
+                        "beneficiary_name": "Agro Fertilizer Pvt. Ltd.",
+                        "settlement_phase": "sale-amount",
+                        "settlement_ifsc_code": "HDFC00000",
+                        "settlement_counterparty": "buyer-app",
+                        "settlement_bank_account_no": "38366111323636"
+                    }
+                ],
+                "@ondc/org/withholding_amount": "0.0",
+                "@ondc/org/buyer_app_finder_fee_type": "percent",
+                "@ondc/org/buyer_app_finder_fee_amount": "3"
+            },
+            "provider": {
+                "id": "5009",
+                "locations": [
+                    {
+                        "id": "5009-L1"
+                    }
+                ]
+            },
+            "created_at": "2024-03-15T13:15:41.315Z",
+            "updated_at": "2024-03-15T13:15:54.914Z",
+            "fulfillments": [
+                {
+                    "id": "5009-Delivery",
+                    "end": {
+                        "time": {
+                            "range": {
+                                "end": "2024-03-17T13:15:41.527Z",
+                                "start": "2024-03-17T01:15:41.527Z"
+                            }
+                        },
+                        "person": {
+                            "name": "Ramu"
+                        },
+                        "contact": {
+                            "phone": "9900000000"
+                        },
+                        "location": {
+                            "gps": "12.974002,77.613458",
+                            "address": {
+                                "city": "Bengaluru",
+                                "name": "SCO1, Avenue road",
+                                "state": "Karnataka",
+                                "country": "IND",
+                                "building": "Wework",
+                                "locality": "Shiv dham",
+                                "area_code": "560001"
+                            }
+                        }
+                    },
+                    "type": "Delivery",
+                    "start": {
+                        "time": {
+                            "range": {
+                                "end": "2024-03-15T19:45:41.527Z",
+                                "start": "2024-03-15T19:15:41.527Z"
+                            }
+                        },
+                        "contact": {
+                            "email": "tech-support@test.com",
+                            "phone": "9900000000"
+                        },
+                        "location": {
+                            "gps": "12.974002,77.613458",
+                            "address": {
+                                "city": "Bengaluru",
+                                "name": "Ramu",
+                                "state": "Karnataka",
+                                "country": "IND",
+                                "building": "Agro Fertilizer Store",
+                                "locality": "Agro Fertilizer Store, Farm 14 Near Village, Bengaluru, Karnataka, 560001",
+                                "area_code": "560001"
+                            },
+                            "descriptor": {
+                                "name": "Agro Fertilizer Store"
+                            }
+                        }
+                    },
+                    "state": {
+                        "descriptor": {
+                            "code": "Pending"
+                        }
+                    },
+                    "@ondc/org/TAT": "P2D",
+                    "@ondc/org/category": "Standard Delivery",
+                    "@ondc/org/provider_name": "Agro Fertilizer Store"
+                },
+                {
+                    "id": "5009-Partial-Cancellation",
+                    "tags": [
+                        {
+                            "code": "cancel_request",
+                            "list": [
+                                {
+                                    "code": "reason_id",
+                                    "value": "002"
+                                },
+                                {
+                                    "code": "initiated_by",
+                                    "value": "seller-app.com"
+                                }
+                            ]
+                        },
+                        {
+                            "code": "quote_trail",
+                            "list": [
+                                {
+                                    "code": "type",
+                                    "value": "item"
+                                },
+                                {
+                                    "code": "id",
+                                    "value": "14108"
+                                },
+                                {
+                                    "code": "currency",
+                                    "value": "INR"
+                                },
+                                {
+                                    "code": "value",
+                                    "value": "-1640.00"
+                                }
+                            ]
+                        },
+                        {
+                            "code": "quote_trail",
+                            "list": [
+                                {
+                                    "code": "type",
+                                    "value": "tax"
+                                },
+                                {
+                                    "code": "id",
+                                    "value": "14108"
+                                },
+                                {
+                                    "code": "currency",
+                                    "value": "INR"
+                                },
+                                {
+                                    "code": "value",
+                                    "value": "0.00"
+                                }
+                            ]
+                        }
+                    ],
+                    "type": "Cancel",
+                    "state": {
+                        "descriptor": {
+                            "code": "Cancelled"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

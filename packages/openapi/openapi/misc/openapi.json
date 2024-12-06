@@ -1,0 +1,289 @@
+{
+	"openapi": "3.0.3",
+	"info": {
+		"title": "ONDC B2B Mock Implemention",
+		"description": "This is a Mock Server for integrating with ONDC. Currently, it supports B2B. An easy way to get started would be to ask yourself the two question - _\"which network participant am I going to send to?\"_ and _\"what would be the action/on_action I am going to send?\"_. With these you can easily construct the URL you need to mock and then find that among this list. <br />",
+		"contact": {
+			"email": "team@ondc.org"
+		},
+		"license": {
+			"name": "Apache 2.0",
+			"url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+		},
+		"version": "1.0.0"
+	},
+	"externalDocs": {
+		"description": "Find out more about ONDC",
+		"url": "https://ondc.org"
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	],
+	"tags": [
+		{
+			"name": "Misc",
+			"description": "Endpoints for Miscellaneous"
+		}
+	],
+	"paths": {
+		"/": {
+			"get": {
+				"tags": ["Misc"],
+				"summary": "Ping Server. Receive a JSON response on success.",
+				"responses": {
+					"200": {
+						"description": "Response message if server is up",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "string",
+											"example": "Mock Server for NP"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/analyse/{transactionId}": {
+			"get": {
+				"parameters": [
+					{
+						"in": "path",
+						"name": "transactionId",
+						"schema": {
+							"type": "string"
+						},
+						"required": true,
+						"description": "ID of the transaction to fetch."
+					}
+				],
+				"tags": ["Misc"],
+				"summary": "Fetch the stored transaction based on ID.",
+				"responses": {
+					"200": {
+						"description": "Transaction Log",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/initiate/b2b": {
+			"post": {
+				"tags": ["Misc"],
+				"summary": "Start a New Mock B2B Transaction",
+				"description": "This Endpoint initiates a Mock B2B Transaction by letting the user enter a new transaction ID, select the example Name and the BPP ID & BPP URI.",
+				"requestBody": {
+					"description": "Request Body for starting a new Mock B2B Transaction.",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"bpp_uri": {
+										"type": "string",
+										"example": "https://mock.ondc.org/api/b2b/bpp"
+									},
+									"city": {
+										"type": "object",
+										"properties": {
+											"code": {
+												"type": "string",
+												"enum": ["std:080", "std:011"]
+											}
+										}
+									},
+									"domain": {
+										"type": "string",
+										"enum": [
+											"ONDC:RET1A",
+											"ONDC:RET1B",
+											"ONDC:RET1C",
+											"ONDC:RET1D",
+											"ONDC:RET10",
+											"ONDC:RET12",
+											"ONDC:RET13",
+											"ONDC:RET14"
+										]
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "ACK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "object",
+											"properties": {
+												"ack": {
+													"type": "object",
+													"properties": {
+														"status": {
+															"type": "string",
+															"example": "ACK"
+														}
+													}
+												}
+											}
+										},
+										"transaction_id": {
+											"type": "string",
+											"example": "d83816b4-5b9a-4da9-9c18-242cc144da07"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/initiate/services": {
+			"post": {
+				"tags": ["Misc"],
+				"summary": "Start a New Mock Services Transaction",
+				"description": "This Endpoint initiates a Mock Services Transaction by letting the user enter a new transaction ID, select the example Name and the BPP ID & BPP URI.",
+				"requestBody": {
+					"description": "Request Body for starting a new Mock Services Transaction.",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"bpp_uri": {
+										"type": "string",
+										"example": "https://mock.ondc.org/api/services/bpp"
+									},
+									"city": {
+										"type": "object",
+										"properties": {
+											"code": {
+												"type": "string",
+												"enum": ["std:080", "std:011"]
+											}
+										}
+									},
+									"domain": {
+										"type": "string",
+										"enum": ["ONDC:SRV11"]
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "ACK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"message": {
+											"type": "object",
+											"properties": {
+												"ack": {
+													"type": "object",
+													"properties": {
+														"status": {
+															"type": "string",
+															"example": "ACK"
+														}
+													}
+												}
+											}
+										},
+										"transaction_id": {
+											"type": "string",
+											"example": "d83816b4-5b9a-4da9-9c18-242cc144da07"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/scenario/{domain}/{action}": {
+			"get": {
+				"tags": ["Misc"],
+				"summary": "Get scenarios for given domain and action",
+				"description": "Returns all the scenarios supported by Mock Server for a given domain and an action",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "domain",
+						"schema": {
+							"type": "string",
+							"enum": [
+								"services",
+								"b2b"
+							]
+						},
+						"required": true,
+						"description": "The Domain whose scenarios are needed"
+					},
+					{
+						"in": "path",
+						"name": "action",
+						"schema": {
+							"type": "string",
+							"enum": [
+								"search",
+								"on_search",
+								"select",
+								"on_select",
+								"init",
+								"on_init",
+								"confirm",
+								"on_confirm",
+								"update",
+								"on_update",
+								"status",
+								"on_status",
+								"cancel",
+								"on_cancel"
+							]
+						},
+						"required": true,
+						"description": "The Action whose scenarios are needed"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Scenarios",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

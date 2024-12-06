@@ -1,0 +1,209 @@
+context:
+  parent: true
+  domain:
+    description: "domain"
+    required: mandatory
+    usage: "ONDC:ONEST10"
+    reference: null
+  action:
+    description: "action"
+    required: mandatory
+    usage: "on_search"
+    reference: null
+  version:
+    description: "version"
+    required: mandatory
+    usage: "2.0.0"
+    reference: null
+  bap_id:
+    description: "bap_id"
+    required: mandatory
+    usage: "worker-hub.bap.io"
+    reference: null
+  bap_uri:
+    description: "bap_uri"
+    required: mandatory
+    usage: "https://worker-hub.bap.io"
+    reference: null
+  transaction_id:
+    description: "transaction_id"
+    required: mandatory
+    usage: "a9aaecca-10b7-4d19-b640-b047a7c62195"
+    reference: null
+  message_id:
+    description: "message_id"
+    required: mandatory
+    usage: "672f774c-4281-44dd-b1c2-84222a3d771e"
+    reference: null
+  location:
+    city:
+      description: "city"
+      required: mandatory
+      usage: "std:080"
+      reference: null
+    country:
+      description: "country"
+      required: mandatory
+      usage: "IND"
+      reference: null
+  timestamp:
+    description: "timestamp"
+    required: mandatory
+    usage: "2023-02-22T11:45:10.171Z"
+    reference: null
+  ttl:
+    description: "ttl"
+    required: mandatory
+    usage: "PT30S"
+    reference: null
+message:
+  parent: true
+  catalog:
+    parent: true
+    descriptor:
+      description: "catalog descriptor"
+      required: mandatory
+      usage: "Affindi Jobs"
+      reference: null
+    providers:
+        id:
+          description: "provider id"
+          required: mandatory
+          usage: "1"
+          reference: null
+        descriptor:
+          name:
+            description: "provider name"
+            required: mandatory
+            usage: "Affinidi"
+            reference: null
+          short_desc:
+            description: "short description"
+            required: mandatory
+            usage: "Short Description about the company"
+            reference: null
+          images.url:
+            description: "image URL"
+            required: mandatory
+            usage: "url of the image of the provider"
+            reference: null
+        fulfillments:
+          id:
+            description: "fulfillment id"
+            required: mandatory
+            usage: "1"
+            reference: null
+          type:
+            description: "fulfillment type"
+            required: mandatory
+            usage: "REMOTE"
+            reference: null
+        locations:
+          parent: true
+          id:
+            description: "location id"
+            required: mandatory
+            usage: "L1"
+            reference: null
+          city:
+            name:
+              description: "city name"
+              required: mandatory
+              usage: "Pune"
+              reference: null
+            code:
+              description: "city code"
+              required: mandatory
+              usage: "std:020"
+              reference: null
+          state:
+            name:
+              description: "state name"
+              required: mandatory
+              usage: "Maharastra"
+              reference: null
+            code:
+              description: "state code"
+              required: mandatory
+              usage: "MH"
+              reference: null
+        items:
+          parent: true
+          id:
+            description: "item id"
+            required: mandatory
+            usage: "0253719F295521CED39EC9C2F3C8DCDE"
+            reference: null
+          category_id:
+            description: "category id"
+            required: mandatory
+            usage: "Software development"
+            reference: null
+          descriptor:
+            name:
+              description: "item name"
+              required: mandatory
+              usage: "Fullstack Engineer"
+              reference: null
+            long_desc:
+              description: "item description"
+              required: mandatory
+              usage: "long_desc"
+              reference: null
+          media:
+            mimetype:
+              description: "media mimetype"
+              required: mandatory
+              usage: "audio/mp4"
+              reference: null
+            url:
+              description: "media URL"
+              required: mandatory
+              usage: "http://url-to-audio-about-job"
+              reference: null
+          quantity:
+            available:
+              count:
+                description: "available count"
+                required: mandatory
+                usage: "50"
+                reference: null
+          application_validity_time:
+            range:
+              start:
+                description: "start time"
+                required: mandatory
+                usage: "2023-01-03T13:23:10.171Z"
+                reference: null
+              end:
+                description: "end time"
+                required: mandatory
+                usage: "2023-02-03T13:23:10.171Z"
+                reference: null
+          location_ids:
+            - description: "location id"
+              required: mandatory
+              usage: "L2"
+              reference: null
+          fulfillment_ids:
+            - description: "fulfillment id"
+              required: mandatory
+              usage: "1"
+              reference: null
+          price:
+            currency:
+              description: "currency"
+              required: mandatory
+              usage: "INR"
+              reference: null
+            value:
+              description: "price value"
+              required: mandatory
+              usage: "1100"
+              reference: null
+            maximum_value:
+              description: "maximum price value"
+              required: mandatory
+              usage: "1200"
+              reference: null
+          

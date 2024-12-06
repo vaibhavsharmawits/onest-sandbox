@@ -1,0 +1,77 @@
+context:
+  parent: true
+  domain:
+    description: "updated domain namespace defined here https://docs.google.com/document/d/1brvcltG_DagZ3kGr1ZZQk4hG4tze3zvcxmGV4NMTzr8/edit#heading=h.w9zlp87xdha1"
+    required: mandatory
+    usage: "ONDC:ONEST10"
+    reference: if any
+  action:
+    description: enum
+    required: mandatory
+    usage: "cancel"
+    reference: if any
+  version:
+    description: current live version
+    required: mandatory
+    usage: "2.0.0"
+    reference: if any
+  bap_id:
+    description: subscriber_id of buyer app
+    required: mandatory
+    usage: "worker-hub.bap.io"
+    reference: if any
+  bap_uri:
+    description: subscriber_uri of buyer app
+    required: mandatory
+    usage: "https://worker-hub.bap.io"
+    reference: if any
+  bpp_id:
+    description: subscriber_id of the provider app
+    required: mandatory
+    usage: "job-hub.bpp.io"
+    reference: if any
+  bpp_uri:
+    description: subscriber_uri of the provider app
+    required: mandatory
+    usage: "https://job-hub.bpp.io"
+    reference: if any
+  transaction_id:
+    description: unique string for each request trail
+    required: mandatory
+    usage: "a9aaecca-10b7-4d19-b640-b047a7c62195"
+    reference: if any
+  message_id:
+    description: unique string for each request trail
+    required: mandatory
+    usage: "8cbb5e99-5d06-4855-81e9-a4fc8013dbff"
+    reference: if any
+  location:
+    city:
+      code:
+        description: "city code for search where service needs to be provided. List of city codes, with pincode mapping, are here - https://docs.google.com/spreadsheets/d/12A_B-nDtvxyFh_FWDfp85ss2qpb65kZ7/edit#gid=213574534"
+        required: mandatory
+        usage: "std:080"
+        reference: if any
+    country:
+      code:
+        description: "ISO standard 3 digit country code where service needs to be provided"
+        required: mandatory
+        usage: "IND"
+        reference: if any
+  ttl:
+    description: validity of message
+    required: mandatory
+    usage: "PT30S"
+    reference: if any
+message:
+  parent: true
+  order_id:
+    description: "Unique identifier for the order"
+    required: mandatory
+    usage: "1677140405881"
+    reference: if any
+  cancellation_reason_id:
+    description: "Unique identifier for the cancellation reason"
+    required: mandatory
+    usage: "1"
+    reference: if any

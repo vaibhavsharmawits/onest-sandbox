@@ -1,0 +1,29 @@
+fulfillments:
+  type:
+    - code: Delivery
+      description: When order is 
+      reference: <PR/Issue/Discussion Links md format text>
+  state:
+    descriptor:
+      code:
+        - code: Pending
+          description: default fulfillment state
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: Packed
+          description: packed for shipping
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: Agent-assigned
+          description: rider assigned
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: Order-picked-up
+          description: order picked up by rider
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: Out-for-delivery
+          description: Out for delivery
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: Order-delivered
+          description: When order is delivered to buyer
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: Cancelled
+          description: When order is cancelled
+          reference: <PR/Issue/Discussion Links md format text>

@@ -1,0 +1,216 @@
+context:
+  parent: true
+  domain:
+    description: "updated domain namespace defined here https://docs.google.com/document/d/1brvcltG_DagZ3kGr1ZZQk4hG4tze3zvcxmGV4NMTzr8/edit#heading=h.w9zlp87xdha1"
+    required: mandatory
+    usage: "ONDC:ONEST10"
+    reference: if any
+  action:
+    description: enum
+    required: mandatory
+    usage: "on_cancel"
+    reference: if any
+  version:
+    description: current live version
+    required: mandatory
+    usage: "2.0.0"
+    reference: if any
+  bap_id:
+    description: subscriber_id of buyer app
+    required: mandatory
+    usage: "worker-hub.bap.io"
+    reference: if any
+  bap_uri:
+    description: subscriber_uri of buyer app
+    required: mandatory
+    usage: "https://worker-hub.bap.io"
+    reference: if any
+  timestamp:
+    description: RFC3339 compliant timestamp
+    required: mandatory
+    usage: "2023-02-23T08:20:016Z"
+    reference: if any
+  transaction_id:
+    description: unique string for each request trail
+    required: mandatory
+    usage: "a9aaecca-10b7-4d19-b640-b047a7c62195"
+    reference: if any
+  message_id:
+    description: unique string for each request trail
+    required: mandatory
+    usage: "8cbb5e99-5d06-4855-81e9-a4fc8013dbff"
+    reference: if any
+  location:
+    city:
+      code:
+        description: "city code for search where service needs to be provided. List of city codes, with pincode mapping, are here - https://docs.google.com/spreadsheets/d/12A_B-nDtvxyFh_FWDfp85ss2qpb65kZ7/edit#gid=213574534"
+        required: mandatory
+        usage: "std:080"
+        reference: if any
+    country:
+      code:
+        description: "ISO standard 3 digit country code where service needs to be provided"
+        required: mandatory
+        usage: "IND"
+        reference: if any
+  ttl:
+    description: validity of message
+    required: mandatory
+    usage: "PT30S"
+    reference: if any
+message:
+  parent: true
+  order:
+    parent: true
+    id:
+      description: "Unique identifier for the order"
+      required: mandatory
+      usage: "1677140405881"
+      reference: if any
+    status:
+      description: "Current status of the order"
+      required: mandatory
+      usage: "Cancelled"
+      reference: if any
+    provider:
+      id:
+        description: "Unique identifier for the provider"
+        required: mandatory
+        usage: "1"
+        reference: if any
+      descriptor:
+        name:
+          description: "Name of the provider"
+          required: mandatory
+          usage: "Affinidi"
+          reference: if any
+      locations:
+          id:
+            description: "Unique identifier for the provider location"
+            required: mandatory
+            usage: "L1"
+            reference: if any
+          city:
+            name:
+              description: "City name of the provider location"
+              required: mandatory
+              usage: "Pune"
+              reference: if any
+            code:
+              description: "City code for the provider location"
+              required: mandatory
+              usage: "std:020"
+              reference: if any
+          state:
+            name:
+              description: "State name of the provider location"
+              required: mandatory
+              usage: "Maharastra"
+              reference: if any
+            code:
+              description: "State code for the provider location"
+              required: mandatory
+              usage: "MH"
+              reference: if any
+    quote:
+      price:
+        currency:
+          description: "Currency in which the price is quoted"
+          required: mandatory
+          usage: "INR"
+          reference: if any
+        value:
+          description: "Quoted price value"
+          required: mandatory
+          usage: "0"
+          reference: if any
+      breakup:
+          id:
+            description: "Unique identifier for the quote breakup"
+            required: mandatory
+            usage: "0253719F295521CED39EC9C2F3C8DCDE"
+            reference: if any
+          price:
+            currency:
+              description: "Currency for the quote breakup"
+              required: mandatory
+              usage: "INR"
+              reference: if any
+            value:
+              description: "Price value for the quote breakup"
+              required: mandatory
+              usage: "0"
+              reference: if any
+          title:
+            description: "Title for the quote breakup"
+            required: mandatory
+            usage: "Fullstack Engineer"
+            reference: if any
+    fulfillment:
+      id:
+        description: "Unique identifier for the fulfillment"
+        required: mandatory
+        usage: "1"
+        reference: if any
+      type:
+        description: "Type of fulfillment"
+        required: mandatory
+        usage: "REMOTE"
+        reference: if any
+      state:
+        descriptor:
+          code:
+            description: "State code of the fulfillment"
+            required: mandatory
+            usage: "CANCELLED"
+            reference: if any
+      customer:
+        person:
+          name:
+            description: "Name of the customer"
+            required: mandatory
+            usage: "Sanjay"
+            reference: if any
+          gender:
+            description: "Gender of the customer"
+            required: mandatory
+            usage: "Male"
+            reference: if any
+          age:
+            description: "Age of the customer"
+            required: mandatory
+            usage: "35"
+            reference: if any
+          skills:
+              code:
+                description: "Skill code of the customer"
+                required: mandatory
+                usage: "Android"
+                reference: if any
+              name:
+                description: "Skill name of the customer"
+                required: mandatory
+                usage: "Android"
+                reference: if any
+          languages:
+              code:
+                description: "Language code of the customer"
+                required: mandatory
+                usage: "en"
+                reference: if any
+              name:
+                description: "Language name of the customer"
+                required: mandatory
+                usage: "english"
+                reference: if any
+        contact:
+          phone:
+            description: "The phone number of the customer."
+            required: mandatory
+            usage: "9999999999"
+            reference: null
+          email:
+            description: "The email of the customer."
+            required: mandatory
+            usage: "abc@abc.bc"
+            reference: null

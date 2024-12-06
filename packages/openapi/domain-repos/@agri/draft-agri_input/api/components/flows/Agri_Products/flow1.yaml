@@ -1,0 +1,54 @@
+summary: Agri Products - Flow 1 (Catalog pull)
+description: The following is an illustrative flow to perform a transaction of a nature where a buyer would like to pull the catelog. ✳️ Buyer NP initiates full catalog pull;
+    ✳️ Seller responds with full catalog;
+    ✳️ Buyer NP initiates catalog incremental refresh request;
+    ✳️ Seller NP responds with incremental catalog refresh response;
+details:
+
+  - description: Sequence Diagram for Agri I/O Products
+    mermaidGraph: >-
+      sequenceDiagram
+        participant B as Buyer
+        participant BA as BuyerApp
+        participant G as Gateway
+        participant SA1 as SellerApp1
+        participant SA2 as SellerApp2
+        
+        Note Over B,SA2: **SEARCH FLOW**
+        B ->> BA: Buyer initiates an exploratory search for product.
+        BA ->> G: **/search** - Search by city for a product and <br>additional parameters
+        Note left of BA: Additional params include: <br><br>
+        G ->> SA1: **/search** - Request broadcasted based <br>on city and domain in context
+        G ->> SA2: **/search** - Request broadcasted based <br>on city and domain in context
+        SA1 ->> BA: **/on_search** - Seller responds with /on_search, providing available products <br> with its details, pricing, quantity and seller statutory details
+        SA2 ->> BA: **/on_search** - Seller responds with /on_search, providing available products <br> with its details, pricing, quantity and seller statutory details
+        Note Over BA,SA1: Buyer now has the option to choose the <br>product from either Seller 1 or Seller 2 or both
+        BA ->> B: Shows all the avilable product <br>options from sellers
+
+reference: if any
+steps:
+  - summary: Buyer initiates an exploratory search for Full Catalogs.
+    api: search (full catalog)
+    description: The buyer expresses interest in purchasing a product (such as MUSTARD PIONEER) from all currently available provider catalog which is serviceable to him
+    reference: if any
+    example:
+      $ref: "../../Examples/Agri_Products_yaml/search/search.yaml"
+  - summary: Seller providing available products with its details, including pricing, quantity and seller statutory details
+    api: on_search (full catalog)
+    description: Seller responds with /on_search, providing available products and its details, including pricing, quantity and seller statutory details
+    reference: if any
+    example:
+      $ref: "../../Examples/Agri_Products_yaml/on_search/on_search.yaml"
+  - summary: Buyer initiates an exploratory search for Incremental calelog pull.
+    api: search (incremental pull)
+    description: The buyer subscribe to send the incrental catelog details with on_search into the requested time range
+    reference: if any
+    example:
+      $ref: "../../Examples/Agri_Products_yaml/search/incremental_search.yaml"
+  - summary: Seller providing the updated items and its details, including changed price with updated quantity (if changed in it)
+    api: on_search (incremental pull)
+    description: Seller responds with /on_search, providing the updated items and its details, including changed price with updated quantity (if changed in it)
+    reference: if any
+    example:
+      $ref: "../../Examples/Agri_Products_yaml/on_search/on_search_incremental.yaml"
+  

@@ -1,0 +1,11 @@
+{
+  "name": "nginx",
+  "version": "1.0.0",
+  "description": "NGINX configurations for environment based configuration usage and routing.",
+  "main": "index.js",
+  "scripts": {
+    "start:nginx": "docker compose down && docker compose up -d --build --force-recreate"
+  },
+  "author": "Abhik Banerjee",
+  "license": "ISC"
+}

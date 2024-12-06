@@ -1,0 +1,86 @@
+context:
+  parent: true
+  domain:
+    description: "domain"
+    required: mandatory
+    usage: "ONDC:ONEST10"
+    reference: if any
+  action:
+    description: "action"
+    required: mandatory
+    usage: "search"
+    reference: if any
+  version:
+    description: "version"
+    required: mandatory
+    usage: "2.0.0"
+    reference: if any
+  bap_id:
+    description: "bap_id"
+    required: mandatory
+    usage: "worker-hub.bap.io"
+    reference: if any
+  bap_uri:
+    description: "bap_uri"
+    required: mandatory
+    usage: "https://worker-hub.bap.io/"
+    reference: if any
+  transaction_id:
+    description: "transaction_id"
+    required: mandatory
+    usage: "a9aaecca-10b7-4d19-b640-b047a7c62195"
+    reference: if any
+  message_id:
+    description: "message_id"
+    required: mandatory
+    usage: "$89bdae17-9942-40c8-869a-5bd413356407"
+    reference: if any
+  location:
+    parent: true
+    city:
+      code:
+        description: "code"
+        required: mandatory
+        usage: "std:080"
+        reference: if any
+    country:
+      code:
+        description: "code"
+        required: mandatory
+        usage: "IND"
+        reference: if any
+  timestamp:
+    description: "timestamp"
+    required: mandatory
+    usage: "2022-10-11T09:55:41.161Z"
+    reference: if any
+  ttl:
+    description: "ttl"
+    required: mandatory
+    usage: "PT30S"
+    reference: if any
+message:
+  parent: true
+  intent:
+    parent: true
+    payment:
+      parent: true
+      BUYER_FINDER_FEE_TYPE:
+        description: "BUYER_FINDER_FEE_TYPE"
+        required: mandatory
+        usage: "PERCENT"
+        reference: if any
+      BUYER_FINDER_FEE_PERCENTAGE:
+        description: "BUYER_FINDER_FEE_PERCENTAGE"
+        required: mandatory
+        usage: "3"
+        reference: if any
+    item:
+      parent: true
+      descriptor:
+        parent: true
+        name:
+          description: "name"
+          required: mandatory
+          usage: "Engineer"
+          reference: if any

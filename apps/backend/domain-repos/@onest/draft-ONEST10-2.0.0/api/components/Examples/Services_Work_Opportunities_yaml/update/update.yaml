@@ -1,0 +1,28 @@
+value:
+  context:
+    domain: ONDC:ONEST10
+    action: update
+    version: 2.0.0
+    bap_id: bap-12345
+    bap_uri: https://worker-hub.bap.io
+    bpp_id: job-hub.bpp.io
+    bpp_uri: https://job-hub.bpp.io
+    transaction_id: a9aaecca-10b7-4d19-b640-b047a7c62195
+    message_id: 8cbb5e99-5d06-4855-81e9-a4fc8013dbff
+    location:
+      city:
+        code: std:080
+      country:
+        code: IND
+    timestamp: "2024-09-04T12:34:561Z"
+    ttl: PT30M
+  message:
+    update_target: fulfillments
+    order:
+      id: "1677140405881"
+      fulfillments:
+        - id: fulfillment_id_value
+          type: FULFILLMENT_TYPE_VALUE
+          contact:
+            phone: "9999999999"
+            email: abc@abc.bc

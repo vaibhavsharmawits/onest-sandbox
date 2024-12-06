@@ -1,0 +1,244 @@
+context:
+  parent: true
+  domain:
+    description: "The domain of the ONDC network."
+    required: mandatory
+    usage: "ONDC:ONEST10"
+    reference: "if any"
+  action:
+    description: "The action being performed in the ONDC flow."
+    required: mandatory
+    usage: "on_update"
+    reference: "if any"
+  version:
+    description: "The version of the ONDC API being used."
+    required: mandatory
+    usage: "2.0.0"
+    reference: "if any"
+  bap_id:
+    description: "The unique identifier of the Buyer Application Provider (BAP)."
+    required: mandatory
+    usage: "worker-hub.bap.io"
+    reference: "if any"
+  bap_uri:
+    description: "The URI of the Buyer Application Provider (BAP)."
+    required: mandatory
+    usage: "https://worker-hub.bap.io"
+    reference: "if any"
+  bpp_id:
+    description: "The unique identifier of the Seller Application Provider (BPP)."
+    required: mandatory
+    usage: "job-hub.bpp.io"
+    reference: "if any"
+  bpp_uri:
+    description: "The URI of the Seller Application Provider (BPP)."
+    required: mandatory
+    usage: "https://job-hub.bpp.io"
+    reference: "if any"
+  transaction_id:
+    description: "The unique transaction identifier for the operation."
+    required: mandatory
+    usage: "a9aaecca-10b7-4d19-b640-b047a7c62195"
+    reference: "if any"
+  message_id:
+    description: "The unique identifier of the message in the ONDC flow."
+    required: mandatory
+    usage: "8cbb5e99-5d06-4855-81e9-a4fc8013dbff"
+    reference: "if any"
+  location:
+    city:
+      code:
+        description: "The city code in the ONDC ecosystem."
+        required: mandatory
+        usage: "std:080"
+        reference: "if any"
+    country:
+      code:
+        description: "The country code in the ONDC ecosystem."
+        required: mandatory
+        usage: "IND"
+        reference: "if any"
+  timestamp:
+    description: "The timestamp of the operation in ISO 8601 format."
+    required: mandatory
+    usage: "2023-02-23T08:20:061Z"
+    reference: "if any"
+  ttl:
+    description: "The Time-to-Live (TTL) of the operation in ISO 8601 duration format."
+    required: mandatory
+    usage: "PT30S"
+    reference: "if any"
+message:
+  parent: true
+  update_target:
+    description: "The target entity being updated in the message."
+    required: mandatory
+    usage: "fulfillments"
+    reference: "if any"
+  order:
+    id:
+      description: "The unique identifier of the order."
+      required: mandatory
+      usage: "1677140405881"
+      reference: "if any"
+  status:
+    description: "The status of the order."
+    required: mandatory
+    usage: "Active"
+    reference: "if any"
+  provider:
+    id:
+      description: "The unique identifier of the provider offering the service."
+      required: mandatory
+      usage: "1"
+      reference: "if any"
+    descriptor:
+      name:
+        description: "The name of the provider."
+        required: mandatory
+        usage: "Affinidi"
+        reference: "if any"
+  locations:
+    id:
+      description: "The unique identifier of the location."
+      required: mandatory
+      usage: "L1"
+      reference: "if any"
+    city:
+      name:
+        description: "The name of the city."
+        required: mandatory
+        usage: "Pune"
+        reference: "if any"
+      code:
+        description: "The city code."
+        required: mandatory
+        usage: "std:020"
+        reference: "if any"
+    state:
+      name:
+        description: "The name of the state."
+        required: mandatory
+        usage: "Maharashtra"
+        reference: "if any"
+      code:
+        description: "The state code."
+        required: mandatory
+        usage: "MH"
+        reference: "if any"
+  items:
+    id:
+      description: "The unique identifier of the item being selected."
+      required: mandatory
+      usage: "a23f2fdfbbb8ac402bf259d75402eb0792f50c095f7d08a55475e7af1c2dadca"
+      reference: "if any"
+    fulfillment_ids:
+      description: "The fulfillment IDs associated with the item."
+      required: mandatory
+      usage: "1"
+      reference: "if any"
+    location_ids:
+      description: "The location IDs associated with the item."
+      required: mandatory
+      usage: "L1"
+      reference: "if any"
+  fulfillments:
+    id:
+      description: "The unique identifier of the fulfillment."
+      required: mandatory
+      usage: "1"
+      reference: "if any"
+    type:
+      description: "The type of fulfillment."
+      required: mandatory
+      usage: "REMOTE"
+      reference: "if any"
+    customer:
+      person:
+        name:
+          description: "The name of the customer."
+          required: mandatory
+          usage: "Sanjay"
+          reference: "if any"
+        gender:
+          description: "The gender of the customer."
+          required: mandatory
+          usage: "Male"
+          reference: "if any"
+        age:
+          description: "The age of the customer."
+          required: mandatory
+          usage: "35"
+          reference: "if any"
+        skills:
+          code:
+            description: "The code of the skill."
+            required: mandatory
+            usage: "Android"
+            reference: null
+          name:
+            description: "The name of the skill."
+            required: mandatory
+            usage: "Android"
+            reference: null
+        languages:
+          code:
+            description: "The language code."
+            required: mandatory
+            usage: "en"
+            reference: null
+          name:
+            description: "The language name."
+            required: mandatory
+            usage: "English"
+            reference: null
+    contact:
+      phone:
+        description: "The phone number of the customer."
+        required: mandatory
+        usage: "9999999999"
+        reference: "if any"
+      email:
+        description: "The email address of the customer."
+        required: mandatory
+        usage: "abc@abc.bc"
+        reference: "if any"
+  quote:
+    price:
+      currency:
+        description: "The currency of the quoted price."
+        required: mandatory
+        usage: "INR"
+        reference: null
+      value:
+        description: "The value of the quoted price."
+        required: mandatory
+        usage: "1400"
+        reference: null
+    breakup:
+      id:
+        description: "The unique identifier for the quote breakup item."
+        required: mandatory
+        usage: "0253719F295521CED39EC9C2F3C8DCDE"
+        reference: null
+      price:
+        currency:
+          description: "The currency of the breakup price."
+          required: mandatory
+          usage: "INR"
+          reference: null
+        value:
+          description: "The value of the breakup price."
+          required: mandatory
+          usage: "1100"
+          reference: null
+      title:
+        description: "The title of the breakup item."
+        required: mandatory
+        usage: "Fullstack Engineer"
+        reference: null
+    ttl:
+      description: "The Time-to-Live (TTL) for the quoted order."
+      required: mandatory
+      usage: "P1D"
+      reference: null

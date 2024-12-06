@@ -1,0 +1,167 @@
+summary: ONDC:ONEST10 - Work Opportunities
+description: The following is an illustrative flow for a job application transaction, where a candidate intends to apply for a specific job role.
+details:
+
+  - description: Sequence Diagram for Services Work Opportunities
+    mermaidGraph: >-
+      sequenceDiagram
+        participant BAP
+        participant BPP
+        participant Gateway
+
+        BAP->>Gateway: search
+        Gateway->>BPP: search
+        BPP-->>BAP: on_search
+
+        BAP->>BPP: select
+        BPP-->>BAP: on_select
+
+        BAP->>BPP: init
+        BPP-->>BAP: on_init
+
+        BAP->>BPP: confirm
+        BPP-->>BAP: on_confirm
+
+        BAP->>BPP: status
+        BPP-->>BAP: on_status
+
+        BAP->>BPP: update
+        BPP-->>BAP: on_update
+
+        BAP->>BPP: cancel
+        BPP-->>BAP: on_cancel
+
+
+  - description: Ordering
+    mermaidGraph: >-
+      sequenceDiagram
+        participant B as Buyer
+        participant BA as BuyerApp
+        participant SA as SellerApp
+        Note Over B,SA: **SELECT FLOW**
+        B ->> BA: Selects one of the <br>providers for job
+        BA ->> SA: **/select** - A job is selected with a <br>TTL for receiving response
+        SA ->> BA: **/on_select** - Responds to the selection with <br>breakup, quote including logistics charges
+        BA ->> B: Shows response with price details
+
+
+  - description: Initializing the order
+    mermaidGraph: >-
+      sequenceDiagram
+        participant B as Buyer
+        participant BA as BuyerApp
+        participant SA as SellerApp
+        Note Over B,SA: **INITIALIZATION FLOW**
+        B ->> BA: Proceeds with the Order
+        BA ->> SA: **/init** - Initializes the order and <br>sends billing details
+        SA ->> BA: **/on_init** - Order initialization with <br>fulfillment & settlement information <br>including UPI or NEFT/IMPS/Bank Transfer
+        BA ->> B: Confirms initialization
+
+  - description: Order Confirmation
+    mermaidGraph: >-
+      sequenceDiagram
+        participant B as Buyer
+        participant BA as BuyerApp
+        participant SA as SellerApp
+        Note Over B,SA: **CONFIRMATION FLOW**
+        B ->> BA: Confirms the Order
+        BA ->> SA: **/confirm** - Creates order to create final digital contract
+        SA ->> BA: **/on_confirm** - Accepts the order 
+        BA ->> B: Confirms order and delivery 
+
+  - description: Fulfillment
+    mermaidGraph: >-
+      sequenceDiagram
+        participant B as Buyer
+        participant BA as BuyerApp
+        participant SA as SellerApp 
+        Note Over B,SA: **ORDER STATUS FLOW**
+        B ->> BA: Checks the order status
+        BA ->> SA: **/status** - Enquire order status <br>or tracking information
+        SA ->> BA: **/on_status** - Latest order and fulfillment status is sent
+        BA ->> B: Updates the latest order <br>and fulfillment information
+
+reference: if any
+steps:
+  - summary: Description
+    api: search
+    description: BAP will make search request with an intent, example :- job name, job provider, location etc.
+    reference: if any
+    example:
+      $ref: "../../Examples/Services_Work_Opportunities_yaml/search/search_by_job_name.yaml"
+  - summary: Description
+    api: on_search
+    description: BPP will create a catalogue containing jobs with matching criteria and sends it as on_search request.
+    reference: if any
+    example:
+      $ref: "../../Examples/Services_Work_Opportunities_yaml/on_search/on_search.yaml"
+  - summary: Description
+    api: select
+    description:  BAP will receive the on_search request and displays the list of jobs to the user. Once the user chooses a job, BAP will make select API with item ID to get the complete details about the job.
+    reference: if any
+    example:
+      $ref: "../../Examples/Services_Work_Opportunities_yaml/select/select.yaml"
+  - summary: Description
+    api: on_select
+    description: BPP will receive the select request and check if the listing is still valid. If the listing is still valid, BPP will send the on_select call with complete details of the job listing.
+    reference: if any
+    example:
+      $ref: "../../Examples/Services_Work_Opportunities_yaml/on_select/on_select.yaml"
+  - summary: Description
+    api: init
+    description: BAP sends the customer details to the BPP in the init API. This is the initializing step of the job application process.
+    reference: if any
+    example:
+      $ref: "../../Examples/Services_Work_Opportunities_yaml/init/init.yaml"
+  - summary: Description
+    api: on_init
+    description: If BPP wants to collect additional details of the user, it will send an xinput form in the on_init request.
+    reference: if any
+    example:
+      $ref: "../../Examples/Services_Work_Opportunities_yaml/on_init/on_init.yaml"
+  - summary: Description
+    api: confirm
+    description: BAP confirms user wants to submit the job application.
+    example:
+      $ref: "../../Examples/Services_Work_Opportunities_yaml/confirm/confirm.yaml"
+  - summary: Description
+    api: on_confirm
+    description: BPP sends confirmation of submission of job application.
+    reference: if any
+    example:
+      $ref: "../../Examples/Services_Work_Opportunities_yaml/on_confirm/on_confirm.yaml"
+  - summary: Description
+    api: status
+    description: BAP sends request for status of submission of job application.
+    reference: if any
+    example:
+      $ref: "../../Examples/Services_Work_Opportunities_yaml/status/status.yaml"
+  - summary: Description
+    api: on_status
+    description: BPP sends confirmation of submission of job application.
+    reference: if any
+    example:
+      $ref: "../../Examples/Services_Work_Opportunities_yaml/on_status/on_status.yaml"
+  - summary: Description
+    api: cancel
+    description: BAP sends request for cancellation of job application.
+    reference: if any
+    example:
+      $ref: "../../Examples/Services_Work_Opportunities_yaml/cancel/cancel.yaml"
+  - summary: Description
+    api: on_cancel
+    description: BPP sends confirmation of cancellation of job application.
+    reference: if any
+    example:
+      $ref: "../../Examples/Services_Work_Opportunities_yaml/on_cancel/on_cancel.yaml"
+  - summary: Description
+    api: update
+    description: BAP confirms user wants to submit the job application.
+    example:
+      $ref: "../../Examples/Services_Work_Opportunities_yaml/update/update.yaml"
+  - summary: Description
+    api: on_update
+    description: BPP sends confirmation of submission of job application.
+    reference: if any
+    example:
+      $ref: "../../Examples/Services_Work_Opportunities_yaml/on_update/on_update.yaml"

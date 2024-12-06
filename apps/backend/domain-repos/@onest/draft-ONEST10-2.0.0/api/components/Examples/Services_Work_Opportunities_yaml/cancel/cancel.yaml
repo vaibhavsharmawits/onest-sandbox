@@ -1,0 +1,21 @@
+value:
+  context:
+    domain: ONDC:ONEST10
+    action: cancel
+    version: 2.0.0
+    bap_id: worker-hub.bap.io
+    bap_uri: https://worker-hub.bap.io
+    bpp_id: job-hub.bpp.io
+    bpp_uri: https://job-hub.bpp.io
+    transaction_id: a9aaecca-10b7-4d19-b640-b047a7c62195
+    message_id: 8cbb5e99-5d06-4855-81e9-a4fc8013dbff
+    location:
+      city:
+        code: std:080
+      country:
+        code: IND
+    timestamp: "2023-02-23T08:20:06Z"
+    ttl: PT30S
+  message:
+    order_id: "1677140405881"
+    cancellation_reason_id: "001"

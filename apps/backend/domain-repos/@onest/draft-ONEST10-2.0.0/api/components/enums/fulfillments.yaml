@@ -1,0 +1,84 @@
+fulfillments:
+  type:
+    - code: REMOTE
+      description: How the job will be fullfilled	
+      reference: <PR/Issue/Discussion Links md format text>
+    - code: HYBRID
+      description: How the job will be fullfilled	
+      reference: <PR/Issue/Discussion Links md format text>
+    - code: ONSITE
+      description: How the job will be fullfilled	
+      reference: <PR/Issue/Discussion Links md format text>
+  state:
+    descriptor:
+      code:
+        - code: APPLICATION_STARTED
+          name: Human readble code of the fulfillment status	
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: APPLICATION_IN_PROGRESS
+          description: Human readble code of the fulfillment status	
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: APPLICATION_FILLED
+          description: Human readble code of the fulfillment status	
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: APPLICATION_SUBMITTED
+          description: Human readble code of the fulfillment status	
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: APPLICATION-REJECTED
+          description: Human readble code of the fulfillment status	
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: ASSESSMENT-IN-PROGRESS
+          description: Human readble code of the fulfillment status	
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: OFFER_EXTENDED
+          description: Human readble code of the fulfillment status	
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: OFFER_ACCEPTED
+          description: Human readble code of the fulfillment status	
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: OFFER-REJECTED
+          description: Human readble code of the fulfillment status	
+          reference: <PR/Issue/Discussion Links md format text>
+      name:
+        - code: Application Started
+          description: Name of the fulfillment status		
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: Application in Progress
+          description: Name of the fulfillment status		
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: Application Filled
+          description: Name of the fulfillment status		
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: Application Submitted
+          description: Name of the fulfillment status		
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: Application Rejected
+          description: Name of the fulfillment status		
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: Assessment in Progress
+          description: Name of the fulfillment status		
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: Offer Extended
+          description: Name of the fulfillment status		
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: Offer Accepted
+          description: Name of the fulfillment status		
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: Offer Rejected
+          description: Name of the fulfillment status		
+          reference: <PR/Issue/Discussion Links md format text>
+  customer:
+    person:
+      gender:
+        - code: Male
+          description: Gender of the job applicant
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: Female
+          description: Gender of the job applicant
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: Transgender
+          description: Gender of the job applicant
+          reference: <PR/Issue/Discussion Links md format text>
+        - code: Other
+          description: Gender of the job applicant
+          reference: <PR/Issue/Discussion Links md format text>

@@ -1,0 +1,74 @@
+domain:
+  - code: ONDC:ONEST10
+    description: Work Opportunities	
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: ONDC:ONEST11
+    description: Learning Experiences	
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: ONDC:ONEST12
+    description: Scholarships	
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: ONDC:ONEST13
+    description: Mentorship	
+    reference: <PR/Issue/Discussion Links md format text>
+action:
+  - code: search  
+    description: Defines the API call. Any actions other than the enumerated actions are not supported by Beckn Protocol.  
+    reference: <PR/Issue/Discussion Links md format text>  
+  - code: select  
+    description: Defines the API call. Any actions other than the enumerated actions are not supported by Beckn Protocol.  
+    reference: <PR/Issue/Discussion Links md format text>  
+  - code: init  
+    description: Defines the API call. Any actions other than the enumerated actions are not supported by Beckn Protocol.  
+    reference: <PR/Issue/Discussion Links md format text>  
+  - code: confirm  
+    description: Defines the API call. Any actions other than the enumerated actions are not supported by Beckn Protocol.  
+    reference: <PR/Issue/Discussion Links md format text>  
+  - code: update  
+    description: Defines the API call. Any actions other than the enumerated actions are not supported by Beckn Protocol.  
+    reference: <PR/Issue/Discussion Links md format text>  
+  - code: status  
+    description: Defines the API call. Any actions other than the enumerated actions are not supported by Beckn Protocol.  
+    reference: <PR/Issue/Discussion Links md format text>  
+  - code: track  
+    description: Defines the API call. Any actions other than the enumerated actions are not supported by Beckn Protocol.  
+    reference: <PR/Issue/Discussion Links md format text>  
+  - code: cancel  
+    description: Defines the API call. Any actions other than the enumerated actions are not supported by Beckn Protocol.  
+    reference: <PR/Issue/Discussion Links md format text>  
+  - code: rating  
+    description: Defines the API call. Any actions other than the enumerated actions are not supported by Beckn Protocol.  
+    reference: <PR/Issue/Discussion Links md format text>  
+  - code: support  
+    description: Defines the API call. Any actions other than the enumerated actions are not supported by Beckn Protocol.  
+    reference: <PR/Issue/Discussion Links md format text>  
+  - code: on_search  
+    description: Defines the API call. Any actions other than the enumerated actions are not supported by Beckn Protocol.  
+    reference: <PR/Issue/Discussion Links md format text>  
+  - code: on_select  
+    description: Defines the API call. Any actions other than the enumerated actions are not supported by Beckn Protocol.  
+    reference: <PR/Issue/Discussion Links md format text>  
+  - code: on_init  
+    description: Defines the API call. Any actions other than the enumerated actions are not supported by Beckn Protocol.  
+    reference: <PR/Issue/Discussion Links md format text>  
+  - code: on_confirm  
+    description: Defines the API call. Any actions other than the enumerated actions are not supported by Beckn Protocol.  
+    reference: <PR/Issue/Discussion Links md format text>  
+  - code: on_update  
+    description: Defines the API call. Any actions other than the enumerated actions are not supported by Beckn Protocol.  
+    reference: <PR/Issue/Discussion Links md format text>  
+  - code: on_status  
+    description: Defines the API call. Any actions other than the enumerated actions are not supported by Beckn Protocol.  
+    reference: <PR/Issue/Discussion Links md format text>  
+  - code: on_track  
+    description: Defines the API call. Any actions other than the enumerated actions are not supported by Beckn Protocol.  
+    reference: <PR/Issue/Discussion Links md format text>  
+  - code: on_cancel  
+    description: Defines the API call. Any actions other than the enumerated actions are not supported by Beckn Protocol.  
+    reference: <PR/Issue/Discussion Links md format text>  
+  - code: on_rating  
+    description: Defines the API call. Any actions other than the enumerated actions are not supported by Beckn Protocol.  
+    reference: <PR/Issue/Discussion Links md format text>  
+  - code: on_support  
+    description: Defines the API call. Any actions other than the enumerated actions are not supported by Beckn Protocol.  
+    reference: <PR/Issue/Discussion Links md format text>  

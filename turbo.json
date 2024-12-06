@@ -1,0 +1,37 @@
+{
+	"$schema": "https://turbo.build/schema.json",
+	"tasks": {
+		"test": {
+			"dependsOn": ["test:backend"],
+			"persistent": true
+		},
+		"test:backend": {
+			"cache": false,
+			"persistent": false
+		},
+		"dev": {
+			"dependsOn": ["db:migrate:dev","start:nginx"],
+			"cache": false,
+			"persistent": true
+		},
+		"start:nginx": {
+			"cache": false,
+			"persistent": false
+		},
+		"swagger:gen": {
+			"cache": false
+		},
+		"db:migrate:dev": {
+			"dependsOn": ["db:up"],
+			"cache": false
+		},
+		"db:up": {
+			"cache": false
+		},
+		"build": {
+      "dependsOn": ["^build"],
+			"outputs": ["dist/**"]
+		},
+		"type-check": {}
+	}
+}

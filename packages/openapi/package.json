@@ -1,0 +1,31 @@
+{
+	"name": "openapi-specs",
+	"version": "1.0.0",
+	"module": "es2022",
+	"description": "Contains the generated OpenAPI Specs.",
+	"scripts": {
+		"swagger:gen": "ts-node generateSwagger.ts"
+	},
+	"author": "Abhik Banerjee",
+	"license": "ISC",
+	"exports": {
+		"./constants": "./constants.ts",
+		"./auth.json": "./openapi/auth/openapi.json",
+		"./misc.json": "./openapi/misc/openapi.json",
+		"./retail-b2b.json": "./openapi/retail-b2b/build/swagger.json",
+		"./b2c.json": "./openapi/b2c/build/swagger.json",
+		"./services.json": "./openapi/services/build/swagger.json",
+		"./agri-services.json": "./openapi/agri-services/build/swagger.json",
+		"./healthcare-services.json": "./openapi/healthcare-services/build/swagger.json",
+		"./agri-equipment-hiring.json": "./openapi/agri-equipment-hiring/build/swagger.json"
+	},
+	"dependencies": {
+		"@apidevtools/json-schema-ref-parser": "^11.5.4",
+		"dotenv": "^16.4.5",
+		"js-yaml": "^4.1.0"
+	},
+	"devDependencies": {
+		"ts-node": "^10.9.2",
+		"typescript": "^5.4.2"
+	}
+}

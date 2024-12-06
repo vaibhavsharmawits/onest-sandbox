@@ -1,0 +1,60 @@
+{
+  "context": {
+    "ttl": "PT30S",
+    "city": "std:011",
+    "action": "select",
+    "bap_id": "buyer-app.com",
+    "bpp_id": "seller-app.com",
+    "domain": "ONDC:AGR10",
+    "bap_uri": "https://buyer-app.com/v1/ondc",
+    "bpp_uri": "https://seller-app.com/v1/ondc",
+    "country": "IND",
+    "timestamp": "2024-03-15T10:00:52.045Z",
+    "message_id": "444c2d2f-9ee5-4a7f-b9f3-4485d9e614b6",
+    "core_version": "1.2.0",
+    "transaction_id": "1124fc7d-91ed-4f1e-9b50-b1855fe41325"
+  },
+  "message": {
+    "order": {
+      "items": [
+        {
+          "id": "13927",
+          "quantity": {
+            "count": 2
+          },
+          "location_id": "5009-L1"
+        },
+        {
+          "id": "14398",
+          "quantity": {
+            "count": 2
+          },
+          "location_id": "5009-L1"
+        }
+      ],
+      "payment": {
+        "type": "ON-FULFILLMENT"
+      },
+      "provider": {
+        "id": "5009",
+        "locations": [
+          {
+            "id": "5009-L1"
+          }
+        ]
+      },
+      "fulfillments": [
+        {
+          "end": {
+            "location": {
+              "gps": "12.974002,77.613458",
+              "address": {
+                "area_code": "560001"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,75 @@
+Agri Products - Basic order flow:
+  summary: Agri Products - Basic order flow
+  description: >-
+    This elaborates the model implementations for agricultural product order process over the network.
+    The process majorly happens in four phases of order processing flow, i.e. Discovery of available products, and providers based on serviceability, order, fulfillment and post-fulfillment.
+  example_set:
+    $ref: "./Agri_Products_yaml/index.yaml"
+Agri Products - Flow 1 (Catalog pull):
+  summary: Agri Products - Flow 1 (Catalog pull)
+  description: >-
+    This elaborates the model implementations for agricultural product catalog pull process over the network.
+    ✳️ Buyer NP initiates full catalog pull;
+    ✳️ Seller responds with full catalog;
+    ✳️ Buyer NP initiates catalog incremental refresh request;
+    ✳️ Seller NP responds with incremental catalog refresh response;
+  example_set:
+    $ref: "./Agri_Products_yaml/index.yaml"
+Agri Products - Flow 2 (Multi item successful order):
+  summary: Agri Products - Flow 2 (Multi item successful order)
+  description: >-
+    This elaborates the model implementations for agricultural product order process over the network.
+    ✳️ Buyer selects multiple items (> 1 qty for each item) for checkout;
+    ✳️ Seller NP provides all fulfillment slots (different fulfillment types), some with tracking enabled;                        
+    ✳️ Buyer selects different type or different slot for which tracking is enabled;
+    ✳️ Seller NP accepts and proceeds to checkout;
+    ✳️ Order is confirmed;
+    ✳️ Buyer NP tracks live status of order;
+    ✳️ Unsolicited status updates for order until delivery;
+  example_set:
+    $ref: "./Agri_Products_yaml/index.yaml"
+Agri Products - Flow 3 (Item out of stock):
+  summary: Agri Products - Flow 3 (Item out of stock)
+  description: >-
+    This elaborates the model implementations for agricultural product order process over the network.
+    ✳️ Buyer selects multiple items (> 1 qty for each item) for checkout;
+    ✳️ Seller NP provides all fulfillment slots (different fulfillment types), some with tracking enabled;
+    ✳️ Seller NP provides details of item which is out of stock and item for which the quantity requested isn't available;
+    ✳️ Buyer selects different type or different slot for which tracking is disabled;
+    ✳️ Buyer NP accepts and proceeds to checkout;
+    ✳️ Order is confirmed;
+    ✳️ Buyer NP tracks live status of order;
+    ✳️ Unsolicited status updates for order until delivery;
+  example_set:
+    $ref: "./Agri_Products_yaml/index.yaml"
+Agri Products - Flow 4 (Buyer side cancellation):
+  summary: Agri Products - Flow 4 (Buyer side cancellation)
+  description: >-
+    This elaborates the model implementations for agricultural product order process over the network and after the order creation Buyer NP cancels order before pickup.
+  example_set:
+    $ref: "./Agri_Products_yaml/index.yaml"
+Agri Products - Flow 5 (Seller side cancellation):
+  summary: Agri Products - Flow 5 (Seller side cancellation)
+  description: >-
+    This elaborates the model implementations for agricultural product order process over the network and after the order creation LSP/Seller NP cancel order due to buyer unavailability.
+  example_set:
+    $ref: "./Agri_Products_yaml/index.yaml"
+Agri Products - Flow 6 (Seller side part cancel before pickup):
+  summary: Agri Products - Flow 6 (Seller side part cancel before pickup)
+  description: >-
+    This elaborates the model implementations for agricultural product order process over the network and after the order creation Merchant cancels one of the items before pickup.
+  example_set:
+    $ref: "./Agri_Products_yaml/index.yaml"
+Agri Products - Flow 6 (Buyer returns and seller liquidate the request):
+  summary: Agri Products - Flow 6 (Buyer returns and seller liquidate the request)
+  description: >-
+    This elaborates the model implementations for agricultural product order process over the network and after the order creation Buyer returns an item which seller NP accepts with liquidation.
+  example_set:
+    $ref: "./Agri_Products_yaml/index.yaml"
+Agri Products - Flow 6 (Buyer returns and seller accept the request i.e. Reverse QC):
+  summary: Agri Products - Flow 6 (Buyer returns and seller accept the request i.e. Reverse QC)
+  description: >-
+    This elaborates the model implementations for agricultural product order process over the network and after the order creation Buyer returns another item from previous order which seller NP accepts with return of item.
+  example_set:
+    $ref: "./Agri_Products_yaml/index.yaml"
+

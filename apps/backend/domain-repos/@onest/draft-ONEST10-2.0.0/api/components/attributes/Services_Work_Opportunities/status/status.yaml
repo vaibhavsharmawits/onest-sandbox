@@ -1,0 +1,79 @@
+context:
+  parent: true
+  domain:
+    description: "The domain of the ONDC network."
+    required: mandatory
+    usage: "ONDC:ONEST10"
+    reference: null
+  action:
+    description: "The action being performed in the ONDC flow."
+    required: mandatory
+    usage: "status"
+    reference: null
+  version:
+    description: "The version of the ONDC API being used."
+    required: mandatory
+    usage: "2.0.0"
+    reference: null
+  bap_id:
+    description: "The unique identifier of the Buyer Application Provider (BAP)."
+    required: mandatory
+    usage: "bap-12345"
+    reference: null
+  bap_uri:
+    description: "The URI of the Buyer Application Provider (BAP)."
+    required: mandatory
+    usage: "https://worker-hub.bap.io"
+    reference: null
+  bpp_id:
+    description: "The unique identifier of the Backend Platform Provider (BPP)."
+    required: mandatory
+    usage: "job-hub.bpp.io"
+    reference: null
+  bpp_uri:
+    description: "The URI of the Backend Platform Provider (BPP)."
+    required: mandatory
+    usage: "https://job-hub.bpp.io"
+    reference: null
+  transaction_id:
+    description: "The unique transaction identifier for the operation."
+    required: mandatory
+    usage: "a9aaecca-10b7-4d19-b640-b047a7c62195"
+    reference: null
+  message_id:
+    description: "The unique identifier of the message in the ONDC flow."
+    required: mandatory
+    usage: "8cbb5e99-5d06-4855-81e9-a4fc8013dbff"
+    reference: null
+  location:
+    city:
+      code:
+        description: "The city code in the ONDC ecosystem."
+        required: mandatory
+        usage: "std:080"
+        reference: null
+    country:
+      code:
+        description: "The country code in the ONDC ecosystem."
+        required: mandatory
+        usage: "IND"
+        reference: null
+  timestamp:
+    description: "The timestamp of the operation in ISO 8601 format."
+    required: mandatory
+    usage: "2024-09-04T12:34:560Z"
+    reference: null
+  ttl:
+    description: "The Time-to-Live (TTL) of the operation in ISO 8601 duration format."
+    required: mandatory
+    usage: "PT30S"
+    reference: null
+message:
+  parent: true
+  order:
+    parent: true
+    id:
+      description: "The unique identifier of the order."
+      required: mandatory
+      usage: "1677140405881"
+      reference: null

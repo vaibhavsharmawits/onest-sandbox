@@ -1,0 +1,17 @@
+value:
+  context:
+    ttl: PT30S
+    city: std:011
+    action: status
+    bap_id: buyer-app.com
+    bpp_id: seller-app.com
+    domain: ONDC:AGR10
+    bap_uri: https://buyer-app.com/v1/ondc
+    bpp_uri: https://seller-app.com/v1/ondc
+    country: IND
+    timestamp: '2024-03-28T07:59:44.941Z'
+    message_id: f9fae97e-d926-4070-bd33-25460ae633da
+    core_version: 1.2.0
+    transaction_id: 9e7ee6cb-5511-4a5c-ae27-7222a0c88320
+  message:
+    order_id: 2024-03-15-85878

@@ -1,0 +1,228 @@
+context:
+  parent: true
+  domain:
+    description: "The domain of the ONDC network."
+    required: mandatory
+    usage: "ONDC:ONEST10"
+    reference: null
+  action:
+    description: "The action being performed in the ONDC flow."
+    required: mandatory
+    usage: "on_status"
+    reference: null
+  version:
+    description: "The version of the ONDC API being used."
+    required: mandatory
+    usage: "2.0.0"
+    reference: null
+  bap_id:
+    description: "The unique identifier of the Buyer Application Provider (BAP)."
+    required: mandatory
+    usage: "worker-hub.bap.io"
+    reference: null
+  bap_uri:
+    description: "The URI of the Buyer Application Provider (BAP)."
+    required: mandatory
+    usage: "https://worker-hub.bap.io"
+    reference: null
+  transaction_id:
+    description: "The unique transaction identifier for the operation."
+    required: mandatory
+    usage: "a9aaecca-10b7-4d19-b640-b047a7c62195"
+    reference: null
+  message_id:
+    description: "The unique identifier of the message in the ONDC flow."
+    required: mandatory
+    usage: "c8e3968c-cd78-4e46-aa34-0d541e46bd73"
+    reference: null
+  location:
+    city:
+      code:
+        description: "The city code in the ONDC ecosystem."
+        required: mandatory
+        usage: "std:080"
+        reference: null
+    country:
+      code:
+        description: "The country code in the ONDC ecosystem."
+        required: mandatory
+        usage: "IND"
+        reference: null
+  timestamp:
+    description: "The timestamp of the operation in ISO 8601 format."
+    required: mandatory
+    usage: "2023-02-22T11:50:46.742Z"
+    reference: null
+  ttl:
+    description: "The Time-to-Live (TTL) of the operation in ISO 8601 duration format."
+    required: mandatory
+    usage: "PT30S"
+    reference: null
+message:
+  parent: true
+  order:
+    parent: true
+    status:
+      description: "The current status of the order."
+      required: mandatory
+      usage: "Active"
+      reference: null
+    provider:
+      id:
+        description: "The unique identifier of the provider offering the service or item."
+        required: mandatory
+        usage: "1"
+        reference: null
+      descriptor:
+        name:
+          description: "The name of the provider."
+          required: mandatory
+          usage: "Affinidi"
+          reference: null
+      locations:
+        id:
+          description: "The unique identifier of the provider location."
+          required: mandatory
+          usage: "L1"
+          reference: null
+        city:
+          name:
+            description: "The name of the city for the location."
+            required: mandatory
+            usage: "Pune"
+            reference: null
+          code:
+            description: "The city code in the ONDC ecosystem."
+            required: mandatory
+            usage: "std:020"
+            reference: null
+        state:
+          name:
+            description: "The name of the state for the location."
+            required: mandatory
+            usage: "Maharastra"
+            reference: null
+          code:
+            description: "The state code in the ONDC ecosystem."
+            required: mandatory
+            usage: "MH"
+            reference: null
+    items:
+      id:
+        description: "The unique identifier of the item being selected."
+        required: mandatory
+        usage: "0253719F295521CED39EC9C2F3C8DCDE"
+        reference: null
+      fulfillment_ids:
+        description: "The list of fulfillment IDs associated with the item."
+        required: mandatory
+        usage: ["1"]
+        reference: null
+    quote:
+      price:
+        currency:
+          description: "The currency of the quoted price."
+          required: mandatory
+          usage: "INR"
+          reference: null
+        value:
+          description: "The value of the quoted price."
+          required: mandatory
+          usage: "1100"
+          reference: null
+      breakup:
+        item:
+          id:
+            description: "The unique identifier of the item in the quote breakup."
+            required: mandatory
+            usage: "0253719F295521CED39EC9C2F3C8DCDE"
+            reference: null
+          price:
+            currency:
+              description: "The currency of the item's price."
+              required: mandatory
+              usage: "INR"
+              reference: null
+            value:
+              description: "The value of the item's price."
+              required: mandatory
+              usage: "1100"
+              reference: null
+          title:
+            description: "The title associated with the quote breakup."
+            required: mandatory
+            usage: "Fullstack Engineer"
+            reference: null
+      ttl:
+        description: "The time-to-live for the quoted price in ISO 8601 format."
+        required: mandatory
+        usage: "P1D"
+        reference: null
+    fulfillments:
+      id:
+        description: "The unique identifier for the fulfillment."
+        required: mandatory
+        usage: "1"
+        reference: null
+      type:
+        description: "The type of fulfillment."
+        required: mandatory
+        usage: "REMOTE"
+        reference: null
+      state:
+        descriptor:
+          code:
+            description: "The code describing the fulfillment state."
+            required: mandatory
+            usage: "APPLICATION_IN_PROGRESS"
+            reference: null
+      customer:
+        person:
+          name:
+            description: "The name of the customer."
+            required: mandatory
+            usage: "Sanjay"
+            reference: null
+          gender:
+            description: "The gender of the customer."
+            required: mandatory
+            usage: "Male"
+            reference: null
+          age:
+            description: "The age of the customer."
+            required: mandatory
+            usage: "35"
+            reference: null
+          skills:
+            code:
+              description: "The code representing the skill."
+              required: mandatory
+              usage: "Android"
+              reference: null
+            name:
+              description: "The name of the skill."
+              required: mandatory
+              usage: "Android"
+              reference: null
+          languages:
+            code:
+              description: "The code of the language."
+              required: mandatory
+              usage: "en"
+              reference: null
+            name:
+              description: "The name of the language."
+              required: mandatory
+              usage: "english"
+              reference: null
+          contact:
+              phone:
+                description: "The phone number of the customer."
+                required: mandatory
+                usage: "9999999999999"
+                reference: null
+              email:
+                description: "The email address of the customer."
+                required: mandatory
+                usage: "abc@abc.bc"
+                reference: null

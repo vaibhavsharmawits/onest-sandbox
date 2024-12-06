@@ -1,0 +1,11 @@
+.github
+node_modules
+
+.env
+
+dev.db*
+
+dist
+.turbo
+
+out

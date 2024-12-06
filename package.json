@@ -1,0 +1,23 @@
+{
+	"name": "ondc-mock-sandbox",
+	"version": "0.1.0",
+	"private": false,
+	"packageManager": "npm@9.2.0",
+	"scripts": {
+		"dev": "turbo run dev",
+		"ec2": "turbo run ec2",
+		"test": "turbo run test",
+		"build": "turbo run build"
+	},
+	"workspaces": [
+		"apps/*",
+		"packages/*"
+	],
+	"devDependencies": {
+		"tsup": "^8.2.4",
+		"turbo": "^2.3.0"
+	},
+	"dependencies": {
+		"iso8601-duration": "^2.1.2"
+	}
+}

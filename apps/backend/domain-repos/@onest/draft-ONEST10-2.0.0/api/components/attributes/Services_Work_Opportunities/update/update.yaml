@@ -1,0 +1,105 @@
+context:
+  parent: true
+  domain:
+    description: "domain"
+    required: mandatory
+    usage: "ONDC:ONEST10"
+    reference: "if any"
+  action:
+    description: "action"
+    required: mandatory
+    usage: "update"
+    reference: "if any"
+  version:
+    description: "version"
+    required: mandatory
+    usage: "2.0.0"
+    reference: "if any"
+  bap_id:
+    description: "bap_id"
+    required: mandatory
+    usage: "bap-12345"
+    reference: "if any"
+  bap_uri:
+    description: "bap_uri"
+    required: mandatory
+    usage: "https://worker-hub.bap.io"
+    reference: "if any"
+  bpp_id:
+    description: "bpp_id"
+    required: mandatory
+    usage: "job-hub.bpp.io"
+    reference: "if any"
+  bpp_uri:
+    description: "bpp_uri"
+    required: mandatory
+    usage: "https://job-hub.bpp.io"
+    reference: "if any"
+  transaction_id:
+    description: "transaction_id"
+    required: mandatory
+    usage: "a9aaecca-10b7-4d19-b640-b047a7c62195"
+    reference: "if any"
+  message_id:
+    description: "message_id"
+    required: mandatory
+    usage: "8cbb5e99-5d06-4855-81e9-a4fc8013dbff"
+    reference: "if any"
+  location:
+    city:
+      code:
+      description: "code"
+      required: mandatory
+      usage: "std:080"
+      reference: "if any"
+    country:
+      code:
+      description: "code"
+      required: mandatory
+      usage: "IND"
+      reference: "if any"
+  timestamp:
+    description: "timestamp"
+    required: mandatory
+    usage: "2024-09-04T12:34:56Z"
+    reference: "if any"
+  ttl:
+    description: "ttl"
+    required: mandatory
+    usage: "PT30S"
+    reference: "if any"
+message:
+  parent: true
+  update_target:
+    description: "update_target"
+    required: mandatory
+    usage: "fulfillments"
+    reference: "if any"
+  order:
+    id:
+      description: "order_id"
+      required: mandatory
+      usage: "1677140405881"
+      reference: "if any"
+  fulfillments:
+    id:
+      description: "fulfillment_id"
+      required: mandatory
+      usage: "fulfillment_id_value"
+      reference: "if any"
+    type:
+      description: "fulfillment_type"
+      required: mandatory
+      usage: "FULFILLMENT_TYPE_VALUE"
+      reference: "if any"
+    contact:
+      phone:
+        description: "phone"
+        required: mandatory
+        usage: "9999999999"
+        reference: "if any"
+      email:
+        description: "email"
+        required: mandatory
+        usage: "abc@abc.bc"
+        reference: "if any"

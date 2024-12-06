@@ -1,0 +1,12 @@
+{
+  "watch": [
+    "."
+  ],
+  "ext": "yaml",
+  "exec": "node ./app.js",
+  "ignore": [
+    "temp.yaml", 
+    "node_modules/**",
+    "build/**"
+  ]
+}

@@ -1,0 +1,166 @@
+value:
+  context:
+    domain: ONDC:ONEST10
+    version: 2.0.0
+    action: confirm
+    bap_id: worker-hub.bap.io
+    bap_uri: https://worker-hub.bap.io
+    bpp_id: job-hub.bpp.io
+    bpp_uri: https://job-hub.bpp.io
+    transaction_id: a9aaecca-10b7-4d19-b640-b047a7c62195
+    message_id: 481a01fc-4b45-4d49-9558-c6a7dfad8b75
+    location:
+      city:
+        code: std:080
+      country:
+        code: IND
+    timestamp: "2023-02-23T08:09:021Z"
+    ttl: PT30S
+  message:
+    order:
+      status: Created
+      provider:
+        id: "1"
+      items:
+        - id: 0253719F295521CED39EC9C2F3C8DCDE
+          fulfillment_ids:
+            - "1"
+          tags:
+          - descriptor:
+              code: NP_FEES
+            list:
+              - code: ID
+                value: "1"
+      fulfillments:
+        - id: "1"
+          customer:
+            person:
+              name: Sanjay
+              gender: Male
+              age: "35"
+              skills:
+                - code: Android
+                  name: Android
+                - code: AWS
+                  name: AWS
+              languages:
+                - code: en
+                  name: english
+                - code: ml
+                  name: Malayalam
+                - code: hi
+                  name: Hindi
+              tags:
+                - descriptor:
+                    code: CURRENT_EXPERIENCE
+                    name: Current Experience
+                  list:
+                    - descriptor:
+                        code: EXP_YEARS
+                        name: Experience
+                      value: P4Y2M
+                    - descriptor:
+                        code: CURRENT_COMPANY
+                        name: Current Company
+                      value: ABC tech
+                - descriptor:
+                    code: SALARY_DETAILS
+                    name: Salary Details
+                  list:
+                    - descriptor:
+                        code: EXPECTED_SALARY
+                        name: Expected Salary
+                      value: "80000"
+                    - descriptor:
+                        code: CURRENT_SALARY
+                        name: Current Salary
+                      value: "50000"
+                - descriptor:
+                    code: DOCUMENTS
+                    name: Documents
+                  list:
+                    - descriptor:
+                        code: RESUME
+                        name: Resume
+                      value: https://link-to-the-document.com
+            contact:
+              phone: "9999999999"
+              email: abc@abc.bc
+          tags:
+            - descriptor:
+                code: DISTRIBUTOR_DETAILS
+                name: Distributor Details
+              list:
+                - descriptor:
+                    code: DISTRIBUTOR_ID
+                    name: Distributor Id
+                  value: PNB
+                - descriptor:
+                    code: DISTRIBUTOR_NAME
+                    name: Distributor Name
+                  value: Pay Near By
+                - descriptor:
+                    code: DISTRIBUTOR_PHONE
+                    name: Distributor Phone
+                  value: "9123456789"
+                - descriptor:
+                    code: DISTRIBUTOR_EMAIL
+                    name: Distributor Email
+                  value: support@pnb.com
+                - descriptor:
+                    code: AGENT_ID
+                    name: Agent Id
+                  value: agent-123
+                - descriptor:
+                    code: AGENT_VERIFIED
+                    name: Agent Verified
+                  value: "true"
+      quote:
+        price:
+          currency: INR
+          value: "1400"
+        breakup:
+          - id: 0253719F295521CED39EC9C2F3C8DCDE
+            price:
+              currency: INR
+              value: "1100"
+            title: Fullstack Engineer
+            tags:
+              - descriptor:
+                  code: TYPE
+                list:
+                  - descriptor:
+                      code: TYPE
+                    value: item
+          - title: NP Fees
+            id: "1"
+            price:
+              currency: INR
+              value: "300.00"
+            tags:
+              - descriptor:
+                  code: QUOTE
+                list:
+                  - descriptor:
+                      code: TYPE
+                    value: item
+              - descriptor:
+                  code: NP_FEES
+                list:
+                  - code: ID
+                    value: "1"
+                  - code: COMMERCIAL_TYPE
+                    value: percent
+                  - code: COMMERCIAL_VALUE
+                    value: "0.5"
+                  - code: COMMERCIAL_NAME
+                    value: qualified
+                  - code: COMMERCIAL_TRIGGERING_STATE
+                    value: OFFER_EXTENDED
+              - descriptor:
+                  code: TYPE
+                list:
+                  - descriptor:
+                      code: TYPE
+                    value: misc
+        ttl: P1D

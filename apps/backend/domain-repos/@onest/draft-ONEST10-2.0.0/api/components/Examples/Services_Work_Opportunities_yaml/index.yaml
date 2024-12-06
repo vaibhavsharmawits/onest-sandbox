@@ -1,0 +1,48 @@
+search:
+  examples:
+    - $ref: ./search/search_by_job_name.yaml
+    - $ref: ./search/search_by_job_provider.yaml
+    - $ref: ./search/search_by_loaction_of_the_job.yaml
+    - $ref: ./search/search_by_user_details.yaml
+    - $ref: ./search/search_by_industry_type.yaml
+    - $ref: ./search/search_by_employment_type.yaml
+select:
+  examples:
+    - $ref: ./select/select.yaml
+init:
+  examples:
+    - $ref: ./init/init.yaml
+confirm:
+  examples:
+    - $ref: ./confirm/confirm.yaml
+update:
+  examples:
+    - $ref: ./update/update.yaml
+status:
+  examples:
+    - $ref: ./status/status.yaml
+cancel:
+  examples:
+    - $ref: ./cancel/cancel.yaml
+on_search:
+  examples:
+    - $ref: ./on_search/on_search.yaml
+on_select:
+  examples:
+    - $ref: ./on_select/on_select.yaml
+on_init:
+  examples:
+    - $ref: ./on_init/on_init.yaml
+    - $ref: ./on_init/on_init_post_form_submission.yaml
+on_confirm:
+  examples:
+    - $ref: ./on_confirm/on_confirm.yaml
+on_update:
+  examples:
+    - $ref: ./on_update/on_update.yaml
+on_status:
+  examples:
+    - $ref: ./on_status/on_status.yaml
+on_cancel:
+  examples:
+    - $ref: ./on_cancel/on_cancel.yaml

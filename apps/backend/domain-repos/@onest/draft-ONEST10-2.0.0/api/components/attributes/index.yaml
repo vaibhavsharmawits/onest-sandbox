@@ -1,0 +1,3 @@
+ONDC:ONEST10 - Work Opportunities:
+  attribute_set:
+    $ref: "./Services_Work_Opportunities/index.yaml"

@@ -1,0 +1,177 @@
+summary: Agri Products - Flow 5 (Seller side cancellation)
+description: The following is an illustrative flow to perform a transaction of a nature where a buyer would like to buy the agri I/O product. The process majorly happens in four phases of order processing flow, i.e. Discovery of available commodity and service providers, order, fulfillment and post-fulfillment where LSP/Seller NP cancel order due to buyer unavailability.
+details:
+
+  - description: Sequence Diagram for Agri I/O Products
+    mermaidGraph: >-
+      sequenceDiagram
+        participant B as Buyer
+        participant BA as BuyerApp
+        participant G as Gateway
+        participant SA1 as SellerApp1
+        participant SA2 as SellerApp2
+        
+        Note Over B,SA2: **SEARCH FLOW**
+        B ->> BA: Buyer initiates an exploratory search for product.
+        BA ->> G: **/search** - Search by city for a product and <br>additional parameters
+        Note left of BA: Additional params include: <br><br>
+        G ->> SA1: **/search** - Request broadcasted based <br>on city and domain in context
+        G ->> SA2: **/search** - Request broadcasted based <br>on city and domain in context
+        SA1 ->> BA: **/on_search** - Seller responds with /on_search, providing available products <br> with product details, pricing, quantity and seller statutory details
+        SA2 ->> BA: **/on_search** - Seller responds with /on_search, providing available products <br> with product details, pricing, quantity and seller statutory details
+        Note Over BA,SA1: Buyer now has the option to choose the <br>product from either Seller 1 or Seller 2 or both
+        BA ->> B: Shows all the avilable product <br>options from sellers
+
+  - description: Item Selection
+    mermaidGraph: >-
+      sequenceDiagram
+        participant B as Buyer
+        participant BA as BuyerApp
+        participant SA as SellerApp
+        Note Over B,SA: **SELECT FLOW**
+        B ->> BA: Buyer selects an item.
+        BA ->> SA: **/select** - Buyer sends a /select request to <br> Seller, along with the item details and fulfillment.
+        SA ->> SA: Verifies the fulfillment and avilability
+        SA ->> BA: **/on_select** - Responds to the selection with <br>breakup, quote including logistics charges
+        BA ->> B: Shows response with price details if item is in stock
+
+  - description: Initializing the order
+    mermaidGraph: >-
+      sequenceDiagram
+        participant B as Buyer
+        participant BA as BuyerApp
+        participant SA as SellerApp      
+        Note Over B,SA: **INITIALIZATION FLOW**
+        B ->> BA: Proceeds with the Order
+        BA ->> SA: **/init** - Initializes the order and <br>sends billing details
+        SA ->> BA: **/on_init** - Order initialization with <br>fulfillment & settlement information <br>including UPI or NEFT/IMPS/Bank Transfer
+        BA ->> B: Confirms initialization
+
+  - description: Order Confirmation
+    mermaidGraph: >-
+      sequenceDiagram
+        participant B as Buyer
+        participant BA as BuyerApp
+        participant SA as SellerApp
+        Note Over B,SA: **CONFIRMATION FLOW**
+        B ->> BA: Confirms the Order
+        BA ->> SA: **/confirm** - Creates order to create final digital contract
+        SA ->> BA: **/on_confirm** - Accepts the order 
+        BA ->> B: Confirms order and delivery
+        
+  - description: Fulfillment
+    mermaidGraph: >-
+      sequenceDiagram
+        participant B as Buyer
+        participant BA as BuyerApp
+        participant SA as SellerApp      
+        Note Over B,SA: **ORDER STATUS FLOW**
+        B ->> BA: Checks the order status
+        BA ->> SA: **/status** - Enquire order status <br>or tracking information
+        SA ->> BA: **/on_status** - Latest order and fulfillment status is sent
+        BA ->> B: Updates the latest order <br>and fulfillment information
+
+  - description: Seller Cancellation
+    mermaidGraph: >-
+      sequenceDiagram
+        participant B as Buyer
+        participant BA as BuyerApp
+        participant SA as SellerApp      
+        Note Over B,SA: **ORDER RTO CANCEL FLOW**
+        SA ->> BA: **/on_cancel** - Seller cancel the order <br> due to buyer unavailability
+        SA ->> BA: **/on_status** - Seller send the status <br> update after cancel the order 
+        BA ->> B: Updates the latest order state as cancelled
+
+reference: if any
+steps:
+  - summary: Buyer initiates an exploratory search for Full Catalogs.
+    api: search
+    description: The buyer expresses interest in purchasing a product (such as MUSTARD PIONEER) from all currently available provider catalog which is serviceable to him
+    reference: if any
+    example:
+      $ref: "../../Examples/Agri_Products_yaml/search/search.yaml"
+  - summary: Seller providing available products with its details, including pricing, quantity and seller statutory details
+    api: on_search
+    description: Seller responds with /on_search, providing available products and its details, including pricing, quantity and seller statutory details
+    reference: if any
+    example:
+      $ref: "../../Examples/Agri_Products_yaml/on_search/on_search.yaml"
+  - summary: Buyer sends a /select request to Seller, along with item and fulfillment.
+    api: select
+    description: Buyer sends a /select request to Seller, along with item and fulfillment.
+    reference: if any
+    example:
+      $ref: "../../Examples/Agri_Products_yaml/select/select.yaml"
+  - summary: Responds to the selection with breakup, quote including logistics charges. 
+    api: on_select
+    description: Seller responds to the selection with breakup, quote including logistics charges. 
+    reference: if any
+    example:
+      $ref: "../../Examples/Agri_Products_yaml/on_select/on_select.yaml"
+  - summary: Buyer Initializes the order and sends billing details
+    api: init
+    description: Buyer Initializes the order and sends billing details
+    reference: if any
+    example:
+      $ref: "../../Examples/Agri_Products_yaml/init/init.yaml"
+  - summary: Seller initialize the order with fulfillment & settlement information including UPI or NEFT/IMPS/Bank Transfer
+    api: on_init
+    description: Seller initialize the order with fulfillment & settlement information including UPI or NEFT/IMPS/Bank Transfer.
+    reference: if any
+    example:
+      $ref: "../../Examples/Agri_Products_yaml/on_init/on_init.yaml"
+  - summary: Buyer confirms the order with /confirm.
+    api: confirm
+    description: Buyer confirms the order with /confirm.
+    example:
+      $ref: "../../Examples/Agri_Products_yaml/confirm/confirm.yaml"
+  - summary: Seller responds with /on_confirm, creating an Order ID with the order state set to "Created or Accepted."
+    api: on_confirm
+    description: Seller responds with /on_confirm, creating an Order ID with the order state set to "Created or Accepted."
+    reference: if any
+    example:
+      $ref: "../../Examples/Agri_Products_yaml/on_confirm/on_confirm.yaml"
+  - summary: Buyer requests for the status of the order
+    api: status
+    description: Buyer requests for the status of the order
+    example:
+      $ref: "../../Examples/Agri_Products_yaml/status/status.yaml"
+  - summary: Seller app sends order status update 
+    api: on_status (Created/Accepted)
+    description: Seller app sends order status update with the latest fulfilement state
+    example:
+      $ref: "../../Examples/Agri_Products_yaml/on_status/on_status_accepted.yaml"
+  - summary: Seller app sends order status update 
+    api: on_status (Packed)
+    description: Seller app sends order status update with the latest fulfilement state
+    example:
+      $ref: "../../Examples/Agri_Products_yaml/on_status/on_status_packed.yaml"
+  - summary: Seller app sends order status update 
+    api: on_status (Agent Assigned)
+    description: Seller app sends order status update with the latest fulfilement state
+    example:
+      $ref: "../../Examples/Agri_Products_yaml/on_status/on_status_agent_assigned.yaml"
+  - summary: Seller app sends order status update 
+    api: on_status (Order Picked Up)
+    description: Seller app sends order status update with the latest fulfilement state
+    example:
+      $ref: "../../Examples/Agri_Products_yaml/on_status/on_status_order_picked_up.yaml"
+  - summary: Seller app sends order status update 
+    api: on_status (Out For Delivery)
+    description: Seller app sends order status update with the latest fulfilement state
+    example:
+      $ref: "../../Examples/Agri_Products_yaml/on_status/on_status_out_for_delivery.yaml"
+  - summary: LSP / Seller NP cancel order due to buyer unavailability
+    api: on_cancel (rto-initiated)
+    description: LSP / Seller NP cancel order due to buyer unavailability
+    example:
+      $ref: "../../Examples/Agri_Products_yaml/on_cancel/on_cancel_rto_initiated.yaml"
+  - summary: Seller send the status update after cancel the order 
+    api: on_status (Rto-disposed)
+    description: Seller send the status update after cancel the order 
+    example:
+      $ref: "../../Examples/Agri_Products_yaml/on_status/on_status_rto_disposed.yaml"
+
+
+
+  

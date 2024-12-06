@@ -1,0 +1,288 @@
+value:
+  context:
+    domain: ONDC:ONEST10
+    action: on_status
+    version: 2.0.0
+    bap_id: worker-hub.bap.io
+    bap_uri: https://worker-hub.bap.io
+    transaction_id: a9aaecca-10b7-4d19-b640-b047a7c62195
+    message_id: c8e3968c-cd78-4e46-aa34-0d541e46bd73
+    location:
+      city:
+        code: std:080
+      country:
+        code: IND
+    timestamp: "2023-02-22T11:50:46.742Z"
+    ttl: PT30S
+  message:
+    order:
+      status: Active
+      provider:
+        id: "1"
+        descriptor:
+          name: Affinidi
+      items:
+        - id: 0253719F295521CED39EC9C2F3C8DCDE
+          fulfillment_ids:
+            - "1"
+          time:
+            range:
+              start: "2023-01-03T13:23:01+00:00"
+              end: "2023-02-03T13:23:01+00:00"
+          tags:
+            - descriptor:
+                code: NP_FEES
+                list:
+                  - code: ID
+                    value: "1"
+            - descriptor:
+                code: ACADEMIC_ELIGIBILITY
+                name: Academic eligibility
+              list:
+                - descriptor:
+                    code: COURSE_NAME
+                    name: Name of the course
+                  value: Class-X
+                - descriptor:
+                    code: MIN_PERCENTAGE
+                    name: >-
+                      Minimum percentage of marks to be obtained in the course
+                      for eligibility
+                  value: "60"
+                - descriptor:
+                    code: MANDATORY_ELIGIBILITY
+                    name: Mandatory Eligibility
+                  value: "true"
+            - descriptor:
+                code: ACADEMIC_ELIGIBILITY
+                name: Academic eligibility
+              list:
+                - descriptor:
+                    code: COURSE_NAME
+                    name: Name of the course
+                  value: Class-XII
+                - descriptor:
+                    code: MIN_PERCENTAGE
+                    name: >-
+                      Minimum percentage of marks to be obtained in the course
+                      for eligibility
+                  value: "60"
+                - descriptor:
+                    code: MANDATORY_ELIGIBILITY
+                    name: Mandatory Eligibility
+                  value: "true"
+            - descriptor:
+                code: ACADEMIC_ELIGIBILITY
+                name: Academic eligibility
+              list:
+                - descriptor:
+                    code: COURSE_LEVEL
+                    name: Level of the course
+                  value: Under Graduate
+                - descriptor:
+                    code: MIN_PERCENTAGE
+                    name: >-
+                      Minimum percentage of marks to be obtained in the course
+                      for eligibility
+                  value: "60"
+                - descriptor:
+                    code: MANDATORY_ELIGIBILITY
+                    name: Mandatory Eligibility
+                  value: "true"
+            - descriptor:
+                code: ACADEMIC_ELIGIBILITY
+                name: Academic eligibility
+              list:
+                - descriptor:
+                    code: COURSE_LEVEL
+                    name: Level of the course
+                  value: Graduate
+                - descriptor:
+                    code: MANDATORY_ELIGIBILITY
+                    name: Mandatory Eligibility
+                  value: "false"
+            - descriptor:
+                code: JOB_REQUIREMENTS
+                name: Job requirements
+              list:
+                - descriptor:
+                    code: REQ_EXPERIENCE
+                    name: Required work experience in years
+                  value: "P2Y6M"
+                - descriptor:
+                    code: REQ_PROF_SKILL
+                    name: Skills required for the role
+                  value: android-development
+                - descriptor:
+                    code: REQ_PROF_SKILL
+                    name: Skills required for the role
+                  value: dev-ops
+                - descriptor:
+                    code: REQ_PROF_SKILL
+                    name: Additional skills required for the job
+                  value: >-
+                    You have 8+ years of engineering experience, predominantly
+                    in shipping user-facing production features
+            - descriptor:
+                code: JOB_RESPONSIBILITIES
+                name: Job responsibilities
+              list:
+                - descriptor:
+                    code: RESPONSIBILITY
+                    name: Responsibility
+                  value: >-
+                    Build frontend experiences for our tools (Web, PWA and
+                    React Native)
+                - descriptor:
+                    code: RESPONSIBILITY
+                    name: Responsibility
+                  value: >-
+                    Articulate a long term technical direction and vision for
+                    building, maintaining, and scaling our web and mobile
+                    platforms
+                - descriptor:
+                    code: RESPONSIBILITY
+                    name: Responsibility
+                  value: >-
+                    Create trustworthy user experiences by building interfaces
+                    that are simple, easy to comprehend, performant and
+                    reliable using modern tools like React, React Native,
+                    Typescript, Node.js, Jest and Webpack.
+                - descriptor:
+                    code: RESPONSIBILITY
+                    name: Responsibility
+                  value: >-
+                    Mentor and train other team members on design techniques
+                    and coding standards.
+            - descriptor:
+                code: LISTING_DETAILS
+                name: Listing details
+              list:
+                - descriptor:
+                    code: INDUSTRY_TYPE
+                    name: Industry type
+                  value: IT Services & Consulting
+                - descriptor:
+                    code: DEPARTMENT
+                    name: Department
+                  value: Engineering - Software & QA
+                - descriptor:
+                    code: CTC
+                    name: Salary Offered
+                  value: 20,00,000
+                - descriptor:
+                    code: POST_START_LOCATION
+                    name: Post start location
+                  value: Pune
+                - descriptor:
+                    code: WORKING_LOCATION
+                    name: Working location
+                  value: Hybrid
+                - descriptor:
+                    code: WORKING_TIME
+                    name: Working hours
+                  value: Full-Time
+      quote:
+        price:
+          currency: INR
+          value: "1400"
+        breakup:
+          - id: 0253719F295521CED39EC9C2F3C8DCDE
+            price:
+              currency: INR
+              value: "1100"
+            title: Fullstack Engineer
+            tags:
+              - descriptor:
+                  code: TYPE
+                list:
+                  - descriptor:
+                      code: TYPE
+                    value: item
+          - title: NP Fees
+            id: "1"
+            price:
+              currency: INR
+              value: "300.00"
+            tags:
+              - descriptor:
+                  code: QUOTE
+                list:
+                  - descriptor:
+                      code: TYPE
+                    value: item
+              - descriptor:
+                  code: NP_FEES
+                list:
+                  - code: ID
+                    value: "1"
+                  - code: COMMERCIAL_TYPE
+                    value: percent
+                  - code: COMMERCIAL_VALUE
+                    value: "0.5"
+                  - code: COMMERCIAL_NAME
+                    value: qualified
+                  - code: COMMERCIAL_TRIGGERING_STATE
+                    value: OFFER-EXTENDED
+              - descriptor:
+                  code: TYPE
+                list:
+                  - descriptor:
+                      code: TYPE
+                    value: misc
+        ttl: P1D
+      fulfillments:
+        - id: "1"
+          type: REMOTE
+          state:
+            descriptor:
+              code: APPLICATION_IN_PROGRESS
+          customer:
+            person:
+              name: Sanjay
+              gender: Male
+              age: "35"
+              skills:
+                - code: Android
+                  name: Android
+                - code: AWS
+                  name: AWS
+              languages:
+                - code: en
+                  name: english
+                - code: ml
+                  name: Malayalam
+                - code: hi
+                  name: Hindi
+              tags:
+                - descriptor:
+                    code: EMP_DETAILS
+                    name: Employee Details
+                  list:
+                    - descriptor:
+                        code: EXPECTED_SALARY
+                        name: Expected Salary
+                      value: "1000000"
+                    - descriptor:
+                        code: TOTAL_EXPERIENCE
+                        name: Total Experience
+                      value: "P4Y"
+                - descriptor:
+                    code: DOCUMENTS
+                    name: Documents
+                  list:
+                    - descriptor:
+                        code: DOC_TYPE
+                        name: Document Type
+                      value: resume
+                    - descriptor:
+                        code: LINK
+                        name: Document Link
+                      value: https://example.com/resume.pdf
+                    - descriptor:
+                        code: FILE_FORMAT
+                        name: File Format
+                      value: pdf
+              contact:
+                phone: "9999999999"
+                email: abc@abc.bc
