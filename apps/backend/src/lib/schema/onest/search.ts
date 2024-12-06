@@ -126,17 +126,60 @@ export const searchSchema = {
               ]
             },
             item: {
-              type: "object",
-              properties: {
-                descriptor: {
+              oneOf: [
+                {
                   type: "object",
                   properties: {
-                    name: {},
+                    descriptor: {
+                      type: "object",
+                      properties: {
+                        name: { type: "string" }
+                      },
+                      required: ["name"]
+                    }
                   },
-                  required: ["name"],
+                  required: ["descriptor"]
                 },
-              },
-              required: ["descriptor"],
+                {
+                  type: "object",
+                  properties: {
+                    tags: {
+                      type: "array",
+                      items: {
+                        type: "object",
+                        properties: {
+                          descriptor: {
+                            type: "object",
+                            properties: {
+                              code: { enum: ["LISTING_DETAILS"] }
+                            },
+                            required: ["code"]
+                          },
+                          list: {
+                            type: "array",
+                            items: {
+                              type: "object",
+                              properties: {
+                                descriptor: {
+                                  type: "object",
+                                  properties: {
+                                    code: { enum: ["INDUSTRY_TYPE", "EMPLOYMENT_TYPE"] }
+                                  },
+                                  required: ["code"]
+                                },
+                                value: { type: "string" }
+                              },
+                              required: ["descriptor", "value"]
+                            }
+                          }
+                        },
+                        required: ["descriptor", "list"]
+                      }
+                    }
+                  },
+                  required: ["tags"]
+                }
+              ]
             },
             tags: {
               type: "array",

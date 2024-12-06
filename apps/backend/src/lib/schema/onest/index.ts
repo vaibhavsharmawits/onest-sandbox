@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import Ajv, { ValidateFunction } from "ajv";
 import addFormats from "ajv-formats";
 import { searchSchema } from "./search";
+import { onSearchSchema } from "./on_search";
 // import { onSearchSchema } from "./on_search";
 // import { onSelectSchema } from "./on_select";
 // import { selectSchema } from "./select";
@@ -57,9 +58,9 @@ export const onestSchemaValidator =
 			case "search":
 				validate = ajv.compile(searchSchema);
 				break;
-			// case "on_search":
-			// 	validate = ajv.compile(onSearchSchema);
-			// 	break;
+			case "on_search":
+				validate = ajv.compile(onSearchSchema);
+				break;
 			// case "select":
 			// 	validate = ajv.compile(selectSchema);
 			// 	break;

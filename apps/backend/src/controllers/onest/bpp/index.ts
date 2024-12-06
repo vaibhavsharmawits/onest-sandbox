@@ -20,42 +20,42 @@ bppRouter.post(
 
 bppRouter.post(
 	"/init",
-	jsonSchemaValidator({ domain: "onest", action: "init" }),
+	// jsonSchemaValidator({ domain: "onest", action: "init" }),
 	redisRetriever,
 	initController
 );
 
 bppRouter.post(
 	"/select",
-	jsonSchemaValidator({ domain: "onest", action: "select" }),
+	// jsonSchemaValidator({ domain: "onest", action: "select" }),
 	redisRetriever,
 	selectController
 );
 
 bppRouter.post(
 	"/confirm",
-	jsonSchemaValidator({ domain: "onest", action: "confirm" }),
+	// jsonSchemaValidator({ domain: "onest", action: "confirm" }),
 	redisRetriever,
 	confirmController
 );
 
 bppRouter.post(
 	"/update",
-	jsonSchemaValidator({ domain: "onest", action: "update" }),
+	// jsonSchemaValidator({ domain: "onest", action: "update" }),
 	redisRetriever,
 	updateController
 );
 
 bppRouter.post(
 	"/status",
-	jsonSchemaValidator({ domain: "onest", action: "status" }),
+	// jsonSchemaValidator({ domain: "onest", action: "status" }),
 	redisRetriever,
 	statusController
 );
 
 bppRouter.post(
 	"/cancel",
-	jsonSchemaValidator({ domain: "onest", action: "cancel" }),
+	// jsonSchemaValidator({ domain: "onest", action: "cancel" }),
 	redisRetriever,
 	cancelController
 );

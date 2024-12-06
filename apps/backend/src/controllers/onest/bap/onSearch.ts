@@ -31,7 +31,7 @@ const onSearchSelectionController = (
 				context.bpp_uri.endsWith("/") ? "select" : "/select"
 			}`,
 			`select`,
-			"services"
+			"onest"
 		);
 	} catch (error) {
 		next(error);
