@@ -65,7 +65,7 @@ export const InitiateRequestSection = () => {
 	const [domainOptions, setDomainOptions] = useState<string[]>([]);
 	const [, setScenarioOptions] = useState<string[]>([]);
 	const [cityOptions, setCityOptions] = useState<string[]>([]);
-	const [version, setVersion] = useState<string>("services");  // why services ?
+	const [version, setVersion] = useState<string>("onest");  // why services ?
 	const [selectedScenario, setSelectedScenario] = useState<string>("default");
 	const [renderActionFields, setRenderActionFields] = useState(false);
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -247,7 +247,6 @@ export const InitiateRequestSection = () => {
 					},
 				}
 			);
-			console.log("🚀 ~ handleSubmit ~ response:", response)
 			if (
 				response.data.message.ack.status === "ACK" ||
 				response.data.sync.message.ack.status === "ACK"

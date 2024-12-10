@@ -27,7 +27,7 @@ bppRouter.post(
 
 bppRouter.post(
 	"/select",
-	// jsonSchemaValidator({ domain: "onest", action: "select" }),
+	jsonSchemaValidator({ domain: "onest", action: "select" }),
 	redisRetriever,
 	selectController
 );

@@ -21,6 +21,7 @@ async function send_response(
   bpp_uri: string = "", // for search
   id: number = 0
 ) {
+  console.log("hello-select2", bpp_uri, res_obj.context)
   let time_now = new Date().toISOString()
   try {
     const { context } = res_obj;
@@ -51,7 +52,6 @@ async function send_response(
       );
     }
 
-
     const headers: headers = {
       authorization: header,
     };
@@ -71,14 +71,12 @@ async function send_response(
       uri = `${bpp_uri}/${action}${scenario ? `?scenario=${scenario}` : ""}`;
 
     }
-
+    
     try {
       const response = await axios.post(uri, res_obj, {
         headers: { ...headers },
       });
       
-      console.log("🚀 ~ uri:", uri)
-      console.log("🚀 ~ res_obj:", res_obj)
 
       await redis.set(
         `${transaction_id}-${action}-from-server-${id}-${time_now}`,
@@ -97,7 +95,7 @@ async function send_response(
       }
       throw err
     }
-
+    console.log("hello-select3")
     return res.status(200).json({
       message: {
         ack: {
@@ -107,6 +105,7 @@ async function send_response(
       transaction_id,
     });
   } catch (error) {
+    console.log("error-select")
     next(error);
   }
 }

@@ -3,6 +3,8 @@ import Ajv, { ValidateFunction } from "ajv";
 import addFormats from "ajv-formats";
 import { searchSchema } from "./search";
 import { onSearchSchema } from "./on_search";
+import { selectSchema } from "./select";
+import { onSelectSchema } from "./on_select";
 // import { onSearchSchema } from "./on_search";
 // import { onSelectSchema } from "./on_select";
 // import { selectSchema } from "./select";
@@ -56,20 +58,17 @@ export const onestSchemaValidator =
 
 		switch (schema) {
 			case "search":
-				console.log("hello1")
 				validate = ajv.compile(searchSchema);
 				break;
 			case "on_search":
-				console.log("hello2")
-				// console.log(JSON.stringify(onSearchSchema, null, 2));
 				validate = ajv.compile(onSearchSchema);
 				break;
-			// case "select":
-			// 	validate = ajv.compile(selectSchema);
-			// 	break;
-			// case "on_select":
-			// 	validate = ajv.compile(onSelectSchema);
-			// 	break;
+			case "select":
+				validate = ajv.compile(selectSchema);
+				break;
+			case "on_select":
+				validate = ajv.compile(onSelectSchema);
+			break;
 			// case "init":
 			// 	validate = ajv.compile(initSchema);
 			// 	break;
@@ -101,6 +100,7 @@ export const onestSchemaValidator =
 			// 	validate = ajv.compile(onCancelSchema);
 			// 	break;
 			default:
+				console.log("error")
 				res.status(400).json({
 					message: {
 						ack: {
@@ -116,6 +116,8 @@ export const onestSchemaValidator =
 		}
 
 		isValid = validate(req.body);
+		
+
 		// console.log('isValid::::: ', isValid)
 		if (!isValid) {
 			console.log("error json schema",schema,validate.errors?.map(

@@ -63,10 +63,7 @@ export const jsonSchemaValidator = <T extends Domain>({
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
       
-      console.log("🚀 ~ action:", action)
-      console.log("🚀 ~ domain:", domain)
       const l2 = await redis.get("l2_validations");
-      console.log("🚀 ~ return ~ l2:", l2)
       const reqDomain = req.body.context.domain;
       console.log("domain at jsonSchema",domain)
       // if (l2 != null && JSON.parse(l2).includes(domain)) {
@@ -106,8 +103,8 @@ export const jsonSchemaValidator = <T extends Domain>({
         case "agri":
           return agriSchemaValidator(action as AllActions)(req, res, next);
         case "onest":
-          console.log("🚀 ~ return ~ onest:")
-          return onestSchemaValidator(action as AllActions)(req, res, next);
+          const validation =  onestSchemaValidator(action as AllActions)(req, res, next);
+          return validation;
         default:
           throw new Error(`Unsupported domain: ${domain}`);
       }

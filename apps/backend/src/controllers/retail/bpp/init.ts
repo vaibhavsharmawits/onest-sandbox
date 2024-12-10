@@ -98,7 +98,6 @@ const initDomesticController = async (
 
     version = await redis.get(
       `${req.body.context.transaction_id}-version`);
-    // console.log("🚀 ~ version:", version)
 
     let file: any
     if (version === "b2c") {

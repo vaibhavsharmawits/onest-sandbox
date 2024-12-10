@@ -93,7 +93,6 @@ export const responseBuilder = async (
 	error?: object | undefined,
 	id: number = 0
 ) => {
-	console.log("🚀 ~ responseBuilder uri:", uri)
 	res.locals = {};
 
 	let ts = new Date();
@@ -117,7 +116,7 @@ export const responseBuilder = async (
 			? SUBSCRIPTION_BPP_MOCKSERVER_URL
 			: domain === "agri"
 			? AGRI_BPP_MOCKSERVER_URL
-			: domain === "onest" 
+			: domain === "onest"
 			? ONEST_BPP_MOCKSERVER_URL
 			: SERVICES_BPP_MOCKSERVER_URL;
 
@@ -659,8 +658,8 @@ export const quoteCreatorAgri = (items: Item[], providersItems?: any) => {
 				item.title = matchingItem?.descriptor?.name;
 				// item.price = matchingItem?.price;
 				item.available_quantity = {
-					available:matchingItem?.quantity?.available,
-					maximum:matchingItem?.quantity?.maximum
+					available: matchingItem?.quantity?.available,
+					maximum: matchingItem?.quantity?.maximum,
 				};
 				item.price = {
 					currency: matchingItem.price.currency,
@@ -671,26 +670,34 @@ export const quoteCreatorAgri = (items: Item[], providersItems?: any) => {
 	});
 	items.forEach((item) => {
 		// console.log("itemsbreakup",item)
-		console.log("itemmsmsss",item)
-		breakup = [...breakup,
+		console.log("itemmsmsss", item);
+		breakup = [
+			...breakup,
 			{
 				title: item.title,
 				"@ondc/org/item_id": item.id,
 				"@ondc/org/item_quantity": {
-					count: item?.quantity?.count? item?.quantity?.count:item?.quantity?.selected?.count,
+					count: item?.quantity?.count
+						? item?.quantity?.count
+						: item?.quantity?.selected?.count,
 				},
 				"@ondc/org/title_type": "item",
 				price: {
 					currency: "INR",
 					value: (
-						Number(item?.price?.value) * (item?.quantity?.count?Number(item?.quantity?.count):Number(item?.quantity?.selected?.count))
+						Number(item?.price?.value) *
+						(item?.quantity?.count
+							? Number(item?.quantity?.count)
+							: Number(item?.quantity?.selected?.count))
 					).toString(),
 				},
 				tags: item.tags,
 				item: {
 					// id: item.id,
 					price: item.price,
-					quantity: item.available_quantity ? item.available_quantity : undefined,
+					quantity: item.available_quantity
+						? item.available_quantity
+						: undefined,
 				},
 			},
 			{
@@ -712,9 +719,8 @@ export const quoteCreatorAgri = (items: Item[], providersItems?: any) => {
 				title: "Discount",
 			},
 		];
-		
 	});
-	console.log("breakuppp",breakup)
+	console.log("breakuppp", breakup);
 
 	//MAKE DYNAMIC BREACKUP USING THE DYANMIC ITEMS
 	let totalPrice = 0;
@@ -731,12 +737,8 @@ export const quoteCreatorAgri = (items: Item[], providersItems?: any) => {
 		}
 	});
 
-	
 	const result = {
-		breakup:[
-			...breakup,
-			...chargesOnFulfillment
-		],
+		breakup: [...breakup, ...chargesOnFulfillment],
 		price: {
 			currency: "INR",
 			value: totalPrice.toFixed(2),
@@ -1577,7 +1579,6 @@ export const updateFulfillments = (
 	try {
 		// Update fulfillments according to actions
 
-
 		const rangeStart = new Date().setHours(new Date().getHours() + 2);
 		const rangeEnd = new Date().setHours(new Date().getHours() + 3);
 
@@ -1593,19 +1594,19 @@ export const updateFulfillments = (
 				ele.time.label = FULFILLMENT_LABELS.CONFIRMED;
 				return ele;
 			}),
-			tags:{
-                "descriptor": {
-                  "code": "schedule"
-                },
-                "list": [
-                  {
-                    "descriptor": {
-                      "code": "ttl"
-                    },
-                    "value": "PT1H"
-                  }
-                ]
-              }
+			tags: {
+				descriptor: {
+					code: "schedule",
+				},
+				list: [
+					{
+						descriptor: {
+							code: "ttl",
+						},
+						value: "PT1H",
+					},
+				],
+			},
 		};
 
 		if (domain !== "subscription") {
@@ -1615,7 +1616,7 @@ export const updateFulfillments = (
 					code: FULFILLMENT_STATES.SERVICEABLE,
 				},
 			};
-			delete fulfillmentObj.tags
+			delete fulfillmentObj.tags;
 		} else {
 			fulfillmentObj.stops = fulfillments[0]?.stops.map((ele: any) => {
 				action;
@@ -1720,3 +1721,99 @@ export const updateFulfillments = (
 		console.log("Error occured in fulfillments method");
 	}
 };
+
+export const quoteCreatorOnest = (quoteItems: any) => {
+  const quote: any = {
+    price: {
+      currency: "INR",
+      value: "0", // Initial value, will be updated later
+    },
+    breakup: [],
+    ttl: "P1D", // Default TTL of 1 day
+  };
+
+  // Iterate over quoteItems and process each one
+  quoteItems.forEach((item: any) => {
+    // Add item price to the total quote price
+    quote.price.value = (parseFloat(quote.price.value) + parseFloat(item.price.value)).toFixed(2);
+
+    // Process the item in the breakup array
+    const itemBreakup: any = {
+      id: item.itemId,
+      price: item.price,
+      title: item.title,
+      tags: [
+        {
+          descriptor: {
+            code: "TYPE",
+          },
+          list: [
+            {
+              descriptor: {
+                code: "TYPE",
+              },
+              value: "item",
+            },
+          ],
+        },
+      ],
+    };
+
+    quote.breakup.push(itemBreakup);
+
+    // Process NP Fees and add to breakup
+    if (item.npFeesList && item.npFeesList.length > 0) {
+      // Extract NP Fees tags
+      const npFeesTag = {
+        price: {
+          currency: "INR",
+          value: "300.00", // This can be modified dynamically based on logic
+        },
+        tags: [
+          {
+            descriptor: {
+              code: "QUOTE",
+            },
+            list: [
+              {
+                descriptor: {
+                  code: "TYPE",
+                },
+                value: "item",
+              },
+            ],
+          },
+          item.npFeesList[0], 
+          {
+            descriptor: {
+              code: "TYPE",
+            },
+            list: [
+              {
+                descriptor: {
+                  code: "TYPE",
+                },
+                value: "misc",
+              },
+            ],
+          },
+        ],
+      };
+
+      const npFeesBreakup = {
+        title: "NP Fees",
+        id: item.npFeesId,
+        price: npFeesTag.price,
+        tags: npFeesTag.tags,
+      };
+
+      quote.breakup.push(npFeesBreakup);
+      
+      // Add NP Fees to the total quote price
+      quote.price.value = (parseFloat(quote.price.value) + parseFloat(npFeesTag.price.value)).toFixed(2);
+    }
+  });
+
+  return quote;
+};
+

@@ -53,11 +53,6 @@ export const redisRetriever = async (
 		e.includes(`${action}-to-server`)
 		).length;
 
-		console.log("🚀 ~ logIndex:", logIndex, `${transaction_id}-${logIndex}-${action}-to-server`,
-		JSON.stringify({
-			request: req.body,
-		}))
-
 		await redis.set(
 			`${transaction_id}-${logIndex}-${action}-to-server`,
 			JSON.stringify({
