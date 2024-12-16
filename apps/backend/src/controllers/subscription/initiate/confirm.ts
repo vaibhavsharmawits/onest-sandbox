@@ -7,7 +7,7 @@ import {
 	redisFetchToServer,
 	SUBSCRIPTION_BAP_MOCKSERVER_URL,
 } from "../../../lib/utils";
-import { ACTTION_KEY, ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
+import { ACTION_KEY, ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
 import { ERROR_MESSAGES } from "../../../lib/utils/responseMessages";
 import { ORDER_STATUS, PAYMENT_STATUS } from "../../../lib/utils/apiConstants";
 
@@ -62,7 +62,7 @@ const intializeRequest = async (
 			context: {
 				...context,
 				timestamp: new Date().toISOString(),
-				action: ACTTION_KEY.CONFIRM,
+				action: ACTION_KEY.CONFIRM,
 				bap_id: MOCKSERVER_ID,
 				bap_uri: SUBSCRIPTION_BAP_MOCKSERVER_URL,
 				message_id: uuidv4()

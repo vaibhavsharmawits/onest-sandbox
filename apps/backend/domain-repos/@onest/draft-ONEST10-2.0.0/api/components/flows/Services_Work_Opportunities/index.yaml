@@ -13,6 +13,10 @@ details:
         Gateway->>BPP: search
         BPP-->>BAP: on_search
 
+        BAP->>Gateway: search_inc
+        Gateway->>BPP: search_inc
+        BPP-->>BAP: on_search_inc
+
         BAP->>BPP: select
         BPP-->>BAP: on_select
 
@@ -95,6 +99,18 @@ steps:
     reference: if any
     example:
       $ref: "../../Examples/Services_Work_Opportunities_yaml/on_search/on_search.yaml"
+  - summary: Description
+    api: search_inc
+    description: BAP will make search inc request with an intent
+    reference: if any
+    example:
+      $ref: "../../Examples/Services_Work_Opportunities_yaml/search/search_inc.yaml"
+  - summary: Description
+    api: on_search_inc
+    description: BPP will create a catalogue containing jobs with matching criteria and sends it as on_search_inc request.
+    reference: if any
+    example:
+      $ref: "../../Examples/Services_Work_Opportunities_yaml/on_search/on_search_inc.yaml"
   - summary: Description
     api: select
     description:  BAP will receive the on_search request and displays the list of jobs to the user. Once the user chooses a job, BAP will make select API with item ID to get the complete details about the job.

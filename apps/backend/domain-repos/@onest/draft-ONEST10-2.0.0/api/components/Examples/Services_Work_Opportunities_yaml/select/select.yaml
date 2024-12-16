@@ -20,11 +20,21 @@ value:
     order:
       provider:
         id: "1"
+      fulfillments:
+        type: "REMOTE"
       items:
         - id: 0253719F295521CED39EC9C2F3C8DCDE
           tags:
             - descriptor:
                 code: NP_FEES
+                name: "Np Fees"
               list:
                 - code: ID
                   value: "1"
+            - descriptor:
+                code: NP_FEES
+                name: "Np Fees"
+              list:
+                - code: ID
+                  value: "2"
+      

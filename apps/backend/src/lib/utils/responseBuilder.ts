@@ -91,11 +91,12 @@ export const responseBuilder = async (
 		| "onest",
 
 	error?: object | undefined,
-	id: number = 0
+	id: number = 0,
+	ts ?: Date,
 ) => {
 	res.locals = {};
 
-	let ts = new Date();
+	ts = ts ?? new Date();
 	// ts.setSeconds(ts.getSeconds() + 1);
 	const sandboxMode = res.getHeader("mode") === "sandbox";
 

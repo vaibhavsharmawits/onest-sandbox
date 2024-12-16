@@ -22,8 +22,6 @@ value:
       status: Accepted
       provider:
         id: "1"
-        descriptor:
-          name: Affinidi
       items:
         - id: 0253719F295521CED39EC9C2F3C8DCDE
           fulfillment_ids:
@@ -31,14 +29,16 @@ value:
           tags:
             - descriptor:
                 code: NP_FEES
-                list:
-                  - code: ID
-                    value: "1"
+                name: "Np Fees"
+              list:
+                - code: ID
+                  value: "1"
             - descriptor:
                 code: NP_FEES
-                list:
-                  - code: ID
-                    value: "1"
+                name: "Np Fees"
+              list:
+                - code: ID
+                  value: "2"
             - descriptor:
                 code: ACADEMIC_ELIGIBILITY
                 name: Academic Eligibility
@@ -182,7 +182,7 @@ value:
       quote:
         price:
           currency: INR
-          value: "1400"
+          value: "1700"
         breakup:
           - id: 0253719F295521CED39EC9C2F3C8DCDE
             price:
@@ -210,6 +210,7 @@ value:
                     value: item
               - descriptor:
                   code: NP_FEES
+                  name: "Np Fees"
                 list:
                   - code: ID
                     value: "1"
@@ -217,6 +218,38 @@ value:
                     value: percent
                   - code: COMMERCIAL_VALUE
                     value: "0.5"
+                  - code: COMMERCIAL_NAME
+                    value: recruitment
+                  - code: COMMERCIAL_TRIGGERING_STATE
+                    value: OFFER_ACCEPTED
+              - descriptor:
+                  code: TYPE
+                list:
+                  - descriptor:
+                      code: TYPE
+                    value: misc
+          - title: NP Fees
+            id: "2"
+            price:
+              currency: INR
+              value: "300.00"
+            tags:
+              - descriptor:
+                  code: QUOTE
+                list:
+                  - descriptor:
+                      code: TYPE
+                    value: item
+              - descriptor:
+                  code: NP_FEES
+                  name: "Np Fees"
+                list:
+                  - code: ID
+                    value: "2"
+                  - code: COMMERCIAL_TYPE
+                    value: percent
+                  - code: COMMERCIAL_VALUE
+                    value: "0.2"
                   - code: COMMERCIAL_NAME
                     value: qualified
                   - code: COMMERCIAL_TRIGGERING_STATE

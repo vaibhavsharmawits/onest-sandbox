@@ -65,16 +65,44 @@ message:
     parent: true
     payment:
       parent: true
-      BUYER_FINDER_FEE_TYPE:
-        description: "BUYER_FINDER_FEE_TYPE"
-        required: mandatory
-        usage: "PERCENT"
-        reference: if any
-      BUYER_FINDER_FEE_PERCENTAGE:
-        description: "BUYER_FINDER_FEE_PERCENTAGE"
-        required: mandatory
-        usage: "3"
-        reference: if any
+      descriptor:
+        parent: true
+        code:
+          description: "NP_FEES code"
+          required: mandatory
+          usage: "NP_FEES"
+          reference: null
+        name:
+          description: "NP_FEES name"
+          required: optional
+          usage: "Np Fees"
+          reference: null
+        list:
+          ID:
+            description: "Identifier for NP_FEES"
+            required: mandatory
+            usage: "1"
+            reference: null
+          COMMERCIAL_TYPE:
+            description: "Type of commercial value"
+            required: mandatory
+            usage: "percent"
+            reference: null
+          COMMERCIAL_VALUE:
+            description: "Value of the commercial percentage"
+            required: mandatory
+            usage: "0.2"
+            reference: null
+          COMMERCIAL_NAME:
+            description: "Name of the commercial type"
+            required: mandatory
+            usage: "qualified"
+            reference: null
+          COMMERCIAL_TRIGGERING_STATE:
+            description: "Triggering state for the commercial fee"
+            required: mandatory
+            usage: "OFFER_EXTENDED"
+            reference: null
     item:
       parent: true
       descriptor:

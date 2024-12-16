@@ -1,7 +1,7 @@
 value:
   context:
     domain: ONDC:ONEST10
-    action: on_search_inc
+    action: on_search
     version: 2.0.0
     bap_id: worker-hub.bap.io
     bap_uri: https://worker-hub.bap.io
@@ -9,7 +9,7 @@ value:
     message_id: 672f774c-4281-44dd-b1c2-84222a3d771e
     location:
       city:
-        code: std:080
+        code: "*"
       country:
         code: IND
     timestamp: "2023-02-22T11:45:10.171Z"
@@ -50,20 +50,21 @@ value:
                 - "5"
                 - "6"
               tags:
-                # - descriptor:
-                #     code: SALARY_INFO
-                #     name: Salary information
-                #   list:
-                #     - descriptor:
-                #         code: GROSS_MIN
-                #         name: Minimum gross pay
-                #       value: "800000"
-                #     - descriptor:
-                #         code: GROSS_MAX
-                #         name: Maximum gross pay
-                #       value: "1000000"
+                - descriptor:
+                    code: SALARY_INFO
+                    name: Salary information
+                  list:
+                    - descriptor:
+                        code: GROSS_MIN
+                        name: Minimum gross pay
+                      value: "800000"
+                    - descriptor:
+                        code: GROSS_MAX
+                        name: Maximum gross pay
+                      value: "1000000"
                 - descriptor:
                     code: NP_FEES
+                    name: "Np Fees"
                   list:
                     - code: ID
                       value: "1"

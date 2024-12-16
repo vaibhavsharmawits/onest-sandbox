@@ -247,18 +247,18 @@ value:
                         code: GENDER
                         name: Gender
                       value: Male
-                # - descriptor:
-                #     code: SALARY_INFO
-                #     name: Salary information
-                #   list:
-                #     - descriptor:
-                #         code: GROSS_MIN
-                #         name: Minimum gross pay
-                #       value: "900000"
-                #     - descriptor:
-                #         code: GROSS_MAX
-                #         name: Maximum gross pay
-                #       value: "1200000"
+                - descriptor:
+                    code: SALARY_INFO
+                    name: Salary information
+                  list:
+                    - descriptor:
+                        code: GROSS_MIN
+                        name: Minimum gross pay
+                      value: "900000"
+                    - descriptor:
+                        code: GROSS_MAX
+                        name: Maximum gross pay
+                      value: "1200000"
                 - descriptor:
                     code: NP_FEES
                     name: "Np Fees"

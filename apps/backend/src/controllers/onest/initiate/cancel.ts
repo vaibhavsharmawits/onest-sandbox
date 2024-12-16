@@ -5,7 +5,7 @@ import {
 	send_nack,
 	redisFetchToServer,
 } from "../../../lib/utils";
-import { ACTTION_KEY, ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
+import { ACTION_KEY, ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
 import { ERROR_MESSAGES } from "../../../lib/utils/responseMessages";
 
 
@@ -40,7 +40,7 @@ const intializeRequest = async (
 		const cancel = {
 			context: {
 				...context,
-				action: ACTTION_KEY.CANCEL,
+				action: ACTION_KEY.CANCEL,
 				message_id: uuidv4(),
 			},
 			message: {
@@ -48,7 +48,7 @@ const intializeRequest = async (
 				cancellation_reason_id,
 			},
 		};
-		await send_response(res, next, cancel, context.transaction_id, ACTTION_KEY.CANCEL, scenario = scenario);
+		await send_response(res, next, cancel, context.transaction_id, ACTION_KEY.CANCEL, scenario = scenario);
 	}catch(error){
 		next(error)
 	}

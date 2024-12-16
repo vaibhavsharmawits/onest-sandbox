@@ -10,7 +10,7 @@ import {
 } from "../../../lib/utils";
 
 import {
-	ACTTION_KEY,
+	ACTION_KEY,
 	ON_ACTION_KEY,
 } from "../../../lib/utils/actionOnActionKeys";
 
@@ -57,7 +57,7 @@ const intializeRequest = async (
 			context: {
 				...context,
 				timestamp: new Date().toISOString(),
-				action: ACTTION_KEY.RATING,
+				action: ACTION_KEY.RATING,
 				bap_id: MOCKSERVER_ID,
 				bap_uri: SUBSCRIPTION_BAP_MOCKSERVER_URL,
 				message_id: uuidv4(),
@@ -78,7 +78,7 @@ const intializeRequest = async (
 			next,
 			rating,
 			context.transaction_id,
-			ACTTION_KEY.RATING,
+			ACTION_KEY.RATING,
 			(scenario = scenario)
 		);
 	} catch (error) {

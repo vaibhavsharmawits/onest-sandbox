@@ -5,19 +5,9 @@ import { searchSchema } from "./search";
 import { onSearchSchema } from "./on_search";
 import { selectSchema } from "./select";
 import { onSelectSchema } from "./on_select";
-// import { onSearchSchema } from "./on_search";
-// import { onSelectSchema } from "./on_select";
-// import { selectSchema } from "./select";
-// import { confirmSchema } from "./confirm";
-// import { initSchema } from "./init";
-// import { onConfirmSchema } from "./on_confirm";
-// import { onInitSchema } from "./on_init";
-// import { onStatusSchema } from "./on_status";
-// import { onUpdateSchema } from "./on_update";
-// import { statusSchema } from "./status";
-// import { updateSchema } from "./update";
-// import { cancelSchema } from "./cancel";
-// import { onCancelSchema } from "./on_cancel";
+import { initSchema } from "./init";
+import { onInitSchema } from "./on_init";
+
 
 export const onestSchemaValidator =
 	(
@@ -69,12 +59,12 @@ export const onestSchemaValidator =
 			case "on_select":
 				validate = ajv.compile(onSelectSchema);
 			break;
-			// case "init":
-			// 	validate = ajv.compile(initSchema);
-			// 	break;
-			// case "on_init":
-			// 	validate = ajv.compile(onInitSchema);
-			// 	break;
+			case "init":
+				validate = ajv.compile(initSchema);
+				break;
+			case "on_init":
+				validate = ajv.compile(onInitSchema);
+				break;
 			// case "confirm":
 			// 	validate = ajv.compile(confirmSchema);
 			// 	break;

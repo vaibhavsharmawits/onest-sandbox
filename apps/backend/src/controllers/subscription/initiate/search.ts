@@ -9,7 +9,7 @@ import {
 	SUBSCRIPTION_BAP_MOCKSERVER_URL,
 	SUBSCRIPTION_EXAMPLES_PATH,
 } from "../../../lib/utils";
-import { ACTTION_KEY } from "../../../lib/utils/actionOnActionKeys";
+import { ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
 import { PRINT_MEDIA_CATEGORIES, SUBSCRIPTION_DOMAINS } from "../../../lib/utils/apiConstants";
 
 export const initiateSearchController = async (
@@ -59,7 +59,7 @@ export const initiateSearchController = async (
 			},
 		};
 		search.bpp_uri = bpp_uri;
-		await send_response(res, next, search, transaction_id, ACTTION_KEY.SEARCH);
+		await send_response(res, next, search, transaction_id, ACTION_KEY.SEARCH);
 	} catch (error) {
 		return next(error);
 	}

@@ -86,3 +86,10 @@ message:
         required: mandatory
         usage: "0253719F295521CED39EC9C2F3C8DCDE"
         reference: null
+    fulfillments:
+      parent: true
+      type:
+        description: "Type of fulfillment"
+        required: mandatory
+        usage: "REMOTE"
+        reference: null

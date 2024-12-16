@@ -8,7 +8,7 @@ import {
 	SERVICES_BAP_MOCKSERVER_URL,
 } from "../../../lib/utils";
 import {
-	ACTTION_KEY,
+	ACTION_KEY,
 	ON_ACTION_KEY,
 } from "../../../lib/utils/actionOnActionKeys";
 import { ERROR_MESSAGES } from "../../../lib/utils/responseMessages";
@@ -62,7 +62,7 @@ const intializeRequest = async (
 			context: {
 				...context,
 				timestamp: new Date().toISOString(),
-				action: ACTTION_KEY.INIT,
+				action: ACTION_KEY.INIT,
 				bap_id: MOCKSERVER_ID,
 				bap_uri: SERVICES_BAP_MOCKSERVER_URL,
 				message_id: uuidv4(),
@@ -115,7 +115,7 @@ const intializeRequest = async (
 			next,
 			init,
 			context.transaction_id,
-			ACTTION_KEY.INIT,
+			ACTION_KEY.INIT,
 			(scenario = scenario)
 		);
 	} catch (error) {

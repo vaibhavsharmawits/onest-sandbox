@@ -19,7 +19,7 @@ bapRouter.post(
 
 bapRouter.post(
 	"/on_init",
-	// jsonSchemaValidator({ domain: "onest", action: "on_init" }),
+	jsonSchemaValidator({ domain: "onest", action: "on_init" }),
 	redisRetriever,
 	onInitController
 );

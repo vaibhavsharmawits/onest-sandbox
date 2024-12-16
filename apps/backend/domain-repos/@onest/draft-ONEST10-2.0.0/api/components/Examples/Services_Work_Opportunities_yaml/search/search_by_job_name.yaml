@@ -17,8 +17,20 @@ value:
   message:
     intent:
       payment:
-        BUYER_FINDER_FEE_TYPE: PERCENT
-        BUYER_FINDER_FEE_PERCENTAGE: "3"
+        descriptor:
+          code: NP_FEES
+          name: "Np Fees"
+        list:
+          - code: ID
+            value: "1"
+          - code: COMMERCIAL_TYPE
+            value: percent
+          - code: COMMERCIAL_VALUE
+            value: "0.2"
+          - code: COMMERCIAL_NAME
+            value: qualified
+          - code: COMMERCIAL_TRIGGERING_STATE
+            value: OFFER_EXTENDED
       item:
         descriptor:
           name: Engineer

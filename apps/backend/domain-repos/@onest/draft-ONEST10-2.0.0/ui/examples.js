@@ -34,7 +34,7 @@ function addExample(example_set) {
         var list = examplesList[key]["examples"];
         base["paths"]["/" + key]["post"]["requestBody"]["content"]["application/json"]["examples"] = {};
         for (var key2 in list) {
-            base["paths"]["/" + key]["post"]["requestBody"]["content"]["application/json"]["examples"]["e" + key2] = list[key2];
+            base["paths"]["/" + key]["post"]["requestBody"]["content"]["application/json"]["examples"][`${key2}`] = list[`${key2}`];
         }
     }
     const output = jsyaml.dump(base);

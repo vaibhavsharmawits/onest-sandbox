@@ -1,0 +1,129 @@
+cities_with_std_codes:
+  - city: Delhi
+    code: std:011
+    description: Delhi
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Ghaziabad
+    code: std:0120
+    description: Ghaziabad
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Meerut
+    code: std:0121
+    description: Meerut
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Gurgaon
+    code: std:0124
+    description: Gurgaon
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Faridabad
+    code: std:0129
+    description: Faridabad
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Saharanpur
+    code: std:0132
+    description: Saharanpur
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Haridwar
+    code: std:01334
+    description: Haridwar
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Bijnor
+    code: std:01342
+    description: Bijnor
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Dehradun
+    code: std:0135
+    description: Dehradun
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Kotdwara
+    code: std:01382
+    description: Kotdwara
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Jaipur
+    code: std:0141
+    description: Jaipur
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Motihari
+    code: std:06252
+    description: Motihari
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Bansur
+    code: std:01461
+    description: Bansur
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Sriganganagar
+    code: std:0154
+    description: Sriganganagar
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Mohali
+    code: std:0172
+    description: Mohali
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Chandigarh
+    code: std:0172
+    description: Chandigarh
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Jammu
+    code: std:0191
+    description: Jammu
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Srinagar
+    code: std:0194
+    description: Srinagar
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Leh
+    code: std:01982
+    description: Leh
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Pune
+    code: std:020
+    description: Pune
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Mumbai
+    code: std:022
+    description: Mumbai
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Thane
+    code: std:022
+    description: Thane
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Dhule
+    code: std:02566
+    description: Dhule
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Surat
+    code: std:0261
+    description: Surat
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Navasari
+    code: std:02637
+    description: Navasari
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Vadodara
+    code: std:0265
+    description: Vadodara
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Nadiad
+    code: std:0268
+    description: Nadiad
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Rajkot
+    code: std:0281
+    description: Rajkot
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Kolkata
+    code: std:033
+    description: Kolkata
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Gangtok
+    code: std:03592
+    description: Gangtok
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Guwahati
+    code: std:0361
+    description: Guwahati
+    reference: <PR/Issue/Discussion Links md format text>
+  - city: Shillong
+    code: std:0364
+    description: Shillong
+    reference: <PR/Issue/Discussion Links md format text>

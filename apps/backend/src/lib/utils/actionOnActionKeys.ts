@@ -1,4 +1,4 @@
-export const ACTTION_KEY = {
+export const ACTION_KEY = {
   SEARCH:"search",
   SELECT:"select",
   INIT:"init",

@@ -79,40 +79,6 @@ message:
         required: mandatory
         usage: 1
         reference: if any
-      descriptor:
-        name:
-          description: Provider name
-          required: mandatory
-          usage: Affinidi
-          reference: if any
-      locations:
-        id:
-          description: Provider location ID
-          required: mandatory
-          usage: L1
-          reference: if any
-        city:
-          name:
-            description: City name
-            required: mandatory
-            usage: Pune
-            reference: if any
-          code:
-            description: City code
-            required: mandatory
-            usage: std:020
-            reference: if any
-        state:
-          name:
-            description: State name
-            required: mandatory
-            usage: Maharastra
-            reference: if any
-          code:
-            description: State code
-            required: mandatory
-            usage: MH
-            reference: if any
     items:
       parent: true
       id:
@@ -257,34 +223,34 @@ message:
           usage: 2023-02-06T09:55:41.161Z
           reference: if any
       customer:
-          person:
+        person:
+          name:
+            description: Customer's name
+            required: mandatory
+            usage: Sanjay
+            reference: if any
+          gender:
+            description: Customer's gender
+            required: mandatory
+            usage: Male
+            reference: if any
+          age:
+            description: Customer's age
+            required: mandatory
+            usage: 35
+            reference: if any
+          skills:
+            code:
+              description: Skill code
+              required: mandatory
+              usage: Android
+              reference: if any
             name:
-              description: Customer's name
+              description: Skill name
               required: mandatory
-              usage: Sanjay
+              usage: Android
               reference: if any
-            gender:
-              description: Customer's gender
-              required: mandatory
-              usage: Male
-              reference: if any
-            age:
-              description: Customer's age
-              required: mandatory
-              usage: 35
-              reference: if any
-            skills:
-              code:
-                description: Skill code
-                required: mandatory
-                usage: Android
-                reference: if any
-              name:
-                description: Skill name
-                required: mandatory
-                usage: Android
-                reference: if any
-            languages:
+          languages:
               code:
                 description: Language code
                 required: mandatory
@@ -295,3 +261,14 @@ message:
                 required: mandatory
                 usage: english
                 reference: if any
+        contact:
+            phone:
+              description: "The phone number of the customer."
+              required: mandatory
+              usage: "9999999999"
+              reference: null
+            email:
+              description: "The email of the customer."
+              required: mandatory
+              usage: "abc@abc.bc"
+              reference: null

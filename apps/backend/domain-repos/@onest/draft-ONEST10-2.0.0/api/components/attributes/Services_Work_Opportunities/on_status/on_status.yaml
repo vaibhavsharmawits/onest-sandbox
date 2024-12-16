@@ -73,40 +73,6 @@ message:
         required: mandatory
         usage: "1"
         reference: null
-      descriptor:
-        name:
-          description: "The name of the provider."
-          required: mandatory
-          usage: "Affinidi"
-          reference: null
-      locations:
-        id:
-          description: "The unique identifier of the provider location."
-          required: mandatory
-          usage: "L1"
-          reference: null
-        city:
-          name:
-            description: "The name of the city for the location."
-            required: mandatory
-            usage: "Pune"
-            reference: null
-          code:
-            description: "The city code in the ONDC ecosystem."
-            required: mandatory
-            usage: "std:020"
-            reference: null
-        state:
-          name:
-            description: "The name of the state for the location."
-            required: mandatory
-            usage: "Maharastra"
-            reference: null
-          code:
-            description: "The state code in the ONDC ecosystem."
-            required: mandatory
-            usage: "MH"
-            reference: null
     items:
       id:
         description: "The unique identifier of the item being selected."
@@ -215,14 +181,14 @@ message:
               required: mandatory
               usage: "english"
               reference: null
-          contact:
-              phone:
-                description: "The phone number of the customer."
-                required: mandatory
-                usage: "9999999999999"
-                reference: null
-              email:
-                description: "The email address of the customer."
-                required: mandatory
-                usage: "abc@abc.bc"
-                reference: null
+        contact:
+            phone:
+              description: "The phone number of the customer."
+              required: mandatory
+              usage: "9999999999999"
+              reference: null
+            email:
+              description: "The email address of the customer."
+              required: mandatory
+              usage: "abc@abc.bc"
+              reference: null

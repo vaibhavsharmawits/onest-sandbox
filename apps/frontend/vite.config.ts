@@ -10,14 +10,15 @@ export default defineConfig({
 			usePolling: true,
 		},
 		host: true,
-		// strictPort: true,
 		port: 5173,
-    open: true
+		open: true,
 	},
-  preview:{
+	preview: {
 		host: true,
-		// strictPort: true,
 		port: 5173,
-    open: false
-  }
+		open: false,
+	},
+	optimizeDeps: {
+		exclude: ["chunk-G332SCLE", "chunk-FUE5BVK4"], // Exclude problematic chunks
+	},
 });

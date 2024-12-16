@@ -100,6 +100,11 @@ message:
           required: mandatory
           usage: "1"
           reference: null
+        type:
+          description: "Type of fulfillment"
+          required: mandatory
+          usage: "REMOTE"
+          reference: null
         customer:
           person:
             name:
@@ -139,17 +144,17 @@ message:
                   required: mandatory
                   usage: "English"
                   reference: null
-        contact:
-          phone:
-            description: "The phone number of the customer."
-            required: mandatory
-            usage: "9999999999"
-            reference: null
-          email:
-            description: "The email of the customer."
-            required: mandatory
-            usage: "abc@abc.bc"
-            reference: null
+          contact:
+            phone:
+              description: "The phone number of the customer."
+              required: mandatory
+              usage: "9999999999"
+              reference: null
+            email:
+              description: "The email of the customer."
+              required: mandatory
+              usage: "abc@abc.bc"
+              reference: null
     quote:
       ttl:
         description: "The Time-to-Live (TTL) for the quoted order."

@@ -10,7 +10,7 @@ import {
 	logger,
 } from "../../../lib/utils";
 import {
-	ACTTION_KEY,
+	ACTION_KEY,
 	ON_ACTION_KEY,
 } from "../../../lib/utils/actionOnActionKeys";
 import { ERROR_MESSAGES } from "../../../lib/utils/responseMessages";
@@ -64,7 +64,7 @@ const intializeRequest = async (
 			context: {
 				...context,
 				timestamp,
-				action: ACTTION_KEY.INIT,
+				action: ACTION_KEY.INIT,
 				bap_id: MOCKSERVER_ID,
 				bap_uri: AGRI_BAP_MOCKSERVER_URL,
 				message_id: uuidv4(),
@@ -129,7 +129,7 @@ const intializeRequest = async (
 			next,
 			init,
 			context.transaction_id,
-			ACTTION_KEY.INIT,
+			ACTION_KEY.INIT,
 			(scenario = scenario)
 		);
 	} catch (error) {

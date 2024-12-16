@@ -17,7 +17,7 @@ import {
 } from "../../../lib/utils";
 import { ERROR_MESSAGES } from "../../../lib/utils/responseMessages";
 import {
-	ACTTION_KEY,
+	ACTION_KEY,
 	ON_ACTION_KEY,
 } from "../../../lib/utils/actionOnActionKeys";
 
@@ -69,7 +69,7 @@ export const initiateUpdateController = async (
 			next,
 			update,
 			transactionId,
-			ACTTION_KEY.UPDATE,
+			ACTION_KEY.UPDATE,
 			(scenario = scenario)
 		);
 	} catch (error) {

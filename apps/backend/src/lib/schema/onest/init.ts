@@ -1,7 +1,7 @@
 import { DOMAIN, VERSION } from "./constants";
 
-export const onSelectSchema = {
-  $id: "onSelectSchema",
+export const initSchema = {
+  $id: "initSchema",
   type: "object",
   properties: {
     context: {
@@ -13,7 +13,7 @@ export const onSelectSchema = {
         },
         action: {
           type: "string",
-          const: "on_select",
+          const: "init",
         },
         version: {
           type: "string",
@@ -99,18 +99,6 @@ export const onSelectSchema = {
               },
               required: ["id"],
             },
-            fulfillments: {
-              type: "object",
-              properties: {
-                id: {
-                  type: "string",
-                },
-                type: {
-                  type: "string",
-                },
-              },
-			  required: ["id", "type"],
-            },
             items: {
               type: "array",
               items: {
@@ -165,6 +153,137 @@ export const onSelectSchema = {
                 required: ["id", "fulfillment_ids", "tags"],
               },
             },
+            fulfillments: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  id: {
+                    type: "string",
+                  },
+                  type: {
+                    type: "string",
+                    enum: ["REMOTE", "HYBRID", "ONSITE"],
+                  },
+                  customer: {
+                    type: "object",
+                    properties: {
+                      person: {
+                        type: "object",
+                        properties: {
+                          name: {
+                            type: "string",
+                          },
+                          gender: {
+                            type: "string",
+                          },
+                          age: {
+                            type: "string",
+                          },
+                          skills: {
+                            type: "array",
+                            items: {
+                              type: "object",
+                              properties: {
+                                code: {
+                                  type: "string",
+                                },
+                                name: {
+                                  type: "string",
+                                },
+                              },
+                              required: ["code", "name"],
+                            },
+                          },
+                          languages: {
+                            type: "array",
+                            items: {
+                              type: "object",
+                              properties: {
+                                code: {
+                                  type: "string",
+                                },
+                                name: {
+                                  type: "string",
+                                },
+                              },
+                              required: ["code", "name"],
+                            },
+                          },
+                          tags: {
+                            type: "array",
+                            items: {
+                              type: "object",
+                              properties: {
+                                descriptor: {
+                                  type: "object",
+                                  properties: {
+                                    code: {
+                                      type: "string",
+                                    },
+                                    name: {
+                                      type: "string",
+                                    },
+                                  },
+                                  required: ["code", "name"],
+                                },
+                                list: {
+                                  type: "array",
+                                  items: {
+                                    type: "object",
+                                    properties: {
+                                      descriptor: {
+                                        type: "object",
+                                        properties: {
+                                          code: {
+                                            type: "string",
+                                          },
+                                          name: {
+                                            type: "string",
+                                          },
+                                        },
+                                        required: ["code"],
+                                      },
+                                      value: {
+                                        type: "string",
+                                      },
+                                    },
+                                    required: ["descriptor", "value"],
+                                  },
+                                },
+                              },
+                              required: ["descriptor", "list"],
+                            },
+                          },
+                        },
+                        required: [
+                          "name",
+                          "gender",
+                          "age",
+                          "skills",
+                          "languages",
+                          "tags",
+                        ],
+                      },
+                      contact: {
+                        type: "object",
+                        properties: {
+                          phone: {
+                            type: "string",
+                          },
+                          email: {
+                            type: "string",
+                          },
+                        },
+                        required: ["phone", "email"],
+                      },
+                    },
+                    required: ["person", "contact"],
+                  },
+                },
+                required: ["id", "type", "customer"],
+              },
+            },
             quote: {
               type: "object",
               properties: {
@@ -214,31 +333,38 @@ export const onSelectSchema = {
                                 code: {
                                   type: "string",
                                 },
+                                name: {
+                                  type: "string",
+                                },
                               },
                               required: ["code"],
                             },
                             list: {
                               type: "array",
                               items: {
-                                type: "object",
-                                properties: {
-                                  descriptor: {
-                                    type: "object",
+                                oneOf: [
+                                  {
                                     properties: {
-                                      code: {
-                                        type: "string",
+                                      descriptor: {
+                                        type: "object",
+                                        properties: {
+                                          code: { type: "string" },
+                                          name: { type: "string" },
+                                        },
+                                        required: ["code"],
                                       },
+                                      value: { type: "string" },
                                     },
-                                    required: ["code"],
+                                    required: ["descriptor", "value"],
                                   },
-                                  code: {
-                                    type: "string",
+                                  {
+                                    properties: {
+                                      code: { type: "string" },
+                                      value: { type: "string" },
+                                    },
+                                    required: ["code", "value"],
                                   },
-                                  value: {
-                                    type: "string",
-                                  },
-                                },
-                                required: ["value"],
+                                ],
                               },
                             },
                           },

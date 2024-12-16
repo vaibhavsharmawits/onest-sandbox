@@ -11,7 +11,7 @@ import {
 	logger,
 	redis,
 } from "../../../lib/utils";
-import { ACTTION_KEY } from "../../../lib/utils/actionOnActionKeys";
+import { ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
 import { SERVICES_DOMAINS } from "../../../lib/utils/apiConstants";
 
 export const initiateSearchController = async (
@@ -91,7 +91,7 @@ export const initiateSearchController = async (
 				break;	
 		}
 		search.bpp_uri = bpp_uri;
-		await send_response(res, next, search, transaction_id, ACTTION_KEY.SEARCH,scenario);
+		await send_response(res, next, search, transaction_id, ACTION_KEY.SEARCH,scenario);
 	} catch (error) {
 		return next(error);
 	}

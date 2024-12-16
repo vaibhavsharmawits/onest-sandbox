@@ -98,6 +98,11 @@ message:
         required: mandatory
         usage: "1"
         reference: null
+      type:
+        description: "Type of fulfillment"
+        required: mandatory
+        usage: "REMOTE"
+        reference: null
         customer:
           person:
             name:
@@ -139,56 +144,17 @@ message:
                 required: mandatory
                 usage: "English"
                 reference: null
-      contact:
-        phone:
-          description: "The phone number of the customer."
-          required: mandatory
-          usage: "9999999999"
-          reference: null
-        email:
-          description: "The email of the customer."
-          required: mandatory
-          usage: "abc@abc.bc"
-          reference: null
-      customer:
-            person:
-              name:
-                description: Customer's name
-                required: mandatory
-                usage: Sanjay
-                reference: if any
-              gender:
-                description: Customer's gender
-                required: mandatory
-                usage: Male
-                reference: if any
-              age:
-                description: Customer's age
-                required: mandatory
-                usage: 35
-                reference: if any
-              skills:
-                code:
-                  description: Skill code
-                  required: mandatory
-                  usage: Android
-                  reference: if any
-                name:
-                  description: Skill name
-                  required: mandatory
-                  usage: Android
-                  reference: if any
-              languages:
-                code:
-                  description: Language code
-                  required: mandatory
-                  usage: en
-                  reference: if any
-                name:
-                  description: Language name
-                  required: mandatory
-                  usage: english
-                  reference: if any
+          contact:
+            phone:
+              description: "The phone number of the customer."
+              required: mandatory
+              usage: "9999999999"
+              reference: null
+            email:
+              description: "The email of the customer."
+              required: mandatory
+              usage: "abc@abc.bc"
+              reference: null
     quote:
       parent: true
       ttl:

@@ -69,51 +69,18 @@ message:
         required: mandatory
         usage: "1"
         reference: null
-      descriptor:
-        name:
-          description: "The name of the provider."
-          required: mandatory
-          usage: "Affinidi"
-          reference: null
-      fulfillments:
-        id:
-          description: "The unique identifier of the fulfillment option."
-          required: mandatory
-          usage: "1"
-          reference: null
-        type:
-          description: "The type of fulfillment."
-          required: mandatory
-          usage: "REMOTE"
-          reference: null
-      locations:
-        id:
-          description: "The unique identifier of the location."
-          required: mandatory
-          usage: "L1"
-          reference: null
-        city:
-          name:
-            description: "The name of the city."
-            required: mandatory
-            usage: "Pune"
-            reference: null
-          code:
-            description: "The city code."
-            required: mandatory
-            usage: "std:020"
-            reference: null
-        state:
-          name:
-            description: "The name of the state."
-            required: mandatory
-            usage: "Maharastra"
-            reference: null
-          code:
-            description: "The state code."
-            required: mandatory
-            usage: "MH"
-            reference: null
+    fulfillments:
+      parent: true
+      id:
+        description: "The unique identifier of the fulfillment option."
+        required: mandatory
+        usage: "1"
+        reference: null
+      type:
+        description: "The type of fulfillment."
+        required: mandatory
+        usage: "REMOTE"
+        reference: null
     items:
       parent: true
       id:
