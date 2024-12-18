@@ -23,3 +23,6 @@ git submodule add -b draft-2.x https://github.com/ONDC-Official/ONDC-LOG-Specifi
 
 # MEC
 git submodule add -b draft-print_media https://github.com/ONDC-Official/ONDC-MEC-Specifications domain-repos/@mec/draft-print_media
+
+# ONEST
+git submodule add -b draft-ONEST10-2.0.0 https://github.com/ONDC-Official/ONDC-ONEST-Specifications domain-repos/@onest/draft-ONEST10-2.0.0
