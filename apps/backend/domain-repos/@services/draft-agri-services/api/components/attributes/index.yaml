@@ -1,3 +1,0 @@
-Agriculture Services:
-  attribute_set:
-    $ref: "./Agriculture_Services/index.yaml"

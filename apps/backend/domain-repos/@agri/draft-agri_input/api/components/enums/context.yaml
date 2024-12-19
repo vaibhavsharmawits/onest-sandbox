@@ -1,8 +1,0 @@
-domain:
-  - code: ONDC:AGR10
-    description: Agri Input Products
-    reference: <PR/Issue/Discussion Links md format text>
-  - code: ONDC:AGR11
-    description: Agri Output Products
-    reference: <PR/Issue/Discussion Links md format text>
-

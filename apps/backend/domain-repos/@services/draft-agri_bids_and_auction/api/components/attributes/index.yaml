@@ -1,4 +1,0 @@
-Agricultural product - Bids and Auction:
-  attribute_set:
-    $ref: "./Agri_Bids_And_Auction/index.yaml"
-

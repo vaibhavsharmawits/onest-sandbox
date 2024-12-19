@@ -3,11 +3,6 @@ import swaggerUi from "swagger-ui-express";
 import cron from "node-cron"; // Import node-cron
 import {
 	authRouter,
-	miscRouter,
-	servicesRouter,
-	subscriptionRouter,
-	logisticsRouter,
-	agriRouter,
 	onestRouter,
 } from "./controllers";
 import cors from "cors";
@@ -23,13 +18,12 @@ import {
 	errorHandlingWrapper,
 	healthcareServiceSwagger,
 } from "./middlewares";
-import { retailRouter } from "./controllers/retail";
 import { sendUpsolicieatedOnStatus } from "./lib/utils/sendUpsolicieatedOnStatus";
-import { loadConfig } from "./lib/utils";
+// import { loadConfig } from "./lib/utils";
 
 export const app: Express = express();
 const port = process.env.PORT || 3000;
-loadConfig();
+// loadConfig();
 app.use(cors());
 
 app.use("/api-docs/auth", swaggerUi.serve, authSwagger("/api-docs/auth"));
@@ -63,13 +57,6 @@ app.use(
 
 app.use(express.raw({ type: "*/*", limit: "1mb" }));
 app.use(requestParser);
-app.use("/", miscRouter);
-app.use("/retail", errorHandlingWrapper(retailRouter));
-app.use("/auth", errorHandlingWrapper(authRouter));
-app.use("/services", errorHandlingWrapper(servicesRouter));
-app.use("/subscription", errorHandlingWrapper(subscriptionRouter));
-app.use("/logistics", errorHandlingWrapper(logisticsRouter));
-app.use("/agri", errorHandlingWrapper(agriRouter));
 app.use("/onest", errorHandlingWrapper(onestRouter));
 app.use("/detect_app_installation", (req: Request, res: Response) => {
 	const headers = req.headers;
