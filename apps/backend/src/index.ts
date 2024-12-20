@@ -3,6 +3,7 @@ import swaggerUi from "swagger-ui-express";
 import cron from "node-cron"; // Import node-cron
 import {
 	authRouter,
+	miscRouter,
 	onestRouter,
 } from "./controllers";
 import cors from "cors";
@@ -57,6 +58,8 @@ app.use(
 
 app.use(express.raw({ type: "*/*", limit: "1mb" }));
 app.use(requestParser);
+app.use("/", miscRouter);
+app.use("/auth", errorHandlingWrapper(authRouter));
 app.use("/onest", errorHandlingWrapper(onestRouter));
 app.use("/detect_app_installation", (req: Request, res: Response) => {
 	const headers = req.headers;
