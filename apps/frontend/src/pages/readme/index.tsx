@@ -42,7 +42,7 @@ const ONDCDocumentation = () => {
 			}}
 		>
 			<div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-				<h1>ONDC Mock & Sandbox</h1>
+				<h1>ONDC ONEST Sandbox</h1>
 				<p>
 					To facilitate the development and testing of Buyer Network
 					participants or Seller network participants, the ONDC Mock & Sandbox
@@ -67,12 +67,11 @@ const ONDCDocumentation = () => {
 				<h2> Make a request</h2>
 				<p>
 					Since you have selected the desired server, now you can make the
-					requests to that server. There are two serivces available to test with
+					requests to that server
 					:
 				</p>
 				<ul>
 					<li>SandBox</li>
-					<li>Mock</li>
 				</ul>
 				<p>You can select service from mode dropdown.</p>
 				<h3>Sandbox</h3>
@@ -104,14 +103,12 @@ const ONDCDocumentation = () => {
 				<h3>BPP (Seller App) Requests:</h3>
 				<p>
 					All action calls are hosted on the BPP server. If you want to make
-					mock requests to BPP, select (b2b, services, healthcare-services,
-					agri-services)/bpp from the servers dropdown.
+					mock requests to BPP, select (onest)/bpp from the servers dropdown.
 				</p>
 				<h3>BAP (Buyer App) Requests:</h3>
 				<p>
 					All on_action calls are hosted on the BAP server. If you want to make
-					mock requests to BAP or the Buyer app, select (b2b, services,
-					healthcare-services, agri-services)/bap from the servers dropdown.
+					mock requests to BAP or the Buyer app, select (onest)/bap from the servers dropdown.
 				</p>
 				<h2>Steps to Use the Mock Server:</h2>
 				<h3>Determine the Service:</h3>
@@ -132,12 +129,10 @@ const ONDCDocumentation = () => {
 				<h3>Select the Server:</h3>
 				<ul>
 					<li>
-						For BPP requests, choose services (b2b, services,
-						healthcare-services, agri-services)/bpp from the dropdown.
+						For BPP requests, choose services (onest)/bpp from the dropdown.
 					</li>
 					<li>
-						For BAP requests, choose (b2b, services, healthcare-services,
-						agri-services)/bap from the dropdown.
+						For BAP requests, choose (onest)/bap from the dropdown.
 					</li>
 				</ul>
 				<h3>Ensure Readiness:</h3>
@@ -147,16 +142,6 @@ const ONDCDocumentation = () => {
 						server. This URL will be used to initiate requests.
 					</li>
 				</ul>
-
-				<p>
-					You can check the payload for that request from ONDC-SRV- link with
-					select the particular service:{" "}
-					<a href="https://ondc-official.github.io/ONDC-SRV-Specifications">
-						https://ondc-official.github.io/ONDC-SRV-Specifications
-					</a>
-					.
-				</p>
-
 				<h2>Example Flow for BPP:</h2>
 				<h3>Step 1: Enter the BPP URL</h3>
 				<ul>
@@ -164,15 +149,9 @@ const ONDCDocumentation = () => {
 					<li>Enter the BPP URL in the provided input field:</li>
 					<ul>
 						<li>
-							Services:{" "}
-							<a href="https://mock.ondc.org/api/services/bpp">
-								https://mock.ondc.org/api/services/bpp
-							</a>
-						</li>
-						<li>
-							Retail:{" "}
-							<a href="https://mock.ondc.org/api/retail/bpp">
-								https://mock.ondc.org/api/retail/bpp
+							Onest:{" "}
+							<a href="https://onest-staging.ondc.org/api/onest/bpp">
+								https://onest-staging.ondc.org/api/onest/bpp
 							</a>
 						</li>
 					</ul>
@@ -211,85 +190,86 @@ const ONDCDocumentation = () => {
 									dangerouslySetInnerHTML={{
 										__html: coloredJsonString({
 											context: {
-												domain: "ONDC:SRV13",
-												location: {
-													city: {
-														code: "std:080",
-													},
-													country: {
-														code: "IND",
-													},
-												},
+												domain: "ONDC:ONEST10",
 												action: "search",
 												version: "2.0.0",
-												bap_id: "mock.ondc.org/api",
-												bap_uri: "https://mock.ondc.org/api/services/bap",
-												transaction_id: "0933f5c2-130c-4ce1-adcf-d9971c289611",
-												message_id: "ec9badac-46c0-46d1-95fe-13096584275e",
-												timestamp: "2024-06-18T08:01:52.263Z",
-												ttl: "PT30S",
+												bap_id: "worker-hub.bap.io",
+												bap_uri: "https://worker-hub.bap.io/",
+												transaction_id: "a9aaecca-10b7-4d19-b640-b047a7c62195",
+												message_id: "$89bdae17-9942-40c8-869a-5bd413356407",
+												location: {
+													city: {
+														code: "std:080"
+													},
+													country: {
+														code: "IND"
+													}
+												},
+												timestamp: "2022-10-11T09:55:41.161Z",
+												ttl: "PT30S"
 											},
 											message: {
 												intent: {
-													item: {
-														descriptor: {
-															name: "LFT",
-														},
-													},
-													fulfillment: {
-														type: "Seller-Fulfilled",
-														customer: {
-															person: {
-																name: "XYZ",
-															},
-															contact: {
-																phone: "9999999999",
-															},
-														},
-														stops: [
-															{
-																type: "end",
-																time: {
-																	range: {
-																		start: "2024-04-04T22:00:00.000Z",
-																	},
-																},
-																location: {
-																	gps: "12.974002,77.613458",
-																	area_code: "560001",
-																},
-															},
-														],
-													},
 													payment: {
-														type: "PRE-FULFILLMENT",
-														collected_by: "BAP",
+														descriptor: {
+															code: "NP_FEES",
+															name: "Np Fees"
+														},
+														list: [
+															{
+																code: "ID",
+																value: "1"
+															}
+														]
+													},
+													item: {
+														tags: [
+															{
+																descriptor: {
+																	code: "LISTING_DETAILS"
+																},
+																list: [
+																	{
+																		descriptor: {
+																			code: "EMPLOYMENT_TYPE"
+																		},
+																		value: "full-time"
+																	}
+																]
+															}
+														]
 													},
 													tags: [
 														{
 															descriptor: {
-																code: "BAP_TERMS",
+																code: "BAP_TERMS"
 															},
-															display: false,
 															list: [
 																{
 																	descriptor: {
-																		code: "FINDER_FEE_TYPE",
+																		code: "STATIC_TERMS"
 																	},
-																	value: "percent",
+																	value: "static_terms_value"
 																},
 																{
 																	descriptor: {
-																		code: "FINDER_FEE_AMOUNT",
+																		code: "STATIC_TERMS_NEW"
 																	},
-																	value: "0",
+																	value: "static_terms_new_value"
 																},
-															],
-														},
-													],
-												},
-											},
-										}),
+																{
+																	descriptor: {
+																		code: "EFFECTIVE_DATE"
+																	},
+																	value: "2023-02-22T11:20:10.122Z"
+																}
+															]
+														}
+													]
+												}
+											}
+										}
+										),
 									}}
 								/>
 								<IconButton
@@ -297,84 +277,84 @@ const ONDCDocumentation = () => {
 									onClick={() =>
 										handleCopyText({
 											context: {
-												domain: "ONDC:SRV13",
-												location: {
-													city: {
-														code: "std:080",
-													},
-													country: {
-														code: "IND",
-													},
-												},
+												domain: "ONDC:ONEST10",
 												action: "search",
 												version: "2.0.0",
-												bap_id: "buyerapp.com",
-												bap_uri: "https://buyerapp.com/ondc",
-												transaction_id: "T1",
-												message_id: "M1",
-												timestamp: "2024-04-01T22:00:00.000Z",
-												ttl: "PT30S",
+												bap_id: "worker-hub.bap.io",
+												bap_uri: "https://worker-hub.bap.io/",
+												transaction_id: "a9aaecca-10b7-4d19-b640-b047a7c62195",
+												message_id: "$89bdae17-9942-40c8-869a-5bd413356407",
+												location: {
+													city: {
+														code: "std:080"
+													},
+													country: {
+														code: "IND"
+													}
+												},
+												timestamp: "2022-10-11T09:55:41.161Z",
+												ttl: "PT30S"
 											},
 											message: {
 												intent: {
-													item: {
-														descriptor: {
-															name: "LFT",
-														},
-													},
-													fulfillment: {
-														type: "Seller-Fulfilled",
-														customer: {
-															person: {
-																name: "XYZ",
-															},
-															contact: {
-																phone: "9999999999",
-															},
-														},
-														stops: [
-															{
-																type: "end",
-																time: {
-																	range: {
-																		start: "2024-04-04T22:00:00.000Z",
-																	},
-																},
-																location: {
-																	gps: "12.974002,77.613458",
-																	area_code: "560001",
-																},
-															},
-														],
-													},
 													payment: {
-														type: "PRE-FULFILLMENT",
-														collected_by: "BAP",
+														descriptor: {
+															code: "NP_FEES",
+															name: "Np Fees"
+														},
+														list: [
+															{
+																code: "ID",
+																value: "1"
+															}
+														]
+													},
+													item: {
+														tags: [
+															{
+																descriptor: {
+																	code: "LISTING_DETAILS"
+																},
+																list: [
+																	{
+																		descriptor: {
+																			code: "EMPLOYMENT_TYPE"
+																		},
+																		value: "full-time"
+																	}
+																]
+															}
+														]
 													},
 													tags: [
 														{
 															descriptor: {
-																code: "BAP_TERMS",
+																code: "BAP_TERMS"
 															},
-															display: false,
 															list: [
 																{
 																	descriptor: {
-																		code: "FINDER_FEE_TYPE",
+																		code: "STATIC_TERMS"
 																	},
-																	value: "percent",
+																	value: "static_terms_value"
 																},
 																{
 																	descriptor: {
-																		code: "FINDER_FEE_AMOUNT",
+																		code: "STATIC_TERMS_NEW"
 																	},
-																	value: "0",
+																	value: "static_terms_new_value"
 																},
-															],
-														},
-													],
-												},
-											},
+																{
+																	descriptor: {
+																		code: "EFFECTIVE_DATE"
+																	},
+																	value: "2023-02-22T11:20:10.122Z"
+																}
+															]
+														}
+													]
+												}
+											}
 										})
 									}
 								>
@@ -501,8 +481,8 @@ const ONDCDocumentation = () => {
 						From the dropdown menu labeled "Initiate Request," select search.
 					</li>
 					<li>
-						Choose the domain from the dropdown menu (e.g.,
-						healthcare-services).
+						Choose the domain from the dropdown menu (e.g.
+						ONDC:ONEST10).
 					</li>
 					<li>
 						Enter the appropriate city code in the provided field (e.g.,
@@ -679,7 +659,7 @@ const ONDCDocumentation = () => {
 
 				<h2>Example Flow for BAP:</h2>
 				<li>
-					This guide explains how to use the ONDC Mock & Sandbox interface to
+					This guide explains how to use the ONDC ONEST Sandbox interface to
 					interact with the Buyer App (BAP). The interface allows you to enter
 					an authentication header and request body for different actions, such
 					as search, select, init, confirm, status, and update.
@@ -690,21 +670,9 @@ const ONDCDocumentation = () => {
 					<li>Enter the BAP URL in the Request Payload:</li>
 					<ul>
 						<li>
-							Services:{" "}
-							<a href="https://mock.ondc.org/api/services/bap">
-								https://mock.ondc.org/api/services/bap
-							</a>
-						</li>
-						<li>
-							B2B:{" "}
-							<a href="https://mock.ondc.org/api/b2b/bap">
-								https://mock.ondc.org/api/b2b/bap
-							</a>
-						</li>
-						<li>
-							B2C:{" "}
-							<a href="https://mock.ondc.org/api/b2c/bap">
-								https://mock.ondc.org/api/b2c/bap
+							Onest:{" "}
+							<a href="https://onest-staging.ondc.org/api/onest/bap">
+								https://onest-staging.ondc.org/api/onest/bap
 							</a>
 						</li>
 					</ul>
@@ -722,7 +690,7 @@ const ONDCDocumentation = () => {
 					<br />
 					<p>
 						To obtain the authentication header, please follow the{" "}
-						<a href="https://mock.ondc.org/api/api-docs/auth/#/Auth/post_signature">
+						<a href="https://onest-staging.ondc.org/api/api-docs/auth/#/Auth/post_signature">
 							Swagger link{" "}
 						</a>
 						provided and create an authentication header for all requests
@@ -772,85 +740,84 @@ const ONDCDocumentation = () => {
 										dangerouslySetInnerHTML={{
 											__html: coloredJsonString({
 												context: {
-													domain: "ONDC:SRV13",
-													location: {
-														city: {
-															code: "std:080",
-														},
-														country: {
-															code: "IND",
-														},
-													},
+													domain: "ONDC:ONEST10",
 													action: "search",
 													version: "2.0.0",
-													bap_id: "mock.ondc.org/api",
-													bap_uri: "https://mock.ondc.org/api/services/bap",
-													transaction_id:
-														"0933f5c2-130c-4ce1-adcf-d9971c289611",
-													message_id: "ec9badac-46c0-46d1-95fe-13096584275e",
-													timestamp: "2024-06-18T08:01:52.263Z",
-													ttl: "PT30S",
+													bap_id: "worker-hub.bap.io",
+													bap_uri: "https://worker-hub.bap.io/",
+													transaction_id: "a9aaecca-10b7-4d19-b640-b047a7c62195",
+													message_id: "$89bdae17-9942-40c8-869a-5bd413356407",
+													location: {
+														city: {
+															code: "std:080"
+														},
+														country: {
+															code: "IND"
+														}
+													},
+													timestamp: "2022-10-11T09:55:41.161Z",
+													ttl: "PT30S"
 												},
 												message: {
 													intent: {
-														item: {
-															descriptor: {
-																name: "LFT",
-															},
-														},
-														fulfillment: {
-															type: "Seller-Fulfilled",
-															customer: {
-																person: {
-																	name: "XYZ",
-																},
-																contact: {
-																	phone: "9999999999",
-																},
-															},
-															stops: [
-																{
-																	type: "end",
-																	time: {
-																		range: {
-																			start: "2024-04-04T22:00:00.000Z",
-																		},
-																	},
-																	location: {
-																		gps: "12.974002,77.613458",
-																		area_code: "560001",
-																	},
-																},
-															],
-														},
 														payment: {
-															type: "PRE-FULFILLMENT",
-															collected_by: "BAP",
+															descriptor: {
+																code: "NP_FEES",
+																name: "Np Fees"
+															},
+															list: [
+																{
+																	code: "ID",
+																	value: "1"
+																}
+															]
+														},
+														item: {
+															tags: [
+																{
+																	descriptor: {
+																		code: "LISTING_DETAILS"
+																	},
+																	list: [
+																		{
+																			descriptor: {
+																				code: "EMPLOYMENT_TYPE"
+																			},
+																			value: "full-time"
+																		}
+																	]
+																}
+															]
 														},
 														tags: [
 															{
 																descriptor: {
-																	code: "BAP_TERMS",
+																	code: "BAP_TERMS"
 																},
-																display: false,
 																list: [
 																	{
 																		descriptor: {
-																			code: "FINDER_FEE_TYPE",
+																			code: "STATIC_TERMS"
 																		},
-																		value: "percent",
+																		value: "static_terms_value"
 																	},
 																	{
 																		descriptor: {
-																			code: "FINDER_FEE_AMOUNT",
+																			code: "STATIC_TERMS_NEW"
 																		},
-																		value: "0",
+																		value: "static_terms_new_value"
 																	},
-																],
-															},
-														],
-													},
-												},
+																	{
+																		descriptor: {
+																			code: "EFFECTIVE_DATE"
+																		},
+																		value: "2023-02-22T11:20:10.122Z"
+																	}
+																]
+															}
+														]
+													}
+												}
 											}),
 										}}
 									/>
@@ -859,84 +826,84 @@ const ONDCDocumentation = () => {
 										onClick={() =>
 											handleCopyText({
 												context: {
-													domain: "ONDC:SRV13",
-													location: {
-														city: {
-															code: "std:080",
-														},
-														country: {
-															code: "IND",
-														},
-													},
+													domain: "ONDC:ONEST10",
 													action: "search",
 													version: "2.0.0",
-													bap_id: "buyerapp.com",
-													bap_uri: "https://buyerapp.com/ondc",
-													transaction_id: "T1",
-													message_id: "M1",
-													timestamp: "2024-04-01T22:00:00.000Z",
-													ttl: "PT30S",
+													bap_id: "worker-hub.bap.io",
+													bap_uri: "https://worker-hub.bap.io/",
+													transaction_id: "a9aaecca-10b7-4d19-b640-b047a7c62195",
+													message_id: "$89bdae17-9942-40c8-869a-5bd413356407",
+													location: {
+														city: {
+															code: "std:080"
+														},
+														country: {
+															code: "IND"
+														}
+													},
+													timestamp: "2022-10-11T09:55:41.161Z",
+													ttl: "PT30S"
 												},
 												message: {
 													intent: {
-														item: {
-															descriptor: {
-																name: "LFT",
-															},
-														},
-														fulfillment: {
-															type: "Seller-Fulfilled",
-															customer: {
-																person: {
-																	name: "XYZ",
-																},
-																contact: {
-																	phone: "9999999999",
-																},
-															},
-															stops: [
-																{
-																	type: "end",
-																	time: {
-																		range: {
-																			start: "2024-04-04T22:00:00.000Z",
-																		},
-																	},
-																	location: {
-																		gps: "12.974002,77.613458",
-																		area_code: "560001",
-																	},
-																},
-															],
-														},
 														payment: {
-															type: "PRE-FULFILLMENT",
-															collected_by: "BAP",
+															descriptor: {
+																code: "NP_FEES",
+																name: "Np Fees"
+															},
+															list: [
+																{
+																	code: "ID",
+																	value: "1"
+																}
+															]
+														},
+														item: {
+															tags: [
+																{
+																	descriptor: {
+																		code: "LISTING_DETAILS"
+																	},
+																	list: [
+																		{
+																			descriptor: {
+																				code: "EMPLOYMENT_TYPE"
+																			},
+																			value: "full-time"
+																		}
+																	]
+																}
+															]
 														},
 														tags: [
 															{
 																descriptor: {
-																	code: "BAP_TERMS",
+																	code: "BAP_TERMS"
 																},
-																display: false,
 																list: [
 																	{
 																		descriptor: {
-																			code: "FINDER_FEE_TYPE",
+																			code: "STATIC_TERMS"
 																		},
-																		value: "percent",
+																		value: "static_terms_value"
 																	},
 																	{
 																		descriptor: {
-																			code: "FINDER_FEE_AMOUNT",
+																			code: "STATIC_TERMS_NEW"
 																		},
-																		value: "0",
+																		value: "static_terms_new_value"
 																	},
-																],
-															},
-														],
-													},
-												},
+																	{
+																		descriptor: {
+																			code: "EFFECTIVE_DATE"
+																		},
+																		value: "2023-02-22T11:20:10.122Z"
+																	}
+																]
+															}
+														]
+													}
+												}
 											})
 										}
 									>
@@ -1087,7 +1054,7 @@ const ONDCDocumentation = () => {
 					</li>
 				</ul>
 
-				<p>
+				{/* <p>
 					Please follow the same approach for all action calls by copying the
 					request from the provided{" "}
 					<a href="https://ondc-official.github.io/ONDC-SRV-Specifications">
@@ -1099,12 +1066,12 @@ const ONDCDocumentation = () => {
 					BAP ID, BAP URL, and authentication header created by you are correct
 					according to the request payload you have pasted in the sandbox
 					request body.
-				</p>
+				</p> */}
 				<h2>Analyzing Transactions after Requests</h2>
 				<p>
 					You can check the transaction analyser process from that link:{" "}
-					<a href="https://mock.ondc.org/analyse">
-						https://mock.ondc.org/analyse
+					<a href="https://onest-staging.ondc.org/analyse">
+						https://onest-staging.ondc.org/analyse
 					</a>
 					.
 				</p>
@@ -1513,10 +1480,10 @@ export default ONDCDocumentation;
 // 	environments.
 // </p>
 // <p>
-// 	Curl host for Buyer instance: https://mock.ondc.org/api/b2b/bap
+// 	Curl host for Buyer instance: https://onest-staging.ondc.org/api/b2b/bap
 // </p>
 // <p>
-// 	Curl host for Seller instance: https://mock.ondc.org/api/b2b/bpp
+// 	Curl host for Seller instance: https://onest-staging.ondc.org/api/b2b/bpp
 // </p>
 {
 	/* Add more details about using Swagger */

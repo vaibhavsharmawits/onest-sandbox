@@ -23,16 +23,6 @@ import { useDomain } from "../utils/hooks";
 const drawerWidth = 200;
 const NAV_LINKS = [
 	{
-		name: "Swagger",
-		nested: false,
-		path: "/swagger",
-	},
-	{
-		name: "Mock Server",
-		nested: false,
-		path: "/mock",
-	},
-	{
 		name: "Sandbox",
 		nested: false,
 		path: "/sandbox",
@@ -197,14 +187,6 @@ export const CustomDrawer = ({ children }: CustomDrawerProps) => {
 				}}
 				render={mobileOpen}
 			/>
-			{/* <NavButton
-				link={{
-					name: "Misc. Swagger",
-					nested: false,
-					path: "/swagger/misc",
-				}}
-				render={mobileOpen}
-			/> */}
 			<NavButton
 				link={{
 					name: "User Guide",
@@ -234,7 +216,7 @@ export const CustomDrawer = ({ children }: CustomDrawerProps) => {
 						component="div"
 						sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
 					>
-						ONDC Mock & Sandbox
+						ONDC ONEST Sandbox
 					</Typography>
 				</Toolbar>
 			</AppBar>

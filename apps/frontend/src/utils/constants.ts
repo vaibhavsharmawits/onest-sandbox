@@ -1,17 +1,17 @@
 import { B2B_SCENARIOS, PRINT_MEDIA_SCENARIOS } from "openapi-specs/constants";
 
-export const SUPPORTED_DOMAINS = [
-	"B2B",
-	"B2C Exports",
-	"SERVICES",
-	"AGRI SERVICES",
-	"HEALTHCARE SERVICES",
-	"AGRI EQUIPMENT HIRING",
-	"BID AND AUCTION",
-	"LOGISTICS",
-	"PRINT MEDIA (SUBSCRIPTION)",
-	"ONEST"
-];
+// export const SUPPORTED_DOMAINS = [
+// 	"B2B",
+// 	"B2C Exports",
+// 	"SERVICES",
+// 	"AGRI SERVICES",
+// 	"HEALTHCARE SERVICES",
+// 	"AGRI EQUIPMENT HIRING",
+// 	"BID AND AUCTION",
+// 	"LOGISTICS",
+// 	"PRINT MEDIA (SUBSCRIPTION)",
+// 	"ONEST"
+// ];
 
 export const USER_GUIDE_LINK =
 	"https://github.com/tanyamadaan/b2b_mock_server/blob/feat-monorepo/README.md";
@@ -103,11 +103,11 @@ export const SERVICES_DOMAINS = {
 };
 
 export const ALL_DOMAINS = {
-	Retail: RETAIL_DOMAINS,
-	Services: SERVICE_DOMAINS,
-	Subscription: SUBSCRIPTION_DOMAINS,
-	Logistics: LOGISTICS_DOMAINS,
-	Agri: AGRI_DOMAINS,
+	// Retail: RETAIL_DOMAINS,
+	// Services: SERVICE_DOMAINS,
+	// Subscription: SUBSCRIPTION_DOMAINS,
+	// Logistics: LOGISTICS_DOMAINS,
+	// Agri: AGRI_DOMAINS,
 	Onest: ONEST_DOMAINS
 };
 

@@ -1,8 +1,8 @@
 {
 	"openapi": "3.0.3",
 	"info": {
-		"title": "ONDC B2B Mock Implemention",
-		"description": "This is a Mock Server for integrating with ONDC. Currently, it supports B2B. An easy way to get started would be to ask yourself the two question - _\"which network participant am I going to send to?\"_ and _\"what would be the action/on_action I am going to send?\"_. With these you can easily construct the URL you need to mock and then find that among this list. <br />",
+		"title": "ONDC ONEST Mock Implemention",
+		"description": "This is a Mock Server for integrating with ONDC. Currently, it supports ONEST. An easy way to get started would be to ask yourself the two question - _\"which network participant am I going to send to?\"_ and _\"what would be the action/on_action I am going to send?\"_. With these you can easily construct the URL you need to mock and then find that among this list. <br />",
 		"contact": {
 			"email": "team@ondc.org"
 		},

@@ -44,12 +44,12 @@ export const useAction = () => {
 					: servicesDomain === SERVICES_DOMAINS.PRINT_MEDIA
 					? PRINT_MEDIA_SCENARIOS
 					: servicesDomain === LOGISTICS_DOMAINS_OBJECT.DOMESTIC ||
-					  servicesDomain === LOGISTICS_DOMAINS_OBJECT.INTERNATIONAL
+					servicesDomain === LOGISTICS_DOMAINS_OBJECT.INTERNATIONAL
 					? LOGISTICS_SCENARIOS
 					: version === "b2b"
 					? B2B_SCENARIOS
-					: version === "b2c"?
-					B2C_SCENARIOS
+					: version === "b2c"
+					? B2C_SCENARIOS
 					: [];
 			if (!parsedLog.context!.action) setLogError(true);
 			const parsedAction = parsedLog.context.action;
@@ -76,5 +76,13 @@ export const useAction = () => {
 			setAction(undefined);
 		}
 	}, 1500);
-	return { action, domain, setDomain, logError, scenarios, detectAction,setLogError };
+	return {
+		action,
+		domain,
+		setDomain,
+		logError,
+		scenarios,
+		detectAction,
+		setLogError,
+	};
 };

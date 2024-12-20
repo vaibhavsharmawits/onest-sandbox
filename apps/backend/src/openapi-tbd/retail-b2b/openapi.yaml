@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: ONDC B2B Mock Implemention
+  title: ONDC ONEST Mock Implemention
   description: >-
     This is a Mock Server for integrating with ONDC. Currently, it supports B2B.
     An easy way to get started would be to ask yourself the two question -

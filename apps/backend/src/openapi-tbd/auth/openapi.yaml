@@ -1,8 +1,8 @@
 openapi: 3.0.3
 info:
-  title: ONDC B2B Mock Implemention
+  title: ONDC ONEST Mock Implementation
   description: >-
-    This is a Mock Server for integrating with ONDC. Currently, it supports B2B.
+    This is a Mock Server for integrating with ONDC. Currently, it supports ONEST.
     An easy way to get started would be to ask yourself the two question -
     _"which network participant am I going to send to?"_ and _"what would be the
     action/on_action I am going to send?"_. With these you can easily construct
@@ -27,12 +27,6 @@ paths:
       tags:
         - Auth
       summary: Check the validity of a authorization token
-      # parameters:
-      #   - name: authorization
-      #     in: header
-      #     description: Signed Authorization Header
-      #     required: true
-      #     type: string
       security:
         - ApiKeyAuth: []
       requestBody:
