@@ -1,18 +1,16 @@
 search:
   examples:
-    search_by_job_name:
-      $ref: ./search/search_by_job_name.yaml
-    search_by_job_provider:
+    search - by job role:
+      $ref: ./search/search_by_job_role.yaml
+    search - by job provider:
       $ref: ./search/search_by_job_provider.yaml
-    search_by_loaction_of_the_job:
-      $ref: ./search/search_by_loaction_of_the_job.yaml
-    search_by_user_details: 
-      $ref: ./search/search_by_user_details.yaml
-    search_by_industry_type:
+    search - by loaction of the job:
+      $ref: ./search/search_by_location_of_the_job.yaml
+    search - by industry type:
       $ref: ./search/search_by_industry_type.yaml
-    search_by_employment_type:
+    search - by employment type:
       $ref: ./search/search_by_employment_type.yaml
-    search_inc:
+    search - incremental:
       $ref: ./search/search_inc.yaml
 select:
   examples:
@@ -41,6 +39,8 @@ on_search:
   examples:
     on_search:
       $ref: ./on_search/on_search.yaml
+    on_search - incremental:
+      $ref: ./on_search/on_search_inc.yaml
 on_select:
   examples:
     on_select:

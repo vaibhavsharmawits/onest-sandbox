@@ -203,25 +203,8 @@ message:
       type:
         description: Fulfillment type
         required: mandatory
-        usage: REMOTE
+        usage: lead
         reference: if any
-      state:
-        descriptor:
-          code:
-            description: Fulfillment state code
-            required: mandatory
-            usage: APPLICATION_STARTED
-            reference: if any
-          name:
-            description: Fulfillment state name
-            required: mandatory
-            usage: Application started
-            reference: if any
-        updated_at:
-          description: Last state update timestamp
-          required: mandatory
-          usage: 2023-02-06T09:55:41.161Z
-          reference: if any
       customer:
         person:
           name:
@@ -272,3 +255,127 @@ message:
               required: mandatory
               usage: "abc@abc.bc"
               reference: null
+    payments:
+      parent: true
+      url:
+        description: "The URL for payment processing."
+        required: mandatory
+        usage: "https://ondc.transaction.com/payment"
+        reference: null
+      type:
+        description: "The type of payment."
+        required: mandatory
+        usage: "ON-ORDER"
+        reference: null
+      collected_by:
+        description: "Entity collecting the payment."
+        required: mandatory
+        usage: "BAP"
+        reference: null
+      # tags:
+      #   descriptor:
+      #     code:
+      #       description: "Descriptor code for the settlement details."
+      #       required: mandatory
+      #       usage: "SETTLEMENT_DETAILS"
+      #       reference: null
+      #   list:
+      #     - descriptor:
+      #         code:
+      #           description: "Descriptor code for the settlement counterparty."
+      #           required: mandatory
+      #           usage: "SETTLEMENT_COUNTERPARTY"
+      #           reference: null
+      #         value:
+      #           description: "The counterparty involved in the settlement."
+      #           required: mandatory
+      #           usage: "seller-app"
+      #           reference: null
+      #     - descriptor:
+      #         code:
+      #           description: "Descriptor code for the settlement phase."
+      #           required: mandatory
+      #           usage: "SETTLEMENT_PHASE"
+      #           reference: null
+      #         value:
+      #           description: "The phase of settlement."
+      #           required: mandatory
+      #           usage: "sale-amount"
+      #           reference: null
+      #     - descriptor:
+      #         code:
+      #           description: "Descriptor code for the settlement type."
+      #           required: mandatory
+      #           usage: "SETTLEMENT_TYPE"
+      #           reference: null
+      #         value:
+      #           description: "The type of settlement."
+      #           required: mandatory
+      #           usage: "upi"
+      #           reference: null
+      #     - descriptor:
+      #         code:
+      #           description: "Descriptor code for the UPI address."
+      #           required: mandatory
+      #           usage: "UPI_ADDRESS"
+      #           reference: null
+      #         value:
+      #           description: "The UPI address for the settlement."
+      #           required: mandatory
+      #           usage: "gft@oksbi"
+      #           reference: null
+      #     - descriptor:
+      #         code:
+      #           description: "Descriptor code for the settlement bank account number."
+      #           required: mandatory
+      #           usage: "SETTLEMENT_BANK_ACCOUNT_NO"
+      #           reference: null
+      #         value:
+      #           description: "The settlement bank account number."
+      #           required: mandatory
+      #           usage: "XXXXXXXXXX"
+      #           reference: null
+      #     - descriptor:
+      #         code:
+      #           description: "Descriptor code for the IFSC code."
+      #           required: mandatory
+      #           usage: "SETTLEMENT_IFSC_CODE"
+      #           reference: null
+      #         value:
+      #           description: "The IFSC code of the bank."
+      #           required: mandatory
+      #           usage: "XXXXXXXXX"
+      #           reference: null
+      #     - descriptor:
+      #         code:
+      #           description: "Descriptor code for the beneficiary name."
+      #           required: mandatory
+      #           usage: "BENEFICIARY_NAME"
+      #           reference: null
+      #         value:
+      #           description: "The name of the beneficiary."
+      #           required: mandatory
+      #           usage: "xxxxx"
+      #           reference: null
+      #     - descriptor:
+      #         code:
+      #           description: "Descriptor code for the bank name."
+      #           required: mandatory
+      #           usage: "BANK_NAME"
+      #           reference: null
+      #         value:
+      #           description: "The name of the bank."
+      #           required: mandatory
+      #           usage: "xxxx"
+      #           reference: null
+      #     - descriptor:
+      #         code:
+      #           description: "Descriptor code for the branch name."
+      #           required: mandatory
+      #           usage: "BRANCH_NAME"
+      #           reference: null
+      #         value:
+      #           description: "The name of the bank branch."
+      #           required: mandatory
+      #           usage: "xxxx"
+      #           reference: null

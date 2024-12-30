@@ -83,26 +83,6 @@ message:
             required: mandatory
             usage: "1"
             reference: null
-          COMMERCIAL_TYPE:
-            description: "Type of commercial value"
-            required: mandatory
-            usage: "percent"
-            reference: null
-          COMMERCIAL_VALUE:
-            description: "Value of the commercial percentage"
-            required: mandatory
-            usage: "0.2"
-            reference: null
-          COMMERCIAL_NAME:
-            description: "Name of the commercial type"
-            required: mandatory
-            usage: "qualified"
-            reference: null
-          COMMERCIAL_TRIGGERING_STATE:
-            description: "Triggering state for the commercial fee"
-            required: mandatory
-            usage: "OFFER_EXTENDED"
-            reference: null
     item:
       parent: true
       descriptor:

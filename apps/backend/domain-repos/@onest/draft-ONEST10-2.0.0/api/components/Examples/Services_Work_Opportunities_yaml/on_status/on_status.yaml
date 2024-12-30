@@ -5,6 +5,8 @@ value:
     version: 2.0.0
     bap_id: worker-hub.bap.io
     bap_uri: https://worker-hub.bap.io
+    bpp_id: job-hub.bpp.io
+    bpp_uri: https://job-hub.bpp.io
     transaction_id: a9aaecca-10b7-4d19-b640-b047a7c62195
     message_id: c8e3968c-cd78-4e46-aa34-0d541e46bd73
     location:
@@ -16,6 +18,7 @@ value:
     ttl: PT30S
   message:
     order:
+      id: "1677140405881"
       status: Active
       provider:
         id: "1"
@@ -217,20 +220,6 @@ value:
                       code: TYPE
                     value: item
               - descriptor:
-                  code: NP_FEES
-                  name: "Np Fees"
-                list:
-                  - code: ID
-                    value: "1"
-                  - code: COMMERCIAL_TYPE
-                    value: percent
-                  - code: COMMERCIAL_VALUE
-                    value: "0.5"
-                  - code: COMMERCIAL_NAME
-                    value: recruitment
-                  - code: COMMERCIAL_TRIGGERING_STATE
-                    value: OFFER_ACCEPTED
-              - descriptor:
                   code: TYPE
                 list:
                   - descriptor:
@@ -249,20 +238,6 @@ value:
                       code: TYPE
                     value: item
               - descriptor:
-                  code: NP_FEES
-                  name: "Np Fees"
-                list:
-                  - code: ID
-                    value: "2"
-                  - code: COMMERCIAL_TYPE
-                    value: percent
-                  - code: COMMERCIAL_VALUE
-                    value: "0.2"
-                  - code: COMMERCIAL_NAME
-                    value: qualified
-                  - code: COMMERCIAL_TRIGGERING_STATE
-                    value: OFFER-EXTENDED
-              - descriptor:
                   code: TYPE
                 list:
                   - descriptor:
@@ -271,10 +246,12 @@ value:
         ttl: P1D
       fulfillments:
         - id: "1"
-          type: REMOTE
+          type: lead
           state:
             descriptor:
               code: APPLICATION_IN_PROGRESS
+              name: Application In Progress
+            updated_at: "2023-02-22T11:50:46.742Z"
           customer:
             person:
               name: Sanjay
@@ -324,3 +301,43 @@ value:
             contact:
               phone: "9999999999"
               email: abc@abc.bc
+      payments:
+          url: "https://ondc.transaction.com/payment"
+          params:
+            currency: "INR"
+            transaction_id: "3937"
+            amount: "1700.00"
+          status: "PAID"
+          type: "ON-ORDER"
+          collected_by: "BAP"
+          tags:
+              descriptor:
+                code: "SETTLEMENT_DETAILS"
+              list:
+                - descriptor:
+                    code: "SETTLEMENT_COUNTERPARTY"
+                  value: "seller-app"
+                - descriptor:
+                    code: "SETTLEMENT_PHASE"
+                  value: "sale-amount"
+                - descriptor:
+                    code: "SETTLEMENT_TYPE"
+                  value: "upi"
+                - descriptor:
+                    code: "UPI_ADDRESS"
+                  value: "gft@oksbi"
+                - descriptor:
+                    code: "SETTLEMENT_BANK_ACCOUNT_NO"
+                  value: "XXXXXXXXXX"
+                - descriptor:
+                    code: "SETTLEMENT_IFSC_CODE"
+                  value: "XXXXXXXXX"
+                - descriptor:
+                    code: "BENEFICIARY_NAME"
+                  value: "xxxxx"
+                - descriptor:
+                    code: "BANK_NAME"
+                  value: "xxxx"
+                - descriptor:
+                    code: "BRANCH_NAME"
+                  value: "xxxx"

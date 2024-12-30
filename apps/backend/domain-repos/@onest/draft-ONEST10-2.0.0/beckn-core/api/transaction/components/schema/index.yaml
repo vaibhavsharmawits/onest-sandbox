@@ -152,7 +152,7 @@ Support:
   $ref: "../../../../schema/Support.yaml"
 
 Tag:
-  $ref: "../../../../schema/Tag.yaml"
+  $ref: "../../../../schema/tag.yaml"
 
 TagGroup:
   $ref: "../../../../schema/TagGroup.yaml"

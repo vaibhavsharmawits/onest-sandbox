@@ -1,4 +1,4 @@
 [submodule "apps/backend/domain-repos/@onest/draft-ONEST10-2.0.0"]
 	path = apps/backend/domain-repos/@onest/draft-ONEST10-2.0.0
-	url = https://github.com/ONDC-Official/ONDC-ONEST-Specifications.git
+	url = https://github.com/ONDC-Official/ONDC-ONEST-Specifications
 	branch = draft-ONEST10-2.0.0

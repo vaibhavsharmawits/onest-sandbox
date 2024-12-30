@@ -1,4 +1,4 @@
-import { DOMAIN, VERSION } from "./constants";
+import { DOMAIN, JOBS_TYPE, VERSION } from "./constants";
 
 export const initSchema = {
   $id: "initSchema",
@@ -163,7 +163,7 @@ export const initSchema = {
                   },
                   type: {
                     type: "string",
-                    enum: ["REMOTE", "HYBRID", "ONSITE"],
+                    enum: JOBS_TYPE,
                   },
                   customer: {
                     type: "object",

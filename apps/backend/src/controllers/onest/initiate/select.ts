@@ -81,6 +81,7 @@ const intializeRequest = async (
 			},
 		};
 
+		console.log("hello-select")
 		await send_response(res, next, select, transaction_id, "select");
 	} catch (error) {
 		return next(error);

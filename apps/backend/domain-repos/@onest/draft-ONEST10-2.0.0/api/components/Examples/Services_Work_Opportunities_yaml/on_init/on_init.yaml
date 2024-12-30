@@ -53,157 +53,6 @@ value:
               list:
                 - code: ID
                   value: "2"
-            - descriptor:
-                code: ACADEMIC_ELIGIBILITY
-                name: Academic eligibility
-              list:
-                - descriptor:
-                    code: COURSE_NAME
-                    name: Name of the course
-                  value: Class-X
-                - descriptor:
-                    code: MIN_PERCENTAGE
-                    name: >-
-                      Minimum percentage of marks to be obtained in the course
-                      for eligibility
-                  value: "60"
-                - descriptor:
-                    code: MANDATORY_ELIGIBILITY
-                    name: Mandatory Eligibility
-                  value: "true"
-            - descriptor:
-                code: ACADEMIC_ELIGIBILITY
-                name: Academic eligibility
-              list:
-                - descriptor:
-                    code: COURSE_NAME
-                    name: Name of the course
-                  value: Class-XII
-                - descriptor:
-                    code: MIN_PERCENTAGE
-                    name: >-
-                      Minimum percentage of marks to be obtained in the course
-                      for eligibility
-                  value: "60"
-                - descriptor:
-                    code: MANDATORY_ELIGIBILITY
-                    name: Mandatory Eligibility
-                  value: "true"
-            - descriptor:
-                code: ACADEMIC_ELIGIBILITY
-                name: Academic eligibility
-              list:
-                - descriptor:
-                    code: COURSE_LEVEL
-                    name: Level of the course
-                  value: Under Graduate
-                - descriptor:
-                    code: MIN_PERCENTAGE
-                    name: >-
-                      Minimum percentage of marks to be obtained in the course
-                      for eligibility
-                  value: "60"
-                - descriptor:
-                    code: MANDATORY_ELIGIBILITY
-                    name: Mandatory Eligibility
-                  value: "true"
-            - descriptor:
-                code: ACADEMIC_ELIGIBILITY
-                name: Academic eligibility
-              list:
-                - descriptor:
-                    code: COURSE_LEVEL
-                    name: Level of the course
-                  value: Graduate
-                - descriptor:
-                    code: MANDATORY_ELIGIBILITY
-                    name: Mandatory Eligibility
-                  value: "false"
-            - descriptor:
-                code: JOB_REQUIREMENTS
-                name: Job requirements
-              list:
-                - descriptor:
-                    code: REQ_EXPERIENCE
-                    name: Required work experience in years
-                  value: "P2Y6M"
-                - descriptor:
-                    code: REQ_PROF_SKILL
-                    name: Skills required for the role
-                  value: android-development
-                - descriptor:
-                    code: REQ_PROF_SKILL
-                    name: Skills required for the role
-                  value: dev-ops
-                - descriptor:
-                    code: REQ_PROF_SKILL
-                    name: Additional skills required for the job
-                  value: >-
-                    You have 8+ years of engineering experience, predominantly
-                    in shipping user-facing production features
-            - descriptor:
-                code: JOB_RESPONSIBILITIES
-                name: Job responsibilities
-              list:
-                - descriptor:
-                    code: RESPONSIBILITY
-                    name: Responsibility
-                  value: >-
-                    Build frontend experiences for our tools (Web, PWA and
-                    React Native)
-                - descriptor:
-                    code: RESPONSIBILITY
-                    name: Responsibility
-                  value: >-
-                    Articulate a long term technical direction and vision for
-                    building, maintaining, and scaling our web and mobile
-                    platforms
-                - descriptor:
-                    code: RESPONSIBILITY
-                    name: Responsibility
-                  value: >-
-                    Create trustworthy user experiences by building interfaces
-                    that are simple, easy to comprehend, performant and
-                    reliable using modern tools like React, React Native,
-                    Typescript, Node.js, Jest and Webpack.
-                - descriptor:
-                    code: RESPONSIBILITY
-                    name: Responsibility
-                  value: >-
-                    Mentor and train other team members on design techniques
-                    and coding standards.
-            - descriptor:
-                code: LISTING_DETAILS
-                name: Listing details
-              list:
-                - descriptor:
-                    code: INDUSTRY_TYPE
-                    name: Industry type
-                  value: IT Services & Consulting
-                - descriptor:
-                    code: DEPARTMENT
-                    name: Department
-                  value: Engineering - Software & QA
-                - descriptor:
-                    code: EMPLOYMENT_TYPE
-                    name: Employment type
-                  value: full-time
-                - descriptor:
-                    code: JOB_ROLE
-                    name: Job role
-                  value: DevOps Engineer
-            # - descriptor:
-            #     code: SALARY_INFO
-            #     name: Salary information
-            #   list:
-            #     - descriptor:
-            #         code: GROSS_MIN
-            #         name: Minimum gross pay
-            #       value: "900000"
-            #     - descriptor:
-            #         code: GROSS_MAX
-            #         name: Maximum gross pay
-            #       value: "1200000"
       quote:
         price:
           currency: INR
@@ -234,20 +83,6 @@ value:
                       code: TYPE
                     value: item
               - descriptor:
-                  code: NP_FEES
-                  name: "Np Fees"
-                list:
-                  - code: ID
-                    value: "1"
-                  - code: COMMERCIAL_TYPE
-                    value: percent
-                  - code: COMMERCIAL_VALUE
-                    value: "0.5"
-                  - code: COMMERCIAL_NAME
-                    value: recruitment
-                  - code: COMMERCIAL_TRIGGERING_STATE
-                    value: OFFER_ACCEPTED
-              - descriptor:
                   code: TYPE
                 list:
                   - descriptor:
@@ -266,20 +101,6 @@ value:
                       code: TYPE
                     value: item
               - descriptor:
-                  code: NP_FEES
-                  name: "Np Fees"
-                list:
-                  - code: ID
-                    value: "2"
-                  - code: COMMERCIAL_TYPE
-                    value: percent
-                  - code: COMMERCIAL_VALUE
-                    value: "0.2"
-                  - code: COMMERCIAL_NAME
-                    value: qualified
-                  - code: COMMERCIAL_TRIGGERING_STATE
-                    value: OFFER-EXTENDED
-              - descriptor:
                   code: TYPE
                 list:
                   - descriptor:
@@ -288,12 +109,7 @@ value:
         ttl: P1D
       fulfillments:
         - id: "1"
-          type: REMOTE
-          state:
-            descriptor:
-              code: APPLICATION_STARTED
-              name: Application started
-            updated_at: "2023-02-06T09:55:41.161Z"
+          type: lead
           customer:
             person:
               name: Sanjay
@@ -343,3 +159,39 @@ value:
             contact:
               phone: "9999999999"
               email: abc@abc.bc
+      payments:
+        url: "https://ondc.transaction.com/payment"
+        status: "NOT-PAID"
+        type: "ON-ORDER"
+        collected_by: "BAP"
+        tags:
+            descriptor:
+              code: "SETTLEMENT_DETAILS"
+            list:
+              - descriptor:
+                  code: "SETTLEMENT_COUNTERPARTY"
+                value: "seller-app"
+              - descriptor:
+                  code: "SETTLEMENT_PHASE"
+                value: "sale-amount"
+              - descriptor:
+                  code: "SETTLEMENT_TYPE"
+                value: "upi"
+              - descriptor:
+                  code: "UPI_ADDRESS"
+                value: "gft@oksbi"
+              - descriptor:
+                  code: "SETTLEMENT_BANK_ACCOUNT_NO"
+                value: "XXXXXXXXXX"
+              - descriptor:
+                  code: "SETTLEMENT_IFSC_CODE"
+                value: "XXXXXXXXX"
+              - descriptor:
+                  code: "BENEFICIARY_NAME"
+                value: "xxxxx"
+              - descriptor:
+                  code: "BANK_NAME"
+                value: "xxxx"
+              - descriptor:
+                  code: "BRANCH_NAME"
+                value: "xxxx"

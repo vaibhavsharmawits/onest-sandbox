@@ -1,11 +1,5 @@
-import { b2bSchemaValidator } from "../lib/schema/b2b";
-import { srvSchemaValidator } from "../lib/schema/services";
-import { subscriptionSchemaValidator } from "../lib/schema/subscription";
-import { logisticsSchemaValidator } from "../lib/schema/logistics";
-import { b2cSchemaValidator } from "../lib/schema/b2c";
-import { l2Validator, redis } from "../lib/utils";
+import { redis } from "../lib/utils";
 import { NextFunction, Request, Response } from "express";
-import { agriSchemaValidator } from "../lib/schema/agri";
 import { onestSchemaValidator } from "../lib/schema/onest";
 
 type AllActions =
@@ -84,25 +78,8 @@ export const jsonSchemaValidator = <T extends Domain>({
       }
 
       switch (domain) {
-        case "services":
-          return srvSchemaValidator(action as AllActions)(req, res, next);
-        case "retail":
-          if (savedVersion === "b2b" || savedVersion === "b2b-exp") {
-
-            return b2bSchemaValidator(action as AllActions)(req, res, next);
-          } else if (savedVersion === "b2c") {
-
-            return b2cSchemaValidator(action as AllActions)(req, res, next);
-          } else {
-            return b2cSchemaValidator(action as AllActions)(req, res, next);
-          }
-        case "subscription":
-          return subscriptionSchemaValidator(action as AllActions)(req, res, next);
-        case "logistics":
-          return logisticsSchemaValidator(action as LogisticsActions)(req, res, next);
-        case "agri":
-          return agriSchemaValidator(action as AllActions)(req, res, next);
         case "onest":
+          console.log("req.body", JSON.stringify(req.body));
           const validation =  onestSchemaValidator(action as AllActions)(req, res, next);
           return validation;
         default:

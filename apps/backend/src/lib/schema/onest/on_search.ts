@@ -193,8 +193,13 @@ export const onSearchSchema = {
 												id: {
 													type: "string",
 												},
-												category_id: {
-													type: "string",
+												category_ids: {
+													type: "array",
+													items: {
+														type: "string",
+													},
+													minItems: 1,
+													uniqueItems: true,
 												},
 												descriptor: {
 													type: "object",
@@ -334,7 +339,7 @@ export const onSearchSchema = {
 											},
 											required: [
 												"id",
-												"category_id",
+												"category_ids",
 												"descriptor",
 												"quantity",
 												"application_validity_time",

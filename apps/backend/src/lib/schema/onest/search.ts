@@ -107,10 +107,6 @@ export const searchSchema = {
 												type: "string",
 												enum: [
 													"ID",
-													"COMMERCIAL_TYPE",
-													"COMMERCIAL_VALUE",
-													"COMMERCIAL_NAME",
-													"COMMERCIAL_TRIGGERING_STATE",
 												],
 											},
 											value: {

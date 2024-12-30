@@ -25,6 +25,16 @@ context:
     required: mandatory
     usage: "https://worker-hub.bap.io"
     reference: null
+  bpp_id:
+    description: "bpp_id"
+    required: mandatory
+    usage: "worker-hub.bpp.io"
+    reference: null
+  bpp_uri:
+    description: "bpp_uri"
+    required: mandatory
+    usage: "https://worker-hub.bpp.io"
+    reference: null
   transaction_id:
     description: "transaction_id"
     required: mandatory
@@ -96,10 +106,9 @@ message:
           type:
             description: "fulfillment type"
             required: mandatory
-            usage: "REMOTE"
+            usage: "lead"
             reference: null
         locations:
-          parent: true
           id:
             description: "location id"
             required: mandatory
@@ -128,13 +137,12 @@ message:
               usage: "MH"
               reference: null
         items:
-          parent: true
           id:
             description: "item id"
             required: mandatory
             usage: "0253719F295521CED39EC9C2F3C8DCDE"
             reference: null
-          category_id:
+          category_ids:
             description: "category id"
             required: mandatory
             usage: "Software development"
@@ -149,6 +157,16 @@ message:
               description: "item description"
               required: mandatory
               usage: "long_desc"
+              reference: null
+            short_desc:
+              description: "item description"
+              required: mandatory
+              usage: "short_desc"
+              reference: null
+            images:
+              description: "item description"
+              required: mandatory
+              usage: "images url"
               reference: null
           media:
             mimetype:

@@ -125,7 +125,7 @@ const intializeRequest = async (
                     },
                     {
                       descriptor: {
-                        code: "documents",
+                        code: "DOCUMENTS",
                         name: "Documents",
                       },
                       list: [

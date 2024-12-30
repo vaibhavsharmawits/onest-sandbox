@@ -3,25 +3,10 @@ ONDC:ONEST10 - Work Opportunities:
   description: >
     Job Hub is acting as provider platform (BPP) which hosts the jobs and Worker Hub is acting as seeker platform (BAP) which helps the workers to find jobs.
     <br/><br/>
-        This document contains detailed specifications and requirements for the job platform, helping stakeholders understand the product in depth
-    (PRD): <a href="https://docs.google.com/document/d/1VydDAqtzjj1jDrJzX4hwZSlYyJsA_bSOJIKYTWxNSpQ">link</a>
+        PRD: ONEST - Work Opportunity : <a href="https://docs.google.com/document/d/1VydDAqtzjj1jDrJzX4hwZSlYyJsA_bSOJIKYTWxNSpQ">link</a>
     <br/><br/>
-    his document provides an overview of the business requirements, with clear explanations about platform functionalities and workflows (Explainer & BRD is documented): <a href="https://docs.google.com/document/d/1cuvt_w9qSv7XpLXpY4KCq5gmrsQSqF8e3VLxOhpfO0g">link</a>
+    BRD: ONEST - Work Opportunities : <a href="https://docs.google.com/document/d/1cuvt_w9qSv7XpLXpY4KCq5gmrsQSqF8e3VLxOhpfO0g">link</a>
     <br/><br/>
-    A detailed taxonomy of product categories and attributes is provided to ensure clarity and standardization across the platform (Product Taxonomy): <a href="https://docs.google.com/spreadsheets/d/1Go22ou013hE-fxpjMd_XuM111l8x8TuMsF_nsjvB3so">link</a>
-  example_set:
-    $ref: "./Services_Work_Opportunities_yaml/index.yaml"
-
-ONDC:ONEST10 - Work Opportunities(Commercials):
-  summary: ONDC:ONEST10 - Work Opportunities(Commercials)
-  description: >-
-    Job Hub is acting as provider platform (BPP) which hosts the jobs and Worker Hub is acting as seeker platform (BAP) which helps the workers to find jobs.
-    <br/><br/>
-        This document contains detailed specifications and requirements for the job platform, helping stakeholders understand the product in depth
-    (PRD): <a href="https://docs.google.com/document/d/1VydDAqtzjj1jDrJzX4hwZSlYyJsA_bSOJIKYTWxNSpQ">link</a>
-    <br/><br/>
-    his document provides an overview of the business requirements, with clear explanations about platform functionalities and workflows (Explainer & BRD is documented): <a href="https://docs.google.com/document/d/1cuvt_w9qSv7XpLXpY4KCq5gmrsQSqF8e3VLxOhpfO0g">link</a>
-    <br/><br/>
-    A detailed taxonomy of product categories and attributes is provided to ensure clarity and standardization across the platform (Product Taxonomy): <a href="https://docs.google.com/spreadsheets/d/1Go22ou013hE-fxpjMd_XuM111l8x8TuMsF_nsjvB3so">link</a>
+    Taxonomy: ONEST - Work Opportunities : <a href="https://docs.google.com/spreadsheets/d/1Go22ou013hE-fxpjMd_XuM111l8x8TuMsF_nsjvB3so">link</a>
   example_set:
     $ref: "./Services_Work_Opportunities_yaml/index.yaml"

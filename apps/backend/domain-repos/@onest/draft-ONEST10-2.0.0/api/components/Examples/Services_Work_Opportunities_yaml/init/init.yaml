@@ -39,7 +39,7 @@ value:
                 value: "2"
       fulfillments:
         - id: "1"
-          type: REMOTE
+          type: lead
           customer:
             person:
               name: Sanjay
@@ -64,23 +64,27 @@ value:
                   list:
                     - descriptor:
                         code: EXPECTED_SALARY
+                        name: Expected Salary
                       value: "1000000"
                     - descriptor:
                         code: TOTAL_EXPERIENCE
                         name: Total Experience
                       value: "P4Y"
                 - descriptor:
-                    code: documents
+                    code: DOCUMENTS
                     name: Documents
                   list:
                     - descriptor:
                         code: DOC_TYPE
+                        name: Document Type
                       value: resume
                     - descriptor:
-                        code: link
+                        code: LINK
+                        name: Document Link
                       value: https://example.com/resume.pdf
                     - descriptor:
                         code: FILE_FORMAT
+                        name: File Format
                       value: pdf
             contact:
               phone: "9999999999"
@@ -115,20 +119,6 @@ value:
                       code: TYPE
                     value: item
               - descriptor:
-                  code: NP_FEES
-                  name: "Np Fees"
-                list:
-                  - code: ID
-                    value: "1"
-                  - code: COMMERCIAL_TYPE
-                    value: percent
-                  - code: COMMERCIAL_VALUE
-                    value: "0.5"
-                  - code: COMMERCIAL_NAME
-                    value: recruitment
-                  - code: COMMERCIAL_TRIGGERING_STATE
-                    value: OFFER_ACCEPTED
-              - descriptor:
                   code: TYPE
                 list:
                   - descriptor:
@@ -146,20 +136,6 @@ value:
                   - descriptor:
                       code: TYPE
                     value: item
-              - descriptor:
-                  code: NP_FEES
-                  name: "Np Fees"
-                list:
-                  - code: ID
-                    value: "2"
-                  - code: COMMERCIAL_TYPE
-                    value: percent
-                  - code: COMMERCIAL_VALUE
-                    value: "0.2"
-                  - code: COMMERCIAL_NAME
-                    value: qualified
-                  - code: COMMERCIAL_TRIGGERING_STATE
-                    value: OFFER_EXTENDED
               - descriptor:
                   code: TYPE
                 list:

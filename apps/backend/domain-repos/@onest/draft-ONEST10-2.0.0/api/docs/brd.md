@@ -308,16 +308,12 @@ The request will contain only minimal details about the job like job name, job d
           "fulfillments": [
             {
               "id": "1",
-              "type": "REMOTE"
+              "type": "lead"
             },
             {
               "id": "2",
-              "type": "HYBRID"
+              "type": "recruitment"
             },
-            {
-              "id": "3",
-              "type": "ONSITE"
-            }
           ],
           "locations": [
             {
@@ -1042,16 +1038,12 @@ The request will contain only minimal details about the job like job name, job d
                 "fulfillments": [
                     {
                         "id": "1",
-                        "type": "REMOTE"
+                        "type": "lead"
                     },
                     {
                         "id": "2",
-                        "type": "HYBRID"
+                        "type": "recruitement"
                     },
-                    {
-                        "id": "3",
-                        "type": "ONSITE"
-                    }
                 ],
                 "locations": [
                     {
@@ -1868,7 +1860,7 @@ The request will contain only minimal details about the job like job name, job d
             "fulfillments": [
                 {
                     "id": "1",
-                    "type": "REMOTE",
+                    "type": "lead",
                     "state": {
                         "descriptor": {
                             "code": "APPLICATION-STARTED",
@@ -2306,7 +2298,7 @@ Here in this example the BPP has only one form to send. So the cur, min and max 
             "fulfillments": [
                 {
                     "id": "1",
-                    "type": "REMOTE",
+                    "type": "lead",
                     "state": {
                         "descriptor": {
                             "code": "APPLICATION-FILLED",
@@ -2932,7 +2924,7 @@ Once the form has been submitted the BPP will send on\_init without any form. Fu
             "fulfillments": [
                 {
                     "id": "1",
-                    "type": "REMOTE",
+                    "type": "lead",
                     "customer": {
                         "person": {
                             "name": "Sanjay",
@@ -3390,7 +3382,7 @@ Once the form has been submitted the BPP will send on\_init without any form. Fu
             "fulfillments": [
                 {
                     "id": "1",
-                    "type": "REMOTE",
+                    "type": "lead",
                     "state": {
                         "descriptor": {
                             "code": "OFFER-EXTENDED",

@@ -1,0 +1,52 @@
+value:
+  context:
+    domain: ONDC:ONEST10
+    action: search
+    version: 2.0.0
+    bap_id: worker-hub.bap.io
+    bap_uri: https://worker-hub.bap.io/
+    transaction_id: a9aaecca-10b7-4d19-b640-b047a7c62195
+    message_id: $89bdae17-9942-40c8-869a-5bd413356407
+    location:
+      city:
+        code: std:080
+      country:
+        code: IND
+    timestamp: "2022-10-11T09:55:41.161Z"
+    ttl: PT30S
+  message:
+    intent:
+      payment:
+        descriptor:
+          code: NP_FEES
+          name: "Np Fees"
+        list:
+          - code: ID
+            value: "1"
+          - code: COMMERCIAL_TYPE
+            value: percent
+          - code: COMMERCIAL_VALUE
+            value: "0.5"
+          - code: COMMERCIAL_NAME
+            value: recruitment
+          - code: COMMERCIAL_TRIGGERING_STATE
+            value: OFFER_ACCEPTED
+          - code: COMPENSATION_TYPE
+            value: LPA
+          - code: COMPENSATION_TRANSFER_PERIOD
+            value: "P1M,P2M,P3M"
+          - code: COMPENSATION_PERCENTAGE_SPLIT
+            value: "50,25,25"  
+      tags:
+        - descriptor:
+            code: BAP_TERMS
+          list:
+            - descriptor:
+                code: STATIC_TERMS
+              value: static_terms_value
+            - descriptor:
+                code: STATIC_TERMS_NEW
+              value: static_terms_new_value
+            - descriptor:
+                code: EFFECTIVE_DATE
+              value: "2023-02-22T11:20:10.122Z"

@@ -1,18 +1,10 @@
-order:
-  status:
-    - code: Created
-      description: about the enum
-      reference: <PR/Issue/Discussion Links md format text>
-    - code: Accepted
-      description: about the enum
-      reference: <PR/Issue/Discussion Links md format text>
-    - code: In-progress
-      description: about the enum
-      reference: <PR/Issue/Discussion Links md format text>
-    - code: Completed
-      description: about the enum
-      reference: <PR/Issue/Discussion Links md format text>
-    - code: Cancelled
-      description: about the enum
-      reference: <PR/Issue/Discussion Links md format text>
- 
+status:
+  - code: Active
+    description: fulfillments.state will be one of these - ["APPLICATION-IN-PROGRESS", "APPLICATION-FILLED", "APPLICATION-SUBMITTED", "ASSESSMENT-IN-PROGRESS", "OFFER-EXTENDED", "OFFER-REJECTED"]
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: Completed
+    description: fulfillments.state will be one of these - ["OFFER-ACCEPTED"]
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: Cancelled
+    description: fulfillments.state will be one of these - ["APPLICATION-REJECTED"]
+    reference: <PR/Issue/Discussion Links md format text>

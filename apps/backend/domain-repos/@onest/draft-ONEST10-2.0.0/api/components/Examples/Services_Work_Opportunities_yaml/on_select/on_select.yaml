@@ -5,6 +5,8 @@ value:
     version: 2.0.0
     bap_id: worker-hub.bap.io
     bap_uri: https://worker-hub.bap.io
+    bpp_id: job-hub.bpp.io
+    bpp_uri: https://job-hub.bpp.io
     transaction_id: a9aaecca-10b7-4d19-b640-b047a7c62195
     message_id: c8e3968c-cd78-4e46-aa34-0d541e46bd73
     location:
@@ -20,7 +22,7 @@ value:
         id: "1"
       fulfillments:
         id: "1"
-        type: "REMOTE"
+        type: "lead"
       items:
         - id: 0253719F295521CED39EC9C2F3C8DCDE
           fulfillment_ids:
@@ -68,20 +70,6 @@ value:
                       code: TYPE
                     value: item
               - descriptor:
-                  code: NP_FEES
-                  name: "Np Fees"
-                list:
-                  - code: ID
-                    value: "1"
-                  - code: COMMERCIAL_TYPE
-                    value: percent
-                  - code: COMMERCIAL_VALUE
-                    value: "0.5"
-                  - code: COMMERCIAL_NAME
-                    value: recruitment
-                  - code: COMMERCIAL_TRIGGERING_STATE
-                    value: OFFER_ACCEPTED
-              - descriptor:
                   code: TYPE
                 list:
                   - descriptor:
@@ -99,20 +87,6 @@ value:
                   - descriptor:
                       code: TYPE
                     value: item
-              - descriptor:
-                  code: NP_FEES
-                  name: "Np Fees"
-                list:
-                  - code: ID
-                    value: "2"
-                  - code: COMMERCIAL_TYPE
-                    value: percent
-                  - code: COMMERCIAL_VALUE
-                    value: "0.2"
-                  - code: COMMERCIAL_NAME
-                    value: qualified
-                  - code: COMMERCIAL_TRIGGERING_STATE
-                    value: OFFER_EXTENDED
               - descriptor:
                   code: TYPE
                 list:

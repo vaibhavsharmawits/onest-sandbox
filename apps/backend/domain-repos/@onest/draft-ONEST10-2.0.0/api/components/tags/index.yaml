@@ -1,7 +1,8 @@
 search:
   message:
     intent:
-      $ref: "./TagGroup.yaml#/intent"
+      item:
+        $ref: "./TagGroup.yaml#/intent"
 on_search:
   message:
     catalog:
@@ -10,7 +11,6 @@ on_search:
 on_select:
   message:
     order:
-      items:
         $ref: "./TagGroup.yaml#/order"
 
 # init:
@@ -37,7 +37,6 @@ on_confirm:
 on_status:
   message:
     order:
-      items:
         $ref: "./TagGroup.yaml#/order"
 
 # update:
@@ -55,9 +54,11 @@ on_status:
 #               description: Update parameter for attributes (Required)
 #               reference: <PR/Issue/Discussion Links md format text>
 #               list:
-#                 $ref: "./Tag.yaml#/EQUIPMENT_ATTRIBUTES"
+#                 $ref: "./tag.yaml#/EQUIPMENT_ATTRIBUTES"
 on_update:
   message:
     order:
       items:
         $ref: "./TagGroup.yaml#/intent"
+      payments:
+        $ref: "./TagGroup.yaml#/order/payments"

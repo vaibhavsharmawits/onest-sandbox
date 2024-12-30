@@ -1784,7 +1784,7 @@ export const quoteCreatorOnest = (quoteItems: any) => {
               },
             ],
           },
-          item.npFeesList[0], 
+          // item.npFeesList[0], 
           {
             descriptor: {
               code: "TYPE",

@@ -130,19 +130,4 @@ const selectConfirmController = (
     next(error);
   }
 };
-/*
 
-return responseBuilder(
-			res,
-			next,
-			context,
-			responseMessage,
-			`${req.body.context.bap_uri}${
-				req.body.context.bap_uri.endsWith("/")
-					? ON_ACTION_KEY.ON_SELECT
-					: `/${ON_ACTION_KEY.ON_SELECT}`
-			}`,
-			`${ON_ACTION_KEY.ON_SELECT}`,
-			"onest"
-		);
-		*/

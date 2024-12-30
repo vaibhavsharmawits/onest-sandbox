@@ -1,66 +1,43 @@
-# ONDC ONEST Specification
+# Open Network for Digital Commerce (ONDC) - ONEST Specification
 
-These specifications are to enable ONDC Network Participants to expose or consume ONEST services on ONDC.
+## Overview
 
-ONDC ONEST specification is an adaptation of [beckn ONEST specifications](https://github.com/ONEST-Network/ONEST-Specification).
+**ONDC ONEST** (Open Network for Employment and Skilling Transformations) is a groundbreaking initiative under the Open Network for Digital Commerce (ONDC) framework. It aims to create an inclusive, interoperable digital ecosystem for **education, skilling, financial aid, and mentorship**. Built on the principles of decentralization, ONEST enables seamless transactions and interactions among providers, seekers, platforms, and other stakeholders, promoting a learner-centric ecosystem.
 
-[Live URL](https://ondc-official.github.io/ONDC-ONEST-Specifications).
+ONEST facilitates the discovery of work opportunities and skilling resources across diverse industries and roles, enhancing access and engagement for local commerce in sectors like mobility, retail, education, and beyond.
 
-These specifications will be released in multiple phases enabling different use case and enhancements.
-
-## Latest Version
-
-[draft-v2.0.0](https://github.com/ONDC-Official/ONDC-ONEST-Specifications/tree/draft-ONEST10-2.0.0)
-
-## Earlier Versions
-
-| Version | Release Date | beckn Version                   | Comments                                         |
-| ------- | ------------ | ------------------------------- | ------------------------------------------------ |
-| v2.0.0  | TBD          | core - 1.0.0<br />ONEST - 2.0.0 | Initial ONEST specification for work-oppurtunity |
-
-## Introduction
-
-The **Open Network for Education Skilling Transaction (ONEST)** is a groundbreaking initiative under ONDC that aims to create an inclusive and interoperable digital ecosystem for education and skilling. Built on the principles of decentralization, ONEST enables seamless transactions and interactions among education providers, learners, institutions, and other stakeholders.
-
-By adhering to the ONEST specifications, stakeholders can ensure interoperability, scalability, and transparency in delivering and accessing education and skilling resources. The initiative aims to bridge gaps in education and skill development, fostering a learner-centric ecosystem.
+[ONDC ONEST Specifications](https://ondc-official.github.io/ONDC-ONEST-Specifications)
 
 ---
 
-## Enabled/Supported Use Cases on the Network
+## Objectives
 
-The ONEST network supports a wide range of education and skilling use cases, including:
+ONDC ONEST aims to:
 
-1. **Course Discovery and Enrollment**:
-
-   - Enabling learners to discover courses, skilling programs, or certifications offered by various providers.
-   - Streamlined enrollment processes with secure payment options.
-
-2. **Credential Verification and Issuance**:
-
-   - Issuing verifiable digital certificates or credentials.
-   - Seamless sharing and validation of credentials across platforms.
-
-3. **Learning Resource Sharing**:
-
-   - Facilitating access to learning materials, study guides, and research papers across institutions.
-
-4. **Skill Assessment and Matching**:
-
-   - Matching learners with opportunities based on skillsets acquired.
-   - Enabling organizations to assess and hire based on verifiable credentials.
-
-5. **Feedback and Ratings**:
-
-   - Empowering learners to provide feedback and rate courses or programs, enhancing quality assurance.
-
-6. **Scholarship and Financial Aid Distribution**:
-   - Connecting eligible learners with scholarships and funding opportunities.
+- **Enable Local Commerce**: Bring together a diverse set of work opportunities, learning & skilling experiences, mentorship, and financial support, enabling engagement on an open network.
+- **Foster Collaboration & New Models**: Encourage collaboration, sharing, and development of new models to benefit all stakeholders.
+- **Facilitate Responsive Policy**: Engage with decision-making authorities in the education and workspaces to bring onboard the country’s inventory at scale.
+- **Create Seamless Interoperability**: Ensure that all mobility apps and platforms in the network can communicate in a unified way to provide seamless experiences.
 
 ---
 
-## Evolution
+## Versions
 
-ONEST has evolved through collaboration with multiple stakeholders in the education and skilling domain. Its journey includes:
+| Version | Release Date | beckn Version | Domain        | Comments                                 | Status     |
+| ------- | ------------ | ------------- | ------------- | ---------------------------------------- | ---------- |
+| v1.0.0  | TBD          | core - 0.9.4  | ONEST - 0.8.2 | Initial ONEST specification              | Deprecated |
+| v2.0.0  | TBD          | core - 0.9.4  | ONEST - 0.8.2 | ONEST specification for work-opportunity | Draft Live |
+
+---
+
+## ONEST Specification
+
+The **Open Network for Employment and Skilling Transformations (ONEST)** specification enables a nationwide, multi-modal network designed to support:
+
+- **On-demand work opportunities**: Full-time and part-time roles across blue, grey, and white-collar jobs.
+- **Education & Skilling Resources**: Seamless access to educational content, skill-building modules, financial aid, and mentorship.
+
+### Key Phases of Evolution
 
 1. **Phase 1 - Foundation**:
 
@@ -78,6 +55,15 @@ ONEST has evolved through collaboration with multiple stakeholders in the educat
 
 ---
 
+## Enabled/Supported Use Cases on the Network
+
+ONEST supports a wide range of use cases, including:
+
+- On-demand **full-time and part-time work opportunities**.
+- Support for **blue, grey, and white-collar roles** across diverse industries.
+
+---
+
 ## Contribution
 
 ### Contribution to Specifications
@@ -88,28 +74,44 @@ Anyone can contribute to the ONEST specifications. Contributions may include:
 - Reporting issues or suggesting improvements.
 - Drafting or refining technical documentation.
 
-Please refer to the **Beckn Contribution Guidelines** for detailed steps on contributing to the specifications.
+For detailed steps on contributing to the specifications, please refer to the [Beckn Contribution Guidelines](https://github.com/beckn).
 
-### Contribution to Network
+### Contribution to the Network
 
-Contributing to the network involves enhancing the ONEST infrastructure, protocols, or overall functionality. Examples include:
+Contributions to the network can help enhance the ONEST infrastructure, protocols, or overall functionality. This includes:
 
 - Developing tools or utilities for ONEST implementation.
 - Building integrations with other platforms or ecosystems.
 - Improving network scalability, security, or performance.
 
-All contributions to the network must follow the ONDC ONEST contribution guidelines.
-
-#### What is a Contribution to the Network?
-
-A contribution to the network refers to any effort that directly improves the operational, technical, or functional aspects of ONEST. This includes:
+**Examples of network contributions:**
 
 - Proposing or implementing network-wide enhancements.
 - Contributing code, frameworks, or APIs to support ONEST use cases.
 - Reporting and resolving bugs or vulnerabilities.
 
+All contributions must follow the ONDC ONEST [contribution guidelines](https://github.com/beckn).
+
+### Review and Approval Process
+
 Each contribution is reviewed by the ONDC ONEST committee. Upon approval, contributions will be merged into applicable versions of the specifications or network infrastructure.
 
 ---
 
-By contributing to ONEST, you become part of a movement shaping the future of education and skilling through open and collaborative innovation.
+## Get Involved
+
+By contributing to ONEST, you become part of a movement to shape the future of education and skilling through open, collaborative innovation. Together, we can create a truly inclusive, decentralized, and interoperable network that benefits all stakeholders in the learning, skilling, and employment ecosystem.
+
+---
+
+## Links & Resources
+
+- [ONDC Official Website](https://www.ondc.org)
+- [Beckn GitHub Repository](https://github.com/beckn)
+- [Contribution Guidelines](https://github.com/beckn)
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).

@@ -66,11 +66,11 @@ export const onestSchemaValidator =
 				validate = ajv.compile(onInitSchema);
 				break;
 			// case "confirm":
-			// 	validate = ajv.compile(confirmSchema);
-			// 	break;
+				// validate = ajv.compile(confirmSchema);
+				// break;
 			// case "on_confirm":
-			// 	validate = ajv.compile(onConfirmSchema);
-			// 	break;
+				// validate = ajv.compile(onConfirmSchema);
+				// break;
 			// case "status":
 			// 	validate = ajv.compile(statusSchema);
 			// 	break;

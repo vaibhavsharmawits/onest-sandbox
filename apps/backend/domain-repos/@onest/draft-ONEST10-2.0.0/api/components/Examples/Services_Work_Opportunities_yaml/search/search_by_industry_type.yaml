@@ -31,14 +31,6 @@ value:
         list:
           - code: ID
             value: "1"
-          - code: COMMERCIAL_TYPE
-            value: percent
-          - code: COMMERCIAL_VALUE
-            value: "0.2"
-          - code: COMMERCIAL_NAME
-            value: qualified
-          - code: COMMERCIAL_TRIGGERING_STATE
-            value: OFFER_EXTENDED
       tags:
         - descriptor:
             code: BAP_TERMS

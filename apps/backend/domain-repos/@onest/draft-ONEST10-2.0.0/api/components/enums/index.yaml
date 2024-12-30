@@ -4,10 +4,6 @@ search:
       $ref: "./context.yaml#/domain"
   message:
     intent:
-      # item:
-      # category:
-      #   id:
-      #     $ref: "./category.yaml#/category_ids"
       fulfillments: &fulfillments
         type:
           $ref: "./fulfillments.yaml#/fulfillments/type"
@@ -80,12 +76,25 @@ confirm:
   context: &context
     domain:
       $ref: "./context.yaml#/domain"
-#   message:
-#     order:
-#       $ref: "./order.yaml#/order"
-#       fulfillments:
-#         type:
-#           $ref: "./fulfillments.yaml#/fulfillments/type"
+  message:
+    order:
+      status:
+        - code: Created
+          description: fulfillments.state will be one of these - ["APPLICATION-STARTED"]
+          reference: <PR/Issue/Discussion Links md format text>
+      fulfillments:
+        type:
+          $ref: "./fulfillments.yaml#/fulfillments/type"
+        state:
+          descriptor:
+            code:
+              - code: APPLICATION_STARTED
+                name: Name of the fulfillment status	
+                reference: <PR/Issue/Discussion Links md format text>
+            name:
+              - code: Application Started
+                description: Name of the fulfillment status		
+                reference: <PR/Issue/Discussion Links md format text>
 #       quote:
 #         breakup:
 #           $ref: "./title_type.yaml#/breakup"
@@ -95,14 +104,25 @@ on_confirm:
   context: &context
     domain:
       $ref: "./context.yaml#/domain"
-  # message:
-  #   order:
-  #     $ref: "./order.yaml#/order"
-  #     fulfillments:
-  #       type:
-  #         $ref: "./fulfillments.yaml#/fulfillments/type"
-  #       state:
-  #         $ref: "./fulfillments.yaml#/fulfillments/state"
+  message:
+    order:
+      status:
+        - code: Created
+          description: fulfillments.state will be one of these - ["APPLICATION-STARTED"]
+          reference: <PR/Issue/Discussion Links md format text>
+      fulfillments:
+        type:
+          $ref: "./fulfillments.yaml#/fulfillments/type"
+        state:
+          descriptor:
+            code:
+              - code: APPLICATION_STARTED
+                name: Name of the fulfillment status	
+                reference: <PR/Issue/Discussion Links md format text>
+            name:
+              - code: Application Started
+                description: Name of the fulfillment status		
+                reference: <PR/Issue/Discussion Links md format text>
   #     quote:
   #       breakup:
   #         $ref: "./title_type.yaml#/breakup"
@@ -139,12 +159,15 @@ on_status:
   context: &context
     domain:
       $ref: "./context.yaml#/domain"
-#   message:
-#     order:
-#       $ref: "./order.yaml#/order"
-#       fulfillments:
-#         state:
-#           $ref: "./fulfillments.yaml#/fulfillments/state"
+  message:
+    order:
+      status:
+        $ref: "./order.yaml#/status"
+      fulfillments:
+        type:
+          $ref: "./fulfillments.yaml#/fulfillments/type"
+        state:
+          $ref: "./fulfillments.yaml#/fulfillments/state"
 #       quote:
 #         breakup:
 #           $ref: "./title_type.yaml#/breakup"

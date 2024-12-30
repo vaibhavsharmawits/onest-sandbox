@@ -5,6 +5,8 @@ value:
     version: 2.0.0
     bap_id: worker-hub.bap.io
     bap_uri: https://worker-hub.bap.io
+    bpp_id: job-hub.bpp.io
+    bpp_uri: https://job-hub.bpp.io
     transaction_id: a9aaecca-10b7-4d19-b640-b047a7c62195
     message_id: 672f774c-4281-44dd-b1c2-84222a3d771e
     location:
@@ -31,6 +33,12 @@ value:
                   comfortable working with large datasets, identifying trends,
                   and creating predictive models. This role requires the
                   ability to apply data-driven insights to business problems.
+                short_desc: >-
+                  We are seeking a Staff Mobile Developer with strong critical thinking, data-driven decision-making,
+                  adaptability, goal-orientation, and problem-solving skills.
+                images:
+                  - "images url1"
+                  - "images url2"
                 media:
                   - mimetype: audio/mp4
                     url: http://url-to-audio-about-data-scientist-job
@@ -76,6 +84,14 @@ value:
                       value: recruitment
                     - code: COMMERCIAL_TRIGGERING_STATE
                       value: OFFER_ACCEPTED
+                    - code: COMMERCIAL_TRIGGERING_STATE
+                      value: OFFER_EXTENDED
+                    - code: COMPENSATION_TYPE
+                      value: CTC
+                    - code: COMPENSATION_TRANSFER_PERIOD
+                      value: "P1M,P3M,P10M"
+                    - code: COMPENSATION_PERCENTAGE_SPLIT
+                      value: "25,25,50"
                 - descriptor:
                     code: LISTING_DETAILS
                     name: Listing details

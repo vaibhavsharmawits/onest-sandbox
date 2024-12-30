@@ -147,15 +147,25 @@ message:
       type:
         description: "The type of fulfillment."
         required: mandatory
-        usage: "REMOTE"
+        usage: "lead"
         reference: null
       state:
-        descriptor:
-          code:
-            description: "The state code of the fulfillment."
+          descriptor:
+            code:
+              description: Fulfillment state code
+              required: mandatory
+              usage: APPLICATION_STARTED
+              reference: if any
+            name:
+              description: Fulfillment state name
+              required: mandatory
+              usage: Application started
+              reference: if any
+          updated_at:
+            description: Last state update timestamp
             required: mandatory
-            usage: "APPLICATION_STARTED"
-            reference: null
+            usage: 2023-02-23T08:20:016Z
+            reference: if any
       customer:
         contact:
           phone:
@@ -225,4 +235,41 @@ message:
         description: "The amount to be paid."
         required: mandatory
         usage: "1400"
+        reference: null
+    payments:
+      url:
+        description: "The URL for payment processing."
+        required: mandatory
+        usage: "https://ondc.transaction.com/payment"
+        reference: null
+      params:
+        currency:
+          description: "The currency used for the transaction."
+          required: mandatory
+          usage: "INR"
+          reference: null
+        transaction_id:
+          description: "The ID of the transaction."
+          required: mandatory
+          usage: "3937"
+          reference: null
+        amount:
+          description: "The transaction amount."
+          required: mandatory
+          usage: "1400.00"
+          reference: null
+      status:
+        description: "The payment status."
+        required: mandatory
+        usage: "PAID"
+        reference: null
+      type:
+        description: "The type of payment."
+        required: mandatory
+        usage: "ON-ORDER"
+        reference: null
+      collected_by:
+        description: "Entity collecting the payment."
+        required: mandatory
+        usage: "BAP"
         reference: null

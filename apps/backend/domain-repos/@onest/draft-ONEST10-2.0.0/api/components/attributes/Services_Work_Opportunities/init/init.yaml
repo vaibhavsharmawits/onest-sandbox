@@ -101,7 +101,7 @@ message:
       type:
         description: "Type of fulfillment"
         required: mandatory
-        usage: "REMOTE"
+        usage: "lead"
         reference: null
         customer:
           person:

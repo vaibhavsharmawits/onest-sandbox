@@ -3,16 +3,11 @@ import fs from "fs";
 import path from "path";
 import YAML from "yaml";
 import {
-	AGRI_EQUIPMENT_HIRING_EXAMPLES_PATH,
-	AGRI_SERVICES_EXAMPLES_PATH,
-	BID_AUCTION_SERVICES_EXAMPLES_PATH,
-	HEALTHCARE_SERVICES_EXAMPLES_PATH,
 	ONEST_EXAMPLES_PATH,
 	responseBuilder,
-	SERVICES_EXAMPLES_PATH,
 } from "../../../lib/utils";
 import { ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
-import { ONEST_DOMAINS, SERVICES_DOMAINS } from "../../../lib/utils/apiConstants";
+import { ONEST_DOMAINS } from "../../../lib/utils/apiConstants";
 
 export const searchController = (
 	req: Request,

@@ -19,7 +19,7 @@ value:
   message:
     order:
       id: "1677140405881"
-      status: Accepted
+      status: Created
       provider:
         id: "1"
       items:
@@ -209,20 +209,6 @@ value:
                       code: TYPE
                     value: item
               - descriptor:
-                  code: NP_FEES
-                  name: "Np Fees"
-                list:
-                  - code: ID
-                    value: "1"
-                  - code: COMMERCIAL_TYPE
-                    value: percent
-                  - code: COMMERCIAL_VALUE
-                    value: "0.5"
-                  - code: COMMERCIAL_NAME
-                    value: recruitment
-                  - code: COMMERCIAL_TRIGGERING_STATE
-                    value: OFFER_ACCEPTED
-              - descriptor:
                   code: TYPE
                 list:
                   - descriptor:
@@ -241,20 +227,6 @@ value:
                       code: TYPE
                     value: item
               - descriptor:
-                  code: NP_FEES
-                  name: "Np Fees"
-                list:
-                  - code: ID
-                    value: "2"
-                  - code: COMMERCIAL_TYPE
-                    value: percent
-                  - code: COMMERCIAL_VALUE
-                    value: "0.2"
-                  - code: COMMERCIAL_NAME
-                    value: qualified
-                  - code: COMMERCIAL_TRIGGERING_STATE
-                    value: OFFER_EXTENDED
-              - descriptor:
                   code: TYPE
                 list:
                   - descriptor:
@@ -263,10 +235,12 @@ value:
         ttl: P1D
       fulfillments:
         - id: "1"
-          type: REMOTE
+          type: lead
           state:
             descriptor:
               code: APPLICATION_STARTED
+              name: Application Started
+            updated_at: "2023-02-23T08:20:06Z"
           customer:
             person:
               name: Sanjay
@@ -349,3 +323,43 @@ value:
                     code: AGENT_VERIFIED
                     name: Agent Verified
                   value: "true"
+      payments:
+          url: "https://ondc.transaction.com/payment"
+          params:
+            currency: "INR"
+            transaction_id: "3937"
+            amount: "1700.00"
+          status: "PAID"
+          type: "ON-ORDER"
+          collected_by: "BAP"
+          tags:
+              descriptor:
+                code: "SETTLEMENT_DETAILS"
+              list:
+                - descriptor:
+                    code: "SETTLEMENT_COUNTERPARTY"
+                  value: "seller-app"
+                - descriptor:
+                    code: "SETTLEMENT_PHASE"
+                  value: "sale-amount"
+                - descriptor:
+                    code: "SETTLEMENT_TYPE"
+                  value: "upi"
+                - descriptor:
+                    code: "UPI_ADDRESS"
+                  value: "gft@oksbi"
+                - descriptor:
+                    code: "SETTLEMENT_BANK_ACCOUNT_NO"
+                  value: "XXXXXXXXXX"
+                - descriptor:
+                    code: "SETTLEMENT_IFSC_CODE"
+                  value: "XXXXXXXXX"
+                - descriptor:
+                    code: "BENEFICIARY_NAME"
+                  value: "xxxxx"
+                - descriptor:
+                    code: "BANK_NAME"
+                  value: "xxxx"
+                - descriptor:
+                    code: "BRANCH_NAME"
+                  value: "xxxx"

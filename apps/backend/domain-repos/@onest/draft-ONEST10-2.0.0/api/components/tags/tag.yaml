@@ -7,24 +7,34 @@ Payment_Details:
     description: Reason for payment request, check the possible enum from enum list (Required)
     reference: <PR/Issue/Discussion Links md format text>
 Settlement_Details:
-  - code: Counterparty
-    description: Counterparty involved; Can be BAP/BPP (Required)
+  - code: SETTLEMENT_COUNTERPARTY
+    description: Counterparty involved; Can be seller-app/buyer-app (Required)
     reference: <PR/Issue/Discussion Links md format text>
-  - code: Mode
+  - code: SETTLEMENT_TYPE
     description: Mode of Payment. E.g. UPI, NEFT, RTGS (Required)
     reference: <PR/Issue/Discussion Links md format text>
-  - code: Beneficiary_Name
+  - code: BENEFICIARY_NAME
     description: Description of the Tag (Required in case of neft and rtgs)
     reference: <PR/Issue/Discussion Links md format text>
-  - code: Bank_Account_No
+  - code: SETTLEMENT_BANK_ACCOUNT_NO
     description: Bank Account of the counterpart (Required in case of neft and rtgs)
     reference: <PR/Issue/Discussion Links md format text>
-  - code: Ifsc_Code
+  - code: SETTLEMENT_IFSC_CODE
     description: IFSC Code for the Bank Account of the Counter party (Required in case of neft and rtgs)
     reference: <PR/Issue/Discussion Links md format text>
-  - code: UPI_Address
+  - code: UPI_ADDRESS
     description: Description of the Tag (Required in case of UPI mode)
     reference: <PR/Issue/Discussion Links md format text>
+  - code: SETTLEMENT_PHASE
+    description: Phase of the settlement process; e.g., sale-amount
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: BANK_NAME
+    description: Name of the bank associated with the settlement
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: BRANCH_NAME
+    description: Branch name of the bank for the settlement
+    reference: <PR/Issue/Discussion Links md format text>
+
 Buyer_Finder_Fee:
   - code: FINDER_FEE_TYPE
     description: Type of the finder fee. eg. "percent" (Required)
@@ -188,11 +198,21 @@ NP_FEES:
     description: commercial value - [percentage, number]
     reference: <PR/Issue/Discussion Links md format text>
   - code: COMMERCIAL_NAME
-    description: commercial name - [verified, recruitment, qualified]
+    description: commercial name - [recruitment, lead]
     reference: <PR/Issue/Discussion Links md format text>
   - code: COMMERCIAL_TRIGGERING_STATE
     description: commercial triggering - [APPLICATION_SUBMITTED, OFFER_ACCEPTED, OFFER_EXTENDED]
     reference: <PR/Issue/Discussion Links md format text>
+  - code: COMPENSATION_TYPE
+    description: comepensation type - [CTC, LPA]
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: COMPENSATION_TRANSFER_PERIOD
+    description: comepensation transfer period - ["P1M,P3M,P10M", "P1M,P3M,P10M"]
+    reference: <PR/Issue/Discussion Links md format text>
+  - code: COMPENSATION_PERCENTAGE_SPLIT
+    description: comepensation percentage split - ["50,25,25", "25,25,50"]
+    reference: <PR/Issue/Discussion Links md format text>
+
 
 SALARY:
   - code: GROSS_MIN

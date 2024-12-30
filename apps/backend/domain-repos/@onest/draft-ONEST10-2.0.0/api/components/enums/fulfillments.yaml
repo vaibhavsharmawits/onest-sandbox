@@ -1,48 +1,39 @@
 fulfillments:
   type:
-    - code: REMOTE
+    - code: lead
       description: How the job will be fullfilled	
       reference: <PR/Issue/Discussion Links md format text>
-    - code: HYBRID
-      description: How the job will be fullfilled	
-      reference: <PR/Issue/Discussion Links md format text>
-    - code: ONSITE
+    - code: recruitment
       description: How the job will be fullfilled	
       reference: <PR/Issue/Discussion Links md format text>
   state:
     descriptor:
       code:
-        - code: APPLICATION_STARTED
-          name: Human readble code of the fulfillment status	
-          reference: <PR/Issue/Discussion Links md format text>
         - code: APPLICATION_IN_PROGRESS
-          description: Human readble code of the fulfillment status	
+          description: Name of the fulfillment status	
           reference: <PR/Issue/Discussion Links md format text>
         - code: APPLICATION_FILLED
-          description: Human readble code of the fulfillment status	
+          description: Name of the fulfillment status	
           reference: <PR/Issue/Discussion Links md format text>
         - code: APPLICATION_SUBMITTED
-          description: Human readble code of the fulfillment status	
+          description: Name of the fulfillment status	
           reference: <PR/Issue/Discussion Links md format text>
         - code: APPLICATION-REJECTED
-          description: Human readble code of the fulfillment status	
+          description: Name of the fulfillment status	
           reference: <PR/Issue/Discussion Links md format text>
         - code: ASSESSMENT-IN-PROGRESS
-          description: Human readble code of the fulfillment status	
+          description: Name of the fulfillment status	
           reference: <PR/Issue/Discussion Links md format text>
         - code: OFFER_EXTENDED
-          description: Human readble code of the fulfillment status	
+          description: Name of the fulfillment status	
           reference: <PR/Issue/Discussion Links md format text>
         - code: OFFER_ACCEPTED
-          description: Human readble code of the fulfillment status	
+          description: Name of the fulfillment status	
           reference: <PR/Issue/Discussion Links md format text>
         - code: OFFER-REJECTED
-          description: Human readble code of the fulfillment status	
+          description: Name of the fulfillment status	
           reference: <PR/Issue/Discussion Links md format text>
       name:
-        - code: Application Started
-          description: Name of the fulfillment status		
-          reference: <PR/Issue/Discussion Links md format text>
         - code: Application in Progress
           description: Name of the fulfillment status		
           reference: <PR/Issue/Discussion Links md format text>
