@@ -88,8 +88,13 @@ message:
         reference: null
     fulfillments:
       parent: true
+      id:
+        description: "The unique identifier of the fulfillment option."
+        required: mandatory
+        usage: "1"
+        reference: null
       type:
-        description: "Type of fulfillment"
+        description: "The type of fulfillment."
         required: mandatory
         usage: "lead"
         reference: null

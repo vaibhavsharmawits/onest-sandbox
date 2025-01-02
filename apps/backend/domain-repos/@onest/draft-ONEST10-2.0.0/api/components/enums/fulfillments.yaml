@@ -6,6 +6,9 @@ fulfillments:
     - code: recruitment
       description: How the job will be fullfilled	
       reference: <PR/Issue/Discussion Links md format text>
+    - code: lead & recruitment
+      description: How the job will be fullfilled	
+      reference: <PR/Issue/Discussion Links md format text>
   state:
     descriptor:
       code:
@@ -65,9 +68,6 @@ fulfillments:
           description: Gender of the job applicant
           reference: <PR/Issue/Discussion Links md format text>
         - code: Female
-          description: Gender of the job applicant
-          reference: <PR/Issue/Discussion Links md format text>
-        - code: Transgender
           description: Gender of the job applicant
           reference: <PR/Issue/Discussion Links md format text>
         - code: Other

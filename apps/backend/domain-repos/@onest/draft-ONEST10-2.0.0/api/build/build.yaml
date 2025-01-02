@@ -2373,13 +2373,13 @@ x-enum:
       intent:
         fulfillments:
           type: &ref_1
-            - code: REMOTE
+            - code: lead
               description: How the job will be fullfilled
               reference: <PR/Issue/Discussion Links md format text>
-            - code: HYBRID
+            - code: recruitment
               description: How the job will be fullfilled
               reference: <PR/Issue/Discussion Links md format text>
-            - code: ONSITE
+            - code: lead & recruitment
               description: How the job will be fullfilled
               reference: <PR/Issue/Discussion Links md format text>
   on_search:
@@ -2448,9 +2448,6 @@ x-enum:
                   description: Gender of the job applicant
                   reference: <PR/Issue/Discussion Links md format text>
                 - code: Female
-                  description: Gender of the job applicant
-                  reference: <PR/Issue/Discussion Links md format text>
-                - code: Transgender
                   description: Gender of the job applicant
                   reference: <PR/Issue/Discussion Links md format text>
                 - code: Other
@@ -2751,8 +2748,8 @@ x-tags:
                 description: Employment Type
                 reference: <PR/Issue/Discussion Links md format text>
                 list: *ref_3
-              - code: LISTING_DETAILS
-                description: LISTING_DETAILS
+              - code: JOB_DETAILS
+                description: JOB_DETAILS
                 reference: <PR/Issue/Discussion Links md format text>
                 list:
                   - code: INDUSTRY_TYPE
@@ -2906,7 +2903,7 @@ x-tags:
                       and Compliance Consulting", "Organizational Consulting"]
                     reference: <PR/Issue/Discussion Links md format text>
                   - code: GENDER
-                    description: Gender - ["Male", "Female", "Transgender", "Others"]
+                    description: Gender - ["Male", "Female", "Other"]
                     reference: <PR/Issue/Discussion Links md format text>
               - code: ACADEMIC_ELIGIBILITY
                 description: ACADEMIC_ELIGIBILITY
@@ -2948,13 +2945,25 @@ x-tags:
                       Minimum CGPA of marks to be obtained in the course for
                       eligibility
                     reference: <PR/Issue/Discussion Links md format text>
+              - code: DOCUMENTS_REQUIRED
+                description: DOCUMENTS_REQUIRED
+                reference: <PR/Issue/Discussion Links md format text>
+                list:
+                  - code: DOCUMENT_NAME
+                    description: Document name - ["AADHAAR_CARD", "PAN_CARD"]
+                    reference: <PR/Issue/Discussion Links md format text>
+                  - code: MANDATORY_DOCUMENT
+                    description: >-
+                      Indicates if the document is mandatory for eligibility -
+                      ["true", "false"]
+                    reference: <PR/Issue/Discussion Links md format text>
   on_select:
     message:
       order: &ref_4
         items:
           tags:
-            - code: LISTING_DETAILS
-              description: LISTING_DETAILS
+            - code: JOB_DETAILS
+              description: JOB_DETAILS
               reference: <PR/Issue/Discussion Links md format text>
               list: *ref_3
         payments: &ref_6
@@ -3057,7 +3066,7 @@ x-flows:
             Note Over B,SA: **SELECT FLOW**
             B ->> BA: Selects one of the <br>providers for job
             BA ->> SA: **/select** - A job is selected with a <br>TTL for receiving response
-            SA ->> BA: **/on_select** - Responds to the selection with <br>breakup, quote including logistics charges
+            SA ->> BA: **/on_select** - Responds to the selection with <br>breakup, quote 
             BA ->> B: Shows response with price details
       - description: Initializing the order
         mermaidGraph: |-
@@ -3098,7 +3107,7 @@ x-flows:
         api: search
         description: BAP will make a search by city request with an intent
         reference: if any
-        example: &ref_7
+        example:
           value:
             context:
               domain: ONDC:ONEST10
@@ -3157,7 +3166,7 @@ x-flows:
           BPP will create a catalogue containing jobs with matching criteria and
           sends it as on_search request.
         reference: if any
-        example: &ref_8
+        example: &ref_14
           value:
             context:
               domain: ONDC:ONEST10
@@ -3189,11 +3198,11 @@ x-flows:
                         - url: url of the image of the provider
                     fulfillments:
                       - id: '1'
-                        type: REMOTE
+                        type: lead
                       - id: '2'
-                        type: HYBRID
+                        type: recruitment
                       - id: '3'
-                        type: ONSITE
+                        type: lead & recruitment
                     locations:
                       - id: L1
                         city:
@@ -3245,8 +3254,8 @@ x-flows:
                             adaptability, goal-orientation, and problem-solving
                             skills.
                           images:
-                            - images url1
-                            - images url2
+                            - url: images url1
+                            - url: images url2
                           media:
                             - mimetype: audio/mp4
                               url: http://url-to-audio-about-job
@@ -3255,7 +3264,9 @@ x-flows:
                         quantity:
                           available:
                             count: 50
-                        application_validity_time:
+                        time:
+                          label: enable
+                          timestamp: '2023-02-22T11:45:10.171Z'
                           range:
                             start: '2023-01-03T13:23:10.171Z'
                             end: '2023-02-03T13:23:10.171Z'
@@ -3265,7 +3276,90 @@ x-flows:
                           - '1'
                           - '2'
                           - '3'
+                        creator:
+                          descriptor:
+                            name: Marketplace Connector
+                            code: MPC_45
+                            short_desc: Connecting Digital Marketplaces
+                            long_desc: >-
+                              This platform bridges various digital
+                              marketplaces, fostering seamless trade and
+                              enhancing accessibility for businesses and
+                              consumers alike.
+                            media:
+                              - mimetype: image/jpeg
+                                url: https://marketplace.com/logo.jpg
+                            images:
+                              - url: https://marketplace.com/banner.jpg
+                          address: Level 5, Trade Tower, Mumbai, Maharashtra, India
+                          state:
+                            name: Maharashtra
+                            code: MH
+                          city:
+                            name: Mumbai
+                            code: MUM
+                          contact:
+                            phone: +91-1234567890
+                            email: support@marketplace.com
                         tags:
+                          - descriptor:
+                              code: JOB_PROVIDER_LOCATION
+                              name: Job Provider Location
+                            list:
+                              - descriptor:
+                                  code: ADDRESS
+                                  name: Address
+                                value: >-
+                                  Level 5, Trade Tower, Mumbai, Maharashtra,
+                                  India
+                              - descriptor:
+                                  code: STATE
+                                  name: State
+                                value: Mumbai
+                              - descriptor:
+                                  code: CITY
+                                  name: City
+                                value: Maharashtra
+                          - descriptor:
+                              code: TIMING
+                              name: Timing
+                            list:
+                              - descriptor:
+                                  code: DAY_FROM
+                                  name: Day from
+                                value: '1'
+                              - descriptor:
+                                  code: DAY_TO
+                                  name: Day to
+                                value: '6'
+                              - descriptor:
+                                  code: TIME_FROM
+                                  name: Time from
+                                value: '0900'
+                              - descriptor:
+                                  code: TIME_TO
+                                  name: Time to
+                                value: '1800'
+                          - descriptor:
+                              code: TIMING
+                              name: Timing
+                            list:
+                              - descriptor:
+                                  code: DAY_FROM
+                                  name: Day from
+                                value: '6'
+                              - descriptor:
+                                  code: DAY_TO
+                                  name: Day to
+                                value: '6'
+                              - descriptor:
+                                  code: TIME_FROM
+                                  name: Time from
+                                value: '0900'
+                              - descriptor:
+                                  code: TIME_TO
+                                  name: Time to
+                                value: '1400'
                           - descriptor:
                               code: ACADEMIC_ELIGIBILITY
                               name: Academic eligibility
@@ -3283,7 +3377,7 @@ x-flows:
                               - descriptor:
                                   code: MANDATORY_ELIGIBILITY
                                   name: Mandatory Eligibility
-                                value: 'true'
+                                value: 'false'
                           - descriptor:
                               code: ACADEMIC_ELIGIBILITY
                               name: Academic eligibility
@@ -3315,7 +3409,7 @@ x-flows:
                               - descriptor:
                                   code: MANDATORY_ELIGIBILITY
                                   name: Mandatory Eligibility
-                                value: 'true'
+                                value: 'false'
                           - descriptor:
                               code: ACADEMIC_ELIGIBILITY
                               name: Academic eligibility
@@ -3333,6 +3427,18 @@ x-flows:
                               - descriptor:
                                   code: MANDATORY_ELIGIBILITY
                                   name: Mandatory Eligibility
+                                value: 'false'
+                          - descriptor:
+                              code: DOCUMENTS_REQUIRED
+                              name: Documents Required
+                            list:
+                              - descriptor:
+                                  code: DOCUMENT_NAME
+                                  name: Name of the document
+                                value: PAN_CARD
+                              - descriptor:
+                                  code: MANDATORY_DOCUMENT
+                                  name: Mandatory DOCUMENT
                                 value: 'true'
                           - descriptor:
                               code: JOB_REQUIREMENTS
@@ -3343,15 +3449,15 @@ x-flows:
                                   name: Required work experience in years
                                 value: P2Y6M
                               - descriptor:
-                                  code: REQ_PROF_SKILL
+                                  code: ADD_PROF_SKILL
                                   name: Skills required for the role
                                 value: android-development
                               - descriptor:
-                                  code: REQ_PROF_SKILL
+                                  code: ADD_PROF_SKILL
                                   name: Skills required for the role
                                 value: dev-ops
                               - descriptor:
-                                  code: REQ_PROF_SKILL
+                                  code: ADD_PROF_SKILL
                                   name: Additional skills required for the job
                                 value: >-
                                   You have 8+ years of engineering experience,
@@ -3390,7 +3496,7 @@ x-flows:
                                   Mentor and train other team members on design
                                   techniques and coding standards.
                           - descriptor:
-                              code: LISTING_DETAILS
+                              code: JOB_DETAILS
                               name: Listing details
                             list:
                               - descriptor:
@@ -3406,7 +3512,7 @@ x-flows:
                                   name: Employment type
                                 value: part-time
                               - descriptor:
-                                  code: WORKING-HOURS
+                                  code: WORKING_HOURS
                                   name: working hours
                                 value: 1300-1700
                               - descriptor:
@@ -3525,8 +3631,8 @@ x-flows:
                             adaptability, goal-orientation, and problem-solving
                             skills.
                           images:
-                            - images url1
-                            - images url2
+                            - url: images url1
+                            - url: images url2
                           media:
                             - mimetype: audio/mp4
                               url: http://url-to-audio-about-job
@@ -3541,11 +3647,97 @@ x-flows:
                           - '1'
                           - '2'
                           - '3'
-                        application_validity_time:
+                        creator:
+                          descriptor:
+                            name: Global Trade Hub
+                            code: GTH_99
+                            short_desc: Facilitating Global Commerce
+                            long_desc: >-
+                              Global Trade Hub is a platform designed to enable
+                              international trade by connecting buyers and
+                              sellers across borders with innovative solutions.
+                            media:
+                              - mimetype: image/svg+xml
+                                url: https://globaltradehub.com/logo.svg
+                            images:
+                              - url: https://globaltradehub.com/header-image.jpg
+                          address: >-
+                            Suite 302, International Business Park, New Delhi,
+                            India
+                          state:
+                            name: Delhi
+                            code: DL
+                          city:
+                            name: New Delhi
+                            code: NDL
+                          contact:
+                            phone: +91-9988776655
+                            email: info@globaltradehub.com
+                        time:
+                          label: enable
+                          timestamp: '2023-02-22T11:45:10.171Z'
                           range:
                             start: '2023-01-03T13:23:10.171Z'
                             end: '2023-02-03T13:23:10.171Z'
                         tags:
+                          - descriptor:
+                              code: JOB_PROVIDER_LOCATION
+                              name: Job Provider Location
+                            list:
+                              - descriptor:
+                                  code: ADDRESS
+                                  name: Address
+                                value: >-
+                                  Suite 302, International Business Park, New
+                                  Delhi, India
+                              - descriptor: null
+                                code: STATE
+                                name: State
+                                value: Delhi
+                              - descriptor:
+                                  code: CITY
+                                  name: City
+                                value: New Delhi
+                          - descriptor:
+                              code: TIMING
+                              name: Timing
+                            list:
+                              - descriptor:
+                                  code: DAY_FROM
+                                  name: Day from
+                                value: '1'
+                              - descriptor:
+                                  code: DAY_TO
+                                  name: Day to
+                                value: '6'
+                              - descriptor:
+                                  code: TIME_FROM
+                                  name: Time from
+                                value: '0900'
+                              - descriptor:
+                                  code: TIME_TO
+                                  name: Time to
+                                value: '1800'
+                          - descriptor:
+                              code: TIMING
+                              name: Timing
+                            list:
+                              - descriptor:
+                                  code: DAY_FROM
+                                  name: Day from
+                                value: '6'
+                              - descriptor:
+                                  code: DAY_TO
+                                  name: Day to
+                                value: '6'
+                              - descriptor:
+                                  code: TIME_FROM
+                                  name: Time from
+                                value: '0900'
+                              - descriptor:
+                                  code: TIME_TO
+                                  name: Time to
+                                value: '1400'
                           - descriptor:
                               code: ACADEMIC_ELIGIBILITY
                               name: Academic eligibility
@@ -3615,6 +3807,18 @@ x-flows:
                                   name: Mandatory Eligibility
                                 value: 'true'
                           - descriptor:
+                              code: DOCUMENTS_REQUIRED
+                              name: Documents Required
+                            list:
+                              - descriptor:
+                                  code: DOCUMENT_NAME
+                                  name: Name of the document
+                                value: AADHAAR_CARD
+                              - descriptor:
+                                  code: MANDATORY_DOCUMENT
+                                  name: Mandatory DOCUMENT
+                                value: 'false'
+                          - descriptor:
                               code: JOB_REQUIREMENTS
                               name: Job requirements
                             list:
@@ -3623,15 +3827,15 @@ x-flows:
                                   name: Required work experience in years
                                 value: P2Y6M
                               - descriptor:
-                                  code: REQ_PROF_SKILL
+                                  code: ADD_PROF_SKILL
                                   name: Skills required for the role
                                 value: pipeline-development
                               - descriptor:
-                                  code: REQ_PROF_SKILL
+                                  code: ADD_PROF_SKILL
                                   name: Skills required for the role
                                 value: dev-ops
                               - descriptor:
-                                  code: REQ_PROF_SKILL
+                                  code: ADD_PROF_SKILL
                                   name: Additional skills required for the job
                                 value: >-
                                   You have 8+ years of engineering experience,
@@ -3670,7 +3874,7 @@ x-flows:
                                   Mentor and train other team members on design
                                   techniques and coding standards.
                           - descriptor:
-                              code: LISTING_DETAILS
+                              code: JOB_DETAILS
                               name: Listing details
                             list:
                               - descriptor:
@@ -3805,8 +4009,8 @@ x-flows:
                             adaptability, goal-orientation, and problem-solving
                             skills.
                           images:
-                            - images url1
-                            - images url2
+                            - url: images url1
+                            - url: images url2
                           media:
                             - mimetype: audio/mp4
                               url: http://url-to-audio-about-job
@@ -3821,11 +4025,96 @@ x-flows:
                           - '1'
                           - '2'
                           - '3'
-                        application_validity_time:
+                        creator:
+                          descriptor:
+                            name: Marketplace Connector
+                            code: MPC_45
+                            short_desc: Connecting Digital Marketplaces
+                            long_desc: >-
+                              This platform bridges various digital
+                              marketplaces, fostering seamless trade and
+                              enhancing accessibility for businesses and
+                              consumers alike.
+                            media:
+                              - mimetype: image/jpeg
+                                url: https://marketplace.com/logo.jpg
+                            images:
+                              - url: https://marketplace.com/banner.jpg
+                          address: Level 5, Trade Tower, Mumbai, Maharashtra, India
+                          state:
+                            name: Maharashtra
+                            code: MH
+                          city:
+                            name: Mumbai
+                            code: MUM
+                          contact:
+                            phone: +91-1234567890
+                            email: support@marketplace.com
+                        time:
+                          label: enable
+                          timestamp: '2023-02-22T11:45:10.171Z'
                           range:
                             start: '2023-01-03T13:23:10.171Z'
                             end: '2023-02-03T13:23:10.171Z'
                         tags:
+                          - descriptor:
+                              code: JOB_PROVIDER_LOCATION
+                              name: Job Provider Location
+                            list:
+                              - descriptor:
+                                  code: ADDRESS
+                                  name: Address
+                                value: >-
+                                  Level 5, Trade Tower, Mumbai, Maharashtra,
+                                  India
+                              - descriptor:
+                                  code: STATE
+                                  name: State
+                                value: Mumbai
+                              - descriptor:
+                                  code: CITY
+                                  name: City
+                                value: Maharashtra
+                          - descriptor:
+                              code: TIMING
+                              name: Timing
+                            list:
+                              - descriptor:
+                                  code: DAY_FROM
+                                  name: Day from
+                                value: '1'
+                              - descriptor:
+                                  code: DAY_TO
+                                  name: Day to
+                                value: '6'
+                              - descriptor:
+                                  code: TIME_FROM
+                                  name: Time from
+                                value: '0900'
+                              - descriptor:
+                                  code: TIME_TO
+                                  name: Time to
+                                value: '1800'
+                          - descriptor:
+                              code: TIMING
+                              name: Timing
+                            list:
+                              - descriptor:
+                                  code: DAY_FROM
+                                  name: Day from
+                                value: '6'
+                              - descriptor:
+                                  code: DAY_TO
+                                  name: Day to
+                                value: '6'
+                              - descriptor:
+                                  code: TIME_FROM
+                                  name: Time from
+                                value: '0900'
+                              - descriptor:
+                                  code: TIME_TO
+                                  name: Time to
+                                value: '1400'
                           - descriptor:
                               code: ACADEMIC_ELIGIBILITY
                               name: Academic eligibility
@@ -3895,6 +4184,30 @@ x-flows:
                                   name: Mandatory Eligibility
                                 value: 'true'
                           - descriptor:
+                              code: DOCUMENTS_REQUIRED
+                              name: Documents Required
+                            list:
+                              - descriptor:
+                                  code: DOCUMENT_NAME
+                                  name: Name of the document
+                                value: AADHAAR_CARD
+                              - descriptor:
+                                  code: MANDATORY_DOCUMENT
+                                  name: Mandatory DOCUMENT
+                                value: 'true'
+                          - descriptor:
+                              code: DOCUMENTS_REQUIRED
+                              name: Documents Required
+                            list:
+                              - descriptor:
+                                  code: DOCUMENT_NAME
+                                  name: Name of the document
+                                value: PAN_CARD
+                              - descriptor:
+                                  code: MANDATORY_DOCUMENT
+                                  name: Mandatory DOCUMENT
+                                value: 'false'
+                          - descriptor:
                               code: JOB_REQUIREMENTS
                               name: Job requirements
                             list:
@@ -3903,15 +4216,15 @@ x-flows:
                                   name: Required work experience in years
                                 value: P6M
                               - descriptor:
-                                  code: REQ_PROF_SKILL
+                                  code: ADD_PROF_SKILL
                                   name: Skills required for the role
                                 value: pipeline-development
                               - descriptor:
-                                  code: REQ_PROF_SKILL
+                                  code: ADD_PROF_SKILL
                                   name: Skills required for the role
                                 value: dev-ops
                               - descriptor:
-                                  code: REQ_PROF_SKILL
+                                  code: ADD_PROF_SKILL
                                   name: Additional skills required for the job
                                 value: >-
                                   You have 8+ years of engineering experience,
@@ -3950,7 +4263,7 @@ x-flows:
                                   Mentor and train other team members on design
                                   techniques and coding standards.
                           - descriptor:
-                              code: LISTING_DETAILS
+                              code: JOB_DETAILS
                               name: Listing details
                             list:
                               - descriptor:
@@ -4051,9 +4364,12 @@ x-flows:
                           maximum_value: '1500.0'
       - summary: Description
         api: search_inc
-        description: BAP will make search inc request with an intent
+        description: >-
+          BAP will make a search inc request to combine multiple search
+          parameters, such as city, employment type, industry type, job
+          provider, job role, or location for refined results.
         reference: if any
-        example: &ref_19
+        example: &ref_7
           value:
             context:
               domain: ONDC:ONEST10
@@ -4086,25 +4402,13 @@ x-flows:
                       - descriptor:
                           code: MODE
                         value: start
-                  - descriptor:
-                      code: BAP_TERMS
-                    list:
-                      - descriptor:
-                          code: STATIC_TERMS
-                        value: static_terms_value
-                      - descriptor:
-                          code: STATIC_TERMS_NEW
-                        value: static_terms_new_value
-                      - descriptor:
-                          code: EFFECTIVE_DATE
-                        value: '2023-02-22T11:20:10.122Z'
       - summary: Description
         api: on_search_inc
         description: >-
           BPP will create a catalogue containing jobs with matching criteria and
           sends it as on_search_inc request.
         reference: if any
-        example: &ref_21
+        example: &ref_15
           value:
             context:
               domain: ONDC:ONEST10
@@ -4121,12 +4425,10 @@ x-flows:
                   code: '*'
                 country:
                   code: IND
-              timestamp: '2023-02-22T11:45:10.171Z'
+              timestamp: '2023-02-22T11:50:02.789Z'
               ttl: PT30S
             message:
               catalog:
-                descriptor:
-                  name: Affindi Jobs
                 providers:
                   - id: '1'
                     items:
@@ -4147,8 +4449,8 @@ x-flows:
                             adaptability, goal-orientation, and problem-solving
                             skills.
                           images:
-                            - images url1
-                            - images url2
+                            - url: images url1
+                            - url: images url2
                           media:
                             - mimetype: audio/mp4
                               url: http://url-to-audio-about-data-scientist-job
@@ -4156,8 +4458,10 @@ x-flows:
                               url: http://url-to-video-about-data-scientist-job
                         quantity:
                           available:
-                            count: 30
-                        application_validity_time:
+                            count: 0
+                        time:
+                          label: disable
+                          timestamp: '2023-02-22T11:50:02.789Z'
                           range:
                             start: '2023-01-04T09:32:10.560Z'
                             end: '2023-02-04T08:20:00.230Z'
@@ -4203,7 +4507,7 @@ x-flows:
                               - code: COMPENSATION_PERCENTAGE_SPLIT
                                 value: 25,25,50
                           - descriptor:
-                              code: LISTING_DETAILS
+                              code: JOB_DETAILS
                               name: Listing details
                             list:
                               - descriptor:
@@ -4229,7 +4533,7 @@ x-flows:
           to the user. Once the user chooses a job, BAP will make select API
           with item ID to get the complete details about the job.
         reference: if any
-        example: &ref_9
+        example: &ref_8
           value:
             context:
               domain: ONDC:ONEST10
@@ -4253,7 +4557,8 @@ x-flows:
                 provider:
                   id: '1'
                 fulfillments:
-                  type: REMOTE
+                  - id: '1'
+                    type: lead
                 items:
                   - id: 0253719F295521CED39EC9C2F3C8DCDE
                     tags:
@@ -4276,7 +4581,7 @@ x-flows:
           valid. If the listing is still valid, BPP will send the on_select call
           with complete details of the job listing.
         reference: if any
-        example: &ref_10
+        example: &ref_16
           value:
             context:
               domain: ONDC:ONEST10
@@ -4300,8 +4605,8 @@ x-flows:
                 provider:
                   id: '1'
                 fulfillments:
-                  id: '1'
-                  type: REMOTE
+                  - id: '1'
+                    type: lead
                 items:
                   - id: 0253719F295521CED39EC9C2F3C8DCDE
                     fulfillment_ids:
@@ -4322,7 +4627,7 @@ x-flows:
                 quote:
                   price:
                     currency: INR
-                    value: '1700'
+                    value: '1100'
                   breakup:
                     - id: 0253719F295521CED39EC9C2F3C8DCDE
                       price:
@@ -4336,42 +4641,6 @@ x-flows:
                             - descriptor:
                                 code: TYPE
                               value: item
-                    - title: NP Fees
-                      id: '1'
-                      price:
-                        currency: INR
-                        value: '300.00'
-                      tags:
-                        - descriptor:
-                            code: QUOTE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: item
-                        - descriptor:
-                            code: TYPE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: misc
-                    - title: NP Fees
-                      id: '2'
-                      price:
-                        currency: INR
-                        value: '300.00'
-                      tags:
-                        - descriptor:
-                            code: QUOTE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: item
-                        - descriptor:
-                            code: TYPE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: misc
                   ttl: P1D
       - summary: Description
         api: init
@@ -4379,7 +4648,7 @@ x-flows:
           BAP sends the customer details to the BPP in the init API. This is the
           initializing step of the job application process.
         reference: if any
-        example: &ref_11
+        example: &ref_9
           value:
             context:
               domain: ONDC:ONEST10
@@ -4421,7 +4690,7 @@ x-flows:
                             value: '2'
                 fulfillments:
                   - id: '1'
-                    type: REMOTE
+                    type: lead
                     customer:
                       person:
                         name: Sanjay
@@ -4474,7 +4743,7 @@ x-flows:
                 quote:
                   price:
                     currency: INR
-                    value: '1700'
+                    value: '1100'
                   breakup:
                     - id: 0253719F295521CED39EC9C2F3C8DCDE
                       price:
@@ -4488,42 +4757,6 @@ x-flows:
                             - descriptor:
                                 code: TYPE
                               value: item
-                    - title: NP Fees
-                      id: '1'
-                      price:
-                        currency: INR
-                        value: '300.00'
-                      tags:
-                        - descriptor:
-                            code: QUOTE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: item
-                        - descriptor:
-                            code: TYPE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: misc
-                    - title: NP Fees
-                      id: '2'
-                      price:
-                        currency: INR
-                        value: '300.00'
-                      tags:
-                        - descriptor:
-                            code: QUOTE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: item
-                        - descriptor:
-                            code: TYPE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: misc
                   ttl: P1D
       - summary: Description
         api: on_init
@@ -4531,7 +4764,7 @@ x-flows:
           If BPP wants to collect additional details of the user, it will send
           an xinput form in the on_init request.
         reference: if any
-        example: &ref_12
+        example: &ref_17
           value:
             context:
               domain: ONDC:ONEST10
@@ -4590,7 +4823,7 @@ x-flows:
                 quote:
                   price:
                     currency: INR
-                    value: '1700'
+                    value: '1100'
                   breakup:
                     - id: 0253719F295521CED39EC9C2F3C8DCDE
                       price:
@@ -4604,46 +4837,10 @@ x-flows:
                             - descriptor:
                                 code: TYPE
                               value: item
-                    - title: NP Fees
-                      id: '1'
-                      price:
-                        currency: INR
-                        value: '300.00'
-                      tags:
-                        - descriptor:
-                            code: QUOTE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: item
-                        - descriptor:
-                            code: TYPE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: misc
-                    - title: NP Fees
-                      id: '2'
-                      price:
-                        currency: INR
-                        value: '300.00'
-                      tags:
-                        - descriptor:
-                            code: QUOTE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: item
-                        - descriptor:
-                            code: TYPE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: misc
                   ttl: P1D
                 fulfillments:
                   - id: '1'
-                    type: REMOTE
+                    type: lead
                     customer:
                       person:
                         name: Sanjay
@@ -4732,7 +4929,7 @@ x-flows:
       - summary: Description
         api: confirm
         description: BAP confirms user wants to submit the job application.
-        example: &ref_13
+        example: &ref_10
           value:
             context:
               domain: ONDC:ONEST10
@@ -4776,7 +4973,7 @@ x-flows:
                             value: '2'
                 fulfillments:
                   - id: '1'
-                    type: REMOTE
+                    type: lead
                     state:
                       descriptor:
                         code: APPLICATION_STARTED
@@ -4867,7 +5064,7 @@ x-flows:
                 quote:
                   price:
                     currency: INR
-                    value: '1700'
+                    value: '1100'
                   breakup:
                     - id: 0253719F295521CED39EC9C2F3C8DCDE
                       price:
@@ -4881,42 +5078,6 @@ x-flows:
                             - descriptor:
                                 code: TYPE
                               value: item
-                    - title: NP Fees
-                      id: '1'
-                      price:
-                        currency: INR
-                        value: '300.00'
-                      tags:
-                        - descriptor:
-                            code: QUOTE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: item
-                        - descriptor:
-                            code: TYPE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: misc
-                    - title: NP Fees
-                      id: '2'
-                      price:
-                        currency: INR
-                        value: '300.00'
-                      tags:
-                        - descriptor:
-                            code: QUOTE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: item
-                        - descriptor:
-                            code: TYPE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: misc
                   ttl: P1D
                 payments:
                   url: https://ondc.transaction.com/payment
@@ -4962,7 +5123,7 @@ x-flows:
         api: on_confirm
         description: BPP sends confirmation of submission of job application.
         reference: if any
-        example: &ref_14
+        example: &ref_18
           value:
             context:
               domain: ONDC:ONEST10
@@ -5073,11 +5234,11 @@ x-flows:
                               name: Required Work Experience in Years
                             value: P2Y6M
                           - descriptor:
-                              code: REQ_PROF_SKILL
+                              code: ADD_PROF_SKILL
                               name: Skills Required for the Role
                             value: android-development
                           - descriptor:
-                              code: REQ_PROF_SKILL
+                              code: ADD_PROF_SKILL
                               name: Skills Required for the Role
                             value: dev-ops
                           - descriptor:
@@ -5114,7 +5275,7 @@ x-flows:
                               Mentor team members on design techniques and
                               coding standards.
                       - descriptor:
-                          code: LISTING_DETAILS
+                          code: JOB_DETAILS
                           name: Listing Details
                         list:
                           - descriptor:
@@ -5150,46 +5311,10 @@ x-flows:
                             - descriptor:
                                 code: TYPE
                               value: item
-                    - title: NP Fees
-                      id: '1'
-                      price:
-                        currency: INR
-                        value: '300.00'
-                      tags:
-                        - descriptor:
-                            code: QUOTE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: item
-                        - descriptor:
-                            code: TYPE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: misc
-                    - title: NP Fees
-                      id: '2'
-                      price:
-                        currency: INR
-                        value: '300.00'
-                      tags:
-                        - descriptor:
-                            code: QUOTE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: item
-                        - descriptor:
-                            code: TYPE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: misc
                   ttl: P1D
                 fulfillments:
                   - id: '1'
-                    type: REMOTE
+                    type: lead
                     state:
                       descriptor:
                         code: APPLICATION_STARTED
@@ -5321,7 +5446,7 @@ x-flows:
         api: status
         description: BAP sends request for status of submission of job application.
         reference: if any
-        example: &ref_15
+        example: &ref_12
           value:
             context:
               domain: ONDC:ONEST10
@@ -5347,7 +5472,7 @@ x-flows:
         api: on_status
         description: BPP sends confirmation of submission of job application.
         reference: if any
-        example: &ref_16
+        example: &ref_20
           value:
             context:
               domain: ONDC:ONEST10
@@ -5468,15 +5593,15 @@ x-flows:
                               name: Required work experience in years
                             value: P2Y6M
                           - descriptor:
-                              code: REQ_PROF_SKILL
+                              code: ADD_PROF_SKILL
                               name: Skills required for the role
                             value: android-development
                           - descriptor:
-                              code: REQ_PROF_SKILL
+                              code: ADD_PROF_SKILL
                               name: Skills required for the role
                             value: dev-ops
                           - descriptor:
-                              code: REQ_PROF_SKILL
+                              code: ADD_PROF_SKILL
                               name: Additional skills required for the job
                             value: >-
                               You have 8+ years of engineering experience,
@@ -5515,7 +5640,7 @@ x-flows:
                               Mentor and train other team members on design
                               techniques and coding standards.
                       - descriptor:
-                          code: LISTING_DETAILS
+                          code: JOB_DETAILS
                           name: Listing details
                         list:
                           - descriptor:
@@ -5545,7 +5670,7 @@ x-flows:
                 quote:
                   price:
                     currency: INR
-                    value: '1700'
+                    value: '1100'
                   breakup:
                     - id: 0253719F295521CED39EC9C2F3C8DCDE
                       price:
@@ -5559,46 +5684,10 @@ x-flows:
                             - descriptor:
                                 code: TYPE
                               value: item
-                    - title: NP Fees
-                      id: '1'
-                      price:
-                        currency: INR
-                        value: '300.00'
-                      tags:
-                        - descriptor:
-                            code: QUOTE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: item
-                        - descriptor:
-                            code: TYPE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: misc
-                    - title: NP Fees
-                      id: '2'
-                      price:
-                        currency: INR
-                        value: '300.00'
-                      tags:
-                        - descriptor:
-                            code: QUOTE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: item
-                        - descriptor:
-                            code: TYPE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: misc
                   ttl: P1D
                 fulfillments:
                   - id: '1'
-                    type: REMOTE
+                    type: lead
                     state:
                       descriptor:
                         code: APPLICATION_IN_PROGRESS
@@ -5697,7 +5786,7 @@ x-flows:
         api: cancel
         description: BAP sends request for cancellation of job application.
         reference: if any
-        example: &ref_20
+        example: &ref_13
           value:
             context:
               domain: ONDC:ONEST10
@@ -5723,7 +5812,7 @@ x-flows:
         api: on_cancel
         description: BPP sends confirmation of cancellation of job application.
         reference: if any
-        example: &ref_22
+        example: &ref_21
           value:
             context:
               domain: ONDC:ONEST10
@@ -5799,46 +5888,10 @@ x-flows:
                             - descriptor:
                                 code: TYPE
                               value: item
-                    - title: NP Fees
-                      id: '1'
-                      price:
-                        currency: INR
-                        value: '0'
-                      tags:
-                        - descriptor:
-                            code: QUOTE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: item
-                        - descriptor:
-                            code: TYPE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: misc
-                    - title: NP Fees
-                      id: '2'
-                      price:
-                        currency: INR
-                        value: '0'
-                      tags:
-                        - descriptor:
-                            code: QUOTE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: item
-                        - descriptor:
-                            code: TYPE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: misc
                   ttl: P1D
                 fulfillments:
                   - id: '1'
-                    type: REMOTE
+                    type: lead
                     state:
                       descriptor:
                         code: CANCELLED
@@ -5941,21 +5994,6 @@ x-flows:
                           - descriptor:
                               code: VALUE
                             value: '-1100.00'
-                      - descriptor:
-                          code: QUOTE_TRAIL
-                        list:
-                          - descriptor:
-                              code: CURRENCY
-                            value: INR
-                          - descriptor:
-                              code: ID
-                            value: '1'
-                          - descriptor:
-                              code: TYPE
-                            value: misc
-                          - descriptor:
-                              code: VALUE
-                            value: '-300.00'
                 payments:
                   url: https://ondc.transaction.com/payment
                   params:
@@ -5999,7 +6037,7 @@ x-flows:
       - summary: Description
         api: update
         description: BAP confirms user wants to submit the job application.
-        example: &ref_17
+        example: &ref_11
           value:
             context:
               domain: ONDC:ONEST10
@@ -6032,7 +6070,7 @@ x-flows:
         api: on_update
         description: BPP sends confirmation of submission of job application.
         reference: if any
-        example: &ref_18
+        example: &ref_19
           value:
             context:
               domain: ONDC:ONEST10
@@ -6146,11 +6184,11 @@ x-flows:
                               name: Required Work Experience in Years
                             value: P2Y6M
                           - descriptor:
-                              code: REQ_PROF_SKILL
+                              code: ADD_PROF_SKILL
                               name: Skills Required for the Role
                             value: android-development
                           - descriptor:
-                              code: REQ_PROF_SKILL
+                              code: ADD_PROF_SKILL
                               name: Skills Required for the Role
                             value: dev-ops
                           - descriptor:
@@ -6187,7 +6225,7 @@ x-flows:
                               Mentor team members on design techniques and
                               coding standards.
                       - descriptor:
-                          code: LISTING_DETAILS
+                          code: JOB_DETAILS
                           name: Listing Details
                         list:
                           - descriptor:
@@ -6208,7 +6246,7 @@ x-flows:
                             value: DevOps Engineer
                 fulfillments:
                   - id: '1'
-                    type: REMOTE
+                    type: lead
                     customer:
                       person:
                         name: Sanjay
@@ -6261,7 +6299,7 @@ x-flows:
                 quote:
                   price:
                     currency: INR
-                    value: '1700'
+                    value: '1100'
                   breakup:
                     - id: 0253719F295521CED39EC9C2F3C8DCDE
                       price:
@@ -6275,42 +6313,6 @@ x-flows:
                             - descriptor:
                                 code: TYPE
                               value: item
-                    - title: NP Fees
-                      id: '1'
-                      price:
-                        currency: INR
-                        value: '300.00'
-                      tags:
-                        - descriptor:
-                            code: QUOTE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: item
-                        - descriptor:
-                            code: TYPE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: misc
-                    - title: NP Fees
-                      id: '2'
-                      price:
-                        currency: INR
-                        value: '300.00'
-                      tags:
-                        - descriptor:
-                            code: QUOTE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: item
-                        - descriptor:
-                            code: TYPE
-                          list:
-                            - descriptor:
-                                code: TYPE
-                              value: misc
                   ttl: P1D
                 payments:
                   url: https://ondc.transaction.com/payment
@@ -6352,156 +6354,6 @@ x-flows:
                       - descriptor:
                           code: BRANCH_NAME
                         value: xxxx
-  - summary: ONDC:ONEST10 - Work Opportunities(Commercials)
-    description: >-
-      The following is an illustrative flow for a job application transaction,
-      where a candidate intends to apply for a specific job role.
-    details:
-      - description: Sequence Diagram for Services Work Opportunities(Commercials)
-        mermaidGraph: |-
-          sequenceDiagram
-            participant BAP
-            participant BPP
-            participant Gateway
-
-            BAP->>Gateway: search
-            Gateway->>BPP: search
-            BPP-->>BAP: on_search
-
-            BAP->>BPP: select
-            BPP-->>BAP: on_select
-
-            BAP->>BPP: init
-            BPP-->>BAP: on_init
-
-            BAP->>BPP: confirm
-            BPP-->>BAP: on_confirm
-
-            BAP->>BPP: status
-            BPP-->>BAP: on_status
-
-            BAP->>BPP: update
-            BPP-->>BAP: on_update
-
-            BAP->>BPP: cancel
-            BPP-->>BAP: on_cancel
-      - description: Ordering
-        mermaidGraph: |-
-          sequenceDiagram
-            participant B as Buyer
-            participant BA as BuyerApp
-            participant G as 
-            participant SA as SellerApp
-            Note Over B,SA: **SELECT FLOW**
-            B ->> BA: Selects one of the <br>providers for job
-            BA ->> SA: **/select** - A job is selected with a <br>TTL for receiving response
-            SA ->> BA: **/on_select** - Responds to the selection with <br>breakup, quote including logistics charges
-            BA ->> B: Shows response with price details
-      - description: Initializing the order
-        mermaidGraph: |-
-          sequenceDiagram
-            participant B as Buyer
-            participant BA as BuyerApp
-            participant SA as SellerApp
-            Note Over B,SA: **INITIALIZATION FLOW**
-            B ->> BA: Proceeds with the Order
-            BA ->> SA: **/init** - Initializes the order and <br>sends billing details
-            SA ->> BA: **/on_init** - Order initialization with <br>fulfillment & settlement information <br>including UPI or NEFT/IMPS/Bank Transfer
-            BA ->> B: Confirms initialization
-      - description: Order Confirmation
-        mermaidGraph: |-
-          sequenceDiagram
-            participant B as Buyer
-            participant BA as BuyerApp
-            participant SA as SellerApp
-            Note Over B,SA: **CONFIRMATION FLOW**
-            B ->> BA: Confirms the Order
-            BA ->> SA: **/confirm** - Creates order to create final digital contract
-            SA ->> BA: **/on_confirm** - Accepts the order 
-            BA ->> B: Confirms order and delivery 
-      - description: Fulfillment
-        mermaidGraph: |-
-          sequenceDiagram
-            participant B as Buyer
-            participant BA as BuyerApp
-            participant SA as SellerApp 
-            Note Over B,SA: **ORDER STATUS FLOW**
-            B ->> BA: Checks the order status
-            BA ->> SA: **/status** - Enquire order status <br>or tracking information
-            SA ->> BA: **/on_status** - Latest order and fulfillment status is sent
-            BA ->> B: Updates the latest order <br>and fulfillment information
-    reference: if any
-    steps:
-      - summary: Description
-        api: search
-        description: BAP will make a search by city request with an intent
-        reference: if any
-        example: *ref_7
-      - summary: Description
-        api: on_search
-        description: >-
-          BPP will create a catalogue containing jobs with matching criteria and
-          sends it as on_search request.
-        reference: if any
-        example: *ref_8
-      - summary: Description
-        api: select
-        description: >-
-          BAP will receive the on_search request and displays the list of jobs
-          to the user. Once the user chooses a job, BAP will make select API
-          with item ID to get the complete details about the job.
-        reference: if any
-        example: *ref_9
-      - summary: Description
-        api: on_select
-        description: >-
-          BPP will receive the select request and check if the listing is still
-          valid. If the listing is still valid, BPP will send the on_select call
-          with complete details of the job listing.
-        reference: if any
-        example: *ref_10
-      - summary: Description
-        api: init
-        description: >-
-          BAP sends the customer details to the BPP in the init API. This is the
-          initializing step of the job application process.
-        reference: if any
-        example: *ref_11
-      - summary: Description
-        api: on_init
-        description: >-
-          If BPP wants to collect additional details of the user, it will send
-          an xinput form in the on_init request.
-        reference: if any
-        example: *ref_12
-      - summary: Description
-        api: confirm
-        description: BAP confirms user wants to submit the job application.
-        example: *ref_13
-      - summary: Description
-        api: on_confirm
-        description: BPP sends confirmation of submission of job application.
-        reference: if any
-        example: *ref_14
-      - summary: Description
-        api: status
-        description: BAP sends request for status of submission of job application.
-        reference: if any
-        example: *ref_15
-      - summary: Description
-        api: on_status
-        description: BPP sends confirmation of submission of job application.
-        reference: if any
-        example: *ref_16
-      - summary: Description
-        api: update
-        description: BAP confirms user wants to submit the job application.
-        example: *ref_17
-      - summary: Description
-        api: on_update
-        description: BPP sends confirmation of submission of job application.
-        reference: if any
-        example: *ref_18
 x-examples:
   ONDC:ONEST10 - Work Opportunities:
     summary: ONDC:ONEST10 - Work Opportunities
@@ -6509,13 +6361,12 @@ x-examples:
       Job Hub is acting as provider platform (BPP) which hosts the jobs and
       Worker Hub is acting as seeker platform (BAP) which helps the workers to
       find jobs. <br/><br/>
-          PRD: ONEST - Work Opportunity: <a
-      href="https://docs.google.com/document/d/1VydDAqtzjj1jDrJzX4hwZSlYyJsA_bSOJIKYTWxNSpQ">link</a>
-      <br/><br/> BRD: ONEST - Work Opportunities: <a
+          PRD: ONEST - Work Opportunity : <a href="https://docs.google.com/document/d/1VydDAqtzjj1jDrJzX4hwZSlYyJsA_bSOJIKYTWxNSpQ">link</a>
+      <br/><br/> BRD: ONEST - Work Opportunities : <a
       href="https://docs.google.com/document/d/1cuvt_w9qSv7XpLXpY4KCq5gmrsQSqF8e3VLxOhpfO0g">link</a>
-      <br/><br/> Taxonomy: ONEST - Work Opportunities: <a
+      <br/><br/> Taxonomy: ONEST - Work Opportunities : <a
       href="https://docs.google.com/spreadsheets/d/1Go22ou013hE-fxpjMd_XuM111l8x8TuMsF_nsjvB3so">link</a>
-    example_set: &ref_23
+    example_set:
       search:
         examples:
           search - by job role:
@@ -6688,7 +6539,7 @@ x-examples:
                   item:
                     tags:
                       - descriptor:
-                          code: LISTING_DETAILS
+                          code: JOB_DETAILS
                         list:
                           - descriptor:
                               code: INDUSTRY_TYPE
@@ -6742,7 +6593,7 @@ x-examples:
                   item:
                     tags:
                       - descriptor:
-                          code: LISTING_DETAILS
+                          code: JOB_DETAILS
                         list:
                           - descriptor:
                               code: EMPLOYMENT_TYPE
@@ -6760,36 +6611,69 @@ x-examples:
                         - descriptor:
                             code: EFFECTIVE_DATE
                           value: '2023-02-22T11:20:10.122Z'
-          search - incremental: *ref_19
+          search - incremental start: *ref_7
+          search - incremental stop:
+            value:
+              context:
+                domain: ONDC:ONEST10
+                action: search
+                version: 2.0.0
+                bap_id: worker-hub.bap.io
+                bap_uri: https://worker-hub.bap.io
+                transaction_id: a9aaecca-10b7-4d19-b640-b047a7c62195
+                message_id: 672f774c-4281-44dd-b1c2-84222a3d771e
+                location:
+                  city:
+                    code: '*'
+                  country:
+                    code: IND
+                timestamp: '2023-02-22T12:10:11.008Z'
+                ttl: PT30S
+              message:
+                intent:
+                  payment:
+                    descriptor:
+                      code: NP_FEES
+                      name: Np Fees
+                    list:
+                      - code: ID
+                        value: '1'
+                  tags:
+                    - descriptor:
+                        code: CATALOG_INC
+                      list:
+                        - descriptor:
+                            code: MODE
+                          value: stop
       select:
         examples:
-          select: *ref_9
+          select: *ref_8
       init:
         examples:
-          init: *ref_11
+          init: *ref_9
       confirm:
         examples:
-          confirm: *ref_13
+          confirm: *ref_10
       update:
         examples:
-          - *ref_17
+          - *ref_11
       status:
         examples:
-          status: *ref_15
+          status: *ref_12
       cancel:
         examples:
-          cancel: *ref_20
+          cancel: *ref_13
       on_search:
         examples:
-          on_search: *ref_8
-          on_search - incremental: *ref_21
+          on_search: *ref_14
+          on_search - incremental: *ref_15
       on_select:
         examples:
-          on_select: *ref_10
+          on_select: *ref_16
       on_init:
         examples:
-          on_init: *ref_12
-          on_init_post_form_submission:
+          on_init: *ref_17
+          on_init - unsolicited:
             value:
               context:
                 domain: ONDC:ONEST10
@@ -6800,13 +6684,13 @@ x-examples:
                 bpp_id: job-hub.bpp.io
                 bpp_uri: https://job-hub.bpp.io
                 transaction_id: a9aaecca-10b7-4d19-b640-b047a7c62195
-                message_id: af58aa7b-6745-47d0-9b0d-62dcb262ee87
+                message_id: 9f06d8ef-ac19-40a9-9d7b-37f2f1fdb836
                 location:
                   city:
                     code: std:080
                   country:
                     code: IND
-                timestamp: 2023-02-23T10:14:051Z
+                timestamp: 2023-02-23T10:16:123Z
                 ttl: PT30S
               message:
                 order:
@@ -6816,21 +6700,39 @@ x-examples:
                     - id: 0253719F295521CED39EC9C2F3C8DCDE
                       fulfillment_ids:
                         - '1'
+                      xinput:
+                        required: true
+                        head:
+                          descriptor:
+                            name: Application Form
+                          index:
+                            min: 1
+                            cur: 2
+                            max: 2
+                          headings:
+                            - Candidate Details
+                        form:
+                          mime_type: text/html
+                          url: >-
+                            https://6vs8xnx5i7.jobhub.co.in/loans-kyc/xinput/formid/updatedformid123
+                          resubmit: false
                       tags:
                         - descriptor:
                             code: NP_FEES
+                            name: Np Fees
                           list:
                             - code: ID
                               value: '1'
                         - descriptor:
                             code: NP_FEES
+                            name: Np Fees
                           list:
                             - code: ID
                               value: '2'
                   quote:
                     price:
                       currency: INR
-                      value: '1700'
+                      value: '1100'
                     breakup:
                       - id: 0253719F295521CED39EC9C2F3C8DCDE
                         price:
@@ -6844,46 +6746,10 @@ x-examples:
                               - descriptor:
                                   code: TYPE
                                 value: item
-                      - title: NP Fees
-                        id: '1'
-                        price:
-                          currency: INR
-                          value: '300.00'
-                        tags:
-                          - descriptor:
-                              code: QUOTE
-                            list:
-                              - descriptor:
-                                  code: TYPE
-                                value: item
-                          - descriptor:
-                              code: TYPE
-                            list:
-                              - descriptor:
-                                  code: TYPE
-                                value: misc
-                      - title: NP Fees
-                        id: '2'
-                        price:
-                          currency: INR
-                          value: '300.00'
-                        tags:
-                          - descriptor:
-                              code: QUOTE
-                            list:
-                              - descriptor:
-                                  code: TYPE
-                                value: item
-                          - descriptor:
-                              code: TYPE
-                            list:
-                              - descriptor:
-                                  code: TYPE
-                                value: misc
                     ttl: P1D
                   fulfillments:
                     - id: '1'
-                      type: REMOTE
+                      type: lead
                       customer:
                         person:
                           name: Sanjay
@@ -6971,29 +6837,16 @@ x-examples:
                           value: xxxx
       on_confirm:
         examples:
-          on_confirm: *ref_14
+          on_confirm: *ref_18
       on_update:
         examples:
-          on_update: *ref_18
+          on_update: *ref_19
       on_status:
         examples:
-          on_status: *ref_16
+          on_status: *ref_20
       on_cancel:
         examples:
-          on_cancel: *ref_22
-  ONDC:ONEST10 - Work Opportunities(Commercials):
-    summary: ONDC:ONEST10 - Work Opportunities
-    description: >
-      Job Hub is acting as provider platform (BPP) which hosts the jobs and
-      Worker Hub is acting as seeker platform (BAP) which helps the workers to
-      find jobs. <br/><br/>
-          PRD: ONEST - Work Opportunity: <a
-      href="https://docs.google.com/document/d/1VydDAqtzjj1jDrJzX4hwZSlYyJsA_bSOJIKYTWxNSpQ">link</a>
-      <br/><br/> BRD: ONEST - Work Opportunities: <a
-      href="https://docs.google.com/document/d/1cuvt_w9qSv7XpLXpY4KCq5gmrsQSqF8e3VLxOhpfO0g">link</a>
-      <br/><br/> Taxonomy: ONEST - Work Opportunities: <a
-      href="https://docs.google.com/spreadsheets/d/1Go22ou013hE-fxpjMd_XuM111l8x8TuMsF_nsjvB3so">link</a>
-    example_set: *ref_23
+          on_cancel: *ref_21
 x-attributes:
   ONDC:ONEST10 - Work Opportunities:
     attribute_set:
@@ -7203,7 +7056,7 @@ x-attributes:
                 type:
                   description: fulfillment type
                   required: mandatory
-                  usage: REMOTE
+                  usage: lead
                   reference: null
               locations:
                 id:
@@ -7283,7 +7136,89 @@ x-attributes:
                       required: mandatory
                       usage: '50'
                       reference: null
-                application_validity_time:
+                creator:
+                  descriptor:
+                    name:
+                      description: The name of the creator organization.
+                      required: mandatory
+                      usage: Global Trade Hub
+                      reference: null
+                    code:
+                      description: >-
+                        A unique code or identifier for the creator
+                        organization.
+                      required: mandatory
+                      usage: GTH_99
+                      reference: null
+                    short_desc:
+                      description: A brief description of the creator organization.
+                      required: mandatory
+                      usage: Facilitating Global Commerce
+                      reference: null
+                    long_desc:
+                      description: A detailed description of the creator organization.
+                      required: mandatory
+                      usage: >-
+                        Global Trade Hub is a platform designed to enable
+                        international trade by connecting buyers and sellers
+                        across borders with innovative solutions.
+                      reference: null
+                    media:
+                      mimetype:
+                        description: The media file's mime type (SVG image).
+                        required: mandatory
+                        usage: image/svg+xml
+                        reference: null
+                      url:
+                        description: URL of the media file.
+                        required: mandatory
+                        usage: https://globaltradehub.com/logo.svg
+                        reference: null
+                    images:
+                      url:
+                        description: URL of the header image.
+                        required: mandatory
+                        usage: https://globaltradehub.com/header-image.jpg
+                        reference: null
+                  address:
+                    description: Physical address of the creator organization.
+                    required: mandatory
+                    usage: Suite 302, International Business Park, New Delhi, India
+                    reference: null
+                  state:
+                    name:
+                      description: state name
+                      required: mandatory
+                      usage: Maharastra
+                      reference: null
+                    code:
+                      description: state code
+                      required: mandatory
+                      usage: MH
+                      reference: null
+                  city:
+                    name:
+                      description: city name
+                      required: mandatory
+                      usage: Pune
+                      reference: null
+                    code:
+                      description: city code
+                      required: mandatory
+                      usage: std:020
+                      reference: null
+                  contact:
+                    phone:
+                      description: The phone number of the customer.
+                      required: mandatory
+                      usage: '9999999999'
+                      reference: null
+                    email:
+                      description: The email of the customer.
+                      required: mandatory
+                      usage: abc@abc.bc
+                      reference: null
+                time:
                   range:
                     start:
                       description: start time
@@ -7417,10 +7352,15 @@ x-attributes:
                 reference: null
             fulfillments:
               parent: true
-              type:
-                description: Type of fulfillment
+              id:
+                description: The unique identifier of the fulfillment option.
                 required: mandatory
-                usage: REMOTE
+                usage: '1'
+                reference: null
+              type:
+                description: The type of fulfillment.
+                required: mandatory
+                usage: lead
                 reference: null
       on_select:
         parent: true
@@ -7507,7 +7447,7 @@ x-attributes:
               type:
                 description: The type of fulfillment.
                 required: mandatory
-                usage: REMOTE
+                usage: lead
                 reference: null
             items:
               parent: true
@@ -7663,7 +7603,7 @@ x-attributes:
               type:
                 description: Type of fulfillment
                 required: mandatory
-                usage: REMOTE
+                usage: lead
                 reference: null
                 customer:
                   person:
@@ -7965,7 +7905,7 @@ x-attributes:
               type:
                 description: Fulfillment type
                 required: mandatory
-                usage: REMOTE
+                usage: lead
                 reference: if any
               customer:
                 person:
@@ -8148,7 +8088,7 @@ x-attributes:
               type:
                 description: Type of fulfillment
                 required: mandatory
-                usage: REMOTE
+                usage: lead
                 reference: null
               state:
                 descriptor:
@@ -8446,7 +8386,7 @@ x-attributes:
               type:
                 description: The type of fulfillment.
                 required: mandatory
-                usage: REMOTE
+                usage: lead
                 reference: null
               state:
                 descriptor:
@@ -8802,7 +8742,7 @@ x-attributes:
               type:
                 description: The type of fulfillment.
                 required: mandatory
-                usage: REMOTE
+                usage: lead
                 reference: null
               state:
                 descriptor:
@@ -9126,7 +9066,7 @@ x-attributes:
               type:
                 description: Type of fulfillment
                 required: mandatory
-                usage: REMOTE
+                usage: lead
                 reference: if any
               state:
                 descriptor:
@@ -9453,7 +9393,7 @@ x-attributes:
               type:
                 description: The type of fulfillment.
                 required: mandatory
-                usage: REMOTE
+                usage: lead
                 reference: if any
               customer:
                 person:
@@ -9583,3 +9523,9 @@ x-attributes:
                 usage: BAP
                 reference: null
 x-errorcodes: null
+x-testcasesui:
+  filenames:
+    - log-verification.md
+x-changeLog:
+  filenames:
+    - ONEST10-2.0.0.md

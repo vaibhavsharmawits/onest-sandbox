@@ -10,8 +10,10 @@ search:
       $ref: ./search/search_by_industry_type.yaml
     search - by employment type:
       $ref: ./search/search_by_employment_type.yaml
-    search - incremental:
-      $ref: ./search/search_inc.yaml
+    search - incremental start:
+      $ref: ./search/search_inc_start.yaml
+    search - incremental stop:
+      $ref: ./search/search_inc_stop.yaml
 select:
   examples:
     select:
@@ -49,8 +51,8 @@ on_init:
   examples:
     on_init:
       $ref: ./on_init/on_init.yaml
-    on_init_post_form_submission:
-      $ref: ./on_init/on_init_post_form_submission.yaml
+    on_init - unsolicited:
+      $ref: ./on_init/on_init_unsolicited.yaml
 on_confirm:
   examples:
     on_confirm:

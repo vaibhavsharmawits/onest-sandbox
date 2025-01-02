@@ -14,12 +14,10 @@ value:
         code: "*"
       country:
         code: IND
-    timestamp: "2023-02-22T11:45:10.171Z"
+    timestamp: "2023-02-22T11:50:02.789Z"
     ttl: PT30S
   message:
     catalog:
-      descriptor:
-        name: Affindi Jobs
       providers:
         - id: "1"
           items:
@@ -37,8 +35,8 @@ value:
                   We are seeking a Staff Mobile Developer with strong critical thinking, data-driven decision-making,
                   adaptability, goal-orientation, and problem-solving skills.
                 images:
-                  - "images url1"
-                  - "images url2"
+                  - url: "images url1"
+                  - url: "images url2"
                 media:
                   - mimetype: audio/mp4
                     url: http://url-to-audio-about-data-scientist-job
@@ -46,8 +44,10 @@ value:
                     url: http://url-to-video-about-data-scientist-job
               quantity:
                 available:
-                  count: 30
-              application_validity_time:
+                  count: 0
+              time:
+                label: disable
+                timestamp: "2023-02-22T11:50:02.789Z"
                 range:
                   start: "2023-01-04T09:32:10.560Z"
                   end: "2023-02-04T08:20:00.230Z"
@@ -93,7 +93,7 @@ value:
                     - code: COMPENSATION_PERCENTAGE_SPLIT
                       value: "25,25,50"
                 - descriptor:
-                    code: LISTING_DETAILS
+                    code: JOB_DETAILS
                     name: Listing details
                   list:
                     - descriptor:

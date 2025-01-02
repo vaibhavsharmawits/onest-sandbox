@@ -45,7 +45,7 @@ details:
         Note Over B,SA: **SELECT FLOW**
         B ->> BA: Selects one of the <br>providers for job
         BA ->> SA: **/select** - A job is selected with a <br>TTL for receiving response
-        SA ->> BA: **/on_select** - Responds to the selection with <br>breakup, quote including logistics charges
+        SA ->> BA: **/on_select** - Responds to the selection with <br>breakup, quote 
         BA ->> B: Shows response with price details
 
 
@@ -101,10 +101,10 @@ steps:
       $ref: "../../Examples/Services_Work_Opportunities_yaml/on_search/on_search.yaml"
   - summary: Description
     api: search_inc
-    description: BAP will make search inc request with an intent
+    description: BAP will make a search inc request to combine multiple search parameters, such as city, employment type, industry type, job provider, job role, or location for refined results.
     reference: if any
     example:
-      $ref: "../../Examples/Services_Work_Opportunities_yaml/search/search_inc.yaml"
+      $ref: "../../Examples/Services_Work_Opportunities_yaml/search/search_inc_start.yaml"
   - summary: Description
     api: on_search_inc
     description: BPP will create a catalogue containing jobs with matching criteria and sends it as on_search_inc request.

@@ -110,11 +110,11 @@ value:
                     name: Required Work Experience in Years
                   value: "P2Y6M"
                 - descriptor:
-                    code: REQ_PROF_SKILL
+                    code: ADD_PROF_SKILL
                     name: Skills Required for the Role
                   value: android-development
                 - descriptor:
-                    code: REQ_PROF_SKILL
+                    code: ADD_PROF_SKILL
                     name: Skills Required for the Role
                   value: dev-ops
                 - descriptor:
@@ -150,7 +150,7 @@ value:
                     Mentor team members on design techniques and coding
                     standards.
             - descriptor:
-                code: LISTING_DETAILS
+                code: JOB_DETAILS
                 name: Listing Details
               list:
                 - descriptor:
@@ -236,7 +236,7 @@ value:
       quote:
         price:
           currency: INR
-          value: "1700"
+          value: "1100"
         breakup:
           - id: 0253719F295521CED39EC9C2F3C8DCDE
             price:
@@ -250,42 +250,6 @@ value:
                   - descriptor:
                       code: TYPE
                     value: item
-          - title: NP Fees
-            id: "1"
-            price:
-              currency: INR
-              value: "300.00"
-            tags:
-              - descriptor:
-                  code: QUOTE
-                list:
-                  - descriptor:
-                      code: TYPE
-                    value: item
-              - descriptor:
-                  code: TYPE
-                list:
-                  - descriptor:
-                      code: TYPE
-                    value: misc
-          - title: NP Fees
-            id: "2"
-            price:
-              currency: INR
-              value: "300.00"
-            tags:
-              - descriptor:
-                  code: QUOTE
-                list:
-                  - descriptor:
-                      code: TYPE
-                    value: item
-              - descriptor:
-                  code: TYPE
-                list:
-                  - descriptor:
-                      code: TYPE
-                    value: misc
         ttl: P1D
       payments:
           url: "https://ondc.transaction.com/payment"

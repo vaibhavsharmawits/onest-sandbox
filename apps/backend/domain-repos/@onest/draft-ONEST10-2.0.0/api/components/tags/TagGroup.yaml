@@ -45,16 +45,21 @@ catalog:
           reference: <PR/Issue/Discussion Links md format text>
           list:
             $ref: "./tag.yaml#/EMPLOYMENT_TYPE"
-        - code: LISTING_DETAILS
-          description: LISTING_DETAILS
+        - code: JOB_DETAILS
+          description: JOB_DETAILS
           reference: <PR/Issue/Discussion Links md format text>
           list:
-            $ref: "./tag.yaml#/LISTING_DETAILS"
+            $ref: "./tag.yaml#/JOB_DETAILS"
         - code: ACADEMIC_ELIGIBILITY
           description: ACADEMIC_ELIGIBILITY
           reference: <PR/Issue/Discussion Links md format text>
           list:
             $ref: "./tag.yaml#/ACADEMIC_ELIGIBILITY"
+        - code: DOCUMENTS_REQUIRED
+          description: DOCUMENTS_REQUIRED
+          reference: <PR/Issue/Discussion Links md format text>
+          list:
+            $ref: "./tag.yaml#/DOCUMENTS_REQUIRED"
         
         # - code: SERVICE_INFORMATION
         #   description: Information of the service (Required)
@@ -113,8 +118,8 @@ catalog:
 order:
   items:
     tags:
-      - code: LISTING_DETAILS
-        description: LISTING_DETAILS
+      - code: JOB_DETAILS
+        description: JOB_DETAILS
         reference: <PR/Issue/Discussion Links md format text>
         list:
           $ref: "./tag.yaml#/EMPLOYMENT_TYPE"

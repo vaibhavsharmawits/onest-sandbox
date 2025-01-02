@@ -26,7 +26,7 @@ value:
       item:
         tags:
           - descriptor:
-              code: LISTING_DETAILS
+              code: JOB_DETAILS
             list:
               - descriptor:
                   code: EMPLOYMENT_TYPE

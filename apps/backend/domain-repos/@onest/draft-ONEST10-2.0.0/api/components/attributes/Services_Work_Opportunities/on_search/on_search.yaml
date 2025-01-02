@@ -186,7 +186,84 @@ message:
                 required: mandatory
                 usage: "50"
                 reference: null
-          application_validity_time:
+          creator:
+            descriptor:
+              name:
+                description: "The name of the creator organization."
+                required: mandatory
+                usage: "Global Trade Hub"
+                reference: null
+              code:
+                description: "A unique code or identifier for the creator organization."
+                required: mandatory
+                usage: "GTH_99"
+                reference: null
+              short_desc:
+                description: "A brief description of the creator organization."
+                required: mandatory
+                usage: "Facilitating Global Commerce"
+                reference: null
+              long_desc:
+                description: "A detailed description of the creator organization."
+                required: mandatory
+                usage: "Global Trade Hub is a platform designed to enable international trade by connecting buyers and sellers across borders with innovative solutions."
+                reference: null
+              media:
+                mimetype: 
+                  description: "The media file's mime type (SVG image)."
+                  required: mandatory
+                  usage: "image/svg+xml"
+                  reference: null
+                url:
+                  description: "URL of the media file."
+                  required: mandatory
+                  usage: "https://globaltradehub.com/logo.svg"
+                  reference: null
+              images:
+                url: 
+                  description: "URL of the header image."
+                  required: mandatory
+                  usage: "https://globaltradehub.com/header-image.jpg"
+                  reference: null
+            address:
+              description: "Physical address of the creator organization."
+              required: mandatory
+              usage: "Suite 302, International Business Park, New Delhi, India"
+              reference: null
+            state:
+              name:
+                description: "state name"
+                required: mandatory
+                usage: "Maharastra"
+                reference: null
+              code:
+                description: "state code"
+                required: mandatory
+                usage: "MH"
+                reference: null
+            city:
+              name:
+                description: "city name"
+                required: mandatory
+                usage: "Pune"
+                reference: null
+              code:
+                description: "city code"
+                required: mandatory
+                usage: "std:020"
+                reference: null
+            contact:
+              phone:
+                description: "The phone number of the customer."
+                required: mandatory
+                usage: "9999999999"
+                reference: null
+              email:
+                description: "The email of the customer."
+                required: mandatory
+                usage: "abc@abc.bc"
+                reference: null
+          time:
             range:
               start:
                 description: "start time"

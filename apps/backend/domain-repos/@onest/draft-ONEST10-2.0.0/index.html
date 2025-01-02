@@ -80,8 +80,21 @@
             justify-content: center;
             width: 75%;
         }
-      #flow-summary {
+      
+        #flow-summary {
         padding-left: 16px;
+      }
+
+
+      #testcases-container  {
+        padding: 10px 0px;
+      }
+
+      #testcases {
+        margin: 5px;
+        padding: 10px;
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
       }
 
       /* tr:nth-child(even) {
@@ -162,6 +175,28 @@
                 >
                   Sandbox-UI
                 </a>
+              </li>
+              <li class="nav-item" id="testcases-navbar">
+                <a
+                  class="nav-link"
+                  id="testcases-tab"
+                  data-bs-toggle="tab"
+                  href="#testcases"
+                  role="tab"
+                  aria-selected="false"
+                  >LogSubmission-UI</a
+                >
+              </li>
+              <li class="nav-item" id="change-log-nav">
+                <a
+                  class="nav-link"
+                  id="change-log-tab"
+                  data-bs-toggle="tab"
+                  href="#changeLog"
+                  role="tab"
+                  aria-selected="false"
+                  >Change-Log-UI</a
+                >
               </li>
             </ul>
           </div>
@@ -285,6 +320,28 @@
               </div>
              </div>
             </div>
+            <div class="tab-pane fade" id="changeLog" role="tabpanel">
+              <table class="table">
+                <tr>
+                  <td><b>Version: </b></td>
+                  <td>
+                    <select
+                      id="change-log-dropdown"
+                      class="form-select"
+                      onchange="updateChangeLog()"
+                    ></select>
+                  </td>
+                </tr>
+              </table>
+              <div class="feature-set">
+                <div id="change-log-container"></div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="testcases" role="tabpanel">
+              <div class="testcases-set">
+                <div id="testcases-container"></div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-lg-4">
@@ -400,9 +457,8 @@
     <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@3.52.0/swagger-ui-standalone-preset.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/lib/marked.umd.min.js"></script>
     <script src="ui/build.js"></script>
-    <script src="ui/api-contract.js"></script>
     <script src="ui/tabs.js"></script>
     <script src="ui/swagger.js"></script>
     <script src="ui/enum.js"></script>
@@ -410,6 +466,8 @@
     <script src="ui/flow.js"></script>
     <script src="ui/examples.js"></script>
     <script src="ui/attribute.js"></script>
+    <script src="ui/change-log.js"></script>
+    <script src="ui/test-cases.js"></script>
     </script>
     <script type="text/javascript">
 

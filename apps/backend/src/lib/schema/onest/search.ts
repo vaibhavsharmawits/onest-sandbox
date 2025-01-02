@@ -107,6 +107,13 @@ export const searchSchema = {
 												type: "string",
 												enum: [
 													"ID",
+													"COMMERCIAL_TYPE",
+													"COMMERCIAL_VALUE",
+													"COMMERCIAL_NAME",
+													"COMMERCIAL_TRIGGERING_STATE",
+													"COMPENSATION_TYPE",
+													"COMPENSATION_TRANSFER_PERIOD",
+													"COMPENSATION_PERCENTAGE_SPLIT",
 												],
 											},
 											value: {
@@ -120,36 +127,29 @@ export const searchSchema = {
 							required: ["descriptor", "list"],
 						},
 						item: {
-							oneOf: [
-								{
-									type: "object",
-									properties: {
-										descriptor: {
-											type: "object",
-											properties: {
-												name: { type: "string" },
-											},
-											required: ["name"],
-										},
-									},
-									required: ["descriptor"],
-								},
-								{
-									type: "object",
-									properties: {
-										tags: {
-											type: "array",
-											items: {
+							type: "object",
+							properties: {
+								tags: {
+									type: "array",
+									items: {
+										oneOf: [
+											{
 												type: "object",
 												properties: {
 													descriptor: {
 														type: "object",
 														properties: {
-															code: { enum: ["LISTING_DETAILS"] },
+															code: { type: "string" },
 														},
 														required: ["code"],
 													},
-													list: {
+												},
+												required: ["descriptor"],
+											},
+											{
+												type: "object",
+												properties: {
+													tags: {
 														type: "array",
 														items: {
 															type: "object",
@@ -157,28 +157,40 @@ export const searchSchema = {
 																descriptor: {
 																	type: "object",
 																	properties: {
-																		code: {
-																			enum: [
-																				"INDUSTRY_TYPE",
-																				"EMPLOYMENT_TYPE",
-																			],
-																		},
+																		code: { enum: ["JOB_DETAILS"] },
 																	},
 																	required: ["code"],
 																},
-																value: { type: "string" },
+																list: {
+																	type: "array",
+																	items: {
+																		type: "object",
+																		properties: {
+																			descriptor: {
+																				type: "object",
+																				properties: {
+																					code: {
+																						enum: ["INDUSTRY_TYPE"],
+																					},
+																				},
+																				required: ["code"],
+																			},
+																			value: { type: "string" },
+																		},
+																		required: ["descriptor", "value"],
+																	},
+																},
 															},
-															required: ["descriptor", "value"],
+															required: ["descriptor", "list"],
 														},
 													},
 												},
-												required: ["descriptor", "list"],
+												required: ["tags"],
 											},
-										},
+										],
 									},
-									required: ["tags"],
 								},
-							],
+							},
 						},
 						tags: {
 							type: "array",
@@ -188,7 +200,11 @@ export const searchSchema = {
 									descriptor: {
 										type: "object",
 										properties: {
-											code: { type: "string", enum: ["BAP_TERMS"] },
+											code: {
+												type: "string",
+
+												enum: ["BAP_TERMS"],
+											},
 										},
 										required: ["code"],
 									},

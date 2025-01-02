@@ -1763,56 +1763,56 @@ export const quoteCreatorOnest = (quoteItems: any) => {
     quote.breakup.push(itemBreakup);
 
     // Process NP Fees and add to breakup
-    if (item.npFeesList && item.npFeesList.length > 0) {
-      // Extract NP Fees tags
-      const npFeesTag = {
-        price: {
-          currency: "INR",
-          value: "300.00", // This can be modified dynamically based on logic
-        },
-        tags: [
-          {
-            descriptor: {
-              code: "QUOTE",
-            },
-            list: [
-              {
-                descriptor: {
-                  code: "TYPE",
-                },
-                value: "item",
-              },
-            ],
-          },
-          // item.npFeesList[0], 
-          {
-            descriptor: {
-              code: "TYPE",
-            },
-            list: [
-              {
-                descriptor: {
-                  code: "TYPE",
-                },
-                value: "misc",
-              },
-            ],
-          },
-        ],
-      };
+    // if (item.npFeesList && item.npFeesList.length > 0) {
+    //   // Extract NP Fees tags
+    //   const npFeesTag = {
+    //     price: {
+    //       currency: "INR",
+    //       value: "300.00", // This can be modified dynamically based on logic
+    //     },
+    //     tags: [
+    //       {
+    //         descriptor: {
+    //           code: "QUOTE",
+    //         },
+    //         list: [
+    //           {
+    //             descriptor: {
+    //               code: "TYPE",
+    //             },
+    //             value: "item",
+    //           },
+    //         ],
+    //       },
+    //       item.npFeesList[0], 
+    //       {
+    //         descriptor: {
+    //           code: "TYPE",
+    //         },
+    //         list: [
+    //           {
+    //             descriptor: {
+    //               code: "TYPE",
+    //             },
+    //             value: "misc",
+    //           },
+    //         ],
+    //       },
+    //     ],
+    //   };
 
-      const npFeesBreakup = {
-        title: "NP Fees",
-        id: item.npFeesId,
-        price: npFeesTag.price,
-        tags: npFeesTag.tags,
-      };
+    //   const npFeesBreakup = {
+    //     title: "NP Fees",
+    //     id: item.npFeesId,
+    //     price: npFeesTag.price,
+    //     tags: npFeesTag.tags,
+    //   };
 
-      quote.breakup.push(npFeesBreakup);
+    //   quote.breakup.push(npFeesBreakup);
       
-      // Add NP Fees to the total quote price
-      quote.price.value = (parseFloat(quote.price.value) + parseFloat(npFeesTag.price.value)).toFixed(2);
-    }
+    //   // Add NP Fees to the total quote price
+    //   quote.price.value = (parseFloat(quote.price.value) + parseFloat(npFeesTag.price.value)).toFixed(2);
+    // }
   });
 
   return quote;

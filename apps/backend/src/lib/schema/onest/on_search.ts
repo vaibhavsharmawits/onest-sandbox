@@ -54,15 +54,6 @@ export const onSearchSchema = {
 				},
 				message_id: {
 					type: "string",
-					allOf: [
-						{
-							not: {
-								const: { $data: "1/transaction_id" },
-							},
-							errorMessage:
-								"Message ID should not be equal to transaction_id: ${1/transaction_id}",
-						},
-					],
 				},
 				timestamp: {
 					type: "string",
@@ -243,9 +234,17 @@ export const onSearchSchema = {
 													},
 													required: ["available"],
 												},
-												application_validity_time: {
+												time: {
 													type: "object",
 													properties: {
+														label: {
+															type: "string",
+															enum: ["enable", "disable"],
+														},
+														timestamp: {
+															type: "string",
+															format: "date-time",
+														},
 														range: {
 															type: "object",
 															properties: {
@@ -261,7 +260,7 @@ export const onSearchSchema = {
 															required: ["start", "end"],
 														},
 													},
-													required: ["range"],
+													required: ["range", "label", "timestamp"],
 												},
 												location_ids: {
 													type: "array",
@@ -342,7 +341,7 @@ export const onSearchSchema = {
 												"category_ids",
 												"descriptor",
 												"quantity",
-												"application_validity_time",
+												"time",
 												"location_ids",
 												"fulfillment_ids",
 												"tags",

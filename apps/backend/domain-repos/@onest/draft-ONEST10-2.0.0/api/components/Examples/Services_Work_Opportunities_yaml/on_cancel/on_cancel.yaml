@@ -73,42 +73,6 @@ value:
                   - descriptor:
                       code: TYPE
                     value: item
-          - title: NP Fees
-            id: "1"
-            price:
-              currency: INR
-              value: "0"
-            tags:
-              - descriptor:
-                  code: QUOTE
-                list:
-                  - descriptor:
-                      code: TYPE
-                    value: item
-              - descriptor:
-                  code: TYPE
-                list:
-                  - descriptor:
-                      code: TYPE
-                    value: misc
-          - title: NP Fees
-            id: "2"
-            price:
-              currency: INR
-              value: "0"
-            tags:
-              - descriptor:
-                  code: QUOTE
-                list:
-                  - descriptor:
-                      code: TYPE
-                    value: item
-              - descriptor:
-                  code: TYPE
-                list:
-                  - descriptor:
-                      code: TYPE
-                    value: misc
         ttl: P1D
       fulfillments:
         - id: "1"
@@ -215,21 +179,6 @@ value:
                 - descriptor:
                     code: VALUE
                   value: "-1100.00"
-            - descriptor:
-                code: QUOTE_TRAIL
-              list:
-                - descriptor:
-                    code: CURRENCY
-                  value: INR
-                - descriptor:
-                    code: ID
-                  value: "1"
-                - descriptor:
-                    code: TYPE
-                  value: misc
-                - descriptor:
-                    code: VALUE
-                  value: "-300.00"
       payments:
           url: "https://ondc.transaction.com/payment"
           params:
