@@ -39,134 +39,134 @@ value:
               list:
                 - code: ID
                   value: "2"
-            - descriptor:
-                code: ACADEMIC_ELIGIBILITY
-                name: Academic Eligibility
-              list:
-                - descriptor:
-                    code: COURSE_NAME
-                    name: Name of the Course
-                  value: Class-X
-                - descriptor:
-                    code: MIN_PERCENTAGE
-                    name: Minimum Percentage of Marks for Eligibility
-                  value: "60"
-                - descriptor:
-                    code: MANDATORY_ELIGIBILITY
-                    name: Mandatory Eligibility
-                  value: "true"
-            - descriptor:
-                code: ACADEMIC_ELIGIBILITY
-                name: Academic Eligibility
-              list:
-                - descriptor:
-                    code: COURSE_NAME
-                    name: Name of the Course
-                  value: Class-XII
-                - descriptor:
-                    code: MIN_PERCENTAGE
-                    name: Minimum Percentage of Marks for Eligibility
-                  value: "60"
-                - descriptor:
-                    code: MANDATORY_ELIGIBILITY
-                    name: Mandatory Eligibility
-                  value: "true"
-            - descriptor:
-                code: ACADEMIC_ELIGIBILITY
-                name: Academic Eligibility
-              list:
-                - descriptor:
-                    code: COURSE_LEVEL
-                    name: Level of the Course
-                  value: Under Graduate
-                - descriptor:
-                    code: MIN_PERCENTAGE
-                    name: Minimum Percentage of Marks for Eligibility
-                  value: "60"
-                - descriptor:
-                    code: MANDATORY_ELIGIBILITY
-                    name: Mandatory Eligibility
-                  value: "true"
-            - descriptor:
-                code: ACADEMIC_ELIGIBILITY
-                name: Academic Eligibility
-              list:
-                - descriptor:
-                    code: COURSE_LEVEL
-                    name: Level of the Course
-                  value: Graduate
-                - descriptor:
-                    code: MANDATORY_ELIGIBILITY
-                    name: Mandatory Eligibility
-                  value: "false"
-            - descriptor:
-                code: JOB_REQUIREMENTS
-                name: Job Requirements
-              list:
-                - descriptor:
-                    code: REQ_EXPERIENCE
-                    name: Required Work Experience in Years
-                  value: "P2Y6M"
-                - descriptor:
-                    code: ADD_PROF_SKILL
-                    name: Skills Required for the Role
-                  value: android-development
-                - descriptor:
-                    code: ADD_PROF_SKILL
-                    name: Skills Required for the Role
-                  value: dev-ops
-                - descriptor:
-                    code: REQ_ADDL_SKILL
-                    name: Additional Skills Required for the Job
-                  value: >-
-                    8+ years of engineering experience in shipping user-facing
-                    production features
-            - descriptor:
-                code: JOB_RESPONSIBILITIES
-                name: Job Responsibilities
-              list:
-                - descriptor:
-                    code: RESPONSIBILITY
-                    name: Responsibility
-                  value: >-
-                    Build frontend experiences for tools (Web, PWA, React
-                    Native)
-                - descriptor:
-                    code: RESPONSIBILITY
-                    name: Responsibility
-                  value: Define long-term technical direction and vision
-                - descriptor:
-                    code: RESPONSIBILITY
-                    name: Responsibility
-                  value: >-
-                    Create reliable interfaces using modern tools like React,
-                    React Native, Typescript, Node.js, Jest, and Webpack.
-                - descriptor:
-                    code: RESPONSIBILITY
-                    name: Responsibility
-                  value: >-
-                    Mentor team members on design techniques and coding
-                    standards.
-            - descriptor:
-                code: JOB_DETAILS
-                name: Listing Details
-              list:
-                - descriptor:
-                    code: INDUSTRY_TYPE
-                    name: Industry Type
-                  value: IT Services & Consulting
-                - descriptor:
-                    code: DEPARTMENT
-                    name: Department
-                  value: Engineering - Software & QA
-                - descriptor:
-                    code: EMPLOYMENT_TYPE
-                    name: Employment Type
-                  value: Full-Time
-                - descriptor:
-                    code: JOB_ROLE
-                    name: Job Role
-                  value: DevOps Engineer
+            # - descriptor:
+            #     code: ACADEMIC_ELIGIBILITY
+            #     name: Academic Eligibility
+            #   list:
+            #     - descriptor:
+            #         code: COURSE_NAME
+            #         name: Name of the Course
+            #       value: Class-X
+            #     - descriptor:
+            #         code: MIN_PERCENTAGE
+            #         name: Minimum Percentage of Marks for Eligibility
+            #       value: "60"
+            #     - descriptor:
+            #         code: MANDATORY_ELIGIBILITY
+            #         name: Mandatory Eligibility
+            #       value: "true"
+            # - descriptor:
+            #     code: ACADEMIC_ELIGIBILITY
+            #     name: Academic Eligibility
+            #   list:
+            #     - descriptor:
+            #         code: COURSE_NAME
+            #         name: Name of the Course
+            #       value: Class-XII
+            #     - descriptor:
+            #         code: MIN_PERCENTAGE
+            #         name: Minimum Percentage of Marks for Eligibility
+            #       value: "60"
+            #     - descriptor:
+            #         code: MANDATORY_ELIGIBILITY
+            #         name: Mandatory Eligibility
+            #       value: "true"
+            # - descriptor:
+            #     code: ACADEMIC_ELIGIBILITY
+            #     name: Academic Eligibility
+            #   list:
+            #     - descriptor:
+            #         code: COURSE_LEVEL
+            #         name: Level of the Course
+            #       value: Under Graduate
+            #     - descriptor:
+            #         code: MIN_PERCENTAGE
+            #         name: Minimum Percentage of Marks for Eligibility
+            #       value: "60"
+            #     - descriptor:
+            #         code: MANDATORY_ELIGIBILITY
+            #         name: Mandatory Eligibility
+            #       value: "true"
+            # - descriptor:
+            #     code: ACADEMIC_ELIGIBILITY
+            #     name: Academic Eligibility
+            #   list:
+            #     - descriptor:
+            #         code: COURSE_LEVEL
+            #         name: Level of the Course
+            #       value: Graduate
+            #     - descriptor:
+            #         code: MANDATORY_ELIGIBILITY
+            #         name: Mandatory Eligibility
+            #       value: "false"
+            # - descriptor:
+            #     code: JOB_REQUIREMENTS
+            #     name: Job Requirements
+            #   list:
+            #     - descriptor:
+            #         code: REQ_EXPERIENCE
+            #         name: Required Work Experience in Years
+            #       value: "P2Y6M"
+            #     - descriptor:
+            #         code: ADD_PROF_SKILL
+            #         name: Skills Required for the Role
+            #       value: android-development
+            #     - descriptor:
+            #         code: ADD_PROF_SKILL
+            #         name: Skills Required for the Role
+            #       value: dev-ops
+            #     - descriptor:
+            #         code: REQ_ADDL_SKILL
+            #         name: Additional Skills Required for the Job
+            #       value: >-
+            #         8+ years of engineering experience in shipping user-facing
+            #         production features
+            # - descriptor:
+            #     code: JOB_RESPONSIBILITIES
+            #     name: Job Responsibilities
+            #   list:
+            #     - descriptor:
+            #         code: RESPONSIBILITY
+            #         name: Responsibility
+            #       value: >-
+            #         Build frontend experiences for tools (Web, PWA, React
+            #         Native)
+            #     - descriptor:
+            #         code: RESPONSIBILITY
+            #         name: Responsibility
+            #       value: Define long-term technical direction and vision
+            #     - descriptor:
+            #         code: RESPONSIBILITY
+            #         name: Responsibility
+            #       value: >-
+            #         Create reliable interfaces using modern tools like React,
+            #         React Native, Typescript, Node.js, Jest, and Webpack.
+            #     - descriptor:
+            #         code: RESPONSIBILITY
+            #         name: Responsibility
+            #       value: >-
+            #         Mentor team members on design techniques and coding
+            #         standards.
+            # - descriptor:
+            #     code: JOB_DETAILS
+            #     name: Listing Details
+            #   list:
+            #     - descriptor:
+            #         code: INDUSTRY_TYPE
+            #         name: Industry Type
+            #       value: IT Services & Consulting
+            #     - descriptor:
+            #         code: DEPARTMENT
+            #         name: Department
+            #       value: Engineering - Software & QA
+            #     - descriptor:
+            #         code: EMPLOYMENT_TYPE
+            #         name: Employment Type
+            #       value: Full-Time
+            #     - descriptor:
+            #         code: JOB_ROLE
+            #         name: Job Role
+            #       value: DevOps Engineer
             # - descriptor:
             #     code: SALARY_INFO
             #     name: Salary Information
