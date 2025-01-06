@@ -54,6 +54,7 @@ type OptionsType = {
 	subscription: string[];
 	b2b: string[];
 	b2c: string[];
+	onest: string[];
 };
 
 type Version = keyof OptionsType;
@@ -65,7 +66,8 @@ export const InitiateRequestSection = () => {
 	const [domainOptions, setDomainOptions] = useState<string[]>([]);
 	const [, setScenarioOptions] = useState<string[]>([]);
 	const [cityOptions, setCityOptions] = useState<string[]>([]);
-	const [version, setVersion] = useState<string>("onest");  // why services ?
+	const [searchOptions, setSearchOptions] = useState<string[]>([]);
+	const [version, setVersion] = useState<string>("onest"); // why services ?
 	const [selectedScenario, setSelectedScenario] = useState<string>("default");
 	const [renderActionFields, setRenderActionFields] = useState(false);
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -159,6 +161,13 @@ export const InitiateRequestSection = () => {
 					?.options?.[version as Version] || [];
 
 			setScenarioOptions(newScenarioOption as string[]);
+		}
+		if (fieldName === "search_type") {
+			console.log("vaibhavvvvv")
+			const newSearchOptions =
+				INITIATE_FIELDS.search.find((field) => field.name === "search_type")
+					?.options || [];
+			setSearchOptions(newSearchOptions as string[]);
 		}
 		if (fieldName === "scenario") {
 			setSelectedScenario(value as string);
@@ -273,7 +282,7 @@ export const InitiateRequestSection = () => {
 				);
 				setMessageType("error");
 			}
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (error: any) {
 			// 	setMessageType("error");
 			// 	if (
@@ -681,6 +690,29 @@ export const InitiateRequestSection = () => {
 																handleFieldChange(field.name, e.target.value)
 															}
 														/>
+													) : domain === "onest" &&
+													  field.name === "search_type" ? (
+														<Select
+															placeholder={field.placeholder}
+															onChange={(
+																_event: React.SyntheticEvent | null,
+																newValue: string | null
+															) =>
+																handleFieldChange(
+																	field.name,
+																	newValue as string
+																)
+															}
+														>
+															<>
+																{console.log(field.options,searchOptions,  "fieldoptionss")}
+																{searchOptions.map((option:string, index: number) => (
+																	<Option value={option} key={option + index}>
+																		{option}
+																	</Option>
+																))}
+															</>
+														</Select>
 													) : null
 												) : null}
 											</React.Fragment>

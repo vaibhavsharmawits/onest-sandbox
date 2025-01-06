@@ -79,9 +79,7 @@ export const SERVICE_DOMAINS = [
 	"ONDC:SRV18",
 ];
 
-export const SUBSCRIPTION_DOMAINS = [
-	"ONDC:MEC10"
-]
+export const SUBSCRIPTION_DOMAINS = ["ONDC:MEC10"];
 
 export const RETAIL_DOMAINS = ["b2b", "b2c"];
 
@@ -99,7 +97,7 @@ export const SERVICES_DOMAINS = {
 	AGRI_SERVICES: "ONDC:SRV14",
 	EQUIPMENT_HIRING_SERVICES: "ONDC:SRV17",
 	BID_AUCTION_SERVICE: "ONDC:SRV18",
-	PRINT_MEDIA: "ONDC:MEC10"
+	PRINT_MEDIA: "ONDC:MEC10",
 };
 
 export const ALL_DOMAINS = {
@@ -108,109 +106,117 @@ export const ALL_DOMAINS = {
 	// Subscription: SUBSCRIPTION_DOMAINS,
 	// Logistics: LOGISTICS_DOMAINS,
 	// Agri: AGRI_DOMAINS,
-	Onest: ONEST_DOMAINS
+	Onest: ONEST_DOMAINS,
 };
 
 export const CITY_CODE = ["std:080", "std:011", "std:999"];
+export const ONEST_SEARCH_SCENARIOS = [
+	"search_by_employment_type",
+	"search_by_industry_type",
+	"search_by_job_location",
+	"search_by_job_provider",
+	"search_by_role_name",
+];
+
 export const AGRI_SCENARIOS = {
-  search: [
-    {
-      name: "Default",
-      scenario: "default",
-    },
-    {
-      name: "Incremental Pull.",
-      scenario: "incremental-pull", // Select Domestic
-    },
-  ],
-  on_search: [
-    {
-      name: "Default",
-      scenario: "default",
-    },
-    {
-      name: "Incremental Pull.",
-      scenario: "incremental-pull", // Select Domestic
-    },
-  ],
-  select: [
-    {
-      name: "Default",
-      scenario: "default",
-    },
-    {
-      name: "Multi Items Successfull Order",
-      scenario: "multi-items-successfull-order",
-    },
-  ],
-  on_select: [
-    {
-      name: "Default",
-      scenario: "default",
-    },
-    {
-      name: "Multi Items Successfull Order",
-      scenario: "multi-items-successfull-order",
-    },
-    {
-      name: "Item_Out_Of_Stock",
-      scenario: "item-out-of-stock",
-    },
-  ],
-  on_status: [
-    {
-      name: "Default",
-      scenario: "default",
-    },
-    {
-      name: "Accepted",
-      scenario: "accepted",
-    },
-    {
-      name: "Packed",
-      scenario: "packed",
-    },
-    {
-      name: "Agent Assigned",
-      scenario: "agent-assigned",
-    },
-    {
-      name: "Order Picked Up",
-      scenario: "order-picked-up",
-    },
-    {
-      name: "Out for Delivery",
-      scenario: "out-for-delivery",
-    },
-    {
-      name: "Delivery",
-      scenario: "delivery",
-    },
-  ],
-  update: [
-    // {
-    //  name:"update-items",
-    //  scenario:"items"
-    // },
-    {
-      name: "liquidate",
-      scenario: "liquidate",
-    },
-    {
-      name: "Reject",
-      scenario: "reject",
-    },
-  ],
-  on_update: [
-    {
-      name: "Default",
-      scenario: "default",
-    },
-    {
-      name: "Reject",
-      scenario: "reject", 
-    },
-  ],
+	search: [
+		{
+			name: "Default",
+			scenario: "default",
+		},
+		{
+			name: "Incremental Pull.",
+			scenario: "incremental-pull", // Select Domestic
+		},
+	],
+	on_search: [
+		{
+			name: "Default",
+			scenario: "default",
+		},
+		{
+			name: "Incremental Pull.",
+			scenario: "incremental-pull", // Select Domestic
+		},
+	],
+	select: [
+		{
+			name: "Default",
+			scenario: "default",
+		},
+		{
+			name: "Multi Items Successfull Order",
+			scenario: "multi-items-successfull-order",
+		},
+	],
+	on_select: [
+		{
+			name: "Default",
+			scenario: "default",
+		},
+		{
+			name: "Multi Items Successfull Order",
+			scenario: "multi-items-successfull-order",
+		},
+		{
+			name: "Item_Out_Of_Stock",
+			scenario: "item-out-of-stock",
+		},
+	],
+	on_status: [
+		{
+			name: "Default",
+			scenario: "default",
+		},
+		{
+			name: "Accepted",
+			scenario: "accepted",
+		},
+		{
+			name: "Packed",
+			scenario: "packed",
+		},
+		{
+			name: "Agent Assigned",
+			scenario: "agent-assigned",
+		},
+		{
+			name: "Order Picked Up",
+			scenario: "order-picked-up",
+		},
+		{
+			name: "Out for Delivery",
+			scenario: "out-for-delivery",
+		},
+		{
+			name: "Delivery",
+			scenario: "delivery",
+		},
+	],
+	update: [
+		// {
+		//  name:"update-items",
+		//  scenario:"items"
+		// },
+		{
+			name: "liquidate",
+			scenario: "liquidate",
+		},
+		{
+			name: "Reject",
+			scenario: "reject",
+		},
+	],
+	on_update: [
+		{
+			name: "Default",
+			scenario: "default",
+		},
+		{
+			name: "Reject",
+			scenario: "reject",
+		},
+	],
 };
 // export const AGRI_OUTPUT_SCENARIOS = {
 //   search: [
@@ -220,7 +226,7 @@ export const AGRI_SCENARIOS = {
 //     },
 //     {
 //       name: "Interval Pull",
-//       scenario: "interval-pull", 
+//       scenario: "interval-pull",
 //     },
 // 		{
 // 			name:"Start",
@@ -234,7 +240,7 @@ export const AGRI_SCENARIOS = {
 //     },
 //     {
 //       name: "Push By Seller ",
-//       scenario: "push-by-seller", 
+//       scenario: "push-by-seller",
 //     },
 //   ],
 //   select: [
@@ -348,7 +354,7 @@ export const AGRI_SCENARIOS = {
 //     },
 //     {
 //       name: "Reject",
-//       scenario: "reject", 
+//       scenario: "reject",
 //     },
 // 		{
 //       name: "Not Awarded",
@@ -374,6 +380,14 @@ export const INITIATE_FIELDS = {
 			type: "text",
 		},
 
+		{
+			name: "search_type",
+			placeholder: "Select Search Type",
+			type: "select",
+			options: {
+				onest: ONEST_SEARCH_SCENARIOS,
+			},
+		},
 		//DEPEND ON SERVICES AND RETAILS
 		{
 			name: "version",
@@ -402,7 +416,7 @@ export const INITIATE_FIELDS = {
 				b2c: B2C_DOMAINS,
 				logistics: LOGISTICS_DOMAINS,
 				agri: AGRI_DOMAINS,
-				onest: ONEST_DOMAINS
+				onest: ONEST_DOMAINS,
 			},
 		},
 		//DEPENDS ON DOMAIN B2B LOGISTICS
@@ -416,7 +430,6 @@ export const INITIATE_FIELDS = {
 			},
 		},
 
-
 		{
 			name: "city",
 			placeholder: "Select A City",
@@ -429,8 +442,8 @@ export const INITIATE_FIELDS = {
 				subscription: CITY_CODE,
 				b2c: B2C_CITY_CODE,
 				agri: CITY_CODE,
-				agrioutput:CITY_CODE,
-				onest:CITY_CODE,
+				agrioutput: CITY_CODE,
+				onest: CITY_CODE,
 				logistics: [],
 			},
 		},
@@ -459,7 +472,9 @@ export const INITIATE_FIELDS = {
 			domainDepended: true,
 			options: {
 				retail: B2B_SCENARIOS["select"].map((each) => each.scenario),
-				subscription: PRINT_MEDIA_SCENARIOS["select"].map((each) => each.scenario),
+				subscription: PRINT_MEDIA_SCENARIOS["select"].map(
+					(each) => each.scenario
+				),
 				b2b: B2B_SCENARIOS["select"].map((each) => each.scenario),
 				agri: AGRI_SCENARIOS["select"].map((each) => each.scenario),
 				// agrioutput:AGRI_OUTPUT_SCENARIOS["select"].map((each)=>each.scenario)
@@ -568,8 +583,7 @@ export const INITIATE_FIELDS = {
 				retail: ["001"],
 				subscription: ["001"],
 				logistics: ["TAT Breach, 007"],
-				agri: ["010"]
-
+				agri: ["010"],
 			},
 		},
 		{
