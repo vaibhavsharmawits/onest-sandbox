@@ -5,11 +5,11 @@ search:
     search - by job provider:
       $ref: ./search/search_by_job_provider.yaml
     search - by location of the job:
-      $ref: ./search/search_by_location_of_the_job.yaml
+      $ref: ./search/search_by_job_location.yaml
     search - by industry type:
       $ref: ./search/search_by_industry_type.yaml
-    search - by employment type:
-      $ref: ./search/search_by_employment_type.yaml
+    search - by job type:
+      $ref: ./search/search_by_job_type.yaml
     search - incremental start:
       $ref: ./search/search_inc_start.yaml
     search - incremental stop:

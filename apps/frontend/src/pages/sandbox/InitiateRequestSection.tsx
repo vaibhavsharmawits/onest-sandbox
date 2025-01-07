@@ -129,6 +129,13 @@ export const InitiateRequestSection = () => {
 	) => {
 		setRenderActionFields(false);
 		setAction(newValue as string);
+		console.log("action in handle selection", action);
+		// if(action === "search"){
+		// 	const newSearchOptions =
+		// 		INITIATE_FIELDS.search.find((field) => field.name === "search_type")
+		// 			?.options || [];
+		// 	setSearchOptions(newSearchOptions as string[]);
+		// }
 		setFormState({});
 		setAllowSubmission(false);
 		setTimeout(() => setRenderActionFields(true), 500);
@@ -142,6 +149,7 @@ export const InitiateRequestSection = () => {
 
 	const handleFieldChange = (fieldName: string, value: string) => {
 		if (fieldName === "version") {
+			console.log("here");
 			setVersion(value as string);
 			/****Write the logic for changes the domain options based on version selection */
 			const newDomainOptions =
@@ -162,13 +170,13 @@ export const InitiateRequestSection = () => {
 
 			setScenarioOptions(newScenarioOption as string[]);
 		}
-		if (fieldName === "search_type") {
-			console.log("vaibhavvvvv")
-			const newSearchOptions =
-				INITIATE_FIELDS.search.find((field) => field.name === "search_type")
-					?.options || [];
-			setSearchOptions(newSearchOptions as string[]);
-		}
+		// if (fieldName === "search_type") {
+		// 	console.log("vaibhavvvvv")
+		// 	const newSearchOptions =
+		// 		INITIATE_FIELDS.search.find((field) => field.name === "search_type")
+		// 			?.options || [];
+		// 	setSearchOptions(newSearchOptions as string[]);
+		// }
 		if (fieldName === "scenario") {
 			setSelectedScenario(value as string);
 			/****Write the logic for changes the domain options based on version selection */
@@ -241,6 +249,10 @@ export const InitiateRequestSection = () => {
 				?.options?.[version as Version] || [];
 
 		setScenarioOptions(newScenarioOption as string[]);
+		const newSearchOptions =
+			INITIATE_FIELDS.search.find((field) => field.name === "search_type")
+				?.options?.[version as Version] || [];
+		setSearchOptions(newSearchOptions as string[]);
 	}, [action, domain, formState, version]);
 
 	const handleSubmit = async () => {
@@ -704,14 +716,13 @@ export const InitiateRequestSection = () => {
 																)
 															}
 														>
-															<>
-																{console.log(field.options,searchOptions,  "fieldoptionss")}
-																{searchOptions.map((option:string, index: number) => (
+															{searchOptions?.map(
+																(option: string, index: number) => (
 																	<Option value={option} key={option + index}>
 																		{option}
 																	</Option>
-																))}
-															</>
+																)
+															)}
 														</Select>
 													) : null
 												) : null}
