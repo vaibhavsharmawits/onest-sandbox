@@ -5,6 +5,7 @@ const redisOptions: RedisOptions = {
 	port: (process.env.REDIS_PORT || 6379) as number,
 	username: process.env.REDIS_USERNAME,
 	password: process.env.REDIS_PASSWORD,
+	maxRetriesPerRequest: (process.env.REDIS_MAX_RETRIES || 100) as number,
 };
 
 export type TransactionType = {
