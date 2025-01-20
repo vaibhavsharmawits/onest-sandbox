@@ -23,7 +23,7 @@ RUN npm i --force
 COPY --from=pruner /app/out/full/apps/backend .
 
 # Generate the Prisma Client
-RUN npx prisma generate
+RUN npx prisma generate 
 
 # Builds the Express Project
 # RUN npm run build

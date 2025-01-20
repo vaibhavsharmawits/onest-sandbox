@@ -1,7 +1,7 @@
-import { MockRequestSection } from '../../../../components'
+// import { MockRequestSection } from '../../../../components'
 
-export const AgriEquipmentServicesMock = () => {
-  return (
-    <MockRequestSection/>
-  )
-}
+// export const AgriEquipmentServicesMock = () => {
+//   return (
+//     <MockRequestSection/>
+//   )
+// }
