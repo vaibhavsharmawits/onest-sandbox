@@ -87,7 +87,7 @@ message:
       fulfillment_ids:
         description: "The list of fulfillment IDs associated with the item."
         required: mandatory
-        usage: ["1"]
+        usage: "F1"
         reference: null
     quote:
       price:
@@ -104,28 +104,28 @@ message:
       breakup:
         item:
           id:
-            description: "The unique identifier of the item in the quote breakup."
+            description: "The unique identifier for the quote breakup item."
             required: mandatory
             usage: "0253719F295521CED39EC9C2F3C8DCDE"
             reference: null
           price:
             currency:
-              description: "The currency of the item's price."
+              description: "The currency of the breakup price."
               required: mandatory
               usage: "INR"
               reference: null
             value:
-              description: "The value of the item's price."
+              description: "The value of the breakup price."
               required: mandatory
-              usage: "1100"
+              usage: "1150"
               reference: null
           title:
-            description: "The title associated with the quote breakup."
+            description: "The title of the breakup item."
             required: mandatory
-            usage: "Fullstack Engineer"
+            usage: "item"
             reference: null
       ttl:
-        description: "The time-to-live for the quoted price in ISO 8601 format."
+        description: "The Time-to-Live (TTL) for the quoted order."
         required: mandatory
         usage: "P1D"
         reference: null
@@ -133,7 +133,7 @@ message:
       id:
         description: "The unique identifier for the fulfillment."
         required: mandatory
-        usage: "1"
+        usage: "F1"
         reference: null
       type:
         description: "The type of fulfillment."
@@ -147,66 +147,11 @@ message:
             required: mandatory
             usage: "APPLICATION_IN_PROGRESS"
             reference: null
-          name:
-            description: Fulfillment state name
-            required: mandatory
-            usage: Application In Progress
-            reference: if any
         updated_at:
           description: Last state update timestamp
           required: mandatory
           usage: 2023-02-22T11:50:46.742Z
           reference: if any
-      customer:
-        person:
-          name:
-            description: "The name of the customer."
-            required: mandatory
-            usage: "Sanjay"
-            reference: null
-          gender:
-            description: "The gender of the customer."
-            required: mandatory
-            usage: "Male"
-            reference: null
-          age:
-            description: "The age of the customer."
-            required: mandatory
-            usage: "35"
-            reference: null
-          skills:
-            code:
-              description: "The code representing the skill."
-              required: mandatory
-              usage: "Android"
-              reference: null
-            name:
-              description: "The name of the skill."
-              required: mandatory
-              usage: "Android"
-              reference: null
-          languages:
-            code:
-              description: "The code of the language."
-              required: mandatory
-              usage: "en"
-              reference: null
-            name:
-              description: "The name of the language."
-              required: mandatory
-              usage: "english"
-              reference: null
-        contact:
-            phone:
-              description: "The phone number of the customer."
-              required: mandatory
-              usage: "9999999999999"
-              reference: null
-            email:
-              description: "The email address of the customer."
-              required: mandatory
-              usage: "abc@abc.bc"
-              reference: null
     payments:
       url:
         description: "The URL for payment processing."
@@ -227,7 +172,7 @@ message:
         amount:
           description: "The transaction amount."
           required: mandatory
-          usage: "1400.00"
+          usage: "1150.00"
           reference: null
       status:
         description: "The payment status."

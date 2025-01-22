@@ -17,12 +17,11 @@ value:
     timestamp: "2024-09-04T12:34:561Z"
     ttl: PT30M
   message:
-    update_target: fulfillments
+    update_target: fulfillment
     order:
       id: "1677140405881"
       fulfillments:
-        - id: fulfillment_id_value
-          type: FULFILLMENT_TYPE_VALUE
-          contact:
-            phone: "9999999999"
-            email: abc@abc.bc
+        - id: F3
+          state:
+            descriptor:
+              code: OFFER_ACCEPTED

@@ -97,13 +97,13 @@ message:
       fulfillment_ids:
         description: "Fulfillment ID associated with the item."
         required: mandatory
-        usage: "1"
+        usage: "F1"
         reference: null
     fulfillments:
         id:
           description: "The unique identifier of the fulfillment option."
           required: mandatory
-          usage: "1"
+          usage: "F1"
           reference: null
         type:
           description: "Type of fulfillment"
@@ -115,12 +115,7 @@ message:
             code:
               description: Fulfillment state code
               required: mandatory
-              usage: APPLICATION_STARTED
-              reference: if any
-            name:
-              description: Fulfillment state name
-              required: mandatory
-              usage: Application started
+              usage: APPLICATION_SUBMITTED
               reference: if any
           updated_at:
             description: Last state update timestamp
@@ -145,32 +140,54 @@ message:
               usage: "35"
               reference: null
             skills:
-              code:
+              name:
                 description: "The code of the skill."
                 required: mandatory
                 usage: "Android"
                 reference: null
-              name:
-                description: "The name of the skill."
-                required: mandatory
-                usage: "Android"
-                reference: null
             languages:
-              code:
+              name:
                 description: "The language code."
                 required: mandatory
                 usage: "en"
                 reference: null
-              name:
-                  description: "The language name."
+            creds:
+                id:
+                  description: "The unique identifier for the credential."
                   required: mandatory
-                  usage: "English"
+                  usage: "D1"
+                  reference: null
+                descriptor:
+                  name:
+                    description: "The name of the credential (e.g., PAN_CARD)."
+                    required: mandatory
+                    usage: "PAN_CARD"
+                    reference: null
+                  short_desc:
+                    description: "A brief description of the credential (e.g., PAN Card information)."
+                    required: mandatory
+                    usage: "PAN Card information"
+                    reference: null
+                  long_desc:
+                    description: "A detailed explanation of the credential (e.g., Permanent Account Number)."
+                    required: mandatory
+                    usage: "Permanent Account Number"
+                    reference: null
+                url:
+                  description: "The URL where the credential image or file is hosted."
+                  required: mandatory
+                  usage: "https://example.com/pan_card.jpeg"
+                  reference: null
+                type:
+                  description: "The type of the credential file (e.g., file format such as jpeg, pdf)."
+                  required: mandatory
+                  usage: "jpeg"
                   reference: null
           contact:
             phone:
               description: "The phone number of the customer."
               required: mandatory
-              usage: "9999999999"
+              usage: "+91-1234567890"
               reference: null
             email:
               description: "The email of the customer."
@@ -192,30 +209,31 @@ message:
         value:
           description: "The value of the quoted price."
           required: mandatory
-          usage: "1400"
+          usage: "1150"
           reference: null
       breakup:
-        id:
-          description: "The unique identifier for the quote breakup item."
-          required: mandatory
-          usage: "0253719F295521CED39EC9C2F3C8DCDE"
-          reference: null
-        price:
-          currency:
-            description: "The currency of the breakup price."
+        item:
+          id:
+            description: "The unique identifier for the quote breakup item."
             required: mandatory
-            usage: "INR"
+            usage: "0253719F295521CED39EC9C2F3C8DCDE"
             reference: null
-          value:
-            description: "The value of the breakup price."
+          price:
+            currency:
+              description: "The currency of the breakup price."
+              required: mandatory
+              usage: "INR"
+              reference: null
+            value:
+              description: "The value of the breakup price."
+              required: mandatory
+              usage: "1150"
+              reference: null
+          title:
+            description: "The title of the breakup item."
             required: mandatory
-            usage: "1100"
+            usage: "item"
             reference: null
-        title:
-          description: "The title of the breakup item."
-          required: mandatory
-          usage: "Fullstack Engineer"
-          reference: null
     payments:
       url:
         description: "The URL for payment processing."
@@ -236,7 +254,7 @@ message:
         amount:
           description: "The transaction amount."
           required: mandatory
-          usage: "1400.00"
+          usage: "1150.00"
           reference: null
       status:
         description: "The payment status."
