@@ -381,8 +381,74 @@ export const initSchema = {
               },
               required: ["price", "breakup", "ttl"],
             },
+            payments: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'string',
+                    enum: ['NOT-PAID', 'PAID'], // Adjust as per possible statuses
+                  },
+                  type: {
+                    type: 'string',
+                    enum: ['ON-ORDER', 'SETTLED'], // Adjust as per possible types
+                  },
+                  collected_by: {
+                    type: 'string',
+                    enum: ['BAP', 'OTHER'], // Adjust based on valid values for 'collected_by'
+                  },
+                  tags: {
+                    type: 'object',
+                    properties: {
+                      descriptor: {
+                        type: 'object',
+                        properties: {
+                          code: {
+                            type: 'string',
+                            enum: ['SETTLEMENT_DETAILS'], // Adjust based on valid codes
+                          },
+                        },
+                        required: ['code'],
+                      },
+                      list: {
+                        type: 'array',
+                        items: {
+                          type: 'object',
+                          properties: {
+                            descriptor: {
+                              type: 'object',
+                              properties: {
+                                code: {
+                                  type: 'string',
+                                  enum: [
+                                    'SETTLEMENT_COUNTERPARTY',
+                                    'SETTLEMENT_BANK_ACCOUNT_NO',
+                                    'SETTLEMENT_IFSC_CODE',
+                                    'BENEFICIARY_NAME',
+                                    'BANK_NAME',
+                                    'BRANCH_NAME',
+                                  ], // Adjust with other valid codes if needed
+                                },
+                              },
+                              required: ['code'],
+                            },
+                            value: {
+                              type: 'string',
+                            },
+                          },
+                          required: ['descriptor', 'value'],
+                        },
+                      },
+                    },
+                    required: ['descriptor', 'list'],
+                  },
+                },
+                required: ['status', 'type', 'collected_by', 'tags'],
+              },
+            }     
           },
-          required: ["provider", "items", "fulfillments", "quote"],
+          required: ["provider", "items", "fulfillments", "quote","payments"],
         },
       },
       required: ["order"],

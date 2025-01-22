@@ -16,7 +16,7 @@ async function send_response(
 	res_obj: any,
 	transaction_id: string,
 	action: string,
-  search_type:string = "search_by_job_type",
+  search_type:string = "search_by_employment_type",
 	scenario: any = "",
 	version: any = "",
 	bpp_uri: string = "", // for search
@@ -76,12 +76,21 @@ async function send_response(
 		} else {
 			uri = `${bpp_uri}/${action}${scenario ? `?scenario=${scenario}` : ""}`;
 		}
-
+		let response:any
 		try {
       console.log("resObj", res_obj);
-			const response = await axios.post(uri, res_obj, {
+			console.log("uri",uri);
+			// uri = "http://localhost:3000/api/onest/bpp/search";
+			console.log("🚀 ~ uri2:", uri)
+			try {
+			response = await axios.post(uri, res_obj, {
 				headers: { ...headers },
 			});
+				console.log(response.data, "response")
+			} catch (error: any) {
+				console.error('Error details:', error.toJSON ? error.toJSON() : error);
+			}
+			
 			await redis.set(
 				`${transaction_id}-${action}-from-server-${id}-${time_now}`,
 				JSON.stringify({
@@ -93,6 +102,7 @@ async function send_response(
 				})
 			);
 		} catch (err: any) {
+			console.log("🚀 ~ err:", err)
 			if (err instanceof AxiosError) {
 				res.status(err.response?.status || 500).json(err.response?.data || "");
 				return;
