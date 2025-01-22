@@ -8,5 +8,7 @@ ONDC:ONEST10 - Work Opportunities:
     BRD: ONEST - Work Opportunities : <a href="https://docs.google.com/document/d/1cuvt_w9qSv7XpLXpY4KCq5gmrsQSqF8e3VLxOhpfO0g">link</a>
     <br/><br/>
     Taxonomy: ONEST - Work Opportunities : <a href="https://docs.google.com/spreadsheets/d/1Go22ou013hE-fxpjMd_XuM111l8x8TuMsF_nsjvB3so">link</a>
+    <br/><br/>
+    Attributes For Profiling: ONEST - Work Opportunities : <a href="https://docs.google.com/spreadsheets/d/1FIcpfypkN4rdWG6ZH3UKgP-lPnkJ6gkT8czwi0urLcA/edit?gid=0#gid=0">link</a>
   example_set:
     $ref: "./Services_Work_Opportunities_yaml/index.yaml"

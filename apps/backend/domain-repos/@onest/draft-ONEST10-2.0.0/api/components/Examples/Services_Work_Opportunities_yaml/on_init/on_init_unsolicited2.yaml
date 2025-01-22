@@ -8,13 +8,13 @@ value:
     bpp_id: job-hub.bpp.io
     bpp_uri: https://job-hub.bpp.io
     transaction_id: a9aaecca-10b7-4d19-b640-b047a7c62195
-    message_id: af58aa7b-6745-47d0-9b0d-62dcb262ee87
+    message_id: 9f06d8ef-ac19-40a9-9d7b-37f2f1fdb836
     location:
       city:
         code: std:080
       country:
         code: IND
-    timestamp: "2023-02-23T10:14:051Z"
+    timestamp: "2023-02-23T10:18:456Z"
     ttl: PT30S
   message:
     order:
@@ -24,22 +24,6 @@ value:
         - id: 0253719F295521CED39EC9C2F3C8DCDE
           fulfillment_ids:
             - "F3"
-          xinput:
-            required: true
-            head:
-              descriptor:
-                name: Application Form
-              index:
-                min: 1
-                cur: 1
-                max: 2
-              headings:
-                - Candidate Details
-            form:
-              mime_type: text/html
-              url: >-
-                https://6vs8xnx5i7.jobhub.co.in/loans-kyc/xinput/formid/a23f2fdfbbb8ac402bfd54f-1
-              resubmit: false
           tags:
             - descriptor:
                 code: NP_FEES
@@ -74,8 +58,8 @@ value:
           type: "lead & recruitment"
           state:
             descriptor:
-              code: APPLICATION_IN_PROGRESS
-            updated_at: "2023-02-23T10:14:051Z"
+              code: APPLICATION_FILLED
+          updated_at: "2023-02-23T10:18:456Z"
           customer:
             person:
               name: Sanjay

@@ -136,6 +136,18 @@ steps:
     example:
       $ref: "../../Examples/Services_Work_Opportunities_yaml/on_init/on_init.yaml"
   - summary: Description
+    api: on_init (unsolicited)
+    description: If BPP wants to collect additional details of the user, it will send an xinput form in the on_init request.
+    reference: if any
+    example:
+      $ref: "../../Examples/Services_Work_Opportunities_yaml/on_init/on_init_unsolicited.yaml"
+  - summary: Description
+    api: on_init (unsolicited 2)
+    description: If BPP wants to collect additional details of the user.
+    reference: if any
+    example:
+      $ref: "../../Examples/Services_Work_Opportunities_yaml/on_init/on_init_unsolicited2.yaml"
+  - summary: Description
     api: confirm
     description: BAP confirms user wants to submit the job application.
     example:
@@ -158,6 +170,18 @@ steps:
     reference: if any
     example:
       $ref: "../../Examples/Services_Work_Opportunities_yaml/on_status/on_status.yaml"
+  - summary: Description
+    api: on_status (unsolicited)
+    description: BPP sends confirmation of submission of job application.
+    reference: if any
+    example:
+      $ref: "../../Examples/Services_Work_Opportunities_yaml/on_status/on_status_unsolicited.yaml"
+  - summary: Description
+    api: on_status (unsolicited 2)
+    description: BPP sends confirmation of submission of job application.
+    reference: if any
+    example:
+      $ref: "../../Examples/Services_Work_Opportunities_yaml/on_status/on_status_unsolicited2.yaml"
   - summary: Description
     api: cancel
     description: BAP sends request for cancellation of job application.

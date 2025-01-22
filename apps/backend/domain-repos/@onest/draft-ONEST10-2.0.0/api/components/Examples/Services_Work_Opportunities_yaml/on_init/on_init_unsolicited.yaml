@@ -23,7 +23,7 @@ value:
       items:
         - id: 0253719F295521CED39EC9C2F3C8DCDE
           fulfillment_ids:
-            - "1"
+            - "F3"
           xinput:
             required: true
             head:
@@ -43,119 +43,120 @@ value:
           tags:
             - descriptor:
                 code: NP_FEES
-                name: "Np Fees"
               list:
                 - code: ID
                   value: "1"
             - descriptor:
                 code: NP_FEES
-                name: "Np Fees"
               list:
                 - code: ID
                   value: "2"
       quote:
         price:
           currency: INR
-          value: "1100"
+          value: "1150"
         breakup:
-          - id: 0253719F295521CED39EC9C2F3C8DCDE
-            price:
-              currency: INR
-              value: "1100"
-            title: Fullstack Engineer
-            tags:
-              - descriptor:
-                  code: TYPE
-                list:
-                  - descriptor:
-                      code: TYPE
-                    value: item
-        ttl: P1D
+          - item:
+              id: "0253719F295521CED39EC9C2F3C8DCDE"
+              price:
+                  currency: INR
+                  value: "1100"
+              title: "item"
+          - item:
+              id: "a3a7fe79-f26e-4698-ad0f-874e6b5db085"
+              price:
+                  currency: INR
+                  value: "50"
+              title: "tax"
+        ttl: "P1D"
       fulfillments:
-        - id: "1"
-          type: lead
+        - id: "F3"
+          type: "lead & recruitment"
+          state:
+            descriptor:
+              code: APPLICATION_IN_PROGRESS
+            updated_at: "2023-02-23T10:16:123Z"
           customer:
             person:
               name: Sanjay
               gender: Male
               age: "35"
               skills:
-                - code: Android
-                  name: Android
-                - code: AWS
-                  name: AWS
+                - name: Android
+                - name: AWS
               languages:
-                - code: en
-                  name: english
-                - code: ml
-                  name: Malayalam
-                - code: hi
-                  name: Hindi
-              tags:
-                - descriptor:
-                    code: EMP_DETAILS
-                    name: Employee Details
-                  list:
-                    - descriptor:
-                        code: EXPECTED_SALARY
-                        name: Expected Salary
-                      value: "1000000"
-                    - descriptor:
-                        code: TOTAL_EXPERIENCE
-                        name: Total Experience
-                      value: "P4Y"
-                - descriptor:
-                    code: DOCUMENTS
-                    name: Documents
-                  list:
-                    - descriptor:
-                        code: DOC_TYPE
-                        name: Document Type
-                      value: resume
-                    - descriptor:
-                        code: LINK
-                        name: Document Link
-                      value: https://example.com/resume.pdf
-                    - descriptor:
-                        code: FILE_FORMAT
-                        name: File Format
-                      value: pdf
+                - name: en
+                - name: ml
+                - name: hi
+              creds:
+                - id: "D1"
+                  descriptor:
+                    name: "PAN_CARD"
+                    short_desc: "PAN Card information"
+                    long_desc: "Permanent Account Number"
+                  url: "https://example.com/pan_card.jpeg"
+                  type: "jpeg"
+                - id: "D2"
+                  descriptor:
+                    name: "AADHAAR_CARD"
+                    short_desc: "Aadhaar Card information"
+                    long_desc: "Unique Identification Number"
+                  url: "https://example.com/aadhaar_card.jpeg"
+                  type: "pdf"
+                - id: "D3"
+                  descriptor:
+                    name: "VOTER_ID"
+                    short_desc: "Voter ID information"
+                    long_desc: "Election Commission ID"
+                  url: "https://example.com/voter_id.jpeg"
+                  type: "jpeg"
+                - id: "D4"
+                  descriptor:
+                    name: "PASSPORT"
+                    short_desc: "Passport information"
+                    long_desc: "International Travel Document"
+                  url: "https://example.com/passport.jpeg"
+                  type: "jpeg"
+                - id: "D5"
+                  descriptor:
+                    name: "DRIVING_LICENSE"
+                    short_desc: "Driving License information"
+                    long_desc: "License to Drive"
+                  url: "https://example.com/driving_license.jpeg"
+                  type: "jpeg"
+                - id: "D6"
+                  descriptor:
+                    name: "RESUME"
+                    short_desc: "Summary of qualifications, work experience, and education."
+                    long_desc: "A comprehensive document showcasing an individual's career achievements, skills, work history, education, certifications, and professional experience."
+                  url: "https://example.com/resume.pdf"
+                  type: "pdf"
             contact:
-              phone: "9999999999"
+              phone: "+91-1234567890"
               email: abc@abc.bc
       payments:
-        url: "https://ondc.transaction.com/payment"
-        status: "NOT-PAID"
-        type: "ON-ORDER"
-        collected_by: "BAP"
-        tags:
-            descriptor:
-              code: "SETTLEMENT_DETAILS"
-            list:
-              - descriptor:
-                  code: "SETTLEMENT_COUNTERPARTY"
-                value: "seller-app"
-              - descriptor:
-                  code: "SETTLEMENT_PHASE"
-                value: "sale-amount"
-              - descriptor:
-                  code: "SETTLEMENT_TYPE"
-                value: "upi"
-              - descriptor:
-                  code: "UPI_ADDRESS"
-                value: "gft@oksbi"
-              - descriptor:
-                  code: "SETTLEMENT_BANK_ACCOUNT_NO"
-                value: "XXXXXXXXXX"
-              - descriptor:
-                  code: "SETTLEMENT_IFSC_CODE"
-                value: "XXXXXXXXX"
-              - descriptor:
-                  code: "BENEFICIARY_NAME"
-                value: "xxxxx"
-              - descriptor:
-                  code: "BANK_NAME"
-                value: "xxxx"
-              - descriptor:
-                  code: "BRANCH_NAME"
-                value: "xxxx"
+        - status: "NOT-PAID"
+          type: "ON-ORDER"
+          collected_by: "BAP"
+          tags:
+              descriptor:
+                code: "SETTLEMENT_DETAILS"
+              list:
+                - descriptor:
+                    code: "SETTLEMENT_COUNTERPARTY"
+                  value: "seller-app"
+                - descriptor:
+                    code: "SETTLEMENT_BANK_ACCOUNT_NO"
+                  value: "XXXXXXXXXX"
+                - descriptor:
+                    code: "SETTLEMENT_IFSC_CODE"
+                  value: "XXXXXXXXX"
+                - descriptor:
+                    code: "BENEFICIARY_NAME"
+                  value: "xxxxx"
+                - descriptor:
+                    code: "BANK_NAME"
+                  value: "xxxx"
+                - descriptor:
+                    code: "BRANCH_NAME"
+                  value: "xxxx"

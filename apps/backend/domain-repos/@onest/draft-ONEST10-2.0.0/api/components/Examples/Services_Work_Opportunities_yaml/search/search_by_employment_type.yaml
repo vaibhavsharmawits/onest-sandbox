@@ -19,7 +19,6 @@ value:
       payment:
         descriptor:
           code: NP_FEES
-          name: "Np Fees"
         list:
           - code: ID
             value: "1"
@@ -29,7 +28,7 @@ value:
               code: JOB_DETAILS
             list:
               - descriptor:
-                  code: EMPLOYMENT_TYPE
+                  code: JOB_TYPE
                 value: full-time
       tags:
         - descriptor:

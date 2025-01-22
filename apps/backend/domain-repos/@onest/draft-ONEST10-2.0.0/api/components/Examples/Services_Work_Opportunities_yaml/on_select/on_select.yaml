@@ -21,40 +21,38 @@ value:
       provider:
         id: "1"
       fulfillments:
-        - id: "1"
-          type: "lead"
+        - id: "F3"
+          type: "lead & recruitment"
       items:
         - id: 0253719F295521CED39EC9C2F3C8DCDE
           fulfillment_ids:
-            - "1"
+            - "F3"
           tags:
           - descriptor:
               code: NP_FEES
-              name: "Np Fees"
             list:
               - code: ID
                 value: "1"
           - descriptor:
               code: NP_FEES
-              name: "Np Fees"
             list:
               - code: ID
                 value: "2"
       quote:
         price:
           currency: INR
-          value: "1100"
+          value: "1150"
         breakup:
-          - id: 0253719F295521CED39EC9C2F3C8DCDE
-            price:
-              currency: INR
-              value: "1100"
-            title: Fullstack Engineer
-            tags:
-              - descriptor:
-                  code: TYPE
-                list:
-                  - descriptor:
-                      code: TYPE
-                    value: item
-        ttl: P1D
+          - item:
+              id: "0253719F295521CED39EC9C2F3C8DCDE"
+              price:
+                  currency: INR
+                  value: "1100"
+              title: "item"
+          - item:
+              id: "a3a7fe79-f26e-4698-ad0f-874e6b5db085"
+              price:
+                  currency: INR
+                  value: "50"
+              title: "tax"
+        ttl: "P1D"

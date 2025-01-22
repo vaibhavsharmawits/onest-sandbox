@@ -25,7 +25,7 @@ value:
       items:
         - id: 0253719F295521CED39EC9C2F3C8DCDE
           fulfillment_ids:
-            - "1"
+            - "F3"
             - C1
           time:
             range:
@@ -34,134 +34,47 @@ value:
           tags:
             - descriptor:
                 code: NP_FEES
-                name: "Np Fees"
               list:
                 - code: ID
                   value: "1"
             - descriptor:
                 code: NP_FEES
-                name: "Np Fees"
               list:
                 - code: ID
                   value: "2"
             - descriptor:
                 code: CANCEL_REQUEST
-                name: Cancel request
               list:
                 - descriptor:
                     code: REASON_ID
-                    name: Reason id
                   value: "001"
                 - descriptor:
                     code: INITIATED_BY
-                    name: Initiated by
                   value: Subscriber ID
       quote:
         price:
           currency: INR
           value: "0"
         breakup:
-          - id: 0253719F295521CED39EC9C2F3C8DCDE
-            price:
-              currency: INR
-              value: "0"
-            title: Fullstack Engineer
-            tags:
-              - descriptor:
-                  code: TYPE
-                list:
-                  - descriptor:
-                      code: TYPE
-                    value: item
-        ttl: P1D
+          - item:
+              id: "0253719F295521CED39EC9C2F3C8DCDE"
+              price:
+                  currency: INR
+                  value: "0"
+              title: "item"
+          - item:
+              id: "a3a7fe79-f26e-4698-ad0f-874e6b5db085"
+              price:
+                  currency: INR
+                  value: "0"
+              title: "tax"
+        ttl: "P1D"
       fulfillments:
-        - id: "1"
-          type: lead
+        - id: "F3"
+          type: "lead & recruitment"
           state:
             descriptor:
               code: CANCELLED
-          customer:
-            person:
-              name: Sanjay
-              gender: Male
-              age: "35"
-              skills:
-                - code: Android
-                  name: Android
-                - code: AWS
-                  name: AWS
-              languages:
-                - code: en
-                  name: english
-                - code: ml
-                  name: Malayalam
-                - code: hi
-                  name: Hindi
-              tags:
-                - descriptor:
-                    code: CURRENT_EXPERIENCE
-                    name: Current Experience
-                  list:
-                    - descriptor:
-                        code: EXP_YEARS
-                        name: Experience
-                      value: P4Y2M
-                    - descriptor:
-                        code: CURRENT_COMPANY
-                        name: Current Company
-                      value: ABC tech
-                - descriptor:
-                    code: SALARY_DETAILS
-                    name: Salary Details
-                  list:
-                    - descriptor:
-                        code: EXPECTED_SALARY
-                        name: Expected Salary
-                      value: "80000"
-                    - descriptor:
-                        code: CURRENT_SALARY
-                        name: Current Salary
-                      value: "50000"
-                - descriptor:
-                    code: DOCUMENTS
-                    name: Documents
-                  list:
-                    - descriptor:
-                        code: RESUME
-                        name: Resume
-                      value: https://link-to-the-document.com
-            contact:
-              phone: "9999999999"
-              email: abc@abc.bc
-          tags:
-            - descriptor:
-                code: DISTRIBUTOR_DETAILS
-                name: Distributor Details
-              list:
-                - descriptor:
-                    code: DISTRIBUTOR_ID
-                    name: Distributor Id
-                  value: PNB
-                - descriptor:
-                    code: DISTRIBUTOR_NAME
-                    name: Distributor Name
-                  value: Pay Near By
-                - descriptor:
-                    code: DISTRIBUTOR_PHONE
-                    name: Distributor Phone
-                  value: "9123456789"
-                - descriptor:
-                    code: DISTRIBUTOR_EMAIL
-                    name: Distributor Email
-                  value: support@pnb.com
-                - descriptor:
-                    code: AGENT_ID
-                    name: Agent Id
-                  value: agent-123
-                - descriptor:
-                    code: AGENT_VERIFIED
-                    name: Agent Verified
-                  value: "true"
         - id: C1
           tags:
             - descriptor:
@@ -179,43 +92,60 @@ value:
                 - descriptor:
                     code: VALUE
                   value: "-1100.00"
-      payments:
-          url: "https://ondc.transaction.com/payment"
-          params:
-            currency: "INR"
-            transaction_id: "3937"
-            amount: "1700.00"
-          status: "PAID"
-          type: "ON-ORDER"
-          collected_by: "BAP"
-          tags:
-              descriptor:
-                code: "SETTLEMENT_DETAILS"
+            - descriptor:
+                code: QUOTE_TRAIL
               list:
                 - descriptor:
-                    code: "SETTLEMENT_COUNTERPARTY"
-                  value: "seller-app"
+                    code: CURRENCY
+                  value: INR
                 - descriptor:
-                    code: "SETTLEMENT_PHASE"
-                  value: "sale-amount"
+                    code: ID
+                  value: a3a7fe79-f26e-4698-ad0f-874e6b5db085
                 - descriptor:
-                    code: "SETTLEMENT_TYPE"
-                  value: "upi"
+                    code: TYPE
+                  value: TAX
                 - descriptor:
-                    code: "UPI_ADDRESS"
-                  value: "gft@oksbi"
-                - descriptor:
-                    code: "SETTLEMENT_BANK_ACCOUNT_NO"
-                  value: "XXXXXXXXXX"
-                - descriptor:
-                    code: "SETTLEMENT_IFSC_CODE"
-                  value: "XXXXXXXXX"
-                - descriptor:
-                    code: "BENEFICIARY_NAME"
-                  value: "xxxxx"
-                - descriptor:
-                    code: "BANK_NAME"
-                  value: "xxxx"
-                - descriptor:
-                    code: "BRANCH_NAME"
-                  value: "xxxx"
+                    code: VALUE
+                  value: "-50.00"
+      payments:
+         -  params:
+              currency: "INR"
+              transaction_id: "3937"
+              amount: "1150.00"
+            status: "PAID"
+            type: "ON-ORDER"
+            collected_by: "BAP"
+            tags:
+                descriptor:
+                  code: "SETTLEMENT_DETAILS"
+                list:
+                  - descriptor:
+                      code: "SETTLEMENT_COUNTERPARTY"
+                    value: "seller-app"
+                  - descriptor:
+                      code: "SETTLEMENT_PHASE"
+                    value: "sale-amount"
+                  - descriptor:
+                      code: "SETTLEMENT_TYPE"
+                    value: "neft"
+                  - descriptor:
+                      code: "SETTLEMENT_BASIS"
+                    value: "lead & recruitment"
+                  - descriptor:
+                      code: "SETTLEMENT_WINDOW"
+                    value: "P3M"
+                  - descriptor:
+                      code: "SETTLEMENT_BANK_ACCOUNT_NO"
+                    value: "XXXXXXXXXX"
+                  - descriptor:
+                      code: "SETTLEMENT_IFSC_CODE"
+                    value: "XXXXXXXXX"
+                  - descriptor:
+                      code: "BENEFICIARY_NAME"
+                    value: "xxxxx"
+                  - descriptor:
+                      code: "BANK_NAME"
+                    value: "xxxx"
+                  - descriptor:
+                      code: "BRANCH_NAME"
+                    value: "xxxx"

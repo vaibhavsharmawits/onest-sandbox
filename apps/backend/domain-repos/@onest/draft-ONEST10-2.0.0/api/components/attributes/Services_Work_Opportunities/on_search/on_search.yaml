@@ -101,7 +101,7 @@ message:
           id:
             description: "fulfillment id"
             required: mandatory
-            usage: "1"
+            usage: "F1"
             reference: null
           type:
             description: "fulfillment type"
@@ -115,22 +115,12 @@ message:
             usage: "L1"
             reference: null
           city:
-            name:
-              description: "city name"
-              required: mandatory
-              usage: "Pune"
-              reference: null
             code:
               description: "city code"
               required: mandatory
               usage: "std:020"
               reference: null
           state:
-            name:
-              description: "state name"
-              required: mandatory
-              usage: "Maharastra"
-              reference: null
             code:
               description: "state code"
               required: mandatory
@@ -231,22 +221,12 @@ message:
               usage: "Suite 302, International Business Park, New Delhi, India"
               reference: null
             state:
-              name:
-                description: "state name"
-                required: mandatory
-                usage: "Maharastra"
-                reference: null
               code:
                 description: "state code"
                 required: mandatory
                 usage: "MH"
                 reference: null
             city:
-              name:
-                description: "city name"
-                required: mandatory
-                usage: "Pune"
-                reference: null
               code:
                 description: "city code"
                 required: mandatory
@@ -256,7 +236,7 @@ message:
               phone:
                 description: "The phone number of the customer."
                 required: mandatory
-                usage: "9999999999"
+                usage: "+91-1234567890"
                 reference: null
               email:
                 description: "The email of the customer."
@@ -283,7 +263,7 @@ message:
           fulfillment_ids:
             - description: "fulfillment id"
               required: mandatory
-              usage: "1"
+              usage: "F1"
               reference: null
           price:
             currency:

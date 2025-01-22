@@ -91,7 +91,7 @@ message:
       id:
         description: "The unique identifier of the fulfillment option."
         required: mandatory
-        usage: "1"
+        usage: "F1"
         reference: null
       type:
         description: "The type of fulfillment."

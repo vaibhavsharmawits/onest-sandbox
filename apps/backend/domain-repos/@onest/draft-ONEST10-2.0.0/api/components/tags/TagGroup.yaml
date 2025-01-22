@@ -1,28 +1,30 @@
 intent:
-  tags:
-    - code: EMPLOYMENT_TYPE
-      description: Employment Type
-      reference: <PR/Issue/Discussion Links md format text>
-      list:
-        $ref: "./tag.yaml#/EMPLOYMENT_TYPE"
-    # - code: CATALOG_FULL
-    #   description: The format in which the buyer Np wants the catalog
-    #   reference: <PR/Issue/Discussion Links md format text>
-    #   list:
-    #     $ref: "./tag.yaml#/CATALOG_FULL"
-    # - code: CATALOG_INC
-    #   description: The format in which the buyer Np wants the catalog
-    #   reference: <PR/Issue/Discussion Links md format text>
-    #   list:
-    #     $ref: "./tag.yaml#/CATALOG_INC"
-catalog:
-  providers:
+  item:
     tags:
-      - code: EMPLOYMENT_TYPE
+      - code: JOB_DETAILS
         description: Employment Type
         reference: <PR/Issue/Discussion Links md format text>
         list:
-          $ref: "./tag.yaml#/EMPLOYMENT_TYPE"
+          $ref: "./tag.yaml#/JOB_TYPE"
+  tags:
+    - code: BAP_TERMS
+      description: Employment Type
+      reference: <PR/Issue/Discussion Links md format text>
+      list:
+        $ref: "./tag.yaml#/JOB_TYPE"
+    - code: CATALOG_INC
+      description: Incremental catalog
+      reference: <PR/Issue/Discussion Links md format text>
+      list:
+        $ref: "./tag.yaml#/CATALOG_INC"
+catalog:
+  providers:
+    tags:
+      - code: LOCATION
+        description: Provider Location
+        reference: <PR/Issue/Discussion Links md format text>
+        list:
+          $ref: "./tag.yaml#/LOCATION"
       - code: NP_FEES
         description: NP_FEES
         reference: <PR/Issue/Discussion Links md format text>
@@ -33,118 +35,131 @@ catalog:
         reference: <PR/Issue/Discussion Links md format text>
         list:
           $ref: "./tag.yaml#/SALARY"
-      # - code: serviceability
-      #   description: Serviceability Details (Required)
-      #   reference: <PR/Issue/Discussion Links md format text>
-      #   list:
-      #     $ref: "./tag.yaml#/serviceability"
     items:
       tags:
-        - code: EMPLOYMENT_TYPE
-          description: Employment Type
-          reference: <PR/Issue/Discussion Links md format text>
-          list:
-            $ref: "./tag.yaml#/EMPLOYMENT_TYPE"
         - code: JOB_DETAILS
           description: JOB_DETAILS
           reference: <PR/Issue/Discussion Links md format text>
           list:
             $ref: "./tag.yaml#/JOB_DETAILS"
-        - code: ACADEMIC_ELIGIBILITY
-          description: ACADEMIC_ELIGIBILITY
+        - code: ACADEMIC_QUALIFICATIONS
+          description: ACADEMIC_QUALIFICATIONS
           reference: <PR/Issue/Discussion Links md format text>
           list:
-            $ref: "./tag.yaml#/ACADEMIC_ELIGIBILITY"
-        - code: DOCUMENTS_REQUIRED
-          description: DOCUMENTS_REQUIRED
+            $ref: "./tag.yaml#/ACADEMIC_QUALIFICATIONS"
+        - code: DOC_REQUIREMENTS
+          description: DOC_REQUIREMENTS
           reference: <PR/Issue/Discussion Links md format text>
           list:
-            $ref: "./tag.yaml#/DOCUMENTS_REQUIRED"
-        
-        # - code: SERVICE_INFORMATION
-        #   description: Information of the service (Required)
-        #   reference: <PR/Issue/Discussion Links md format text>
-        #   list:
-        #     $ref: "./tag.yaml#/SERVICE_INFORMATION"
-        # - code: ADDITIONAL_CHARGES
-        #   description: Information of the additional charges (Optional)
-        #   reference: <PR/Issue/Discussion Links md format text>
-        #   list:
-        #     $ref: "./tag.yaml#/ADDITIONAL_CHARGES"
-        # - code: RESCHEDULE_TERMS
-        #   description: Reschedule terms for the item (Optional)
-        #   reference: <PR/Issue/Discussion Links md format text>
-        #   list:
-        #     $ref: "./tag.yaml#/RESCHEDULE_TERMS"
-        # - code: EQUIPMENT_ATTRIBUTES
-        #   description: Equipment attribute of a particular item (Required)
-        #   reference: <PR/Issue/Discussion Links md format text>
-        #   list:
-        #     $ref: "./tag.yaml#/EQUIPMENT_ATTRIBUTES"
-        # - code: CHECKLIST_DOCUMENTS
-        #   description: Checklist documents that need to verify for equipement hiring (Required)
-        #   reference: <PR/Issue/Discussion Links md format text>
-        #   list:
-        #     $ref: "./tag.yaml#/CHECKLIST_DOCUMENTS"
-        # - code: INSURANCE
-        #   description: Insurance that need to verify for equipement hiring (Optional)
-        #   reference: <PR/Issue/Discussion Links md format text>
-        #   list:
-        #     $ref: "./tag.yaml#/INSURANCE"
-  # categories:
-  #   tags:
-  #     - code: SELECTION
-  #       description: Selection details for category (Optional)
-  #       reference: <PR/Issue/Discussion Links md format text>
-  #       list:
-  #         $ref: "./tag.yaml#/SELECTION"
-  # offers:
-  #   tags:
-  #     - code: qualifier
-  #       description: Qualifier which offer can apply (Optional)
-  #       reference: <PR/Issue/Discussion Links md format text>
-  #       list:
-  #         $ref: "./tag.yaml#/qualifier"
-  #     - code: benefit
-  #       description: Benefit which offer can avail (Optional)
-  #       reference: <PR/Issue/Discussion Links md format text>
-  #       list:
-  #         $ref: "./tag.yaml#/benefit"
-  #     - code: meta
-  #       description: meta value for offer (Optional)
-  #       reference: <PR/Issue/Discussion Links md format text>
-  #       list:
-  #         $ref: "./tag.yaml#/meta"
+            $ref: "./tag.yaml#/DOC_REQUIREMENTS"
+        - code: TIMING
+          description: TIMING
+          reference: <PR/Issue/Discussion Links md format text>
+          list:
+            $ref: "./tag.yaml#/TIMING"
+        - code: JOB_REQUIREMENTS
+          description: JOB_REQUIREMENTS
+          reference: <PR/Issue/Discussion Links md format text>
+          list:
+            $ref: "./tag.yaml#/JOB_REQUIREMENTS"
+        - code: JOB_RESPONSIBILITIES
+          description: JOB_RESPONSIBILITIES
+          reference: <PR/Issue/Discussion Links md format text>
+          list:
+            $ref: "./tag.yaml#/JOB_RESPONSIBILITIES"
+        - code: COMPENSATION
+          description: COMPENSATION
+          reference: <PR/Issue/Discussion Links md format text>
+          list:
+            $ref: "./tag.yaml#/COMPENSATION"
+        - code: NP_FEES
+          description: NP_FEES
+          reference: <PR/Issue/Discussion Links md format text>
+          list:
+            $ref: "./tag.yaml#/NP_FEES"
+
 order:
   items:
     tags:
-      - code: JOB_DETAILS
-        description: JOB_DETAILS
+      - code: NP_FEES
+        description: NP_FEES
         reference: <PR/Issue/Discussion Links md format text>
         list:
-          $ref: "./tag.yaml#/EMPLOYMENT_TYPE"
-  # quote:
-  #   breakup:
-  #     tags: &ref2
-  #       - code: title
-  #         description: title tag (Optional)
-  #         reference: <PR/Issue/Discussion Links md format text>
-  #         list:
-  #           $ref: "./tag.yaml#/title"
+          $ref: "./tag.yaml#/NP_FEES_SELECT"
   payments: &ref1
     tags:
-      - code: Settlement_Details
+      - code: SETTLEMENT_DETAILS
         description: Define Payment Settlement Details here (Required)
         reference: <PR/Issue/Discussion Links md format text>
         list:
           $ref: "./tag.yaml#/Settlement_Details"
-  #     - code: Payment_Details
-  #       description: Define Payment Details here (Optional)
-  #       reference: <PR/Issue/Discussion Links md format text>
-  #       list:
-  #         $ref: "./tag.yaml#/Payment_Details"
-  #     - code: Buyer_Finder_Fee
-  #       description: Define Finder's Fee for Buyer (Optional)
-  #       reference: <PR/Issue/Discussion Links md format text>
-  #       list:
-  #         $ref: "./tag.yaml#/Buyer_Finder_Fee"
+
+selectItem:
+  - code: NP_FEES
+    description: NP_FEES
+    reference: <PR/Issue/Discussion Links md format text>
+    list:
+      $ref: "./tag.yaml#/NP_FEES_SELECT"
+initPersonTags:
+  - code: EMP_DETAILS
+    description: EMP_DETAILS
+    reference: <PR/Issue/Discussion Links md format text>
+    list:
+      $ref: "./tag.yaml#/EMP_DETAILS"
+
+  - code: ACADEMIC_QUALIFICATIONS
+    description: ACADEMIC_QUALIFICATIONS
+    reference: <PR/Issue/Discussion Links md format text>
+    list:
+      $ref: "./tag.yaml#/ACADEMIC_QUALIFICATION"
+
+  - code: ONLINE_LEARNING_AND_SPECIALIZATIONS
+    description: ONLINE_LEARNING_AND_SPECIALIZATIONS
+    reference: <PR/Issue/Discussion Links md format text>
+    list:
+      $ref: "./tag.yaml#/ONLINE_LEARNING_AND_SPECIALIZATIONS"
+
+  - code: WORK_EXPERIENCE
+    description: WORK_EXPERIENCE
+    reference: <PR/Issue/Discussion Links md format text>
+    list:
+      $ref: "./tag.yaml#/WORK_EXPERIENCE"
+
+  - code: TECHNICAL_SKILLS
+    description: TECHNICAL_SKILLS
+    reference: <PR/Issue/Discussion Links md format text>
+    list:
+      $ref: "./tag.yaml#/TECHNICAL_SKILLS"
+
+  - code: SKILLS
+    description: SKILLS
+    reference: <PR/Issue/Discussion Links md format text>
+    list:
+      $ref: "./tag.yaml#/SKILLS"
+
+  - code: DIGITAL_FOOTPRINT
+    description: DIGITAL_FOOTPRINT
+    reference: <PR/Issue/Discussion Links md format text>
+    list:
+      $ref: "./tag.yaml#/DIGITAL_FOOTPRINT"
+
+onInitSETTLEMENT_DETAILS:
+  - code: SETTLEMENT_DETAILS
+    description: SETTLEMENT_DETAILS
+    reference: <PR/Issue/Discussion Links md format text>
+    list:
+      $ref: "./tag.yaml#/SETTLEMENT_DETAILS"
+
+SETTLEMENT_DETAILS: 
+  - code: SETTLEMENT_DETAILS
+    description: Define Payment Settlement Details here (Required)
+    reference: <PR/Issue/Discussion Links md format text>
+    list:
+      $ref: "./tag.yaml#/Settlement_Details"
+
+QUOTE_TRAIL:
+- code: QUOTE_TRAIL
+  description: Quote trail of the items in quote.breakup
+  reference: <PR/Issue/Discussion Links md format text>
+  list:
+    $ref: "./tag.yaml#/QUOTE_TRAIL"
