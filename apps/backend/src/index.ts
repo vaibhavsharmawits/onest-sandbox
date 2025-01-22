@@ -20,11 +20,13 @@ import {
 	healthcareServiceSwagger,
 } from "./middlewares";
 import { sendUpsolicieatedOnStatus } from "./lib/utils/sendUpsolicieatedOnStatus";
-// import { loadConfig } from "./lib/utils";
+import { loadConfig } from "./lib/utils";
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const app: Express = express();
 const port = process.env.PORT || 3000;
-// loadConfig();
+loadConfig();
 app.use(cors());
 
 app.use("`/api-docs/auth`", swaggerUi.serve, authSwagger("/api-docs/auth"));

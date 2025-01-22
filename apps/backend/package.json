@@ -8,9 +8,8 @@
 		"test:backend": "npm run test",
 		"test": "jest --watchAll  --detectOpenHandles",
 		"dev": "nodemon ./src/index.ts",
-		"db:up": "docker-compose -f ../../docker-compose.yml up -d db redis",
-		"db:down": "docker-compose -f ../../docker-compose.yml down db redis",
-		"db:migrate:dev": "prisma migrate dev",
+		"db:up": "docker-compose -f ../../docker-compose.yml up -d redis",
+		"db:down": "docker-compose -f ../../docker-compose.yml down redis",
 		"build": "tsc --noEmit && tsup ./src/index.ts"
 	},
 	"tsup": {
