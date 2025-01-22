@@ -151,26 +151,26 @@ export const onSearchSchema = {
 												city: {
 													type: "object",
 													properties: {
-														name: {
-															type: "string",
-														},
+														// name: {
+														// 	type: "string",
+														// },
 														code: {
 															type: "string",
 														},
 													},
-													required: ["name", "code"],
+													required: [ "code"],
 												},
 												state: {
 													type: "object",
 													properties: {
-														name: {
-															type: "string",
-														},
+														// name: {
+														// 	type: "string",
+														// },
 														code: {
 															type: "string",
 														},
 													},
-													required: ["name", "code"],
+													required: ["code"],
 												},
 											},
 											required: ["id", "city", "state"],
@@ -282,10 +282,9 @@ export const onSearchSchema = {
 															descriptor: {
 																type: "object",
 																properties: {
-																	code: { type: "string" },
-																	name: { type: "string" },
+																	code: { type: "string" }
 																},
-																required: ["code", "name"],
+																required: ["code"],
 															},
 															list: {
 																type: "array",
@@ -298,9 +297,8 @@ export const onSearchSchema = {
 																					type: "object",
 																					properties: {
 																						code: { type: "string" },
-																						name: { type: "string" },
 																					},
-																					required: ["code", "name"],
+																					required: ["code"],
 																				},
 																				value: { type: "string" },
 																			},
@@ -341,10 +339,8 @@ export const onSearchSchema = {
 												"category_ids",
 												"descriptor",
 												"quantity",
-												"time",
 												"location_ids",
 												"fulfillment_ids",
-												"tags",
 												"price",
 											],
 										},

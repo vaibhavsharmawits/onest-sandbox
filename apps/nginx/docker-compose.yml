@@ -10,9 +10,9 @@ services:
       - "host.docker.internal:host-gateway"
     environment:
       - ENVIRONMENT=${ENVIRONMENT}
-      - NGINX_PORT=${NGINX_PORT}
-      - USE_SSL=${USE_SSL}
-      - SSL_PORT=${SSL_PORT}
+      # - NGINX_PORT=${NGINX_PORT}
+      # - USE_SSL=${USE_SSL}
+      # - SSL_PORT=${SSL_PORT}
       - SSL_CERT_PATH=${SSL_CERT_PATH:-.}
     volumes:
       - ./nginx-${ENVIRONMENT}.conf:/etc/nginx/nginx.conf:ro
