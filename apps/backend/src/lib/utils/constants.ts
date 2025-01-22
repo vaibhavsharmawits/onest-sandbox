@@ -41,7 +41,8 @@ export const SUBSCRIPTION_EXAMPLES_PATH =
 export const AGRI_EXAMPLES_PATH =
 	"./domain-repos/@agri/draft-agri_input/api/components/Examples/Agri_Products_yaml";
 
-export const ONEST_EXAMPLES_PATH =
+
+export const ONEST_EXAMPLES_PATH = process.env.ENVIRONMENT==="staging" ? "/app/apps/backend/domain-repos/@onest/draft-ONEST10-2.0.0/api/components/Examples/Services_Work_Opportunities_yaml":
 	"./domain-repos/@onest/draft-ONEST10-2.0.0/api/components/Examples/Services_Work_Opportunities_yaml";
 
 	// export const ONEST_EXAMPLES_PATH = path.resolve(

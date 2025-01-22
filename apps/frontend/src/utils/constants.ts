@@ -112,7 +112,7 @@ export const ALL_DOMAINS = {
 export const CITY_CODE = ["std:080", "std:011", "std:999"];
 export const ONEST_SEARCH_SCENARIOS = [
 	"search_by_employment_type",
-	"search_by_industry_type",
+	"search_by_category",
 	"search_by_job_location",
 	"search_by_job_provider",
 	"search_by_job_role",
