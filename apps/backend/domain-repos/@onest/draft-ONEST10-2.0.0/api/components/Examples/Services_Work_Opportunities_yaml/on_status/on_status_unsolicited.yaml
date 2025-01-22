@@ -14,7 +14,7 @@ value:
         code: std:080
       country:
         code: IND
-    timestamp: "2023-02-22T11:50:46.742Z"
+    timestamp: "2023-02-22T11:51:45.143Z"
     ttl: PT30S
   message:
     order:
@@ -155,8 +155,8 @@ value:
           type: "lead & recruitment"
           state:
             descriptor:
-              code: APPLICATION_IN_PROGRESS
-            updated_at: "2023-02-22T11:50:46.742Z"
+              code: APPLICATIO_SUBMITTED
+            updated_at: "2023-02-22T11:51:45.143Z"
       payments:
         - params:
             currency: "INR"

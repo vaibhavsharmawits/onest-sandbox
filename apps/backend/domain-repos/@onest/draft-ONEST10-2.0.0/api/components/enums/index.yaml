@@ -64,14 +64,21 @@ on_init:
   context: &context
     domain:
       $ref: "./context.yaml#/domain"
-#   message:
-#     order:
-#       quote:
-#         breakup:
-#           title:
-#             $ref: "./title_type.yaml#/breakup/title"
-#       payments:
-#         $ref: "./payment.yaml#/payment"
+  message:
+    fulfillments:
+        type:
+          $ref: "./fulfillments.yaml#/fulfillments/type"
+        state:
+          descriptor:
+            code:
+              - code: APPLICATION_IN_PROGRESS
+                name: Name of the fulfillment status	
+                reference: <PR/Issue/Discussion Links md format text>
+                description: APPLICATION_IN_PROGRESS
+              - code: APPLICATION_FILLED
+                name: Name of the fulfillment status	
+                reference: <PR/Issue/Discussion Links md format text>
+                description: APPLICATION_FILLED
 confirm:
   context: &context
     domain:
@@ -80,7 +87,7 @@ confirm:
     order:
       status:
         - code: Created
-          description: fulfillments.state will be one of these - ["APPLICATION-STARTED"]
+          description: fulfillments.state will be one of these - ["APPLICATION_STARTED"]
           reference: <PR/Issue/Discussion Links md format text>
       fulfillments:
         type:
@@ -88,13 +95,10 @@ confirm:
         state:
           descriptor:
             code:
-              - code: APPLICATION_STARTED
+              - code: APPLICATION_SUBMITTED
                 name: Name of the fulfillment status	
                 reference: <PR/Issue/Discussion Links md format text>
-            name:
-              - code: Application Started
-                description: Name of the fulfillment status		
-                reference: <PR/Issue/Discussion Links md format text>
+                description: APPLICATION_SUBMITTED
 #       quote:
 #         breakup:
 #           $ref: "./title_type.yaml#/breakup"
@@ -108,7 +112,7 @@ on_confirm:
     order:
       status:
         - code: Created
-          description: fulfillments.state will be one of these - ["APPLICATION-STARTED"]
+          description: fulfillments.state will be one of these - ["APPLICATION_ACCEPTED", "APPLICATION_REJECTED"]
           reference: <PR/Issue/Discussion Links md format text>
       fulfillments:
         type:
@@ -116,13 +120,14 @@ on_confirm:
         state:
           descriptor:
             code:
-              - code: APPLICATION_STARTED
+              - code: APPLICATION_ACCEPTED
                 name: Name of the fulfillment status	
                 reference: <PR/Issue/Discussion Links md format text>
-            name:
-              - code: Application Started
-                description: Name of the fulfillment status		
+                description: APPLICATION_ACCEPTED
+              - code: APPLICATION_REJECTED
+                name: Name of the fulfillment status	
                 reference: <PR/Issue/Discussion Links md format text>
+                description: APPLICATION_REJECTED
   #     quote:
   #       breakup:
   #         $ref: "./title_type.yaml#/breakup"
@@ -132,25 +137,33 @@ update:
   context: &context
     domain:
       $ref: "./context.yaml#/domain"
-#   message:
-#     order:
+  message:
+    order:
+      fulfillments:
+        state:
+          descriptor:
+            code:
+              - code: OFFER_ACCEPTED
+                name: Name of the fulfillment status	
+                reference: <PR/Issue/Discussion Links md format text>
+                description: OFFER_ACCEPTED
 #       payments:
 #         $ref: "./payment.yaml#/payment"
 on_update:
   context: &context
     domain:
       $ref: "./context.yaml#/domain"
-#   message:
-#     order:
+  message:
+    order:
 #       $ref: "./order.yaml#/order"
-#       fulfillments:
-#         state:
-#           $ref: "./fulfillments.yaml#/fulfillments/state"
-#       quote:
-#         breakup:
-#           $ref: "./title_type.yaml#/breakup"
-#       payments:
-#         $ref: "./payment.yaml#/payment"
+      fulfillments:
+        state:
+          descriptor:
+            code:
+              - code: OFFER_ACCEPTED
+                name: Name of the fulfillment status	
+                reference: <PR/Issue/Discussion Links md format text>
+                description: OFFER_ACCEPTED
 status:
   context: &context
     domain:

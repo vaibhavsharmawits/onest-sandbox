@@ -1,64 +1,79 @@
 search:
   message:
     intent:
-      item:
         $ref: "./TagGroup.yaml#/intent"
 on_search:
   message:
     catalog:
       $ref: "./TagGroup.yaml#/catalog"
 
+select:
+  message:
+    order:
+      item:
+        $ref: "./TagGroup.yaml#/selectItem"
+
 on_select:
   message:
     order:
-        $ref: "./TagGroup.yaml#/order"
+      item:
+        $ref: "./TagGroup.yaml#/selectItem"
 
-# init:
-#   message:
-#     order:
-#       items:
-#         $ref: "./TagGroup.yaml#/order/items"
-
-on_init:
-  message: &ref1
+init:
+   message:
     order:
-      $ref: "./TagGroup.yaml#/order"
+      item:
+        $ref: "./TagGroup.yaml#/selectItem"
+      fulfillments:
+        customer:
+          person:
+            $ref: "./TagGroup.yaml#/initPersonTags"
+            
+on_init:
+   message:
+    order:
+      item:
+        $ref: "./TagGroup.yaml#/selectItem"
+      payments:
+        $ref: "./TagGroup.yaml#/onInitSETTLEMENT_DETAILS"
 
-# confirm:
-#   message: *ref1
-
+confirm:
+   message:
+    order:
+      item:
+        $ref: "./TagGroup.yaml#/selectItem"
+      payments:
+        $ref: "./TagGroup.yaml#/SETTLEMENT_DETAILS"
 
 on_confirm:
-  message: &ref1
+   message:
     order:
-      $ref: "./TagGroup.yaml#/order"
-
+      item:
+        $ref: "./TagGroup.yaml#/selectItem"
+      payments:
+        $ref: "./TagGroup.yaml#/SETTLEMENT_DETAILS"
 
 on_status:
-  message:
+   message:
     order:
-        $ref: "./TagGroup.yaml#/order"
-
-# update:
-#   message: &ref2
-#     order:
-#       payments:
-#         $ref: "./TagGroup.yaml#/order/payments"
-#       quote:
-#         breakup:
-#           tags:
-#             $ref: "./TagGroup.yaml#/order/quote/breakup/tags"
-#         item:
-#           tags:
-#             - code: EQUIPMENT_ATTRIBUTES
-#               description: Update parameter for attributes (Required)
-#               reference: <PR/Issue/Discussion Links md format text>
-#               list:
-#                 $ref: "./tag.yaml#/EQUIPMENT_ATTRIBUTES"
-on_update:
-  message:
-    order:
-      items:
-        $ref: "./TagGroup.yaml#/intent"
+      item:
+        $ref: "./TagGroup.yaml#/selectItem"
       payments:
-        $ref: "./TagGroup.yaml#/order/payments"
+        $ref: "./TagGroup.yaml#/SETTLEMENT_DETAILS"
+
+on_cancel:
+   message:
+    order:
+      item:
+        $ref: "./TagGroup.yaml#/selectItem"
+      payments:
+        $ref: "./TagGroup.yaml#/SETTLEMENT_DETAILS" 
+      fulfillments:
+        $ref: "./TagGroup.yaml#/QUOTE_TRAIL"
+on_update:
+   message:
+    order:
+      item:
+        $ref: "./TagGroup.yaml#/selectItem"
+      payments:
+        $ref: "./TagGroup.yaml#/SETTLEMENT_DETAILS"

@@ -91,32 +91,38 @@ message:
           usage: "0"
           reference: if any
       breakup:
+        item:
           id:
-            description: "Unique identifier for the quote breakup"
+            description: "The unique identifier for the quote breakup item."
             required: mandatory
             usage: "0253719F295521CED39EC9C2F3C8DCDE"
-            reference: if any
+            reference: null
           price:
             currency:
-              description: "Currency for the quote breakup"
+              description: "The currency of the breakup price."
               required: mandatory
               usage: "INR"
-              reference: if any
+              reference: null
             value:
-              description: "Price value for the quote breakup"
+              description: "The value of the breakup price."
               required: mandatory
               usage: "0"
-              reference: if any
+              reference: null
           title:
-            description: "Title for the quote breakup"
+            description: "The title of the breakup item."
             required: mandatory
-            usage: "Fullstack Engineer"
-            reference: if any
+            usage: "item"
+            reference: null
+      ttl:
+        description: "The Time-to-Live (TTL) for the quoted order."
+        required: mandatory
+        usage: "P1D"
+        reference: null
     fulfillments:
       id:
         description: "Unique identifier for the fulfillment"
         required: mandatory
-        usage: "1"
+        usage: "F1"
         reference: if any
       type:
         description: "Type of fulfillment"
@@ -130,56 +136,6 @@ message:
             required: mandatory
             usage: "CANCELLED"
             reference: if any
-      customer:
-        person:
-          name:
-            description: "Name of the customer"
-            required: mandatory
-            usage: "Sanjay"
-            reference: if any
-          gender:
-            description: "Gender of the customer"
-            required: mandatory
-            usage: "Male"
-            reference: if any
-          age:
-            description: "Age of the customer"
-            required: mandatory
-            usage: "35"
-            reference: if any
-          skills:
-              code:
-                description: "Skill code of the customer"
-                required: mandatory
-                usage: "Android"
-                reference: if any
-              name:
-                description: "Skill name of the customer"
-                required: mandatory
-                usage: "Android"
-                reference: if any
-          languages:
-              code:
-                description: "Language code of the customer"
-                required: mandatory
-                usage: "en"
-                reference: if any
-              name:
-                description: "Language name of the customer"
-                required: mandatory
-                usage: "english"
-                reference: if any
-        contact:
-          phone:
-            description: "The phone number of the customer."
-            required: mandatory
-            usage: "9999999999"
-            reference: null
-          email:
-            description: "The email of the customer."
-            required: mandatory
-            usage: "abc@abc.bc"
-            reference: null
     payments:
       url:
         description: "The URL for payment processing."
@@ -200,7 +156,7 @@ message:
         amount:
           description: "The transaction amount."
           required: mandatory
-          usage: "1400.00"
+          usage: "1150.00"
           reference: null
       status:
         description: "The payment status."

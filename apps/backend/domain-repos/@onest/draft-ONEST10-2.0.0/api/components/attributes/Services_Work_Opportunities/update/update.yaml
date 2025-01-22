@@ -87,19 +87,10 @@ message:
       required: mandatory
       usage: "fulfillment_id_value"
       reference: "if any"
-    type:
-      description: "fulfillment_type"
-      required: mandatory
-      usage: "FULFILLMENT_TYPE_VALUE"
-      reference: "if any"
-    contact:
-      phone:
-        description: "phone"
-        required: mandatory
-        usage: "9999999999"
-        reference: "if any"
-      email:
-        description: "email"
-        required: mandatory
-        usage: "abc@abc.bc"
-        reference: "if any"
+    state:
+        descriptor:
+          code:
+            description: "The code describing the fulfillment state."
+            required: mandatory
+            usage: "OFFER_ACCEPTED"
+            reference: null

@@ -19,20 +19,16 @@ value:
       payment:
         descriptor:
           code: NP_FEES
-          name: "Np Fees"
         list:
           - code: ID
             value: "1"
       provider:
         locations:
           - city:
-              name: Bangalore
               code: std:080
             state:
-              name: Karnataka
               code: IN-KA
             country:
-              name: India
               code: IN
       tags:
         - descriptor:

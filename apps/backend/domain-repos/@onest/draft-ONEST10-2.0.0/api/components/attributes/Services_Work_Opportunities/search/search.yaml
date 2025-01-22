@@ -72,16 +72,41 @@ message:
           required: mandatory
           usage: "NP_FEES"
           reference: null
-        name:
-          description: "NP_FEES name"
-          required: optional
-          usage: "Np Fees"
-          reference: null
         list:
           ID:
             description: "Identifier for NP_FEES"
             required: mandatory
             usage: "1"
+            reference: null
+          COMMERCIAL_TYPE:
+            description: "Type of NP_FEES"
+            required: mandatory
+            usage: "percent"
+            reference: null
+          COMMERCIAL_VALUE:
+            description: "Value of NP_FEES based on the type"
+            required: mandatory
+            usage: "0.5"
+            reference: null
+          COMMERCIAL_NAME:
+            description: "Name of the commercial fee type"
+            required: mandatory
+            usage: "recruitment"
+            reference: null
+          COMMERCIAL_TRIGGERING_STATE:
+            description: "State or event that triggers the application of NP_FEES"
+            required: mandatory
+            usage: "OFFER_ACCEPTED"
+            reference: null
+          COMPENSATION_TYPE:
+            description: "Type of compensation structure used"
+            required: mandatory
+            usage: "P1M,P2M,P3M"
+            reference: null
+          COMPENSATION_TRANSFER_PERIOD:
+            description: "Transfer period percentages for the compensation structure"
+            required: mandatory
+            usage: "50,25,25"
             reference: null
     item:
       parent: true

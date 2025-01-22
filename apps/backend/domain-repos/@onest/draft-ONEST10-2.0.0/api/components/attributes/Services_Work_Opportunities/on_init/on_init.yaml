@@ -89,7 +89,7 @@ message:
       fulfillment_ids:
         description: Fulfillment ID associated with the item
         required: mandatory
-        usage: 1
+        usage: F1
         reference: if any
       xinput: 
         "'required'":
@@ -162,99 +162,49 @@ message:
       breakup:
         item:
           id:
-            description: Breakup item ID
+            description: "The unique identifier for the quote breakup item."
             required: mandatory
-            usage: 0253719F295521CED39EC9C2F3C8DCDE
-            reference: if any
+            usage: "0253719F295521CED39EC9C2F3C8DCDE"
+            reference: null
           price:
             currency:
-              description: Currency of the item price
+              description: "The currency of the breakup price."
               required: mandatory
-              usage: INR
-              reference: if any
+              usage: "INR"
+              reference: null
             value:
-              description: Value of the item price
+              description: "The value of the breakup price."
               required: mandatory
-              usage: 1100
-              reference: if any
-        price:
-          currency:
-            description: Currency of the breakup price
+              usage: "1150"
+              reference: null
+          title:
+            description: "The title of the breakup item."
             required: mandatory
-            usage: INR
-            reference: if any
-          value:
-            description: Value of the breakup price
-            required: mandatory
-            usage: 1100
-            reference: if any
-        title:
-          description: Breakup title
-          required: mandatory
-          usage: Fullstack Engineer
-          reference: if any
+            usage: "item"
+            reference: null
     fulfillments:
-      parent: true
       id:
-        description: Fulfillment ID
+        description: "The unique identifier of the fulfillment option."
         required: mandatory
-        usage: 1
-        reference: if any
+        usage: "F1"
+        reference: null
       type:
-        description: Fulfillment type
+        description: "The type of fulfillment."
         required: mandatory
-        usage: lead
-        reference: if any
-      customer:
-        person:
-          name:
-            description: Customer's name
-            required: mandatory
-            usage: Sanjay
-            reference: if any
-          gender:
-            description: Customer's gender
-            required: mandatory
-            usage: Male
-            reference: if any
-          age:
-            description: Customer's age
-            required: mandatory
-            usage: 35
-            reference: if any
-          skills:
+        usage: "lead"
+        reference: null
+      state:
+          descriptor:
             code:
-              description: Skill code
+              description: Fulfillment state code
               required: mandatory
-              usage: Android
+              usage: APPLICATION_IN_PROGRESS
               reference: if any
-            name:
-              description: Skill name
-              required: mandatory
-              usage: Android
-              reference: if any
-          languages:
-              code:
-                description: Language code
-                required: mandatory
-                usage: en
-                reference: if any
-              name:
-                description: Language name
-                required: mandatory
-                usage: english
-                reference: if any
-        contact:
-            phone:
-              description: "The phone number of the customer."
-              required: mandatory
-              usage: "9999999999"
-              reference: null
-            email:
-              description: "The email of the customer."
-              required: mandatory
-              usage: "abc@abc.bc"
-              reference: null
+          updated_at:
+            description: Last state update timestamp
+            required: mandatory
+            usage: 2023-02-23T08:20:016Z
+            reference: if any
     payments:
       parent: true
       url:
@@ -272,110 +222,3 @@ message:
         required: mandatory
         usage: "BAP"
         reference: null
-      # tags:
-      #   descriptor:
-      #     code:
-      #       description: "Descriptor code for the settlement details."
-      #       required: mandatory
-      #       usage: "SETTLEMENT_DETAILS"
-      #       reference: null
-      #   list:
-      #     - descriptor:
-      #         code:
-      #           description: "Descriptor code for the settlement counterparty."
-      #           required: mandatory
-      #           usage: "SETTLEMENT_COUNTERPARTY"
-      #           reference: null
-      #         value:
-      #           description: "The counterparty involved in the settlement."
-      #           required: mandatory
-      #           usage: "seller-app"
-      #           reference: null
-      #     - descriptor:
-      #         code:
-      #           description: "Descriptor code for the settlement phase."
-      #           required: mandatory
-      #           usage: "SETTLEMENT_PHASE"
-      #           reference: null
-      #         value:
-      #           description: "The phase of settlement."
-      #           required: mandatory
-      #           usage: "sale-amount"
-      #           reference: null
-      #     - descriptor:
-      #         code:
-      #           description: "Descriptor code for the settlement type."
-      #           required: mandatory
-      #           usage: "SETTLEMENT_TYPE"
-      #           reference: null
-      #         value:
-      #           description: "The type of settlement."
-      #           required: mandatory
-      #           usage: "upi"
-      #           reference: null
-      #     - descriptor:
-      #         code:
-      #           description: "Descriptor code for the UPI address."
-      #           required: mandatory
-      #           usage: "UPI_ADDRESS"
-      #           reference: null
-      #         value:
-      #           description: "The UPI address for the settlement."
-      #           required: mandatory
-      #           usage: "gft@oksbi"
-      #           reference: null
-      #     - descriptor:
-      #         code:
-      #           description: "Descriptor code for the settlement bank account number."
-      #           required: mandatory
-      #           usage: "SETTLEMENT_BANK_ACCOUNT_NO"
-      #           reference: null
-      #         value:
-      #           description: "The settlement bank account number."
-      #           required: mandatory
-      #           usage: "XXXXXXXXXX"
-      #           reference: null
-      #     - descriptor:
-      #         code:
-      #           description: "Descriptor code for the IFSC code."
-      #           required: mandatory
-      #           usage: "SETTLEMENT_IFSC_CODE"
-      #           reference: null
-      #         value:
-      #           description: "The IFSC code of the bank."
-      #           required: mandatory
-      #           usage: "XXXXXXXXX"
-      #           reference: null
-      #     - descriptor:
-      #         code:
-      #           description: "Descriptor code for the beneficiary name."
-      #           required: mandatory
-      #           usage: "BENEFICIARY_NAME"
-      #           reference: null
-      #         value:
-      #           description: "The name of the beneficiary."
-      #           required: mandatory
-      #           usage: "xxxxx"
-      #           reference: null
-      #     - descriptor:
-      #         code:
-      #           description: "Descriptor code for the bank name."
-      #           required: mandatory
-      #           usage: "BANK_NAME"
-      #           reference: null
-      #         value:
-      #           description: "The name of the bank."
-      #           required: mandatory
-      #           usage: "xxxx"
-      #           reference: null
-      #     - descriptor:
-      #         code:
-      #           description: "Descriptor code for the branch name."
-      #           required: mandatory
-      #           usage: "BRANCH_NAME"
-      #           reference: null
-      #         value:
-      #           description: "The name of the bank branch."
-      #           required: mandatory
-      #           usage: "xxxx"
-      #           reference: null

@@ -25,27 +25,24 @@ value:
       items:
         - id: 0253719F295521CED39EC9C2F3C8DCDE
           fulfillment_ids:
-            - "1"
+            - "F3"
           tags:
           - descriptor:
               code: NP_FEES
-              name: "Np Fees"
             list:
               - code: ID
                 value: "1"
           - descriptor:
               code: NP_FEES
-              name: "Np Fees"
             list:
               - code: ID
                 value: "2"
       fulfillments:
-        - id: "1"
-          type: lead
+        - id: "F3"
+          type: "lead & recruitment"
           state:
             descriptor:
-              code: APPLICATION_STARTED
-              name: Application Started
+              code: APPLICATION_SUBMITTED
             updated_at: "2023-02-23T08:09:021Z"
           customer:
             person:
@@ -53,106 +50,81 @@ value:
               gender: Male
               age: "35"
               skills:
-                - code: Android
-                  name: Android
-                - code: AWS
-                  name: AWS
+                - name: Android
+                - name: AWS
               languages:
-                - code: en
-                  name: english
-                - code: ml
-                  name: Malayalam
-                - code: hi
-                  name: Hindi
-              tags:
-                - descriptor:
-                    code: CURRENT_EXPERIENCE
-                    name: Current Experience
-                  list:
-                    - descriptor:
-                        code: EXP_YEARS
-                        name: Experience
-                      value: P4Y2M
-                    - descriptor:
-                        code: CURRENT_COMPANY
-                        name: Current Company
-                      value: ABC tech
-                - descriptor:
-                    code: SALARY_DETAILS
-                    name: Salary Details
-                  list:
-                    - descriptor:
-                        code: EXPECTED_SALARY
-                        name: Expected Salary
-                      value: "80000"
-                    - descriptor:
-                        code: CURRENT_SALARY
-                        name: Current Salary
-                      value: "50000"
-                - descriptor:
-                    code: DOCUMENTS
-                    name: Documents
-                  list:
-                    - descriptor:
-                        code: RESUME
-                        name: Resume
-                      value: https://link-to-the-document.com
+                - name: en
+                - name: ml
+                - name: hi
+              creds:
+                - id: "D1"
+                  descriptor:
+                    name: "PAN_CARD"
+                    short_desc: "PAN Card information"
+                    long_desc: "Permanent Account Number"
+                  url: "https://example.com/pan_card.jpeg"
+                  type: "jpeg"
+                - id: "D2"
+                  descriptor:
+                    name: "AADHAAR_CARD"
+                    short_desc: "Aadhaar Card information"
+                    long_desc: "Unique Identification Number"
+                  url: "https://example.com/aadhaar_card.jpeg"
+                  type: "pdf"
+                - id: "D3"
+                  descriptor:
+                    name: "VOTER_ID"
+                    short_desc: "Voter ID information"
+                    long_desc: "Election Commission ID"
+                  url: "https://example.com/voter_id.jpeg"
+                  type: "jpeg"
+                - id: "D4"
+                  descriptor:
+                    name: "PASSPORT"
+                    short_desc: "Passport information"
+                    long_desc: "International Travel Document"
+                  url: "https://example.com/passport.jpeg"
+                  type: "jpeg"
+                - id: "D5"
+                  descriptor:
+                    name: "DRIVING_LICENSE"
+                    short_desc: "Driving License information"
+                    long_desc: "License to Drive"
+                  url: "https://example.com/driving_license.jpeg"
+                  type: "jpeg"
+                - id: "D6"
+                  descriptor:
+                    name: "RESUME"
+                    short_desc: "Summary of qualifications, work experience, and education."
+                    long_desc: "A comprehensive document showcasing an individual's career achievements, skills, work history, education, certifications, and professional experience."
+                  url: "https://example.com/resume.pdf"
+                  type: "pdf"
             contact:
-              phone: "9999999999"
+              phone: "+91-1234567890"
               email: abc@abc.bc
-          tags:
-            - descriptor:
-                code: DISTRIBUTOR_DETAILS
-                name: Distributor Details
-              list:
-                - descriptor:
-                    code: DISTRIBUTOR_ID
-                    name: Distributor Id
-                  value: PNB
-                - descriptor:
-                    code: DISTRIBUTOR_NAME
-                    name: Distributor Name
-                  value: Pay Near By
-                - descriptor:
-                    code: DISTRIBUTOR_PHONE
-                    name: Distributor Phone
-                  value: "9123456789"
-                - descriptor:
-                    code: DISTRIBUTOR_EMAIL
-                    name: Distributor Email
-                  value: support@pnb.com
-                - descriptor:
-                    code: AGENT_ID
-                    name: Agent Id
-                  value: agent-123
-                - descriptor:
-                    code: AGENT_VERIFIED
-                    name: Agent Verified
-                  value: "true"
       quote:
         price:
           currency: INR
-          value: "1100"
+          value: "1150"
         breakup:
-          - id: 0253719F295521CED39EC9C2F3C8DCDE
-            price:
-              currency: INR
-              value: "1100"
-            title: Fullstack Engineer
-            tags:
-              - descriptor:
-                  code: TYPE
-                list:
-                  - descriptor:
-                      code: TYPE
-                    value: item
-        ttl: P1D
+          - item:
+              id: "0253719F295521CED39EC9C2F3C8DCDE"
+              price:
+                  currency: INR
+                  value: "1100"
+              title: "item"
+          - item:
+              id: "a3a7fe79-f26e-4698-ad0f-874e6b5db085"
+              price:
+                  currency: INR
+                  value: "50"
+              title: "tax"
+        ttl: "P1D"
       payments:
-          url: "https://ondc.transaction.com/payment"
-          params:
+        - params:
             currency: "INR"
             transaction_id: "3937"
-            amount: "1700.00"
+            amount: "1150.00"
           status: "PAID"
           type: "ON-ORDER"
           collected_by: "BAP"
@@ -168,10 +140,13 @@ value:
                   value: "sale-amount"
                 - descriptor:
                     code: "SETTLEMENT_TYPE"
-                  value: "upi"
+                  value: "neft"
                 - descriptor:
-                    code: "UPI_ADDRESS"
-                  value: "gft@oksbi"
+                    code: "SETTLEMENT_BASIS"
+                  value: "lead & recruitment"
+                - descriptor:
+                    code: "SETTLEMENT_WINDOW"
+                  value: "P3M"
                 - descriptor:
                     code: "SETTLEMENT_BANK_ACCOUNT_NO"
                   value: "XXXXXXXXXX"

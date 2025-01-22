@@ -89,110 +89,106 @@ message:
       fulfillment_ids:
         description: Fulfillment ID associated with the item
         required: mandatory
-        usage: 1
+        usage: F1
         reference: if any
     fulfillments:
       parent: true
       id:
         description: "The unique identifier of the fulfillment option."
         required: mandatory
-        usage: "1"
+        usage: "F1"
         reference: null
       type:
         description: "Type of fulfillment"
         required: mandatory
         usage: "lead"
         reference: null
-        customer:
-          person:
+      customer:
+        person:
+          name:
+            description: "The name of the customer."
+            required: mandatory
+            usage: "Sanjay"
+            reference: null
+          gender:
+            description: "The gender of the customer."
+            required: mandatory
+            usage: "Male"
+            reference: null
+          age:
+            description: "The age of the customer."
+            required: mandatory
+            usage: "35"
+            reference: null
+          skills:
             name:
-              description: "The name of the customer."
+              description: "The code of the skill."
               required: mandatory
-              usage: "Sanjay"
+              usage: "Android"
               reference: null
-            gender:
-              description: "The gender of the customer."
+          languages:
+            name:
+              description: "The language code."
               required: mandatory
-              usage: "Male"
+              usage: "en"
               reference: null
-            age:
-              description: "The age of the customer."
-              required: mandatory
-              usage: "35"
-              reference: null
-            skills:
-              parent: true
-              code:
-                description: "The code of the skill."
+          creds:
+              id:
+                description: "The unique identifier for the credential."
                 required: mandatory
-                usage: "Android"
+                usage: "D1"
                 reference: null
-              name:
-                description: "The name of the skill."
+              descriptor:
+                name:
+                  description: "The name of the credential (e.g., PAN_CARD)."
+                  required: mandatory
+                  usage: "PAN_CARD"
+                  reference: null
+                short_desc:
+                  description: "A brief description of the credential (e.g., PAN Card information)."
+                  required: mandatory
+                  usage: "PAN Card information"
+                  reference: null
+                long_desc:
+                  description: "A detailed explanation of the credential (e.g., Permanent Account Number)."
+                  required: mandatory
+                  usage: "Permanent Account Number"
+                  reference: null
+              url:
+                description: "The URL where the credential image or file is hosted."
                 required: mandatory
-                usage: "Android"
+                usage: "https://example.com/pan_card.jpeg"
                 reference: null
-            languages:
-              parent: true
-              code:
-                description: "The language code."
+              type:
+                description: "The type of the credential file (e.g., file format such as jpeg, pdf)."
                 required: mandatory
-                usage: "en"
+                usage: "jpeg"
                 reference: null
-              name:
-                description: "The language name."
-                required: mandatory
-                usage: "English"
-                reference: null
-          contact:
-            phone:
-              description: "The phone number of the customer."
-              required: mandatory
-              usage: "9999999999"
-              reference: null
-            email:
-              description: "The email of the customer."
-              required: mandatory
-              usage: "abc@abc.bc"
-              reference: null
-    quote:
+        contact:
+          phone:
+            description: "The phone number of the customer."
+            required: mandatory
+            usage: "+91-1234567890"
+            reference: null
+          email:
+            description: "The email of the customer."
+            required: mandatory
+            usage: "abc@abc.bc"
+            reference: null
+    payments:
       parent: true
-      ttl:
-        description: "The Time-to-Live (TTL) for the quoted order."
+      url:
+        description: "The URL for payment processing."
         required: mandatory
-        usage: "P1D"
+        usage: "https://ondc.transaction.com/payment"
         reference: null
-      price:
-        currency:
-          description: "The currency of the quoted price."
-          required: mandatory
-          usage: "INR"
-          reference: null
-        value:
-          description: "The value of the quoted price."
-          required: mandatory
-          usage: "1400"
-          reference: null
-      breakup:
-        id:
-          description: "The unique identifier for the quote breakup item."
-          required: mandatory
-          usage: "0253719F295521CED39EC9C2F3C8DCDE"
-          reference: null
-        price:
-          currency:
-            description: "The currency of the breakup price."
-            required: mandatory
-            usage: "INR"
-            reference: null
-          value:
-            description: "The value of the breakup price."
-            required: mandatory
-            usage: "1100"
-            reference: null
-          title:
-            description: "The title of the breakup item."
-            required: mandatory
-            usage: "Fullstack Engineer"
-            reference: null
-      
+      type:
+        description: "The type of payment."
+        required: mandatory
+        usage: "ON-ORDER"
+        reference: null
+      collected_by:
+        description: "Entity collecting the payment."
+        required: mandatory
+        usage: "BAP"
+        reference: null
