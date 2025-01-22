@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 export const HOUR24 = 24 * 60 * 60 * 1000;
 const MOCK_API_BASE_URL = process.env?.MOCK_API_BASE_URL
 	? process.env.MOCK_API_BASE_URL
@@ -42,6 +44,9 @@ export const AGRI_EXAMPLES_PATH =
 export const ONEST_EXAMPLES_PATH =
 	"./domain-repos/@onest/draft-ONEST10-2.0.0/api/components/Examples/Services_Work_Opportunities_yaml";
 
+	// export const ONEST_EXAMPLES_PATH = path.resolve(
+	// 	"/backend/domain-repos/@onest/draft-ONEST10-2.0.0/api/components/Examples/Services_Work_Opportunities_yaml"
+	// );
 export const MOCKSERVER_ID = "mock.ondc.org/api";
 // export const B2B_BPP_MOCKSERVER_URL = `https://${MOCKSERVER_ID}/b2b/bpp`;
 // export const B2B_BAP_MOCKSERVER_URL = `https://${MOCKSERVER_ID}/b2b/bap`;

@@ -1,5 +1,5 @@
 import _sodium, { base64_variants } from "libsodium-wrappers";
-
+import "dotenv/config"
 export const createSigningString = async (
 	message: string,
 	created?: string,

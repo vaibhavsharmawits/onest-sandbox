@@ -168,12 +168,10 @@ export const onConfirmSchema = {
                         properties: {
                           code: {
                             type: "string",
-                          },
-                          name: {
-                            type: "string",
+                            enum: ["APPLICATION-SUBMITTED", "APPLICATION_ACCEPTED"], // Replace with valid codes
                           },
                         },
-                        required: ["code", "name"],
+                        required: ["code"],
                       },
                       updated_at: {
                         type: "string",
