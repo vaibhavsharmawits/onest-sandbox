@@ -94,6 +94,7 @@ export const responseBuilder = async (
 	id: number = 0,
 	ts ?: Date,
 ) => {
+	console.log("response message", action, JSON.stringify(message))
 	res.locals = {};
 
 	ts = ts ?? new Date();
@@ -151,7 +152,6 @@ export const responseBuilder = async (
 	if (error) {
 		async = { ...async, error };
 	}
-
 	const header = await createAuthHeader(async);
 
 	if (sandboxMode) {

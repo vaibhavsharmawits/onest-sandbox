@@ -89,10 +89,6 @@ export const onInitSchema = {
       properties: {
         order: {
           type: "object",
-          status: {
-            type: "string",
-            enum: ["IN_PROGRESS", "APPLICATION_FILLED"],
-          },
           properties: {
             provider: {
               type: "object",
@@ -578,7 +574,6 @@ export const onInitSchema = {
             "fulfillments",
             "quote",
             "payments",
-            "status",
           ],
         },
       },

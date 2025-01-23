@@ -88,6 +88,17 @@ const initConsultationController = (
 			return itm;
 		});
 
+		const updatedFulfillments = fulfillments.map((ff: any) => {
+			ff.state = {
+				descriptor: {
+					code: "APPLICATION_IN_PROGRESS",
+				},
+				updated_at: ts.toISOString(),
+			};
+			return ff;
+		});
+		
+
 		const payments = {
 			url: "https://ondc.transaction.com/payment",
 			status: "NOT-PAID",
@@ -160,7 +171,7 @@ const initConsultationController = (
 			order: {
 				provider,
 				items: udpatedItems,
-				fulfillments,
+				fulfillments:updatedFulfillments,
 				quote,
 				payments,
 			},

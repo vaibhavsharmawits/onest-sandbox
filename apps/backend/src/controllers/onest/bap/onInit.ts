@@ -102,15 +102,14 @@ const onInitConsultationController = (
 		const updatedFulfillments = fulfillments.map((ff: any) => {
 			ff.state = {
 				descriptor: {
-					code: "APPLICATION_STARTED",
-					name: "Application Started",
+					code: "APPLICATION_IN_PROGRESS",
 				},
 				updated_at: ts.toISOString(),
 			};
 			ff.tags = distributorTags;
 			return ff;
 		});
-
+		
 		const responseMessage = {
 			order: {
 				status: "Created",
@@ -126,7 +125,7 @@ const onInitConsultationController = (
 							amount: quote?.price?.value,
 							currency: quote?.price?.currency,
 							transaction_id: uuidv4,
-						}
+						},
 					},
 					status: "PAID",
 				},
