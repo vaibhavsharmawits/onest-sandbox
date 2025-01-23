@@ -59,9 +59,9 @@ value:
           items:
             - id: 0253719F295521CED39EC9C2F3C8DCDE
               category_ids:
-                - Software development
+                - DevOps
               descriptor:
-                name: Fullstack Engineer
+                name: DevOps Engineer Trainee
                 long_desc: >-
                   We’re on a search for a Staff Mobile Developer with the
                   following attributes: Critical Thinking- You are able to
@@ -101,7 +101,8 @@ value:
               location_ids:
                 - L2
               fulfillment_ids:
-                - "F3"
+                - "F1"
+                - "F2"
               creator:
                 descriptor:
                   name: Marketplace Connector
@@ -178,7 +179,7 @@ value:
                       value: "60"
                     - descriptor:
                         code: MANDATORY_ELIGIBILITY
-                      value: "true"
+                      value: "false"
                 - descriptor:
                     code: ACADEMIC_QUALIFICATIONS
                   list:
@@ -215,6 +216,9 @@ value:
                     - descriptor:
                         code: ADD_PROF_SKILL
                       value: dev-ops
+                    - descriptor:
+                        code: ADD_PROF_SKILL
+                      value: You have basic understanding
                 - descriptor:
                     code: DOC_REQUIREMENTS
                   list:
@@ -227,8 +231,7 @@ value:
                     - descriptor:
                         code: RESPONSIBILITY
                       value: >-
-                        Build frontend experiences for our tools (Web, PWA and
-                        React Native)
+                        Build frontend experiences for our tools (Web, PWA and React Native)
                     - descriptor:
                         code: RESPONSIBILITY
                       value: >-
@@ -252,10 +255,10 @@ value:
                   list:
                     - descriptor:
                         code: JOB_TYPE
-                      value: full-time
+                      value: part-time
                     - descriptor:
                         code: JOB_ROLE
-                      value: Fullstack Engineer
+                      value: DevOps Engineer
                     - descriptor:
                         code: JOB_LEVEL
                       value: Mid-level
@@ -263,17 +266,17 @@ value:
                         code: GENDER_PREFERENCE
                       value: Male
                 - descriptor:
-                      code: COMPENSATION
+                    code: COMPENSATION
                   list:
                     - descriptor:
                         code: "TYPE"
-                      value: "lpa"
+                      value: "ctc"
                     - descriptor:
                         code: MIN
-                      value: "25"
+                      value: "1200000"
                     - descriptor:
                         code: MAX
-                      value: "30"
+                      value: "2000000"
                 - descriptor:
                     code: NP_FEES
                   list:
@@ -373,8 +376,7 @@ value:
               location_ids:
                 - L1
               fulfillment_ids:
-                - "F1"
-                - "F2"
+                - "F3"
               creator:
                 descriptor:
                   name: Global Trade Hub
@@ -531,13 +533,13 @@ value:
                   list:
                     - descriptor:
                         code: JOB_TYPE
-                      value: full-time
+                      value: contractual
                     - descriptor:
                         code: WORK_DURATION
                       value: P120D
                     - descriptor:
                         code: JOB_ROLE
-                      value: Fullstack Engineer
+                      value: DevOps Engineer
                     - descriptor:
                         code: JOB_LEVEL
                       value: Mid-level
@@ -545,17 +547,17 @@ value:
                         code: GENDER_PREFERENCE
                       value: Male
                 - descriptor:
-                      code: COMPENSATION
+                    code: COMPENSATION
                   list:
                     - descriptor:
                         code: "TYPE"
-                      value: "ctc"
+                      value: "lpa"
                     - descriptor:
                         code: MIN
-                      value: "2500000"
+                      value: "1"
                     - descriptor:
                         code: MAX
-                      value: "3000000"
+                      value: "20"
                 - descriptor:
                     code: NP_FEES
                   list:
@@ -794,27 +796,29 @@ value:
                     - descriptor:
                         code: RESPONSIBILITY
                       value: >-
-                        Build frontend experiences for our tools (Web, PWA and React Native)
+                        Build frontend experiences for our tools (Web, PWA and
+                        React Native)
                     - descriptor:
                         code: RESPONSIBILITY
                       value: >-
-                        Articulate a long term technical direction and vision for building,
-                        maintaining, and scaling our web and mobile platforms
+                        Articulate a long term technical direction and vision
+                        for building, maintaining, and scaling our web and
+                        mobile platforms
                     - descriptor:
                         code: RESPONSIBILITY
                       value: >-
-                        Create trustworthy user experiences by building interfaces that are
-                        simple, easy to comprehend, performant and reliable using modern tools
-                        like React, React Native, Typescript, Node.js, Jest and Webpack.
+                        Create trustworthy user experiences by building
+                        interfaces that are simple, easy to comprehend,
+                        performant and reliable using modern tools like React,
+                        React Native, Typescript, Node.js, Jest and Webpack.
                     - descriptor:
                         code: RESPONSIBILITY
                       value: >-
-                        Mentor and train other team members on design techniques and coding
-                        standards.
+                        Mentor and train other team members on design
+                        techniques and coding standards.
                 - descriptor:
                     code: JOB_DETAILS
                   list:
-                    
                     - descriptor:
                         code: JOB_TYPE
                       value: full-time
@@ -832,13 +836,13 @@ value:
                   list:
                     - descriptor:
                         code: "TYPE"
-                      value: "ctc"
+                      value: "lpa"
                     - descriptor:
                         code: MIN
-                      value: "2500000"
+                      value: "15"
                     - descriptor:
                         code: MAX
-                      value: "3000000"
+                      value: "18"
                 - descriptor:
                     code: NP_FEES
                   list:
@@ -901,9 +905,9 @@ value:
                 value: "1000.00"
                 maximum_value: "1500.0"
           tags:
-          - descriptor:
-              code: LOCATION
-            list:
-              - descriptor:
-                  code: ADDRESS
-                value: Level 5, Trade Tower, Mumbai, Maharashtra, India
+            - descriptor:
+                code: "LOCATION"
+              list:
+                - descriptor:
+                    code: "ADDRESS"
+                  value: "Suite 302, International Business Park, New Delhi, India"

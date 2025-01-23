@@ -165,7 +165,7 @@ value:
               descriptor:
                 code: "SETTLEMENT_DETAILS"
               list:
-                - descriptor: 
+                - descriptor:
                     code: "SETTLEMENT_COUNTERPARTY"
                   value: "seller-app"
                 - descriptor:

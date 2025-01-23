@@ -395,12 +395,12 @@ value:
                 contact:
                   phone: +91-1234567890
                   email: info@globaltradehub.com
-                time:
-                  label: enable
-                  timestamp: "2023-02-22T11:45:10.171Z"
-                  range:
-                    start: "2023-01-03T13:23:10.171Z"
-                    end: "2023-02-03T13:23:10.171Z"
+              time:
+                label: enable
+                timestamp: "2023-02-22T11:45:10.171Z"
+                range:
+                  start: "2023-01-03T13:23:10.171Z"
+                  end: "2023-02-03T13:23:10.171Z"
               tags:
                 - descriptor:
                     code: TIMING
@@ -674,12 +674,12 @@ value:
                 contact:
                   phone: +91-1234567890
                   email: support@marketplace.com
-                time:
-                  label: enable
-                  timestamp: "2023-02-22T11:45:10.171Z"
-                  range:
-                    start: "2023-01-03T13:23:10.171Z"
-                    end: "2023-02-03T13:23:10.171Z"
+              time:
+                label: enable
+                timestamp: "2023-02-22T11:45:10.171Z"
+                range:
+                  start: "2023-01-03T13:23:10.171Z"
+                  end: "2023-02-03T13:23:10.171Z"
               tags:
                 - descriptor:
                     code: TIMING
@@ -894,9 +894,9 @@ value:
                     - code: COMPENSATION_PERCENTAGE_SPLIT
                       value: 25,25,50
               price:
-                  currency: INR
-                  value: "1000.00"
-                  maximum_value: "1500.0"
+                currency: INR
+                value: "1000.00"
+                maximum_value: "1500.0"
           tags:
             - descriptor:
                 code: LOCATION

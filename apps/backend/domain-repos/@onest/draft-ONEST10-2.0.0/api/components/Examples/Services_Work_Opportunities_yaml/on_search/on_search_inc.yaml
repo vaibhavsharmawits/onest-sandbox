@@ -79,230 +79,230 @@ value:
                 contact:
                   phone: "+91-1234567890"
                   email: "support@marketplace.com"
-                time:
-                  label: disable
-                  timestamp: "2023-02-23T11:45:10.171Z"
-                  range:
-                    start: "2023-01-03T13:23:10.171Z"
-                    end: "2023-02-03T13:23:10.171Z"
-                tags:
-                  - descriptor:
-                      code: "TIMING"
-                    list:
-                      - descriptor:
-                          code: "DAY_FROM"
-                        value: "1"
-                      - descriptor:
-                          code: "DAY_TO"
-                        value: "6"
-                      - descriptor:
-                          code: "TIME_FROM"
-                        value: "0900"
-                      - descriptor:
-                          code: "TIME_TO"
-                        value: "1800"
+              time:
+                label: disable
+                timestamp: "2023-02-23T11:45:10.171Z"
+                range:
+                  start: "2023-01-03T13:23:10.171Z"
+                  end: "2023-02-03T13:23:10.171Z"
+              tags:
+                - descriptor:
+                    code: "TIMING"
+                  list:
+                    - descriptor:
+                        code: "DAY_FROM"
+                      value: "1"
+                    - descriptor:
+                        code: "DAY_TO"
+                      value: "6"
+                    - descriptor:
+                        code: "TIME_FROM"
+                      value: "0900"
+                    - descriptor:
+                        code: "TIME_TO"
+                      value: "1800"
 
-                  - descriptor:
-                      code: "TIMING"
-                    list:
-                      - descriptor:
-                          code: "DAY_FROM"
-                        value: "6"
-                      - descriptor:
-                          code: "DAY_TO"
-                        value: "6"
-                      - descriptor:
-                          code: "TIME_FROM"
-                        value: "0900"
-                      - descriptor:
-                          code: "TIME_TO"
-                        value: "1400"
+                - descriptor:
+                    code: "TIMING"
+                  list:
+                    - descriptor:
+                        code: "DAY_FROM"
+                      value: "6"
+                    - descriptor:
+                        code: "DAY_TO"
+                      value: "6"
+                    - descriptor:
+                        code: "TIME_FROM"
+                      value: "0900"
+                    - descriptor:
+                        code: "TIME_TO"
+                      value: "1400"
 
-                  - descriptor:
-                      code: ACADEMIC_QUALIFICATIONS
-                    list:
-                      - descriptor:
-                          code: COURSE_NAME
-                        value: Class-X
-                      - descriptor:
-                          code: MIN_CGPA
-                        value: "6.5"
-                      - descriptor:
-                          code: MANDATORY_ELIGIBILITY
-                        value: "true"
-                  - descriptor:
-                      code: ACADEMIC_QUALIFICATIONS
-                    list:
-                      - descriptor:
-                          code: COURSE_NAME
-                        value: Class-XII
-                      - descriptor:
-                          code: MIN_PERCENTAGE
-                        value: "60"
-                  - descriptor:
-                      code: ACADEMIC_QUALIFICATIONS
-                    list:
-                      - descriptor:
-                          code: COURSE_LEVEL
-                        value: Under Graduate
-                      - descriptor:
-                          code: MIN_PERCENTAGE
-                        value: "60"
-                      - descriptor:
-                          code: MANDATORY_ELIGIBILITY
-                        value: "true"
-                  - descriptor:
-                      code: ACADEMIC_QUALIFICATIONS
-                    list:
-                      - descriptor:
-                          code: COURSE_LEVEL
-                        value: Graduate
-                      - descriptor:
-                          code: MIN_PERCENTAGE
-                        value: "60"
-                      - descriptor:
-                          code: MANDATORY_ELIGIBILITY
-                        value: "true"
-                  - descriptor:
-                      code: DOC_REQUIREMENTS
-                    list:
-                      - descriptor:
-                          code: DOCUMENT_NAME
-                        value: AADHAAR_CARD
-                  - descriptor:
-                      code: JOB_REQUIREMENTS
-                    list:
-                      - descriptor:
-                          code: REQ_EXPERIENCE
-                        value: "P6M"
-                      - descriptor:
-                          code: ADD_PROF_SKILL
-                        value: pipeline-development
-                      - descriptor:
-                          code: ADD_PROF_SKILL
-                        value: dev-ops
+                - descriptor:
+                    code: ACADEMIC_QUALIFICATIONS
+                  list:
+                    - descriptor:
+                        code: COURSE_NAME
+                      value: Class-X
+                    - descriptor:
+                        code: MIN_CGPA
+                      value: "6.5"
+                    - descriptor:
+                        code: MANDATORY_ELIGIBILITY
+                      value: "true"
+                - descriptor:
+                    code: ACADEMIC_QUALIFICATIONS
+                  list:
+                    - descriptor:
+                        code: COURSE_NAME
+                      value: Class-XII
+                    - descriptor:
+                        code: MIN_PERCENTAGE
+                      value: "60"
+                - descriptor:
+                    code: ACADEMIC_QUALIFICATIONS
+                  list:
+                    - descriptor:
+                        code: COURSE_LEVEL
+                      value: Under Graduate
+                    - descriptor:
+                        code: MIN_PERCENTAGE
+                      value: "60"
+                    - descriptor:
+                        code: MANDATORY_ELIGIBILITY
+                      value: "true"
+                - descriptor:
+                    code: ACADEMIC_QUALIFICATIONS
+                  list:
+                    - descriptor:
+                        code: COURSE_LEVEL
+                      value: Graduate
+                    - descriptor:
+                        code: MIN_PERCENTAGE
+                      value: "60"
+                    - descriptor:
+                        code: MANDATORY_ELIGIBILITY
+                      value: "true"
+                - descriptor:
+                    code: DOC_REQUIREMENTS
+                  list:
+                    - descriptor:
+                        code: DOCUMENT_NAME
+                      value: AADHAAR_CARD
+                - descriptor:
+                    code: JOB_REQUIREMENTS
+                  list:
+                    - descriptor:
+                        code: REQ_EXPERIENCE
+                      value: "P6M"
+                    - descriptor:
+                        code: ADD_PROF_SKILL
+                      value: pipeline-development
+                    - descriptor:
+                        code: ADD_PROF_SKILL
+                      value: dev-ops
 
-                  - descriptor:
-                      code: DOC_REQUIREMENTS
-                    list:
-                      - descriptor:
-                          code: DOCUMENT_NAME
-                        value: PAN_CARD
-                  - descriptor:
-                      code: JOB_RESPONSIBILITIES
-                    list:
-                      - descriptor:
-                          code: RESPONSIBILITY
-                        value: >-
-                          Build frontend experiences for our tools (Web, PWA and
-                          React Native)
-                      - descriptor:
-                          code: RESPONSIBILITY
-                        value: >-
-                          Articulate a long term technical direction and vision
-                          for building, maintaining, and scaling our web and
-                          mobile platforms
-                      - descriptor:
-                          code: RESPONSIBILITY
-                        value: >-
-                          Create trustworthy user experiences by building
-                          interfaces that are simple, easy to comprehend,
-                          performant and reliable using modern tools like React,
-                          React Native, Typescript, Node.js, Jest and Webpack.
-                      - descriptor:
-                          code: RESPONSIBILITY
-                        value: >-
-                          Mentor and train other team members on design
-                          techniques and coding standards.
+                - descriptor:
+                    code: DOC_REQUIREMENTS
+                  list:
+                    - descriptor:
+                        code: DOCUMENT_NAME
+                      value: PAN_CARD
+                - descriptor:
+                    code: JOB_RESPONSIBILITIES
+                  list:
+                    - descriptor:
+                        code: RESPONSIBILITY
+                      value: >-
+                        Build frontend experiences for our tools (Web, PWA and
+                        React Native)
+                    - descriptor:
+                        code: RESPONSIBILITY
+                      value: >-
+                        Articulate a long term technical direction and vision
+                        for building, maintaining, and scaling our web and
+                        mobile platforms
+                    - descriptor:
+                        code: RESPONSIBILITY
+                      value: >-
+                        Create trustworthy user experiences by building
+                        interfaces that are simple, easy to comprehend,
+                        performant and reliable using modern tools like React,
+                        React Native, Typescript, Node.js, Jest and Webpack.
+                    - descriptor:
+                        code: RESPONSIBILITY
+                      value: >-
+                        Mentor and train other team members on design
+                        techniques and coding standards.
 
-                  - descriptor:
-                      code: JOB_DETAILS
-                    list:
-                      - descriptor:
-                          code: JOB_TYPE
-                        value: full-time
-                      - descriptor:
-                          code: JOB_ROLE
-                        value: DevOps Engineer
-                      - descriptor:
-                          code: JOB_LEVEL
-                        value: Entry-level
-                      - descriptor:
-                          code: GENDER_PREFERENCE
-                        value: Male
+                - descriptor:
+                    code: JOB_DETAILS
+                  list:
+                    - descriptor:
+                        code: JOB_TYPE
+                      value: full-time
+                    - descriptor:
+                        code: JOB_ROLE
+                      value: DevOps Engineer
+                    - descriptor:
+                        code: JOB_LEVEL
+                      value: Entry-level
+                    - descriptor:
+                        code: GENDER_PREFERENCE
+                      value: Male
 
-                  - descriptor:
-                      code: COMPENSATION
-                    list:
-                      - descriptor:
-                          code: "TYPE"
-                        value: "ctc"
-                      - descriptor:
-                          code: MIN
-                        value: "1200000"
-                      - descriptor:
-                          code: MAX
-                        value: "1500000"
+                - descriptor:
+                    code: COMPENSATION
+                  list:
+                    - descriptor:
+                        code: "TYPE"
+                      value: "ctc"
+                    - descriptor:
+                        code: MIN
+                      value: "1200000"
+                    - descriptor:
+                        code: MAX
+                      value: "1500000"
 
-                  - descriptor:
-                      code: NP_FEES
-                    list:
-                      - code: ID
-                        value: "1"
-                      - code: COMMERCIAL_TYPE
-                        value: percent
-                      - code: COMMERCIAL_VALUE
-                        value: "0.5"
-                      - code: COMMERCIAL_NAME
-                        value: recruitment
-                      - code: COMMERCIAL_TRIGGERING_STATE
-                        value: OFFER_ACCEPTED
-                      - code: COMPENSATION_TYPE
-                        value: CTC
-                      - code: COMPENSATION_TRANSFER_PERIOD
-                        value: "P1M,P3M,P10M"
-                      - code: COMPENSATION_PERCENTAGE_SPLIT
-                        value: "25,25,50"
-                  - descriptor:
-                      code: NP_FEES
-                    list:
-                      - code: ID
-                        value: "2"
-                      - code: COMMERCIAL_TYPE
-                        value: percent
-                      - code: COMMERCIAL_VALUE
-                        value: "0.2"
-                      - code: COMMERCIAL_NAME
-                        value: lead
-                      - code: COMMERCIAL_TRIGGERING_STATE
-                        value: OFFER_EXTENDED
-                      - code: COMPENSATION_TYPE
-                        value: LPA
-                      - code: COMPENSATION_TRANSFER_PERIOD
-                        value: "P1M,P2M,P3M"
-                      - code: COMPENSATION_PERCENTAGE_SPLIT
-                        value: "50,25,25"
-                  - descriptor:
-                      code: NP_FEES
-                    list:
-                      - code: ID
-                        value: "3"
-                      - code: COMMERCIAL_TYPE
-                        value: amount
-                      - code: COMMERCIAL_VALUE
-                        value: "300"
-                      - code: COMMERCIAL_NAME
-                        value: lead
-                      - code: COMMERCIAL_TRIGGERING_STATE
-                        value: APPLICATION_SUBMITTED
-                      - code: COMPENSATION_TYPE
-                        value: CTC
-                      - code: COMPENSATION_TRANSFER_PERIOD
-                        value: "P1M,P3M,P10M"
-                      - code: COMPENSATION_PERCENTAGE_SPLIT
-                        value: "25,25,50"
-                price:
-                  currency: INR
-                  value: "1000.00"
-                  maximum_value: "1500.0"
+                - descriptor:
+                    code: NP_FEES
+                  list:
+                    - code: ID
+                      value: "1"
+                    - code: COMMERCIAL_TYPE
+                      value: percent
+                    - code: COMMERCIAL_VALUE
+                      value: "0.5"
+                    - code: COMMERCIAL_NAME
+                      value: recruitment
+                    - code: COMMERCIAL_TRIGGERING_STATE
+                      value: OFFER_ACCEPTED
+                    - code: COMPENSATION_TYPE
+                      value: CTC
+                    - code: COMPENSATION_TRANSFER_PERIOD
+                      value: "P1M,P3M,P10M"
+                    - code: COMPENSATION_PERCENTAGE_SPLIT
+                      value: "25,25,50"
+                - descriptor:
+                    code: NP_FEES
+                  list:
+                    - code: ID
+                      value: "2"
+                    - code: COMMERCIAL_TYPE
+                      value: percent
+                    - code: COMMERCIAL_VALUE
+                      value: "0.2"
+                    - code: COMMERCIAL_NAME
+                      value: lead
+                    - code: COMMERCIAL_TRIGGERING_STATE
+                      value: OFFER_EXTENDED
+                    - code: COMPENSATION_TYPE
+                      value: LPA
+                    - code: COMPENSATION_TRANSFER_PERIOD
+                      value: "P1M,P2M,P3M"
+                    - code: COMPENSATION_PERCENTAGE_SPLIT
+                      value: "50,25,25"
+                - descriptor:
+                    code: NP_FEES
+                  list:
+                    - code: ID
+                      value: "3"
+                    - code: COMMERCIAL_TYPE
+                      value: amount
+                    - code: COMMERCIAL_VALUE
+                      value: "300"
+                    - code: COMMERCIAL_NAME
+                      value: lead
+                    - code: COMMERCIAL_TRIGGERING_STATE
+                      value: APPLICATION_SUBMITTED
+                    - code: COMPENSATION_TYPE
+                      value: CTC
+                    - code: COMPENSATION_TRANSFER_PERIOD
+                      value: "P1M,P3M,P10M"
+                    - code: COMPENSATION_PERCENTAGE_SPLIT
+                      value: "25,25,50"
+              price:
+                currency: INR
+                value: "1000.00"
+                maximum_value: "1500.0"
  

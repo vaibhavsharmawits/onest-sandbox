@@ -40,7 +40,7 @@ cancel:
 on_search:
   examples:
     on_search - by job role:
-      $ref: ./on_search/on_search_by_job_role.yaml
+      $ref: ./on_search/on_search_by_role_name.yaml
     on_search - by job provider:
       $ref: ./on_search/on_search_by_job_provider.yaml
     on_search - by location of the job:
