@@ -10,6 +10,6 @@
     "dev": "tsc --watch",
     "build": "tsc"
   },
-  "author": "Abhik Banerjee",
+  "author": "Sahil Sharma",
   "license": "ISC"
 }

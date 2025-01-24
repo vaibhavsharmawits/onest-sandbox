@@ -1,12 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import {
-	AGRI_HEALTHCARE_STATUS,
 	AGRI_HEALTHCARE_STATUS_OBJECT,
-	BID_AUCTION_STATUS,
-	EQUIPMENT_HIRING_STATUS,
-	FULFILLMENT_LABELS,
+	FULFILLMENT_STATES,
 	ORDER_STATUS,
-	SERVICES_DOMAINS,
 } from "../../../lib/utils/apiConstants";
 import {
 	Fulfillment,
@@ -32,6 +28,37 @@ export const statusController = async (
 			transaction_id
 		);
 
+		const on_search_data = await redisFetchFromServer(
+			ON_ACTION_KEY.ON_SEARCH,
+			transaction_id
+		);
+
+		function fetchAllItemsWithTime(message: any) {
+			const result: any = {};
+
+			if (
+				!message ||
+				!message.catalog ||
+				!Array.isArray(message.catalog.providers)
+			) {
+				return result;
+			}
+
+			for (const provider of message.catalog.providers) {
+				if (Array.isArray(provider.items)) {
+					for (const item of provider.items) {
+						if (item.id && item.time) {
+							const { range } = item.time;
+							result[item.id] = { range };
+						}
+					}
+				}
+			}
+
+			return result;
+		}
+		const itemsWithTimeRanges = fetchAllItemsWithTime(on_search_data?.message);
+		console.log(JSON.stringify(itemsWithTimeRanges), "itemsWithTimeRanges");
 		if (!on_confirm_data) {
 			return send_nack(res, ERROR_MESSAGES.ON_CONFIRM_DOES_NOT_EXISTED);
 		}
@@ -43,7 +70,14 @@ export const statusController = async (
 		if (on_cancel_exist) {
 			scenario = "cancel";
 		}
-		return statusRequest(req, res, next, on_confirm_data, scenario);
+		return statusRequest(
+			req,
+			res,
+			next,
+			on_confirm_data,
+			scenario,
+			itemsWithTimeRanges
+		);
 	} catch (error) {
 		return next(error);
 	}
@@ -54,7 +88,8 @@ const statusRequest = async (
 	res: Response,
 	next: NextFunction,
 	transaction: any,
-	scenario: string
+	scenario: string,
+	itemsWithTimeRanges: any
 ) => {
 	try {
 		const { context, message } = transaction;
@@ -66,216 +101,241 @@ const statusRequest = async (
 		);
 		let next_status = scenario;
 
-		if (on_status) {
-			//UPDATE SCENARIO TO NEXT STATUS
-			const lastStatus =
-				on_status?.message?.order?.fulfillments[0]?.state?.descriptor?.code;
+		const itemTags = [
+			{
+				descriptor: {
+					code: "ACADEMIC_QUALIFICATIONS",
+				},
+				list: [
+					{
+						descriptor: {
+							code: "COURSE_NAME",
+						},
+						value: "Class-X",
+					},
+					{
+						descriptor: {
+							code: "MIN_PERCENTAGE",
+						},
+						value: "60",
+					},
+					{
+						descriptor: {
+							code: "MANDATORY_ELIGIBILITY",
+						},
+						value: "true",
+					},
+				],
+			},
+			{
+				descriptor: {
+					code: "ACADEMIC_QUALIFICATIONS",
+				},
+				list: [
+					{
+						descriptor: {
+							code: "COURSE_NAME",
+						},
+						value: "Class-XII",
+					},
+					{
+						descriptor: {
+							code: "MIN_PERCENTAGE",
+						},
+						value: "60",
+					},
+					{
+						descriptor: {
+							code: "MANDATORY_ELIGIBILITY",
+						},
+						value: "true",
+					},
+				],
+			},
+			{
+				descriptor: {
+					code: "ACADEMIC_QUALIFICATIONS",
+				},
+				list: [
+					{
+						descriptor: {
+							code: "COURSE_LEVEL",
+						},
+						value: "Under Graduate",
+					},
+					{
+						descriptor: {
+							code: "MIN_PERCENTAGE",
+						},
+						value: "60",
+					},
+					{
+						descriptor: {
+							code: "MANDATORY_ELIGIBILITY",
+						},
+						value: "true",
+					},
+				],
+			},
+			{
+				descriptor: {
+					code: "ACADEMIC_QUALIFICATIONS",
+				},
+				list: [
+					{
+						descriptor: {
+							code: "COURSE_LEVEL",
+						},
+						value: "Graduate",
+					},
+					{
+						descriptor: {
+							code: "MANDATORY_ELIGIBILITY",
+						},
+						value: "false",
+					},
+				],
+			},
+			{
+				descriptor: {
+					code: "JOB_REQUIREMENTS",
+				},
+				list: [
+					{
+						descriptor: {
+							code: "REQ_EXPERIENCE",
+						},
+						value: "P2Y6M",
+					},
+					{
+						descriptor: {
+							code: "ADD_PROF_SKILL",
+						},
+						value: "android-development",
+					},
+					{
+						descriptor: {
+							code: "ADD_PROF_SKILL",
+						},
+						value: "dev-ops",
+					},
+				],
+			},
+			{
+				descriptor: {
+					code: "JOB_RESPONSIBILITIES",
+				},
+				list: [
+					{
+						descriptor: {
+							code: "RESPONSIBILITY",
+						},
+						value:
+							"Build frontend experiences for our tools (Web, PWA and React Native)",
+					},
+					{
+						descriptor: {
+							code: "RESPONSIBILITY",
+						},
+						value:
+							"Articulate a long term technical direction and vision for building, maintaining, and scaling our web and mobile platforms",
+					},
+					{
+						descriptor: {
+							code: "RESPONSIBILITY",
+						},
+						value:
+							"Create trustworthy user experiences by building interfaces that are simple, easy to comprehend, performant and reliable using modern tools like React, React Native, Typescript, Node.js, Jest and Webpack.",
+					},
+					{
+						descriptor: {
+							code: "RESPONSIBILITY",
+						},
+						value:
+							"Mentor and train other team members on design techniques and coding standards.",
+					},
+				],
+			},
+			{
+				descriptor: {
+					code: "JOB_DETAILS",
+				},
+				list: [
+					{
+						descriptor: {
+							code: "CTC",
+						},
+						value: "20,30,40",
+					},
+					{
+						descriptor: {
+							code: "POST_START_LOCATION",
+						},
+						value: "Pune",
+					},
+					{
+						descriptor: {
+							code: "WORKING_LOCATION",
+						},
+						value: "Hybrid",
+					},
+					{
+						descriptor: {
+							code: "WORKING_TIME",
+						},
+						value: "Full-Time",
+					},
+				],
+			},
+		];
 
-			//FIND NEXT STATUS
-			let lastStatusIndex: any = 0;
-			switch (domain) {
-				case SERVICES_DOMAINS.SERVICES || SERVICES_DOMAINS.AGRI_EQUIPMENT:
-					lastStatusIndex = EQUIPMENT_HIRING_STATUS.indexOf(lastStatus);
-					if (lastStatusIndex === 2) {
-						next_status = lastStatus;
-					}
-					if (
-						lastStatusIndex !== -1 &&
-						lastStatusIndex < EQUIPMENT_HIRING_STATUS.length - 1
-					) {
-						const nextStatusIndex = lastStatusIndex + 1;
-						next_status = EQUIPMENT_HIRING_STATUS[nextStatusIndex];
-					}
-					break;
-				case SERVICES_DOMAINS.BID_ACTION_SERVICES:
-					lastStatusIndex = BID_AUCTION_STATUS.indexOf(lastStatus);
-					if (lastStatusIndex === 1) {
-						next_status = lastStatus;
-					}
-					if (
-						lastStatusIndex !== -1 &&
-						lastStatusIndex < BID_AUCTION_STATUS.length - 1
-					) {
-						const nextStatusIndex = lastStatusIndex + 1;
-						next_status = BID_AUCTION_STATUS[nextStatusIndex];
-					}
-					break;
-				default: //service started is the default case
-					lastStatusIndex = AGRI_HEALTHCARE_STATUS.indexOf(lastStatus);
-					if (lastStatus === 6) {
-						next_status = lastStatus;
-					}
-					if (
-						lastStatusIndex !== -1 &&
-						lastStatusIndex < AGRI_HEALTHCARE_STATUS.length - 1
-					) {
-						const nextStatusIndex = lastStatusIndex + 1;
-						next_status = AGRI_HEALTHCARE_STATUS[nextStatusIndex];
-					}
-					break;
-			}
-		}
+		const updatedItems = message.order.items.map((item: any) => {
+			const range = itemsWithTimeRanges[item.id]?.range || null;
+			const updatedItem = {
+				...item,
+				time: {
+					range: range,
+				},
+				tags: [...item.tags, ...itemTags],
+			};
+			return updatedItem;
+		});
+
+		const ts = new Date();
 		scenario = scenario ? scenario : next_status;
+		const updatedFulfillments = message.order.fulfillments.map(
+			(fulfillment: any) => {
+				const updatedFulfillment = {
+					...fulfillment,
+					id: fulfillment.id,
+					state: {
+						descriptor: {
+							code: FULFILLMENT_STATES.APPLICATION_IN_PROGRESS,
+						},
+						updated_at: ts.toISOString(),
+					},
+				};
+
+				if (updatedFulfillment.customer) {
+					delete updatedFulfillment.customer;
+				}
+
+				return updatedFulfillment;
+			}
+		);
 
 		const responseMessage: any = {
 			order: {
+				...message.order,
+				items: updatedItems,
 				id: message.order.id,
-				status: ORDER_STATUS.IN_PROGRESS.toUpperCase(),
-				provider: {
-					...message.order.provider,
-					rateable: undefined,
+				status: ORDER_STATUS.ACTIVE.toUpperCase(),
+				fulfillments: updatedFulfillments,
+				state: {
+					updated_at: ts.toISOString(),
 				},
-				items: message.order.items,
-				billing: { ...message.order.billing, tax_id: undefined },
-
-				fulfillments: message.order.fulfillments.map(
-					(fulfillment: Fulfillment) => ({
-						...fulfillment,
-						id: fulfillment.id,
-						state: {
-							descriptor: {
-								code: AGRI_HEALTHCARE_STATUS_OBJECT.IN_TRANSIT,
-							},
-						},
-
-						stops: fulfillment.stops.map((stop: Stop) => {
-							const demoObj = {
-								...stop,
-								id: undefined,
-								authorization: stop.authorization
-									? {
-											...stop.authorization,
-											status: FULFILLMENT_LABELS.CONFIRMED,
-									  }
-									: undefined,
-								person: stop.person ? stop.person : stop.customer?.person,
-							};
-							if (stop.type === "start") {
-								return {
-									...demoObj,
-									location: {
-										...stop.location,
-										descriptor: {
-											...stop.location?.descriptor,
-											images: [{ url: "https://gf-integration/images/5.png" }],
-										},
-									},
-								};
-							}
-							return demoObj;
-						}),
-						rateable: undefined,
-					})
-				),
-				quote: message.order.quote,
-				payments: message.order.payments,
-				documents: [
-					{
-						url: "https://invoice_url",
-						label: "INVOICE",
-					},
-				],
-				created_at: message.order.created_at,
-				updated_at: message.order.updated_at,
 			},
 		};
-
-		switch (scenario) {
-			case AGRI_HEALTHCARE_STATUS_OBJECT.IN_TRANSIT:
-				responseMessage.order.fulfillments.forEach(
-					(fulfillment: Fulfillment) => {
-						fulfillment.state.descriptor.code =
-							AGRI_HEALTHCARE_STATUS_OBJECT.IN_TRANSIT;
-						fulfillment.stops.forEach((stop: Stop) =>
-							stop?.authorization ? (stop.authorization = undefined) : undefined
-						);
-					}
-				);
-				break;
-			case AGRI_HEALTHCARE_STATUS_OBJECT.AT_LOCATION:
-				responseMessage.order.fulfillments.forEach(
-					(fulfillment: Fulfillment) => {
-						fulfillment.state.descriptor.code =
-							AGRI_HEALTHCARE_STATUS_OBJECT.AT_LOCATION;
-						fulfillment.stops.forEach((stop: Stop) =>
-							stop?.authorization
-								? (stop.authorization = {
-										...stop.authorization,
-										status: "valid",
-								  })
-								: undefined
-						);
-					}
-				);
-				break;
-			case AGRI_HEALTHCARE_STATUS_OBJECT.COLLECTED_BY_AGENT:
-				responseMessage.order.fulfillments.forEach(
-					(fulfillment: Fulfillment) => {
-						fulfillment.state.descriptor.code =
-							AGRI_HEALTHCARE_STATUS_OBJECT.COLLECTED_BY_AGENT;
-					}
-				);
-				break;
-			case AGRI_HEALTHCARE_STATUS_OBJECT.RECEIVED_AT_LAB:
-				responseMessage.order.fulfillments.forEach(
-					(fulfillment: Fulfillment) => {
-						fulfillment.state.descriptor.code =
-							AGRI_HEALTHCARE_STATUS_OBJECT.RECEIVED_AT_LAB;
-					}
-				);
-				break;
-			case AGRI_HEALTHCARE_STATUS_OBJECT.TEST_COMPLETED:
-				responseMessage.order.fulfillments.forEach(
-					(fulfillment: Fulfillment) => {
-						fulfillment.state.descriptor.code =
-							AGRI_HEALTHCARE_STATUS_OBJECT.TEST_COMPLETED;
-						fulfillment.stops.forEach((stop: Stop) =>
-							stop?.authorization ? (stop.authorization = undefined) : undefined
-						);
-					}
-				);
-				break;
-			case AGRI_HEALTHCARE_STATUS_OBJECT.REPORT_GENERATED:
-				responseMessage.order.fulfillments.forEach(
-					(fulfillment: Fulfillment) => {
-						fulfillment.state.descriptor.code =
-							AGRI_HEALTHCARE_STATUS_OBJECT.REPORT_GENERATED;
-					}
-				);
-				break;
-			case AGRI_HEALTHCARE_STATUS_OBJECT.REPORT_SHARED:
-				responseMessage.order.status = AGRI_HEALTHCARE_STATUS_OBJECT.COMPLETED;
-				responseMessage.order.fulfillments.forEach(
-					(fulfillment: Fulfillment) => {
-						fulfillment.state.descriptor.code =
-							AGRI_HEALTHCARE_STATUS_OBJECT.REPORT_SHARED;
-					}
-				);
-				break;
-			case AGRI_HEALTHCARE_STATUS_OBJECT.COMPLETED:
-				responseMessage.order.status = AGRI_HEALTHCARE_STATUS_OBJECT.COMPLETED;
-				responseMessage.order.fulfillments.forEach(
-					(fulfillment: Fulfillment) => {
-						fulfillment.state.descriptor.code =
-							AGRI_HEALTHCARE_STATUS_OBJECT.REPORT_SHARED;
-					}
-				);
-				break;
-			case AGRI_HEALTHCARE_STATUS_OBJECT.PLACED:
-				// responseMessage.order.status = AGRI_HEALTHCARE_STATUS_OBJECT.COMPLETED;
-				responseMessage.order.fulfillments.forEach(
-					(fulfillment: Fulfillment) => {
-						fulfillment.state.descriptor.code =
-							AGRI_HEALTHCARE_STATUS_OBJECT.PLACED;
-					}
-				);
-				break;
-			case AGRI_HEALTHCARE_STATUS_OBJECT.CANCEL:
-				responseMessage.order.status = "Cancelled";
-				break;
-			default: //service started is the default case
-				break;
-		}
 
 		return responseBuilder(
 			res,
@@ -288,7 +348,8 @@ const statusRequest = async (
 					: `/${ON_ACTION_KEY.ON_STATUS}`
 			}`,
 			`${ON_ACTION_KEY.ON_STATUS}`,
-			"services"
+			"onest",
+			ts
 		);
 	} catch (error) {
 		next(error);

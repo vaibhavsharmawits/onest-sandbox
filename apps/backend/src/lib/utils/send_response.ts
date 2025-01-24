@@ -16,47 +16,28 @@ async function send_response(
 	res_obj: any,
 	transaction_id: string,
 	action: string,
-  search_type:string = "search_by_employment_type",
+	search_type: string = "search_by_employment_type",
 	scenario: any = "",
 	version: any = "",
 	bpp_uri: string = "", // for search
-	id: number = 0,
-	
+	id: number = 0
 ) {
-
-  console.log("search", search_type);
+	console.log("search", search_type);
+	console.log("status", JSON.stringify(res_obj))
 
 	let time_now = new Date().toISOString();
 	try {
-		await redis.set(`${transaction_id}-search_type`,search_type)
+		await redis.set(`${transaction_id}-search_type`, search_type);
 		const { context } = res_obj;
 		if (bpp_uri === "") bpp_uri = context.bpp_uri || res_obj.bpp_uri;
 
-		// res_obj.context.bpp_uri = bpp_uri
 		if (res_obj.bpp_uri) delete res_obj.bpp_uri;
 
 		const header = await createAuthHeader(res_obj);
-		// res_obj.bpp_uri = bpp_uri
-
-		//Approach 1
-		if (version === "b2b" || version === "b2c" || version === "b2b-exp") {
-			console.log(
-				"keys",
-				`${transaction_id}-${action}-from-server-${version}-${id}-${time_now}`
-			);
-			console.log("abs", `${transaction_id}-version`, version);
-			await redis.set(`${transaction_id}-version`, version);
-			await redis.set(
-				`${transaction_id}-${action}-from-server-${version}-${id}-${time_now}`,
-				JSON.stringify({ request: { ...res_obj } })
-			);
-		} else {
-			await redis.set(
-				`${transaction_id}-${action}-from-server-${id}-${time_now}`,
-				JSON.stringify({ request: { ...res_obj } })
-			);
-		}
-
+		await redis.set(
+			`${transaction_id}-${action}-from-server-${id}-${time_now}`,
+			JSON.stringify({ request: { ...res_obj } })
+		);
 		const headers: headers = {
 			authorization: header,
 		};
@@ -76,21 +57,18 @@ async function send_response(
 		} else {
 			uri = `${bpp_uri}/${action}${scenario ? `?scenario=${scenario}` : ""}`;
 		}
-		let response:any
+		let response: any;
 		try {
-      console.log("resObj", res_obj);
-			console.log("uri",uri);
-			// uri = "http://localhost:3000/api/onest/bpp/search";
-			console.log("🚀 ~ uri2:", uri)
 			try {
-			response = await axios.post(uri, res_obj, {
-				headers: { ...headers },
-			});
-				console.log(response.data, "response")
+				console.log("uri", uri);
+				response = await axios.post(uri, res_obj, {
+					headers: { ...headers },
+				});
+				console.log(response.data, "response");
 			} catch (error: any) {
-				console.error('Error details:', error.toJSON ? error.toJSON() : error);
+				console.error("Error details:", error.toJSON ? error.toJSON() : error);
 			}
-			
+
 			await redis.set(
 				`${transaction_id}-${action}-from-server-${id}-${time_now}`,
 				JSON.stringify({
@@ -102,7 +80,7 @@ async function send_response(
 				})
 			);
 		} catch (err: any) {
-			console.log("🚀 ~ err:", err)
+			console.log("🚀 ~ err:", err);
 			if (err instanceof AxiosError) {
 				res.status(err.response?.status || 500).json(err.response?.data || "");
 				return;

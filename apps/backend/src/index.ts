@@ -21,7 +21,7 @@ import {
 } from "./middlewares";
 import { sendUpsolicieatedOnStatus } from "./lib/utils/sendUpsolicieatedOnStatus";
 import { loadConfig } from "./lib/utils";
-import dotenv from 'dotenv';
+import dotenv from 'dotenv'; 	
 dotenv.config();
 
 export const app: Express = express();

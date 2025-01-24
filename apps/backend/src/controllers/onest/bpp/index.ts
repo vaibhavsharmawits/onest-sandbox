@@ -48,7 +48,7 @@ bppRouter.post(
 
 bppRouter.post(
 	"/status",
-	// jsonSchemaValidator({ domain: "onest", action: "status" }),
+	jsonSchemaValidator({ domain: "onest", action: "status" }),
 	redisRetriever,
 	statusController
 );

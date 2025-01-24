@@ -6,6 +6,6 @@
   "scripts": {
     "start:nginx": "docker compose down && docker compose up -d --build --force-recreate"
   },
-  "author": "Abhik Banerjee",
+  "author": "Sahil Sharma",
   "license": "ISC"
 }

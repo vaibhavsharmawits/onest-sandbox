@@ -6,7 +6,7 @@
 	"scripts": {
 		"swagger:gen": "ts-node generateSwagger.ts"
 	},
-	"author": "Abhik Banerjee",
+	"author": "Sahil Sharma",
 	"license": "ISC",
 	"exports": {
 		"./constants": "./constants.ts",

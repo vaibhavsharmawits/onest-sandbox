@@ -5,7 +5,7 @@ import {
 	send_nack,
 	redisFetchToServer,
 	redis,
-	SERVICES_BAP_MOCKSERVER_URL,
+	ONEST_BAP_MOCKSERVER_URL,
 } from "../../../lib/utils";
 
 import { v4 as uuidv4 } from "uuid";
@@ -27,7 +27,6 @@ export const initiateStatusController = async (
 ) => {
 	try {
 		const { transactionId } = req.body;
-		const transactionKeys = await redis.keys(`${transactionId}-*`);
 		const on_confirm = await redisFetchToServer(
 			ON_ACTION_KEY.ON_CONFIRM,
 			transactionId
@@ -35,10 +34,7 @@ export const initiateStatusController = async (
 		if (!on_confirm) {
 			return send_nack(res, ERROR_MESSAGES.ON_CONFIRM_DOES_NOT_EXISTED);
 		}
-		const statusIndex = transactionKeys.filter((e) =>
-			e.includes("-status-to-server")
-		).length;
-		return intializeRequest(res, next, on_confirm, statusIndex);
+		return intializeRequest(res, next, on_confirm);
 	} catch (error) {
 		return next(error);
 	}
@@ -47,8 +43,7 @@ export const initiateStatusController = async (
 const intializeRequest = async (
 	res: Response,
 	next: NextFunction,
-	transaction: any,
-	statusIndex: number
+	transaction: any
 ) => {
 	try {
 		const { context } = transaction;
@@ -61,40 +56,16 @@ const intializeRequest = async (
 				timestamp: new Date().toISOString(),
 				action: "status",
 				bap_id: MOCKSERVER_ID,
-				bap_uri: SERVICES_BAP_MOCKSERVER_URL,
+				bap_uri: ONEST_BAP_MOCKSERVER_URL,
 			},
 			message: {
-				order_id: transaction.message.order.id,
+				order: {
+					id: transaction.message.order.id,
+				},
 			},
 		};
-		const domain = context?.domain;
-		switch (domain) {
-			case SERVICES_DOMAINS.SERVICES:
-				senarios = EQUIPMENT_HIRING_STATUS;
-				break;
-				case SERVICES_DOMAINS.AGRI_EQUIPMENT:
-				senarios = EQUIPMENT_HIRING_STATUS;
-				break;
-			case SERVICES_DOMAINS.BID_ACTION_SERVICES:
-				senarios = BID_AUCTION_STATUS;
-				break;
-			default: //service started is the default case
-				senarios = AGRI_HEALTH_STATUS;
-				break;
-		}
 
-		// satus index is always witin boundary of senarios array
-		statusIndex = Math.min(Math.max(statusIndex, 0), senarios.length - 1);
-
-		await send_response(
-			res,
-			next,
-			status,
-			transaction_id,
-			"status",
-			senarios[statusIndex]
-		);
-		
+		await send_response(res, next, status, transaction_id, "status");
 	} catch (error) {
 		next(error);
 	}

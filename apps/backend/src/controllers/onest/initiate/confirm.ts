@@ -110,60 +110,7 @@ const intializeRequest = async (
 				],
 			},
 		];
-
-		const distributorTags = [
-			{
-				descriptor: {
-					code: "DISTRIBUTOR_DETAILS",
-					name: "Distributor Details",
-				},
-				list: [
-					{
-						descriptor: {
-							code: "DISTRIBUTOR_ID",
-							name: "Distributor Id",
-						},
-						value: "PNB",
-					},
-					{
-						descriptor: {
-							code: "DISTRIBUTOR_NAME",
-							name: "Distributor Name",
-						},
-						value: "Pay Near By",
-					},
-					{
-						descriptor: {
-							code: "DISTRIBUTOR_PHONE",
-							name: "Distributor Phone",
-						},
-						value: "9123456789",
-					},
-					{
-						descriptor: {
-							code: "DISTRIBUTOR_EMAIL",
-							name: "Distributor Email",
-						},
-						value: "support@pnb.com",
-					},
-					{
-						descriptor: {
-							code: "AGENT_ID",
-							name: "Agent Id",
-						},
-						value: "agent-123",
-					},
-					{
-						descriptor: {
-							code: "AGENT_VERIFIED",
-							name: "Agent Verified",
-						},
-						value: "true",
-					},
-				],
-			},
-		];
-
+		
 		const updatedItems = items.map((item: any) => {
 			delete item?.xinput;
 			return item;
@@ -177,7 +124,6 @@ const intializeRequest = async (
 				},
 				updated_at: timestamp,
 			};
-			ff.tags = distributorTags;
 			ff.customer.person.tags = ffCustomerPersonTags;
 			return ff;
 		});

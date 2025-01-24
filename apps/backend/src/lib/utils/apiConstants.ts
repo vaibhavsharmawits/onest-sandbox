@@ -43,6 +43,7 @@ export const PRINT_MEDIA_CATEGORIES = {
 export const ORDER_STATUS = {
 	IN_PROGRESS: "In-progress",
 	CREATED: "Created",
+	ACTIVE: "Active",
 	ACCEPTED: "Accepted",
 	CANCELLED: "Cancelled",
 	COMPLETED: "Completed",
@@ -194,6 +195,7 @@ export const FULFILLMENT_LABELS = {
 export const FULFILLMENT_STATES = {
 	SERVICEABLE: "Serviceable",
 	PENDING: "PENDING",
+	APPLICATION_IN_PROGRESS: "APPLICATION_IN_PROGRESS",
 	CANCELLED: "CANCELLED",
 	COMPLETED: "COMPLETED",
 };

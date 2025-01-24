@@ -7,6 +7,10 @@ import { selectSchema } from "./select";
 import { onSelectSchema } from "./on_select";
 import { initSchema } from "./init";
 import { onInitSchema } from "./on_init";
+import { confirmSchema } from "./confirm";
+import { onConfirmSchema } from "./on_confirm";
+import { statusSchema } from "./status";
+import { onStatusSchema } from "./on_status";
 
 
 export const onestSchemaValidator =
@@ -65,18 +69,18 @@ export const onestSchemaValidator =
 			case "on_init":
 				validate = ajv.compile(onInitSchema);
 				break;
-			// case "confirm":
-				// validate = ajv.compile(confirmSchema);
-				// break;
-			// case "on_confirm":
-				// validate = ajv.compile(onConfirmSchema);
-				// break;
-			// case "status":
-			// 	validate = ajv.compile(statusSchema);
-			// 	break;
-			// case "on_status":
-			// 	validate = ajv.compile(onStatusSchema);
-			// 	break;
+			case "confirm":
+				validate = ajv.compile(confirmSchema);
+				break;
+			case "on_confirm":
+				validate = ajv.compile(onConfirmSchema);
+				break;
+			case "status":
+				validate = ajv.compile(statusSchema);
+				break;
+			case "on_status":
+				validate = ajv.compile(onStatusSchema);
+				break;
 			// case "update":
 			// 	validate = ajv.compile(updateSchema);
 			// 	break;

@@ -90,11 +90,11 @@ export const responseBuilder = async (
 		| "agri"
 		| "onest",
 
+	ts?: Date,
 	error?: object | undefined,
-	id: number = 0,
-	ts ?: Date,
+	id: number = 0
 ) => {
-	console.log("response message", action, JSON.stringify(message))
+	console.log("response message", action, JSON.stringify(message));
 	res.locals = {};
 
 	ts = ts ?? new Date();
@@ -1724,97 +1724,98 @@ export const updateFulfillments = (
 };
 
 export const quoteCreatorOnest = (quoteItems: any) => {
-  const quote: any = {
-    price: {
-      currency: "INR",
-      value: "0", // Initial value, will be updated later
-    },
-    breakup: [],
-    ttl: "P1D", // Default TTL of 1 day
-  };
+	const quote: any = {
+		price: {
+			currency: "INR",
+			value: "0", // Initial value, will be updated later
+		},
+		breakup: [],
+		ttl: "P1D", // Default TTL of 1 day
+	};
 
-  // Iterate over quoteItems and process each one
-  quoteItems.forEach((item: any) => {
-    // Add item price to the total quote price
-    quote.price.value = (parseFloat(quote.price.value) + parseFloat(item.price.value)).toFixed(2);
+	// Iterate over quoteItems and process each one
+	quoteItems.forEach((item: any) => {
+		// Add item price to the total quote price
+		quote.price.value = (
+			parseFloat(quote.price.value) + parseFloat(item.price.value)
+		).toFixed(2);
 
-    // Process the item in the breakup array
-    const itemBreakup: any = {
-      id: item.itemId,
-      price: item.price,
-      title: item.title,
-      tags: [
-        {
-          descriptor: {
-            code: "TYPE",
-          },
-          list: [
-            {
-              descriptor: {
-                code: "TYPE",
-              },
-              value: "item",
-            },
-          ],
-        },
-      ],
-    };
+		// Process the item in the breakup array
+		const itemBreakup: any = {
+			id: item.itemId,
+			price: item.price,
+			title: item.title,
+			tags: [
+				{
+					descriptor: {
+						code: "TYPE",
+					},
+					list: [
+						{
+							descriptor: {
+								code: "TYPE",
+							},
+							value: "item",
+						},
+					],
+				},
+			],
+		};
 
-    quote.breakup.push(itemBreakup);
+		quote.breakup.push(itemBreakup);
 
-    // Process NP Fees and add to breakup
-    // if (item.npFeesList && item.npFeesList.length > 0) {
-    //   // Extract NP Fees tags
-    //   const npFeesTag = {
-    //     price: {
-    //       currency: "INR",
-    //       value: "300.00", // This can be modified dynamically based on logic
-    //     },
-    //     tags: [
-    //       {
-    //         descriptor: {
-    //           code: "QUOTE",
-    //         },
-    //         list: [
-    //           {
-    //             descriptor: {
-    //               code: "TYPE",
-    //             },
-    //             value: "item",
-    //           },
-    //         ],
-    //       },
-    //       item.npFeesList[0], 
-    //       {
-    //         descriptor: {
-    //           code: "TYPE",
-    //         },
-    //         list: [
-    //           {
-    //             descriptor: {
-    //               code: "TYPE",
-    //             },
-    //             value: "misc",
-    //           },
-    //         ],
-    //       },
-    //     ],
-    //   };
+		// Process NP Fees and add to breakup
+		// if (item.npFeesList && item.npFeesList.length > 0) {
+		//   // Extract NP Fees tags
+		//   const npFeesTag = {
+		//     price: {
+		//       currency: "INR",
+		//       value: "300.00", // This can be modified dynamically based on logic
+		//     },
+		//     tags: [
+		//       {
+		//         descriptor: {
+		//           code: "QUOTE",
+		//         },
+		//         list: [
+		//           {
+		//             descriptor: {
+		//               code: "TYPE",
+		//             },
+		//             value: "item",
+		//           },
+		//         ],
+		//       },
+		//       item.npFeesList[0],
+		//       {
+		//         descriptor: {
+		//           code: "TYPE",
+		//         },
+		//         list: [
+		//           {
+		//             descriptor: {
+		//               code: "TYPE",
+		//             },
+		//             value: "misc",
+		//           },
+		//         ],
+		//       },
+		//     ],
+		//   };
 
-    //   const npFeesBreakup = {
-    //     title: "NP Fees",
-    //     id: item.npFeesId,
-    //     price: npFeesTag.price,
-    //     tags: npFeesTag.tags,
-    //   };
+		//   const npFeesBreakup = {
+		//     title: "NP Fees",
+		//     id: item.npFeesId,
+		//     price: npFeesTag.price,
+		//     tags: npFeesTag.tags,
+		//   };
 
-    //   quote.breakup.push(npFeesBreakup);
-      
-    //   // Add NP Fees to the total quote price
-    //   quote.price.value = (parseFloat(quote.price.value) + parseFloat(npFeesTag.price.value)).toFixed(2);
-    // }
-  });
+		//   quote.breakup.push(npFeesBreakup);
 
-  return quote;
+		//   // Add NP Fees to the total quote price
+		//   quote.price.value = (parseFloat(quote.price.value) + parseFloat(npFeesTag.price.value)).toFixed(2);
+		// }
+	});
+
+	return quote;
 };
-
