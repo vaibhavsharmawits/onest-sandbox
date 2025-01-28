@@ -13,7 +13,7 @@ export const bppRouter = Router();
 
 bppRouter.post(
 	"/search",
-	// jsonSchemaValidator({ domain: "onest", action: "search" }),
+	jsonSchemaValidator({ domain: "onest", action: "search" }),
 	redisRetriever,
 	searchController
 );

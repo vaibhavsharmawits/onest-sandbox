@@ -64,7 +64,7 @@ async function send_response(
 				response = await axios.post(uri, res_obj, {
 					headers: { ...headers },
 				});
-				console.log(response.data, "response");
+				console.log(response.data, "response from uri");
 			} catch (error: any) {
 				console.error("Error details:", error.toJSON ? error.toJSON() : error);
 			}
