@@ -1742,24 +1742,11 @@ export const quoteCreatorOnest = (quoteItems: any) => {
 
 		// Process the item in the breakup array
 		const itemBreakup: any = {
-			id: item.itemId,
-			price: item.price,
-			title: item.title,
-			tags: [
-				{
-					descriptor: {
-						code: "TYPE",
-					},
-					list: [
-						{
-							descriptor: {
-								code: "TYPE",
-							},
-							value: "item",
-						},
-					],
-				},
-			],
+			item: {
+				id: item.itemId,
+				price: item.price,
+				title: item.title,
+			}
 		};
 
 		quote.breakup.push(itemBreakup);

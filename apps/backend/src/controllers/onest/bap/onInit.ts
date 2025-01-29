@@ -118,17 +118,18 @@ const onInitConsultationController = (
 				items: updatedItems,
 				fulfillments: updatedFulfillments,
 				quote: quote,
-				payments: {
-					...payments,
-					params: {
-						params: {
-							amount: quote?.price?.value,
-							currency: quote?.price?.currency,
-							transaction_id: uuidv4,
-						},
-					},
-					status: "PAID",
-				},
+				// payments: {
+				// 	...payments,
+				// 	params: {
+				// 		params: {
+				// 			amount: quote?.price?.value,
+				// 			currency: quote?.price?.currency,
+				// 			transaction_id: uuidv4,
+				// 		},
+				// 	},
+				// 	status: "PAID",
+				// },
+				payments
 			},
 		};
 

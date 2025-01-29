@@ -278,14 +278,11 @@ export const onInitSchema = {
                             items: {
                               type: "object",
                               properties: {
-                                code: {
-                                  type: "string",
-                                },
                                 name: {
                                   type: "string",
                                 },
                               },
-                              required: ["code", "name"],
+                              required: [ "name"],
                             },
                           },
                           languages: {
@@ -293,14 +290,11 @@ export const onInitSchema = {
                             items: {
                               type: "object",
                               properties: {
-                                code: {
-                                  type: "string",
-                                },
                                 name: {
                                   type: "string",
                                 },
                               },
-                              required: ["code", "name"],
+                              required: ["name"],
                             },
                           },
                           tags: {
@@ -312,9 +306,6 @@ export const onInitSchema = {
                                   type: "object",
                                   properties: {
                                     code: {
-                                      type: "string",
-                                    },
-                                    name: {
                                       type: "string",
                                     },
                                   },
@@ -407,90 +398,37 @@ export const onInitSchema = {
                   required: ["currency", "value"],
                 },
                 breakup: {
-                  type: "array",
-                  items: {
-                    type: "object",
-                    properties: {
-                      id: {
-                        type: "string",
-                      },
-                      price: {
-                        type: "object",
-                        properties: {
-                          currency: {
-                            type: "string",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "item": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
                           },
-                          value: {
-                            type: "string",
-                          },
-                        },
-                        required: ["currency", "value"],
-                      },
-                      title: {
-                        type: "string",
-                      },
-                      tags: {
-                        type: "array",
-                        items: {
-                          type: "object",
-                          properties: {
-                            descriptor: {
-                              type: "object",
-                              properties: {
-                                code: {
-                                  type: "string",
-                                },
-                                name: {
-                                  type: "string",
-                                },
+                          "price": {
+                            "type": "object",
+                            "properties": {
+                              "currency": {
+                                "type": "string"
                               },
-                              required: ["code"],
+                              "value": {
+                                "type": "string"
+                              }
                             },
-                            list: {
-                              type: "array",
-                              items: {
-                                oneOf: [
-                                  {
-                                    properties: {
-                                      descriptor: {
-                                        type: "object",
-                                        properties: {
-                                          code: {
-                                            type: "string",
-                                          },
-                                          name: {
-                                            type: "string",
-                                          },
-                                        },
-                                        required: ["code"],
-                                      },
-                                      value: {
-                                        type: "string",
-                                      },
-                                    },
-                                    required: ["descriptor", "value"],
-                                  },
-                                  {
-                                    properties: {
-                                      code: {
-                                        type: "string",
-                                      },
-                                      value: {
-                                        type: "string",
-                                      },
-                                    },
-                                    required: ["code", "value"],
-                                  },
-                                ],
-                              },
-                            },
+                            "required": ["currency", "value"]
                           },
-                          required: ["descriptor", "list"],
+                          "title": {
+                            "type": "string"
+                          }
                         },
-                      },
+                        "required": ["id", "price", "title"]
+                      }
                     },
-                    required: ["id", "price", "title", "tags"],
-                  },
+                    "required": ["item"]
+                  }
                 },
                 ttl: {
                   type: "string",
@@ -499,7 +437,7 @@ export const onInitSchema = {
               required: ["price", "breakup", "ttl"],
             },
             payments: {
-              type: "object",
+              type: "array",
               properties: {
                 url: {
                   type: "string",

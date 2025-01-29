@@ -150,8 +150,8 @@ const ONDCDocumentation = () => {
 					<ul>
 						<li>
 							Onest:{" "}
-							<a href="https://onest-staging.ondc.org/api/onest/bpp">
-								https://onest-staging.ondc.org/api/onest/bpp
+							<a href="https://onest-mock-service.ondc.org/api/onest/bpp">
+							https://onest-mock-service.ondc.org/api/onest/bpp
 							</a>
 						</li>
 					</ul>
@@ -671,8 +671,8 @@ const ONDCDocumentation = () => {
 					<ul>
 						<li>
 							Onest:{" "}
-							<a href="https://onest-staging.ondc.org/api/onest/bap">
-								https://onest-staging.ondc.org/api/onest/bap
+							<a href="https://onest-mock-service.ondc.org/api/onest/bap">
+								https://onest-mock-service.ondc.org/api/onest/bap
 							</a>
 						</li>
 					</ul>
@@ -690,7 +690,7 @@ const ONDCDocumentation = () => {
 					<br />
 					<p>
 						To obtain the authentication header, please follow the{" "}
-						<a href="https://onest-staging.ondc.org/api/api-docs/auth/#/Auth/post_signature">
+						<a href="https://onest-mock-service.ondc.org/api/api-docs/auth/#/Auth/post_signature">
 							Swagger link{" "}
 						</a>
 						provided and create an authentication header for all requests
@@ -1070,8 +1070,8 @@ const ONDCDocumentation = () => {
 				<h2>Analyzing Transactions after Requests</h2>
 				<p>
 					You can check the transaction analyser process from that link:{" "}
-					<a href="https://onest-staging.ondc.org/analyse">
-						https://onest-staging.ondc.org/analyse
+					<a href="https://onest-mock-service.ondc.org/analyse">
+					https://onest-mock-service.ondc.org/analyse
 					</a>
 					.
 				</p>

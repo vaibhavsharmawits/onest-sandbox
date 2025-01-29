@@ -22,7 +22,7 @@ export const Sign = () => {
 	const handleSubmit = async () => {
 		try {
 			const response = await axios.post(
-				`${[import.meta.env.VITE_SERVER_URL]}/auth/signCheck`,
+				`${[import.meta.env.VITE_REACT_SERVER_URL || "https://onest-mock-service.ondc.org/api"]}/auth/signCheck`,
 				requestBody,
 				{
 					headers: {

@@ -88,6 +88,8 @@ const initConsultationController = (
 			return itm;
 		});
 
+		console.log("fulfillments",fulfillments);
+
 		const updatedFulfillments = fulfillments.map((ff: any) => {
 			ff.state = {
 				descriptor: {
@@ -99,7 +101,7 @@ const initConsultationController = (
 		});
 		
 
-		const payments = {
+		const payments = [{
 			url: "https://ondc.transaction.com/payment",
 			status: "NOT-PAID",
 			type: "ON-ORDER",
@@ -165,7 +167,7 @@ const initConsultationController = (
 					},
 				],
 			},
-		};
+		}];
 
 		const responseMessage = {
 			order: {

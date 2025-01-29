@@ -37,7 +37,7 @@ export const searchController = async (
 
 			default:
 				file = fs.readFileSync(
-					path.join(ONEST_EXAMPLES_PATH, "on_search/on_search.yaml")
+					path.join(ONEST_EXAMPLES_PATH, "on_search/on_search_by_job_location.yaml")
 				);
 				break;
 		}
