@@ -102,7 +102,7 @@ In case you use mock service you will receive both `sync` and `async` and in cas
 # Steps to Start in Development Mode
 This mock server uses Node/TS along with TurboRepo to manage the monorepo. It requires Docker and Docker Compose to be present on the workstation. In development mode, the mock server can be started by following:
 1. `npm i --force` to install the dependencies. Run this at the project root.
-2. `docker compose up db redis -d` to start the databases in detached mode.
+2. `docker compose up redis -d` to start the databases in detached mode.
 3. `git submodule update --init` to initiate and update the submodules.
 4. `npm run dev` to finally start up the server.
 

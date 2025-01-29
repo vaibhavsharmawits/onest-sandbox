@@ -93,9 +93,6 @@ export const searchSchema = {
 											type: "string",
 											const: "NP_FEES",
 										},
-										name: {
-											type: "string",
-										},
 									},
 								},
 								list: {
@@ -192,6 +189,48 @@ export const searchSchema = {
 								},
 							},
 						},
+						provider: {
+							type: "object",
+							properties: {
+								locations: {
+									type: "array",
+									items: {
+										type: "object",
+										properties: {
+											city: {
+												type: "object",
+												properties: {
+													code: {
+														type: "string",
+													},
+												},
+												required: ["code"],
+											},
+											state: {
+												type: "object",
+												properties: {
+													code: {
+														type: "string",
+													},
+												},
+												required: ["code"],
+											},
+											country: {
+												type: "object",
+												properties: {
+													code: {
+														type: "string",
+													},
+												},
+												required: ["code"],
+											},
+										},
+										required: ["city", "state", "country"],
+									},
+								},
+							},
+							required: ["locations"],
+						},
 						tags: {
 							type: "array",
 							items: {
@@ -239,7 +278,7 @@ export const searchSchema = {
 							minItems: 1,
 						},
 					},
-					required: ["payment", "item"],
+					required: ["payment", "provider", "tags"],
 				},
 			},
 			required: ["intent"],

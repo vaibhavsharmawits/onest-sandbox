@@ -2,13 +2,10 @@ import { NextFunction, Request, Response } from "express";
 import fs from "fs";
 import path from "path";
 import YAML from "yaml";
-import {
-	ONEST_EXAMPLES_PATH,
-	responseBuilder,
-} from "../../../lib/utils";
+import { ONEST_EXAMPLES_PATH, responseBuilder } from "../../../lib/utils";
 import { ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
 import { ONEST_DOMAINS } from "../../../lib/utils/apiConstants";
-import {redis } from "../../../lib/utils";
+import { redis } from "../../../lib/utils";
 
 export const searchController = async (
 	req: Request,
@@ -17,17 +14,20 @@ export const searchController = async (
 ) => {
 	try {
 		const domain = req.body.context.domain;
-		console.log("bidy of the on_search",JSON.stringify(req.body))
-		let search_type = await redis.get(`${req.body.context.transaction_id}-search_type`)
-		console.log("final search type",search_type);
-		
-		console.log()
+		console.log("bidy of the on_search", JSON.stringify(req.body));
+		let search_type = await redis.get(
+			`${req.body.context.transaction_id}-search_type`
+		);
+		console.log("final search type", search_type);
+
 		let onSearch, file;
 		const {
 			message: { intent },
 		} = req.body;
 		const id = intent?.category?.id;
-
+		if (search_type === "search") {
+			search_type = "search_by_job_location";
+		}
 		switch (domain) {
 			case ONEST_DOMAINS.ONEST10:
 				file = fs.readFileSync(
@@ -42,7 +42,6 @@ export const searchController = async (
 				break;
 		}
 		const response = YAML.parse(file.toString());
-			// fs.writeFileSync("temp-on_search.json", JSON.stringify(response.value.message, null, 2));
 		return responseBuilder(
 			res,
 			next,

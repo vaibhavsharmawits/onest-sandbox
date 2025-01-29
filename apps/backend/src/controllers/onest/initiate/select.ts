@@ -5,6 +5,7 @@ import {
 	send_nack,
 	redisFetchToServer,
 	ONEST_BAP_MOCKSERVER_URL,
+	redis,
 } from "../../../lib/utils";
 import { v4 as uuidv4 } from "uuid";
 import _ from "lodash";
@@ -16,6 +17,13 @@ export const initiateSelectController = async (
 ) => {
 	try {
 		const { transactionId } = req.body;
+
+		let search_type = await redis.get(
+			`${transactionId}-search_type`
+		);
+		if (search_type === "search_inc") {
+			return send_nack(res, "On Search doesn't exist");
+		}
 
 		const on_search = await redisFetchToServer("on_search", transactionId);
 		if (!on_search) {
@@ -81,7 +89,6 @@ const intializeRequest = async (
 			},
 		};
 
-		console.log("hello-select")
 		await send_response(res, next, select, transaction_id, "select");
 	} catch (error) {
 		return next(error);

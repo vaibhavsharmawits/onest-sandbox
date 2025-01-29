@@ -11,13 +11,16 @@ import { confirmSchema } from "./confirm";
 import { onConfirmSchema } from "./on_confirm";
 import { statusSchema } from "./status";
 import { onStatusSchema } from "./on_status";
-
+import { searchIncSchema } from "./search_inc";
+import { onSearchIncSchema } from "./on_search_inc";
 
 export const onestSchemaValidator =
 	(
 		schema:
 			| "search"
 			| "on_search"
+			| "search_inc"
+			| "on_search_inc"
 			| "select"
 			| "on_select"
 			| "init"
@@ -57,12 +60,18 @@ export const onestSchemaValidator =
 			case "on_search":
 				validate = ajv.compile(onSearchSchema);
 				break;
+			case "search_inc":
+				validate = ajv.compile(searchIncSchema);
+				break;
+			case "on_search_inc":
+				validate = ajv.compile(onSearchIncSchema);
+				break;
 			case "select":
 				validate = ajv.compile(selectSchema);
 				break;
 			case "on_select":
 				validate = ajv.compile(onSelectSchema);
-			break;
+				break;
 			case "init":
 				validate = ajv.compile(initSchema);
 				break;
@@ -94,7 +103,7 @@ export const onestSchemaValidator =
 			// 	validate = ajv.compile(onCancelSchema);
 			// 	break;
 			default:
-				console.log("error")
+				console.log("error");
 				res.status(400).json({
 					message: {
 						ack: {
@@ -110,22 +119,21 @@ export const onestSchemaValidator =
 		}
 
 		isValid = validate(req.body);
-		
 
 		// console.log('isValid::::: ', isValid)
 		if (!isValid) {
-			console.log("error json schema",schema,validate.errors?.map(
-				({ message, params, instancePath }) => ({
+			console.log(
+				"error json schema",
+				schema,
+				validate.errors?.map(({ message, params, instancePath }) => ({
 					message: `${message}${
 						params.allowedValues ? ` (${params.allowedValues})` : ""
 					}${params.allowedValue ? ` (${params.allowedValue})` : ""}${
-						params.additionalProperty
-							? ` (${params.additionalProperty})`
-							: ""
+						params.additionalProperty ? ` (${params.additionalProperty})` : ""
 					}`,
 					details: instancePath,
-				})
-			),)
+				}))
+			);
 			res.status(400).json({
 				message: {
 					ack: {
