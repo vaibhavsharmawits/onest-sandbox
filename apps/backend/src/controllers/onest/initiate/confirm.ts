@@ -110,7 +110,7 @@ const intializeRequest = async (
 				],
 			},
 		];
-		
+
 		const updatedItems = items.map((item: any) => {
 			delete item?.xinput;
 			return item;
@@ -120,7 +120,6 @@ const intializeRequest = async (
 			ff.state = {
 				descriptor: {
 					code: "APPLICATION_STARTED",
-					name: "Application Started",
 				},
 				updated_at: timestamp,
 			};
@@ -128,6 +127,17 @@ const intializeRequest = async (
 			return ff;
 		});
 
+		const updatedPayments = payments.map((payment: any) => ({
+			...payment,
+			params: {
+				amount: quote?.price?.value,
+				currency: quote?.price?.currency,
+				transaction_id: uuidv4(),
+			},
+			status: "PAID",
+		}));
+
+		console.log(updatedPayments, "updatedPayments");
 		const confirm = {
 			context: {
 				...context,
@@ -145,15 +155,7 @@ const intializeRequest = async (
 					items: updatedItems,
 					fulfillments: updatedFulfillments,
 					quote: quote,
-					payments: {
-						...payments,
-						params: {
-							amount: quote?.price?.value,
-							currency: quote?.price?.currency,
-							transaction_id: uuidv4(),
-						},
-						status: "PAID",
-					},
+					payments: updatedPayments,
 				},
 			},
 		};

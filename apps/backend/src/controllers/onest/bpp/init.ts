@@ -56,7 +56,7 @@ const initConsultationController = (
 		const {
 			context,
 			message: {
-				order: { provider, items, fulfillments, quote },
+				order: { provider, items, fulfillments, quote, payments },
 			},
 		} = req.body;
 
@@ -101,73 +101,72 @@ const initConsultationController = (
 		});
 		
 
-		const payments = [{
-			url: "https://ondc.transaction.com/payment",
-			status: "NOT-PAID",
-			type: "ON-ORDER",
-			collected_by: "BAP",
-			tags: {
-				descriptor: {
-					code: "SETTLEMENT_DETAILS",
-				},
-				list: [
-					{
-						descriptor: {
-							code: "SETTLEMENT_COUNTERPARTY",
-						},
-						value: "seller-app",
-					},
-					{
-						descriptor: {
-							code: "SETTLEMENT_PHASE",
-						},
-						value: "sale-amount",
-					},
-					{
-						descriptor: {
-							code: "SETTLEMENT_TYPE",
-						},
-						value: "upi",
-					},
-					{
-						descriptor: {
-							code: "UPI_ADDRESS",
-						},
-						value: "gft@oksbi",
-					},
-					{
-						descriptor: {
-							code: "SETTLEMENT_BANK_ACCOUNT_NO",
-						},
-						value: "XXXXXXXXXX",
-					},
-					{
-						descriptor: {
-							code: "SETTLEMENT_IFSC_CODE",
-						},
-						value: "XXXXXXXXX",
-					},
-					{
-						descriptor: {
-							code: "BENEFICIARY_NAME",
-						},
-						value: "xxxxx",
-					},
-					{
-						descriptor: {
-							code: "BANK_NAME",
-						},
-						value: "xxxx",
-					},
-					{
-						descriptor: {
-							code: "BRANCH_NAME",
-						},
-						value: "xxxx",
-					},
-				],
-			},
-		}];
+		// const payments = [{
+		// 	status: "NOT-PAID",
+		// 	type: "ON-ORDER",
+		// 	collected_by: "BAP",
+		// 	tags: {
+		// 		descriptor: {
+		// 			code: "SETTLEMENT_DETAILS",
+		// 		},
+		// 		list: [
+		// 			{
+		// 				descriptor: {
+		// 					code: "SETTLEMENT_COUNTERPARTY",
+		// 				},
+		// 				value: "seller-app",
+		// 			},
+		// 			{
+		// 				descriptor: {
+		// 					code: "SETTLEMENT_PHASE",
+		// 				},
+		// 				value: "sale-amount",
+		// 			},
+		// 			{
+		// 				descriptor: {
+		// 					code: "SETTLEMENT_TYPE",
+		// 				},
+		// 				value: "upi",
+		// 			},
+		// 			{
+		// 				descriptor: {
+		// 					code: "UPI_ADDRESS",
+		// 				},
+		// 				value: "gft@oksbi",
+		// 			},
+		// 			{
+		// 				descriptor: {
+		// 					code: "SETTLEMENT_BANK_ACCOUNT_NO",
+		// 				},
+		// 				value: "XXXXXXXXXX",
+		// 			},
+		// 			{
+		// 				descriptor: {
+		// 					code: "SETTLEMENT_IFSC_CODE",
+		// 				},
+		// 				value: "XXXXXXXXX",
+		// 			},
+		// 			{
+		// 				descriptor: {
+		// 					code: "BENEFICIARY_NAME",
+		// 				},
+		// 				value: "xxxxx",
+		// 			},
+		// 			{
+		// 				descriptor: {
+		// 					code: "BANK_NAME",
+		// 				},
+		// 				value: "xxxx",
+		// 			},
+		// 			{
+		// 				descriptor: {
+		// 					code: "BRANCH_NAME",
+		// 				},
+		// 				value: "xxxx",
+		// 			},
+		// 		],
+		// 	},
+		// }];
 
 		const responseMessage = {
 			order: {

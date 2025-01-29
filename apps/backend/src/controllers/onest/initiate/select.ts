@@ -79,6 +79,10 @@ const intializeRequest = async (
 					provider: {
 						id: id,
 					},
+					fulfillments: [{
+						id: providers[0]?.fulfillments?.[0]?.id,
+						type: providers[0]?.fulfillments?.[0]?.type,}
+					],
 					items: [
 						{
 							...items[0],

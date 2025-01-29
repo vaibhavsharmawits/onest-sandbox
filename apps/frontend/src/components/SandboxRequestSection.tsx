@@ -54,21 +54,26 @@ export const SandboxRequestSection = () => {
 	};
 
 	const handleVersion = (
-		event: React.MouseEvent<Element> | React.KeyboardEvent<Element> | React.FocusEvent<Element> | null,
+		event:
+			| React.MouseEvent<Element>
+			| React.KeyboardEvent<Element>
+			| React.FocusEvent<Element>
+			| null,
 		value: {} | null
 	) => {
-		console.log("event",event)
+		console.log("event", event);
 		if (value) {
 			setVersion(value as string); // Ensure value is a string and set the version
 		}
 	};
-	
 
 	const handleSubmit = async () => {
-		
-		let url = `${[
-			"https://onest-mock-service.ondc.org/api",
-		]}/${domain.toLowerCase()}/${Object.keys(URL_MAPPING).filter((key) =>
+		const viteUrl =
+			import.meta.env.VITE_REACT_SERVER_URL ||
+			"https://onest-mock-service.ondc.org/api";
+		let url = `${[viteUrl]}/${domain.toLowerCase()}/${Object.keys(
+			URL_MAPPING
+		).filter((key) =>
 			URL_MAPPING[key as keyof typeof URL_MAPPING].includes(action as string)
 		)}/${action}?mode=sandbox&version=${version}`;
 

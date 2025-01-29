@@ -9,7 +9,7 @@ export const MiscSwagger = () => {
 		url.startsWith(import.meta.env.VITE_REACT_SERVER_URL || "https://onest-mock-service.ondc.org/api")
 			? { url }
 			: {
-					url: import.meta.env.VITE_REACT_SERVER_URL || "https://onest-mock-service.ondc.org/api" + url.replace("/api", ""),
+					url: import.meta.env.VITE_REACT_SERVER_URL || "https://onest-mock-service.ondc.org/api/analyse/api" + url.replace("/api", ""),
 					// eslint-disable-next-line no-mixed-spaces-and-tabs
 			  }
 	);
