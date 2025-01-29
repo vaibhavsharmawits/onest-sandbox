@@ -104,10 +104,10 @@ const selectConfirmController = (
         provider: {
           ...orderProvider,
         },
-        fulfillments: {
+        fulfillments: [{
           id: provider?.fulfillments?.[0]?.id,
-          type: provider?.fulfillments?.[0]?.type,
-        },
+          type: provider?.fulfillments?.[0]?.type,}
+        ],
         items: [...message.order.items],
         quote: quoteCreatorOnest(quoteItems),
       },

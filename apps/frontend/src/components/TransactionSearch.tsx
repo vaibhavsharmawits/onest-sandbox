@@ -23,7 +23,7 @@ export const TransactionSearch = () => {
 	const fetchTransaction = async (transaction: string) => {
 		try {
 			const response = await axios.get(
-				`${import.meta.env.VITE_SERVER_URL}/analyse/${transaction}`
+				`${import.meta.env.VITE_REACT_SERVER_URL || "https://onest-mock-service.ondc.org/api"}/analyse/${transaction}`
 			);
 			const formattedResponse = response.data
         .reduce(

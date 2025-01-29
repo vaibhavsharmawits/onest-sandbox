@@ -6,10 +6,10 @@ import { SwaggerDownloadButton } from "../../../../components";
 
 export const MiscSwagger = () => {
 	swaggerSpec.servers = swaggerSpec.servers.map(({ url }: { url: string }) =>
-		url.startsWith(import.meta.env.VITE_SERVER_URL)
+		url.startsWith(import.meta.env.VITE_REACT_SERVER_URL || "https://onest-mock-service.ondc.org/api")
 			? { url }
 			: {
-					url: import.meta.env.VITE_SERVER_URL + url.replace("/api", ""),
+					url: import.meta.env.VITE_REACT_SERVER_URL || "https://onest-mock-service.ondc.org/api" + url.replace("/api", ""),
 					// eslint-disable-next-line no-mixed-spaces-and-tabs
 			  }
 	);

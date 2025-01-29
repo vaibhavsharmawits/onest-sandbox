@@ -29,7 +29,7 @@ const port = process.env.PORT || 3000;
 loadConfig();
 app.use(cors());
 
-app.use("`/api-docs/auth`", swaggerUi.serve, authSwagger("/api-docs/auth"));
+app.use("/api-docs/auth", swaggerUi.serve, authSwagger("/api-docs/auth"));
 app.use("/api-docs/misc", swaggerUi.serve, miscSwagger("/api-docs/misc"));
 app.use("/api-docs/b2b", swaggerUi.serve, b2bSwagger("/api-docs/b2b"));
 app.use("/api-docs/b2c", swaggerUi.serve, b2cSwagger("/api-docs/b2c"));

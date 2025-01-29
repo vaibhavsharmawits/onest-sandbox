@@ -100,7 +100,7 @@ export const onSelectSchema = {
               required: ["id"],
             },
             fulfillments: {
-              type: "object",
+              type: "array",
               properties: {
                 id: {
                   type: "string",
@@ -109,7 +109,7 @@ export const onSelectSchema = {
                   type: "string",
                 },
               },
-			  required: ["id", "type"],
+              required: ["id", "type"],
             },
             items: {
               type: "array",
@@ -181,74 +181,39 @@ export const onSelectSchema = {
                   required: ["currency", "value"],
                 },
                 breakup: {
-                  type: "array",
-                  items: {
-                    type: "object",
-                    properties: {
-                      id: {
-                        type: "string",
-                      },
-                      price: {
-                        type: "object",
-                        properties: {
-                          currency: {
-                            type: "string",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "item": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
                           },
-                          value: {
-                            type: "string",
-                          },
-                        },
-                        required: ["currency", "value"],
-                      },
-                      title: {
-                        type: "string",
-                      },
-                      tags: {
-                        type: "array",
-                        items: {
-                          type: "object",
-                          properties: {
-                            descriptor: {
-                              type: "object",
-                              properties: {
-                                code: {
-                                  type: "string",
-                                },
+                          "price": {
+                            "type": "object",
+                            "properties": {
+                              "currency": {
+                                "type": "string"
                               },
-                              required: ["code"],
+                              "value": {
+                                "type": "string"
+                              }
                             },
-                            list: {
-                              type: "array",
-                              items: {
-                                type: "object",
-                                properties: {
-                                  descriptor: {
-                                    type: "object",
-                                    properties: {
-                                      code: {
-                                        type: "string",
-                                      },
-                                    },
-                                    required: ["code"],
-                                  },
-                                  code: {
-                                    type: "string",
-                                  },
-                                  value: {
-                                    type: "string",
-                                  },
-                                },
-                                required: ["value"],
-                              },
-                            },
+                            "required": ["currency", "value"]
                           },
-                          required: ["descriptor", "list"],
+                          "title": {
+                            "type": "string"
+                          }
                         },
-                      },
+                        "required": ["id", "price", "title"]
+                      }
                     },
-                    required: ["id", "price", "title", "tags"],
-                  },
-                },
+                    "required": ["item"]
+                  }
+                }
+                ,
                 ttl: {
                   type: "string",
                 },

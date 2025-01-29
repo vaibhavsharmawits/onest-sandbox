@@ -69,7 +69,7 @@
 
 // 	const handleSubmit = async () => {
 // 		let url = `${[
-// 			import.meta.env.VITE_SERVER_URL,
+// 			import.meta.env.VITE_REACT_SERVER_URL,
 // 		]}/${domain.toLowerCase()}/${Object.keys(URL_MAPPING).filter((key) =>
 // 			URL_MAPPING[key as keyof typeof URL_MAPPING].includes(action as string)
 // 		)}/${action}?mode=mock&version=${version}`;

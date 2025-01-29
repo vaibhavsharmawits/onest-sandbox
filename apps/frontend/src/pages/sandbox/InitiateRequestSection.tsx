@@ -99,7 +99,7 @@ export const InitiateRequestSection = () => {
 				message: { matchingItems: any[] };
 			}>(
 				`${
-					import.meta.env.VITE_SERVER_URL
+					import.meta.env.VITE_REACT_SERVER_URL || "https://onest-mock-service.ondc.org/api"
 				}/${domain.toLowerCase()}/getCatalog/?mode=mock`,
 				{ transactionId },
 				{
@@ -257,9 +257,10 @@ export const InitiateRequestSection = () => {
 
 	const handleSubmit = async () => {
 		try {
+			console.log("import server url",import.meta.env.VITE_REACT_SERVER_URL)
 			const response = await axios.post(
 				`${
-					import.meta.env.VITE_SERVER_URL
+					import.meta.env.VITE_REACT_SERVER_URL || "https://onest-mock-service.ondc.org/api"
 				}/${domain}/initiate/${action}?mode=mock&version=${version}&scenario=${selectedScenario}`,
 				formState,
 				{
