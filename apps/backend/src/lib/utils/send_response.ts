@@ -16,14 +16,13 @@ async function send_response(
 	res_obj: any,
 	transaction_id: string,
 	action: string,
-	search_type: string = "search_by_employment_type",
+	search_type: string = "search_by_job_location",
 	scenario: any = "",
 	version: any = "",
 	bpp_uri: string = "", // for search
 	id: number = 0
 ) {
 	console.log("search", search_type);
-	console.log("status", JSON.stringify(res_obj))
 
 	let time_now = new Date().toISOString();
 	try {

@@ -503,7 +503,7 @@ export const onInitSchema = {
                   required: ["descriptor", "list"],
                 },
               },
-              required: ["url", "status", "type", "collected_by", "tags"],
+              required: ["status", "type", "collected_by", "tags"],
             },
           },
           required: [
