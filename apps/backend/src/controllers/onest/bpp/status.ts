@@ -2,11 +2,11 @@ import { NextFunction, Request, Response } from "express";
 import {
 	AGRI_HEALTHCARE_STATUS_OBJECT,
 	FULFILLMENT_STATES,
+	ONEST_STATUS_OBJECT,
 	ORDER_STATUS,
 } from "../../../lib/utils/apiConstants";
 import {
 	Fulfillment,
-	Stop,
 	redisExistFromServer,
 	redisFetchFromServer,
 	responseBuilder,
@@ -14,6 +14,7 @@ import {
 } from "../../../lib/utils";
 import { ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
 import { ERROR_MESSAGES } from "../../../lib/utils/responseMessages";
+import { sendOnestUnsolicitedOnStatus } from "../../../lib/utils/sendOnestUnsolicitedOnStatus";
 
 export const statusController = async (
 	req: Request,
@@ -336,7 +337,37 @@ const statusRequest = async (
 				},
 			},
 		};
-
+		// This sends unsolicited on_status calls. 
+		if(domain == "ONDC:ONEST10"){
+			const updatedStatus = [ONEST_STATUS_OBJECT.ASSESSMENT_IN_PROGRESS, ONEST_STATUS_OBJECT.OFFER_EXTENDED];
+			updatedStatus.forEach((status,index) => {
+				setTimeout(() => {
+					// Changes in On_Status Unsolicited.
+					const updatedResponseMessage = {
+						...responseMessage,
+					};
+					updatedResponseMessage.order.fulfillments[0].state.descriptor.code = status;
+					updatedResponseMessage.order.fulfillments[0].state.updated_at = new Date().toISOString();
+					sendOnestUnsolicitedOnStatus(
+						res,
+					next,
+					req.body.context,
+					updatedResponseMessage,
+					`${req.body.context.bap_uri}${
+						req.body.context.bap_uri.endsWith("/")
+						? ON_ACTION_KEY.ON_STATUS
+						: `/${ON_ACTION_KEY.ON_STATUS}`
+					}`,
+					`${ON_ACTION_KEY.ON_STATUS}`,
+					"onest",
+					new Date(),
+					undefined,
+					0
+					)
+				}, ((index+1)*5000)) // Interval of 5 seconds per request.
+			})
+		}
+		// This sends standard on_status call. 
 		return responseBuilder(
 			res,
 			next,
