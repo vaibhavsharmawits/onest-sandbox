@@ -1,3 +1,5 @@
+import { DOMAIN, JOBS_TYPE, VERSION } from "./constants";
+
 export const onStatusSchema = {
 	$id: "onStatusSchema",
 	type: "object",
@@ -7,12 +9,15 @@ export const onStatusSchema = {
 			properties: {
 				domain: {
 					type: "string",
-				},
-				action: {
-					type: "string",
+					enum: DOMAIN,
 				},
 				version: {
 					type: "string",
+					const: VERSION,
+				},
+				action: {
+					type: "string",
+					const: "on_status",
 				},
 				bap_id: {
 					type: "string",
@@ -42,7 +47,6 @@ export const onStatusSchema = {
 									type: "string",
 								},
 							},
-							required: ["code"],
 						},
 						country: {
 							type: "object",
@@ -51,7 +55,6 @@ export const onStatusSchema = {
 									type: "string",
 								},
 							},
-							required: ["code"],
 						},
 					},
 					required: ["city", "country"],
@@ -66,8 +69,8 @@ export const onStatusSchema = {
 			},
 			required: [
 				"domain",
-				"action",
 				"version",
+				"action",
 				"bap_id",
 				"bap_uri",
 				"bpp_id",
@@ -85,18 +88,18 @@ export const onStatusSchema = {
 				order: {
 					type: "object",
 					properties: {
-						id: { type: "string" },
+						status: {
+							type: "string",
+							const: "Active",
+						},
 						provider: {
 							type: "object",
 							properties: {
 								id: {
 									type: "string",
 								},
-								name: {
-									type: "string",
-								},
 							},
-							required: ["id", "name"],
+							required: ["id"],
 						},
 						items: {
 							type: "array",
@@ -106,61 +109,76 @@ export const onStatusSchema = {
 									id: {
 										type: "string",
 									},
-									quantity: {
-										type: "object",
-										properties: {
-											count: {
-												type: "integer",
-											},
+									fulfillment_ids: {
+										type: "array",
+										items: {
+											type: "string",
 										},
-										required: ["count"],
 									},
-									price: {
-										type: "object",
-										properties: {
-											currency: {
-												type: "string",
+									tags: {
+										type: "array",
+										items: {
+											type: "object",
+											properties: {
+												descriptor: {
+													type: "object",
+													properties: {
+														code: {
+															type: "string",
+														},
+													},
+													required: ["code"],
+												},
+												list: {
+													type: "array",
+													items: {
+														oneOf: [
+															{
+																type: "object",
+																properties: {
+																	code: {
+																		type: "string",
+																	},
+																	value: {
+																		type: "string",
+																	},
+																},
+																required: ["code", "value"],
+															},
+															{
+																type: "object",
+																properties: {
+																	descriptor: {
+																		type: "object",
+																		properties: {
+																			code: {
+																				type: "string",
+																			},
+																		},
+																		required: ["code"],
+																	},
+																	value: {
+																		type: "string",
+																	},
+																},
+																required: ["descriptor", "value"],
+															},
+														],
+													},
+												},
 											},
-											value: {
-												type: "string",
-											},
+											required: ["descriptor", "list"],
 										},
-										required: ["currency", "value"],
 									},
 								},
-								required: ["id", "quantity", "price"],
+								required: ["id", "fulfillment_ids"],
 							},
-						},
-						billing: {
-							type: "object",
-							properties: {
-								name: {
-									type: "string",
-								},
-								address: {
-									type: "string",
-								},
-								email: {
-									type: "string",
-									format: "email",
-								},
-								phone: {
-									type: "string",
-								},
-							},
-							required: ["name", "address", "email", "phone"],
 						},
 						fulfillments: {
 							type: "array",
 							items: {
 								type: "object",
 								properties: {
-									id: {
-										type: "string",
-									},
-									type: {
-										type: "string",
-									},
 									state: {
 										type: "object",
 										properties: {
@@ -169,12 +187,29 @@ export const onStatusSchema = {
 												properties: {
 													code: {
 														type: "string",
+														enum: [
+															"APPLICATION_IN_PROGRESS",
+															"ASSESSMENT_IN_PROGRESS",
+															"OFFER_EXTENDED",
+															"OFFER_REJECTED",
+														],
 													},
 												},
 												required: ["code"],
 											},
+											updated_at: {
+												type: "string",
+												format: "date-time",
+											},
 										},
-										required: ["descriptor"],
+										required: ["descriptor", "updated_at"],
+									},
+									id: {
+										type: "string",
+									},
+									type: {
+										type: "string",
+										enum: JOBS_TYPE,
 									},
 								},
 								required: ["id", "type", "state"],
@@ -200,88 +235,132 @@ export const onStatusSchema = {
 									items: {
 										type: "object",
 										properties: {
-											title: {
-												type: "string",
-											},
-											price: {
+											item: {
 												type: "object",
 												properties: {
-													currency: {
+													id: {
 														type: "string",
+													},
+													price: {
+														type: "object",
+														properties: {
+															currency: {
+																type: "string",
+															},
+															value: {
+																type: "string",
+															},
+														},
+														required: ["currency", "value"],
+													},
+													title: {
+														type: "string",
+													},
+												},
+												required: ["id", "price", "title"],
+											},
+										},
+										required: ["item"],
+									},
+								},
+								ttl: {
+									type: "string",
+								},
+							},
+							required: ["price", "breakup", "ttl"],
+						},
+						payments: {
+							type: "array",
+							properties: {
+								params: {
+									type: "object",
+									properties: {
+										currency: {
+											type: "string",
+										},
+										transaction_id: {
+											type: "string",
+										},
+										amount: {
+											type: "string",
+										},
+									},
+									required: ["currency", "transaction_id", "amount"],
+								},
+								url: {
+									type: "string",
+								},
+								status: {
+									type: "string",
+									const: "NOT-PAID",
+								},
+								type: {
+									type: "string",
+									enum: ["ON-ORDER", "ON-FULFILLMENT"],
+								},
+								collected_by: {
+									type: "string",
+									enum: ["BAP", "BPP"],
+								},
+								tags: {
+									type: "object",
+									properties: {
+										descriptor: {
+											type: "object",
+											properties: {
+												code: {
+													type: "string",
+													const: "SETTLEMENT_DETAILS",
+												},
+											},
+											required: ["code"],
+										},
+										list: {
+											type: "array",
+											items: {
+												type: "object",
+												properties: {
+													descriptor: {
+														type: "object",
+														properties: {
+															code: {
+																type: "string",
+																enum: [
+																	"SETTLEMENT_COUNTERPARTY",
+																	"SETTLEMENT_PHASE",
+																	"SETTLEMENT_TYPE",
+																	"UPI_ADDRESS",
+																	"SETTLEMENT_BANK_ACCOUNT_NO",
+																	"SETTLEMENT_IFSC_CODE",
+																	"BENEFICIARY_NAME",
+																	"BANK_NAME",
+																	"BRANCH_NAME",
+																],
+															},
+														},
+														required: ["code"],
 													},
 													value: {
 														type: "string",
 													},
 												},
-												required: ["currency", "value"],
+												required: ["descriptor", "value"],
 											},
 										},
-										required: ["title", "price"],
 									},
+									required: ["descriptor", "list"],
 								},
 							},
-							required: ["price", "breakup"],
-						},
-						payment: {
-							type: "object",
-							properties: {
-								status: {
-									type: "string",
-								},
-								uri: {
-									type: "string",
-									format: "uri",
-								},
-								settlement: {
-									type: "array",
-									items: {
-										type: "object",
-										properties: {
-											settlement_type: {
-												type: "string",
-											},
-											settlement_status: {
-												type: "string",
-											},
-											amount: {
-												type: "string",
-											},
-											beneficiary: {
-												type: "object",
-												properties: {
-													name: {
-														type: "string",
-													},
-													account: {
-														type: "string",
-													},
-													ifsc: {
-														type: "string",
-													},
-												},
-												required: ["name", "account", "ifsc"],
-											},
-										},
-										required: [
-											"settlement_type",
-											"settlement_status",
-											"amount",
-											"beneficiary",
-										],
-									},
-								},
-							},
-							required: ["status", "uri", "settlement"],
+							required: ["params", "status", "type", "collected_by", "tags"],
 						},
 					},
 					required: [
-						"id",
+						"status",
 						"provider",
 						"items",
-						"billing",
 						"fulfillments",
 						"quote",
-						"payment",
+						"payments",
 					],
 				},
 			},

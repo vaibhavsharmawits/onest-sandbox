@@ -135,16 +135,38 @@ export const onConfirmSchema = {
 												list: {
 													type: "array",
 													items: {
-														type: "object",
-														properties: {
-															code: {
-																type: "string",
+														oneOf: [
+															{
+																type: "object",
+																properties: {
+																	code: {
+																		type: "string",
+																	},
+																	value: {
+																		type: "string",
+																	},
+																},
+																required: ["code", "value"],
 															},
-															value: {
-																type: "string",
+															{
+																type: "object",
+																properties: {
+																	descriptor: {
+																		type: "object",
+																		properties: {
+																			code: {
+																				type: "string",
+																			},
+																		},
+																		required: ["code"],
+																	},
+																	value: {
+																		type: "string",
+																	},
+																},
+																required: ["descriptor", "value"],
 															},
-														},
-														required: ["code", "value"],
+														],
 													},
 												},
 											},
