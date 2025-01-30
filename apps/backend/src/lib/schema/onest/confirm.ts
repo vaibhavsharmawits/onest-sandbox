@@ -88,6 +88,9 @@ export const confirmSchema = {
 				order: {
 					type: "object",
 					properties: {
+						id: {
+							type: "string",
+						},
 						status: {
 							type: "string",
 							const: "Created",
@@ -126,9 +129,6 @@ export const confirmSchema = {
 														code: {
 															type: "string",
 														},
-														name: {
-															type: "string",
-														},
 													},
 													required: ["code"],
 												},
@@ -161,27 +161,25 @@ export const confirmSchema = {
 								type: "object",
 								properties: {
 									state: {
-                    type: "object",
-                    properties: {
-                      descriptor: {
-                        type: "object",
-                        properties: {
-                          code: {
-                            type: "string",
-                          },
-                          name: {
-                            type: "string",
-                          },
-                        },
-                        required: ["code", "name"],
-                      },
-                      updated_at: {
-                        type: "string",
-                        format: "date-time",
-                      },
-                    },
-                    required: ["descriptor", "updated_at"],
-                  },
+										type: "object",
+										properties: {
+											descriptor: {
+												type: "object",
+												properties: {
+													code: {
+														type: "string",
+														const: "APPLICATION_SUBMITTED",
+													},
+												},
+												required: ["code"],
+											},
+											updated_at: {
+												type: "string",
+												format: "date-time",
+											},
+										},
+										required: ["descriptor", "updated_at"],
+									},
 									id: {
 										type: "string",
 									},
@@ -209,14 +207,11 @@ export const confirmSchema = {
 														items: {
 															type: "object",
 															properties: {
-																code: {
-																	type: "string",
-																},
 																name: {
 																	type: "string",
 																},
 															},
-															required: ["code", "name"],
+															required: ["name"],
 														},
 													},
 													languages: {
@@ -224,59 +219,45 @@ export const confirmSchema = {
 														items: {
 															type: "object",
 															properties: {
-																code: {
-																	type: "string",
-																},
 																name: {
 																	type: "string",
 																},
 															},
-															required: ["code", "name"],
+															required: ["name"],
 														},
 													},
-													tags: {
+													creds: {
 														type: "array",
 														items: {
 															type: "object",
 															properties: {
+																id: {
+																	type: "string",
+																},
 																descriptor: {
 																	type: "object",
 																	properties: {
-																		code: {
-																			type: "string",
-																		},
 																		name: {
 																			type: "string",
 																		},
-																	},
-																	required: ["code"],
-																},
-																list: {
-																	type: "array",
-																	items: {
-																		type: "object",
-																		properties: {
-																			descriptor: {
-																				type: "object",
-																				properties: {
-																					code: {
-																						type: "string",
-																					},
-																					name: {
-																						type: "string",
-																					},
-																				},
-																				required: ["code"],
-																			},
-																			value: {
-																				type: "string",
-																			},
+																		short_desc: {
+																			type: "string",
 																		},
-																		required: ["descriptor", "value"],
+																		long_desc: {
+																			type: "string",
+																		},
 																	},
+																	required: ["name", "short_desc", "long_desc"],
+																},
+																url: {
+																	type: "string",
+																},
+																type: {
+																	type: "string",
+																	enum: ["jpeg", "pdf"],
 																},
 															},
-															required: ["descriptor", "list"],
+															required: ["id", "descriptor", "url", "type"],
 														},
 													},
 												},
@@ -286,7 +267,7 @@ export const confirmSchema = {
 													"age",
 													"skills",
 													"languages",
-													"tags",
+													"creds",
 												],
 											},
 											contact: {
@@ -304,53 +285,8 @@ export const confirmSchema = {
 										},
 										required: ["person", "contact"],
 									},
-									tags: {
-										type: "array",
-										items: {
-											type: "object",
-											properties: {
-												descriptor: {
-													type: "object",
-													properties: {
-														code: {
-															type: "string",
-														},
-														name: {
-															type: "string",
-														},
-													},
-													required: ["code", "name"],
-												},
-												list: {
-													type: "array",
-													items: {
-														type: "object",
-														properties: {
-															descriptor: {
-																type: "object",
-																properties: {
-																	code: {
-																		type: "string",
-																	},
-																	name: {
-																		type: "string",
-																	},
-																},
-																required: ["code", "name"],
-															},
-															value: {
-																type: "string",
-															},
-														},
-														required: ["descriptor", "value"],
-													},
-												},
-											},
-											required: ["descriptor", "list"],
-										},
-									},
 								},
-								required: ["id", "type", "customer", "tags", "state"],
+								required: ["id", "type", "customer", "state"],
 							},
 						},
 						quote: {
@@ -373,65 +309,32 @@ export const confirmSchema = {
 									items: {
 										type: "object",
 										properties: {
-											id: {
-												type: "string",
-											},
-											price: {
+											item: {
 												type: "object",
 												properties: {
-													currency: {
+													id: {
 														type: "string",
 													},
-													value: {
+													price: {
+														type: "object",
+														properties: {
+															currency: {
+																type: "string",
+															},
+															value: {
+																type: "string",
+															},
+														},
+														required: ["currency", "value"],
+													},
+													title: {
 														type: "string",
 													},
 												},
-												required: ["currency", "value"],
-											},
-											title: {
-												type: "string",
-											},
-											tags: {
-												type: "array",
-												items: {
-													type: "object",
-													properties: {
-														descriptor: {
-															type: "object",
-															properties: {
-																code: {
-																	type: "string",
-																},
-															},
-															required: ["code"],
-														},
-														list: {
-															type: "array",
-															items: {
-																type: "object",
-																properties: {
-																	descriptor: {
-																		type: "object",
-																		properties: {
-																			code: {
-																				type: "string",
-																			},
-																		},
-																		required: ["code"],
-																	},
-																	value: {
-																		type: "string",
-																	},
-																},
-																required: ["descriptor", "value"],
-															},
-														},
-													},
-													required: ["descriptor", "list"],
-												},
+												required: ["id", "price", "title"],
 											},
 										},
-										required: ["id", "price", "title", "tags"],
+										required: ["item"],
 									},
 								},
 								ttl: {
@@ -441,11 +344,8 @@ export const confirmSchema = {
 							required: ["price", "breakup", "ttl"],
 						},
 						payments: {
-							type: "object",
+							type: "array",
 							properties: {
-								url: {
-									type: "string",
-								},
 								params: {
 									type: "object",
 									properties: {
@@ -461,14 +361,20 @@ export const confirmSchema = {
 									},
 									required: ["currency", "transaction_id", "amount"],
 								},
+								url: {
+									type: "string",
+								},
 								status: {
 									type: "string",
+									enum: ["NOT-PAID", "PAID"],
 								},
 								type: {
 									type: "string",
+									enum: ["ON-ORDER", "ON-FULFILLMENT"],
 								},
 								collected_by: {
 									type: "string",
+									enum: ["BAP", "BPP"],
 								},
 								tags: {
 									type: "object",
@@ -478,6 +384,7 @@ export const confirmSchema = {
 											properties: {
 												code: {
 													type: "string",
+													const: "SETTLEMENT_DETAILS",
 												},
 											},
 											required: ["code"],
@@ -492,6 +399,17 @@ export const confirmSchema = {
 														properties: {
 															code: {
 																type: "string",
+																enum: [
+																	"SETTLEMENT_COUNTERPARTY",
+																	"SETTLEMENT_PHASE",
+																	"SETTLEMENT_TYPE",
+																	"UPI_ADDRESS",
+																	"SETTLEMENT_BANK_ACCOUNT_NO",
+																	"SETTLEMENT_IFSC_CODE",
+																	"BENEFICIARY_NAME",
+																	"BANK_NAME",
+																	"BRANCH_NAME",
+																],
 															},
 														},
 														required: ["code"],
@@ -507,17 +425,11 @@ export const confirmSchema = {
 									required: ["descriptor", "list"],
 								},
 							},
-							required: [
-								"url",
-								"params",
-								"status",
-								"type",
-								"collected_by",
-								"tags",
-							],
+							required: ["params", "status", "type", "collected_by", "tags"],
 						},
 					},
 					required: [
+						"id",
 						"status",
 						"provider",
 						"items",

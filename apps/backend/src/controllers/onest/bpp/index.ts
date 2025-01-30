@@ -34,7 +34,7 @@ bppRouter.post(
 
 bppRouter.post(
 	"/confirm",
-	// jsonSchemaValidator({ domain: "onest", action: "confirm" }),
+	jsonSchemaValidator({ domain: "onest", action: "confirm" }),
 	redisRetriever,
 	confirmController
 );

@@ -33,14 +33,14 @@ bapRouter.post(
 
 bapRouter.post(
 	"/on_confirm",
-	// jsonSchemaValidator({ domain: "onest", action: "on_confirm" }),
+	jsonSchemaValidator({ domain: "onest", action: "on_confirm" }),
 	redisRetriever,
 	onConfirmController
 );
 
 bapRouter.post(
 	"/on_status",
-	// jsonSchemaValidator({ domain: "onest", action: "on_status" }),
+	jsonSchemaValidator({ domain: "onest", action: "on_status" }),
 	redisRetriever,
 	onStatusController
 );

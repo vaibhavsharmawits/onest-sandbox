@@ -5,7 +5,6 @@ import {
 	send_nack,
 } from "../../../lib/utils";
 import { ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
-import { ORDER_STATUS } from "../../../lib/utils/apiConstants";
 import { ERROR_MESSAGES } from "../../../lib/utils/responseMessages";
 
 export const confirmController = (
@@ -54,11 +53,22 @@ export const confirmConsultationController = async (
 			return item;
 		});
 		const ts = new Date();
-		
+
+		const updatedFulfillments = order?.fulfillments.map((ff: any) => {
+			ff.state = {
+				descriptor: {
+					code: "APPLICATION_ACCEPTED",
+				},
+				updated_at: ts.toISOString(),
+			};
+			return ff;
+		});
+
 		const responseMessage = {
 			order: {
 				...order,
-        items:updatedItems,
+				fulfillments: updatedFulfillments,
+				items: updatedItems,
 				state: { ...order.state, updated_at: ts.toISOString() },
 			},
 		};

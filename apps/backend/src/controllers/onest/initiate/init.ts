@@ -56,7 +56,7 @@ const intializeRequest = async (
 		const {
 			context,
 			message: {
-				order: { provider, items, quote, fulfillments },
+				order: { provider, items, fulfillments },
 			},
 		} = transaction;
 
@@ -309,7 +309,6 @@ const intializeRequest = async (
 					},
 					items: items,
 					fulfillments: initFulfillment,
-					quote: quote,
 					payments: initYaml?.message?.order?.payments,
 				},
 			},

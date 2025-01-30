@@ -40,6 +40,7 @@ export const initController = async (
 		if (!on_select) {
 			return send_nack(res, ERROR_MESSAGES.ON_SELECT_DOES_NOT_EXISTED);
 		}
+		req.body.message.order.quote = on_select?.message?.order?.quote;
 
 		return initConsultationController(req, res, next);
 	} catch (error) {
@@ -88,7 +89,6 @@ const initConsultationController = (
 			return itm;
 		});
 
-		console.log("fulfillments",fulfillments);
 
 		const updatedFulfillments = fulfillments.map((ff: any) => {
 			ff.state = {
@@ -99,80 +99,12 @@ const initConsultationController = (
 			};
 			return ff;
 		});
-		
-
-		// const payments = [{
-		// 	status: "NOT-PAID",
-		// 	type: "ON-ORDER",
-		// 	collected_by: "BAP",
-		// 	tags: {
-		// 		descriptor: {
-		// 			code: "SETTLEMENT_DETAILS",
-		// 		},
-		// 		list: [
-		// 			{
-		// 				descriptor: {
-		// 					code: "SETTLEMENT_COUNTERPARTY",
-		// 				},
-		// 				value: "seller-app",
-		// 			},
-		// 			{
-		// 				descriptor: {
-		// 					code: "SETTLEMENT_PHASE",
-		// 				},
-		// 				value: "sale-amount",
-		// 			},
-		// 			{
-		// 				descriptor: {
-		// 					code: "SETTLEMENT_TYPE",
-		// 				},
-		// 				value: "upi",
-		// 			},
-		// 			{
-		// 				descriptor: {
-		// 					code: "UPI_ADDRESS",
-		// 				},
-		// 				value: "gft@oksbi",
-		// 			},
-		// 			{
-		// 				descriptor: {
-		// 					code: "SETTLEMENT_BANK_ACCOUNT_NO",
-		// 				},
-		// 				value: "XXXXXXXXXX",
-		// 			},
-		// 			{
-		// 				descriptor: {
-		// 					code: "SETTLEMENT_IFSC_CODE",
-		// 				},
-		// 				value: "XXXXXXXXX",
-		// 			},
-		// 			{
-		// 				descriptor: {
-		// 					code: "BENEFICIARY_NAME",
-		// 				},
-		// 				value: "xxxxx",
-		// 			},
-		// 			{
-		// 				descriptor: {
-		// 					code: "BANK_NAME",
-		// 				},
-		// 				value: "xxxx",
-		// 			},
-		// 			{
-		// 				descriptor: {
-		// 					code: "BRANCH_NAME",
-		// 				},
-		// 				value: "xxxx",
-		// 			},
-		// 		],
-		// 	},
-		// }];
 
 		const responseMessage = {
 			order: {
 				provider,
 				items: udpatedItems,
-				fulfillments:updatedFulfillments,
+				fulfillments: updatedFulfillments,
 				quote,
 				payments,
 			},

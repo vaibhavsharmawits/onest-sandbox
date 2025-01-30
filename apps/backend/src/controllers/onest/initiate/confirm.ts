@@ -49,68 +49,6 @@ const intializeRequest = async (
 		const { transaction_id } = context;
 		const timestamp = new Date().toISOString();
 
-		const ffCustomerPersonTags = [
-			{
-				descriptor: {
-					code: "CURRENT_EXPERIENCE",
-					name: "Current Experience",
-				},
-				list: [
-					{
-						descriptor: {
-							code: "EXP_YEARS",
-							name: "Experience",
-						},
-						value: "P4Y2M",
-					},
-					{
-						descriptor: {
-							code: "CURRENT_COMPANY",
-							name: "Current Company",
-						},
-						value: "ABC tech",
-					},
-				],
-			},
-			{
-				descriptor: {
-					code: "SALARY_DETAILS",
-					name: "Salary Details",
-				},
-				list: [
-					{
-						descriptor: {
-							code: "EXPECTED_SALARY",
-							name: "Expected Salary",
-						},
-						value: "80000",
-					},
-					{
-						descriptor: {
-							code: "CURRENT_SALARY",
-							name: "Current Salary",
-						},
-						value: "50000",
-					},
-				],
-			},
-			{
-				descriptor: {
-					code: "DOCUMENTS",
-					name: "Documents",
-				},
-				list: [
-					{
-						descriptor: {
-							code: "RESUME",
-							name: "Resume",
-						},
-						value: "https://link-to-the-document.com",
-					},
-				],
-			},
-		];
-
 		const updatedItems = items.map((item: any) => {
 			delete item?.xinput;
 			return item;
@@ -119,11 +57,11 @@ const intializeRequest = async (
 		const updatedFulfillments = fulfillments.map((ff: any) => {
 			ff.state = {
 				descriptor: {
-					code: "APPLICATION_STARTED",
+					code: "APPLICATION_SUBMITTED",
 				},
 				updated_at: timestamp,
 			};
-			ff.customer.person.tags = ffCustomerPersonTags;
+			delete ff.customer.person.tags;
 			return ff;
 		});
 
@@ -137,7 +75,6 @@ const intializeRequest = async (
 			status: "PAID",
 		}));
 
-		console.log(updatedPayments, "updatedPayments");
 		const confirm = {
 			context: {
 				...context,
