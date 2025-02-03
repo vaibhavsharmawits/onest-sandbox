@@ -153,13 +153,16 @@ const statusRequest = async (
 		if(domain == "ONDC:ONEST10"){
 			const updatedStatus = [FULFILLMENT_STATES.ASSESSMENT_IN_PROGRESS, FULFILLMENT_STATES.OFFER_EXTENDED];
 			updatedStatus.forEach((status,index) => {
+
 				setTimeout(() => {
+					const ts = new Date()
 					// Changes in On_Status Unsolicited.
 					const updatedResponseMessage = {
 						...responseMessage,
 					};
 					updatedResponseMessage.order.fulfillments[0].state.descriptor.code = status;
-					updatedResponseMessage.order.fulfillments[0].state.updated_at = new Date().toISOString();
+					updatedResponseMessage.order.fulfillments[0].state.updated_at = ts.toISOString();
+					updatedResponseMessage.order.state.updated_at = ts.toISOString();
 					sendOnestUnsolicitedOnStatus(
 						res,
 					next,
@@ -172,7 +175,7 @@ const statusRequest = async (
 					}`,
 					`${ON_ACTION_KEY.ON_STATUS}`,
 					"onest",
-					new Date(),
+					ts,
 					undefined,
 					0
 					)
