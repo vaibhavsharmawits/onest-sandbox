@@ -18,7 +18,6 @@ export const cancelController = async (
 	next: NextFunction
 ) => {
 	try {
-		const { scenario } = req.query;
 		const { transaction_id } = req.body.context;
 		const on_confirm_data = await redisFetchFromServer(
 			ON_ACTION_KEY.ON_CONFIRM,
@@ -37,18 +36,7 @@ export const cancelController = async (
 			transaction_id
 		);
 
-		const item_measure_ids =
-			on_search_data.message.catalog.providers[0].items.reduce(
-				(accumulator: any, currentItem: any) => {
-					accumulator[currentItem.id] = currentItem.quantity
-						? currentItem.quantity.unitized.measure
-						: undefined;
-					return accumulator;
-				},
-				{}
-			);
-		req.body.item_measure_ids = item_measure_ids;
-		cancelRequest(req, res, next, on_confirm_data, scenario);
+		cancelRequest(req, res, next, on_confirm_data);
 	} catch (error) {
 		return next(error);
 	}
@@ -58,53 +46,88 @@ const cancelRequest = async (
 	req: Request,
 	res: Response,
 	next: NextFunction,
-	transaction: any,
-	scenario: any
+	transaction: any
 ) => {
 	try {
-		const { context } = req.body;
+		const { context, message } = req.body;
+		const ts = new Date();
+
 		const updatedFulfillments = updateFulfillments(
 			transaction.message.order.fulfillments,
-			ON_ACTION_KEY?.ON_CANCEL
+			ON_ACTION_KEY?.ON_CANCEL,
+			"onest",
+			transaction.message.order.quote,
+			ts
 		);
+		const updatedItems = transaction.message.order.items.map(
+			(itm: any) => {
+				const npFeesTags = itm.tags
+					.filter((tag: any) => tag.descriptor.code === "NP_FEES")
 
+				return {
+					...itm,
+					fulfillment_ids: [...itm.fulfillment_ids, "C1"],
+					time: {
+						range: {
+							start: "2023-01-03T13:23:01+00:00",
+							end: "2023-02-03T13:23:01+00:00",
+						},
+					},
+					tags: [
+						...npFeesTags,
+						{
+							descriptor: {
+								code: "CANCEL_REQUEST",
+							},
+							list: [
+								{
+									descriptor: {
+										code: "REASON_ID",
+									},
+									value: `${message.cancellation_reason_id}`,
+								},
+								{
+									descriptor: {
+										code: "INITIATED_BY",
+									},
+									value: `${context.bap_id}`,
+								},
+							],
+						},
+					],
+				};
+			}
+		);
 		const responseMessage = {
 			order: {
 				id: req.body.message.order_id,
-				status: ORDER_STATUS.CANCELLED.toUpperCase(),
-				cancellation: {
-					cancelled_by: ORDER_CACELLED_BY.CONSUMER,
-					reason: {
-						descriptor: {
-							code: req.body.message.cancellation_reason_id,
-						},
-					},
-				},
+				status: ORDER_STATUS.CANCELLED,
 				provider: {
 					...transaction.message.order.provider,
-					rateable: undefined,
 				},
 
-				items: transaction.message.order.items.map((itm: any) => ({
-					...itm,
-					quantity: {
-						...itm.quantity,
-						measure: req.body.item_measure_ids[itm.id]
-							? req.body.item_measure_ids[itm.id]
-							: { unit: "", value: "" },
-					},
-				})),
+				items: updatedItems,
 
-				quote: transaction.message.order.quote,
+				quote: {
+					...transaction.message.order.quote,
+					price: {
+						...transaction.message.order.quote.price,
+						value: "0.00",
+					},
+					breakup: transaction.message.order.quote.breakup.map((item: any) => ({
+						...item,
+						item: {
+							...item.item,
+							price: {
+								...item.item.price,
+								value: "0.00",
+							},
+						},
+					})),
+				},
 				fulfillments: updatedFulfillments,
-				billing: transaction.message.order.billing,
-				payments: transaction.message.order.payments.map((itm: any) => ({
-					...itm,
-					tags: itm.tags.filter(
-						(tag: any) => tag.descriptor.code !== "Settlement_Counterparty"
-					),
-				})),
-				updated_at: new Date().toISOString(),
+				payments: transaction.message.order.payments,
+				updated_at: ts.toISOString(),
 			},
 		};
 
@@ -119,7 +142,8 @@ const cancelRequest = async (
 					: `/${ON_ACTION_KEY.ON_CANCEL}`
 			}`,
 			`${ON_ACTION_KEY.ON_CANCEL}`,
-			"services"
+			"onest",
+			ts
 		);
 	} catch (error) {
 		next(error);

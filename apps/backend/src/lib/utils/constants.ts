@@ -1,5 +1,3 @@
-import fs from "fs";
-import path from "path";
 export const HOUR24 = 24 * 60 * 60 * 1000;
 const MOCK_API_BASE_URL = process.env?.MOCK_API_BASE_URL
 	? process.env.MOCK_API_BASE_URL

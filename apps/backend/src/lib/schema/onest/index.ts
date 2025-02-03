@@ -13,6 +13,8 @@ import { statusSchema } from "./status";
 import { onStatusSchema } from "./on_status";
 import { searchIncSchema } from "./search_inc";
 import { onSearchIncSchema } from "./on_search_inc";
+import { cancelSchema } from "./cancel";
+import { onCancelSchema } from "./on_cancel";
 
 export const onestSchemaValidator =
 	(
@@ -31,11 +33,8 @@ export const onestSchemaValidator =
 			| "on_status"
 			| "update"
 			| "on_update"
-			| "track"
-			| "on_track"
 			| "cancel"
 			| "on_cancel"
-			| "rating"
 	) =>
 	(req: Request, res: Response, next: NextFunction) => {
 		const ajv = new Ajv({
@@ -96,12 +95,12 @@ export const onestSchemaValidator =
 			// case "on_update":
 			// 	validate = ajv.compile(onUpdateSchema);
 			// 	break;
-			// case "cancel":
-			// 	validate = ajv.compile(cancelSchema);
-			// 	break;
-			// case "on_cancel":
-			// 	validate = ajv.compile(onCancelSchema);
-			// 	break;
+			case "cancel":
+				validate = ajv.compile(cancelSchema);
+				break;
+			case "on_cancel":
+				validate = ajv.compile(onCancelSchema);
+				break;
 			default:
 				console.log("error");
 				res.status(400).json({

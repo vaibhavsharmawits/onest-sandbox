@@ -1574,9 +1574,11 @@ export const checkSelectedItems = async (data: any) => {
 export const updateFulfillments = (
 	fulfillments?: any,
 	action?: string,
-	scenario?: string,
-	domain?: string
+	domain?: string,
+	quote?: any,
+	ts?: Date
 ) => {
+	ts = ts ?? new Date();
 	try {
 		// Update fulfillments according to actions
 
@@ -1589,62 +1591,33 @@ export const updateFulfillments = (
 			return updatedFulfillments; // Return empty if fulfillments is not provided or empty
 		}
 
-		let fulfillmentObj: any = {
-			id: fulfillments[0]?.id ? fulfillments[0].id : "F1",
-			stops: fulfillments[0]?.stops.map((ele: any) => {
-				ele.time.label = FULFILLMENT_LABELS.CONFIRMED;
-				return ele;
-			}),
-			tags: {
-				descriptor: {
-					code: "schedule",
-				},
-				list: [
-					{
-						descriptor: {
-							code: "ttl",
-						},
-						value: "PT1H",
-					},
-				],
-			},
-		};
-
-		if (domain !== "subscription") {
-			fulfillmentObj.tracking = false;
-			fulfillmentObj.state = {
-				descriptor: {
-					code: FULFILLMENT_STATES.SERVICEABLE,
-				},
-			};
-			delete fulfillmentObj.tags;
-		} else {
-			fulfillmentObj.stops = fulfillments[0]?.stops.map((ele: any) => {
-				action;
-				ele.time.range.end = new Date(rangeEnd).toISOString();
-				return ele;
-			});
-			fulfillmentObj.type = fulfillments[0]?.type;
-		}
-		if (
-			domain !== SERVICES_DOMAINS.BID_ACTION_SERVICES &&
-			domain !== "subscription"
-		) {
+		let fulfillmentObj = {};
+		if (domain != "onest")
 			fulfillmentObj = {
-				...fulfillmentObj,
-				type: FULFILLMENT_TYPES.SELLER_FULFILLED,
+				id: fulfillments[0]?.id ? fulfillments[0].id : "F1",
+				stops: fulfillments[0]?.stops.map((ele: any) => {
+					ele.time.label = FULFILLMENT_LABELS.CONFIRMED;
+					return ele;
+				}),
+				tags: {
+					descriptor: {
+						code: "schedule",
+					},
+					list: [
+						{
+							descriptor: {
+								code: "ttl",
+							},
+							value: "PT1H",
+						},
+					],
+				},
 			};
-		}
+
 		switch (action) {
 			case ON_ACTION_KEY.ON_SELECT:
 				// Always push the initial fulfillmentObj
 				updatedFulfillments.push(fulfillmentObj);
-				if (scenario === SCENARIO.MULTI_COLLECTION) {
-					updatedFulfillments.push({
-						...fulfillmentObj,
-						id: "F2",
-					});
-				}
 				break;
 			case ON_ACTION_KEY.ON_CONFIRM:
 				updatedFulfillments = fulfillments;
@@ -1688,29 +1661,38 @@ export const updateFulfillments = (
 				break;
 			case ON_ACTION_KEY.ON_CANCEL:
 				updatedFulfillments = fulfillments;
-				updatedFulfillments = updatedFulfillments.map((fulfillment: any) => ({
-					...fulfillment,
-					state: {
-						...fulfillment.state,
-						descriptor: {
-							code: FULFILLMENT_STATES.CANCELLED,
+				const cancelFulfillment = {
+					id: "C1",
+					...quoteTrailCreatorOnest(quote.breakup),
+				};
+				updatedFulfillments = updatedFulfillments.map((fulfillment: any) => {
+					const { customer, ...rest } = fulfillment;
+					return {
+						...rest,
+						state: {
+							...rest.state,
+							descriptor: {
+								code: FULFILLMENT_STATES.CANCELLED,
+							},
+							updated_at: ts.toISOString(),
 						},
-					},
-					rateable: undefined,
-				}));
+					};
+				});
+				updatedFulfillments.push(cancelFulfillment);
 				break;
 			case ON_ACTION_KEY.ON_UPDATE:
-				updatedFulfillments = fulfillments;
-				updatedFulfillments = updatedFulfillments.map((fulfillment: any) => ({
-					...fulfillment,
-					state: {
-						...fulfillment.state,
-						descriptor: {
-							code: FULFILLMENT_STATES.COMPLETED,
+				updatedFulfillments = fulfillments.map((fulfillment: any) => {
+					const { customer, ...rest } = fulfillment;
+					return {
+						...rest,
+						state: {
+							...rest.state,
+							descriptor: {
+								code: FULFILLMENT_STATES.COMPLETED,
+							},
 						},
-					},
-					rateable: true,
-				}));
+					};
+				});
 				break;
 			default:
 				// Add your default logic if any
@@ -1721,6 +1703,26 @@ export const updateFulfillments = (
 	} catch (err) {
 		console.log("Error occured in fulfillments method");
 	}
+};
+
+export const quoteTrailCreatorOnest = (breakup: any) => {
+	return {
+		tags: breakup.map(({ item }: any) => ({
+			descriptor: { code: "QUOTE_TRAIL" },
+			list: [
+				{ descriptor: { code: "CURRENCY" }, value: item.price.currency },
+				{
+					descriptor: { code: "ID" },
+					value: (item.id = item.id),
+				},
+				{
+					descriptor: { code: "TYPE" },
+					value: (item.id = item.title.toUpperCase()),
+				},
+				{ descriptor: { code: "VALUE" }, value: `-${item.price.value}` },
+			],
+		})),
+	};
 };
 
 export const quoteCreatorOnest = (quoteItems: any) => {
@@ -1746,62 +1748,10 @@ export const quoteCreatorOnest = (quoteItems: any) => {
 				id: item.itemId,
 				price: item.price,
 				title: item.title,
-			}
+			},
 		};
 
 		quote.breakup.push(itemBreakup);
-
-		// Process NP Fees and add to breakup
-		// if (item.npFeesList && item.npFeesList.length > 0) {
-		//   // Extract NP Fees tags
-		//   const npFeesTag = {
-		//     price: {
-		//       currency: "INR",
-		//       value: "300.00", // This can be modified dynamically based on logic
-		//     },
-		//     tags: [
-		//       {
-		//         descriptor: {
-		//           code: "QUOTE",
-		//         },
-		//         list: [
-		//           {
-		//             descriptor: {
-		//               code: "TYPE",
-		//             },
-		//             value: "item",
-		//           },
-		//         ],
-		//       },
-		//       item.npFeesList[0],
-		//       {
-		//         descriptor: {
-		//           code: "TYPE",
-		//         },
-		//         list: [
-		//           {
-		//             descriptor: {
-		//               code: "TYPE",
-		//             },
-		//             value: "misc",
-		//           },
-		//         ],
-		//       },
-		//     ],
-		//   };
-
-		//   const npFeesBreakup = {
-		//     title: "NP Fees",
-		//     id: item.npFeesId,
-		//     price: npFeesTag.price,
-		//     tags: npFeesTag.tags,
-		//   };
-
-		//   quote.breakup.push(npFeesBreakup);
-
-		//   // Add NP Fees to the total quote price
-		//   quote.price.value = (parseFloat(quote.price.value) + parseFloat(npFeesTag.price.value)).toFixed(2);
-		// }
 	});
 
 	return quote;

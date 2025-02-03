@@ -25,7 +25,7 @@ export const searchController = async (
 			message: { intent },
 		} = req.body;
 		const id = intent?.category?.id;
-		if (search_type === "search") {
+		if (search_type === "search" || search_type === "ack") {
 			search_type = "search_by_job_location";
 		}
 		switch (domain) {
@@ -37,11 +37,12 @@ export const searchController = async (
 
 			default:
 				file = fs.readFileSync(
-					path.join(ONEST_EXAMPLES_PATH, "on_search/on_search_by_job_location.yaml")
+					path.join(ONEST_EXAMPLES_PATH, "on_search/on_search.yaml")
 				);
 				break;
 		}
 		const response = YAML.parse(file.toString());
+		console.log("first")
 		return responseBuilder(
 			res,
 			next,

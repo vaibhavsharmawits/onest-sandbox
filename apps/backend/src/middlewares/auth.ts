@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { verifyHeader } from "../lib/utils/auth";
 import { Locals } from "../interfaces";
-import { B2B_BAP_MOCKSERVER_URL, logger } from "../lib/utils";
+import { logger } from "../lib/utils";
 
 export const authValidatorMiddleware = async (
 	req: Request,
@@ -13,9 +13,6 @@ export const authValidatorMiddleware = async (
 		res.setHeader("mode", mode ? mode : "sandbox");
 		if (
 			mode === "mock" 
-			||
-			(req.body.context.bap_uri === B2B_BAP_MOCKSERVER_URL &&
-				req.body.context.action === "search")
 		) {
 			next(); //skipping auth header validation in "mock" mode
 			return;

@@ -55,14 +55,7 @@ bppRouter.post(
 
 bppRouter.post(
 	"/cancel",
-	// jsonSchemaValidator({ domain: "onest", action: "cancel" }),
+	jsonSchemaValidator({ domain: "onest", action: "cancel" }),
 	redisRetriever,
 	cancelController
-);
-
-bppRouter.post(
-	"/rating",
-	jsonSchemaValidator({ domain: "onest", action: "rating" }),
-	redisRetriever,
-	ratingController
 );

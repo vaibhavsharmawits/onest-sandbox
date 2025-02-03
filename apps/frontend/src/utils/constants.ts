@@ -110,10 +110,7 @@ export const ALL_DOMAINS = {
 };
 
 export const CITY_CODE = ["std:080", "std:011", "std:999"];
-export const ONEST_SEARCH_SCENARIOS = [
-	"search",
-	"search_inc"
-];
+export const ONEST_SEARCH_SCENARIOS = ["search", "search_inc"];
 
 export const AGRI_SCENARIOS = {
 	search: [
@@ -574,6 +571,7 @@ export const INITIATE_FIELDS = {
 			type: "text",
 			domainDepended: true,
 			options: {
+				onest: ["001"],
 				services: ["001"],
 				b2b: ["001"],
 				b2c: ["001"],
