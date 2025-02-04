@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { logger } from "../lib/utils";
-import { AxiosError } from "axios";
 
 export const globalErrorHandler = (err: Error, _req: Request, res: Response, _next: NextFunction) => {
 	logger.error(`Error occured: ${err.stack}`);

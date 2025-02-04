@@ -2,7 +2,7 @@
 
 import { NextFunction, Response } from "express";
 import axios from "axios";
-import { createAuthHeader, redis } from "./index";
+import { createAuthHeader, logger, redis } from "./index";
 import { AxiosError } from "axios";
 
 interface headers {
@@ -22,8 +22,6 @@ async function send_response(
 	bpp_uri: string = "", // for search
 	id: number = 0
 ) {
-	console.log("search", search_type);
-
 	let time_now = new Date().toISOString();
 	try {
 		await redis.set(`${transaction_id}-search_type`, search_type);
@@ -33,10 +31,12 @@ async function send_response(
 		if (res_obj.bpp_uri) delete res_obj.bpp_uri;
 
 		const header = await createAuthHeader(res_obj);
+
 		await redis.set(
 			`${transaction_id}-${action}-from-server-${id}-${time_now}`,
 			JSON.stringify({ request: { ...res_obj } })
 		);
+
 		const headers: headers = {
 			authorization: header,
 		};
@@ -59,13 +59,13 @@ async function send_response(
 		let response: any;
 		try {
 			try {
-				console.log("uri", uri);
+				logger.info("bap request from the server", res_obj);
 				response = await axios.post(uri, res_obj, {
 					headers: { ...headers },
 				});
-				console.log(response.data, "response from uri");
+				logger.info("bpp response", response.data);
 			} catch (error: any) {
-				console.error("Error details:", error.toJSON ? error.toJSON() : error);
+				logger.error("Error details:", error.toJSON ? error.toJSON() : error);
 			}
 
 			await redis.set(
@@ -79,7 +79,7 @@ async function send_response(
 				})
 			);
 		} catch (err: any) {
-			console.log("🚀 ~ err:", err);
+			logger.error("err:", err);
 			if (err instanceof AxiosError) {
 				res.status(err.response?.status || 500).json(err.response?.data || "");
 				return;

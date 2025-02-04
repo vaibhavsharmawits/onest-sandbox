@@ -2,7 +2,11 @@ import { NextFunction, Request, Response } from "express";
 import fs from "fs";
 import path from "path";
 import YAML from "yaml";
-import { ONEST_EXAMPLES_PATH, responseBuilder } from "../../../lib/utils";
+import {
+	logger,
+	ONEST_EXAMPLES_PATH,
+	responseBuilder,
+} from "../../../lib/utils";
 import { ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
 import { ONEST_DOMAINS } from "../../../lib/utils/apiConstants";
 import { redis } from "../../../lib/utils";
@@ -14,18 +18,12 @@ export const searchController = async (
 ) => {
 	try {
 		const domain = req.body.context.domain;
-		console.log("bidy of the on_search", JSON.stringify(req.body));
 		let search_type = await redis.get(
 			`${req.body.context.transaction_id}-search_type`
 		);
-		console.log("final search type", search_type);
+		let file;
 
-		let onSearch, file;
-		const {
-			message: { intent },
-		} = req.body;
-		const id = intent?.category?.id;
-		if (search_type === "search" || search_type === "ack") {
+		if (search_type === "search" || search_type === "ack" || !search_type) {
 			search_type = "search_by_job_location";
 		}
 		switch (domain) {
@@ -42,7 +40,6 @@ export const searchController = async (
 				break;
 		}
 		const response = YAML.parse(file.toString());
-		console.log("first")
 		return responseBuilder(
 			res,
 			next,
@@ -55,6 +52,12 @@ export const searchController = async (
 			"onest"
 		);
 	} catch (error) {
+		logger.error(
+			"searchController: Error occurred for transaction id",
+			req.body.transaction_id,
+			error
+		);
+
 		return next(error);
 	}
 };

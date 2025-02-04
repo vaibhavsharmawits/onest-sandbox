@@ -1,9 +1,6 @@
 export enum NetworkPaticipantType {
   BAP = "BAP",
   BPP = "BPP",
-  BG = "BG",
-  BREG = "BREG",
-  LOG = "LOG",
 }
 
 export type SubscriberDetail = {

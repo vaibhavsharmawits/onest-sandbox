@@ -8,6 +8,7 @@ import {
 	send_response,
 	ONEST_EXAMPLES_PATH,
 	ONEST_BAP_MOCKSERVER_URL,
+	logger,
 } from "../../../lib/utils";
 import { ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
 import { ONEST_DOMAINS } from "../../../lib/utils/apiConstants";
@@ -19,9 +20,9 @@ export const initiateSearchController = async (
 ) => {
 	try {
 		const { bpp_uri, city, domain, search_type } = req.body;
-		console.log("search_type", search_type);
+		logger.info("search_type", search_type);
+		
 		let file;
-
 		switch (domain) {
 			case ONEST_DOMAINS.ONEST10:
 				if (search_type) {
@@ -44,7 +45,7 @@ export const initiateSearchController = async (
 				file = fs.readFileSync(
 					path.join(
 						ONEST_EXAMPLES_PATH,
-						"search/on_search_by_job_location.yaml"
+						"search/search_by_job_location.yaml"
 					)
 				);
 		}

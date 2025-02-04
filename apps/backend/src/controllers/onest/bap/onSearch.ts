@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { responseBuilder } from "../../../lib/utils";
+import { logger, responseBuilder } from "../../../lib/utils";
 
 export const onSearchController = (
 	req: Request,
@@ -9,6 +9,11 @@ export const onSearchController = (
 	try {
 		onSearchSelectionController(req, res, next);
 	} catch (error) {
+		logger.error(
+			"onSearchController: Error occurred for transaction id",
+			req.body.transaction_id,
+			error
+		);
 		return next(error);
 	}
 };
@@ -21,7 +26,7 @@ const onSearchSelectionController = (
 	try {
 		const { context, message } = req.body;
 		const resposneMessage = message;
-		
+
 		return responseBuilder(
 			res,
 			next,
@@ -34,6 +39,11 @@ const onSearchSelectionController = (
 			"onest"
 		);
 	} catch (error) {
+		logger.error(
+			"onSearchSelectionController: Error occurred for transaction id",
+			req.body.transaction_id,
+			error
+		);
 		next(error);
 	}
 };

@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import { SubscriberDetail } from "../interfaces";
 import {  redis, split_auth_header } from "../lib/utils";
 export const rateLimiter = async (
 	req: Request,

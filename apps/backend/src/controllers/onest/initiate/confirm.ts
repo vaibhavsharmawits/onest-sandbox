@@ -6,6 +6,7 @@ import {
 	send_nack,
 	redisFetchToServer,
 	ONEST_BAP_MOCKSERVER_URL,
+	logger,
 } from "../../../lib/utils";
 import {
 	ACTION_KEY,
@@ -25,6 +26,10 @@ export const initiateConfirmController = async (
 			transactionId
 		);
 		if (!on_init) {
+			logger.error(
+				"on_init doesn't exist for the given transaction_id",
+				transactionId
+			);
 			return send_nack(res, ERROR_MESSAGES.ON_INIT_DOES_NOT_EXISTED);
 		}
 		return intializeRequest(res, next, on_init, scenario);
@@ -96,8 +101,6 @@ const intializeRequest = async (
 				},
 			},
 		};
-
-		console.log("confirm payload: ", JSON.stringify(confirm));
 
 		await send_response(
 			res,

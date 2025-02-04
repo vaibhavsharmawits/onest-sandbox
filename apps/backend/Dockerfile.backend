@@ -36,8 +36,6 @@ WORKDIR /app
 COPY --from=builder /app/apps/backend/dist /app/dist
 # COPY --from=builder /app/packages/openapi /app/packages/openapi
 COPY --from=builder /app/node_modules /app/node_modules
-COPY ./apps/backend/config /app/config
-COPY ./apps/backend/specs /app/specs
 # COPY ./apps/backend/domain-repos /app/domain-repos
 COPY init_submodules.sh ./
 RUN chmod +x init_submodules.sh

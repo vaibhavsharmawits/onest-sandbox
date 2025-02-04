@@ -6,6 +6,7 @@ import {
 	redisFetchToServer,
 	ONEST_BAP_MOCKSERVER_URL,
 	redis,
+	logger,
 } from "../../../lib/utils";
 import { v4 as uuidv4 } from "uuid";
 import _ from "lodash";
@@ -18,16 +19,16 @@ export const initiateSelectController = async (
 	try {
 		const { transactionId } = req.body;
 
-		let search_type = await redis.get(
-			`${transactionId}-search_type`
-		);
+		let search_type = await redis.get(`${transactionId}-search_type`);
 		if (search_type === "search_inc") {
-			return send_nack(res, "On Search doesn't exist");
+			logger.error("on_search doesn't exist for the given transaction_id", transactionId);
+			return send_nack(res, "on_search doesn't exist");
 		}
 
 		const on_search = await redisFetchToServer("on_search", transactionId);
 		if (!on_search) {
-			return send_nack(res, "On Search doesn't exist");
+			logger.error("on_search doesn't exist for the given transaction_id", transactionId);
+			return send_nack(res, "on_search doesn't exist");
 		}
 
 		return intializeRequest(req, res, next, on_search);
@@ -79,9 +80,11 @@ const intializeRequest = async (
 					provider: {
 						id: id,
 					},
-					fulfillments: [{
-						id: providers[0]?.fulfillments?.[0]?.id,
-						type: providers[0]?.fulfillments?.[0]?.type,}
+					fulfillments: [
+						{
+							id: providers[0]?.fulfillments?.[0]?.id,
+							type: providers[0]?.fulfillments?.[0]?.type,
+						},
 					],
 					items: [
 						{

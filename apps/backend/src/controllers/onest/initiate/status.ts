@@ -6,19 +6,12 @@ import {
 	redisFetchToServer,
 	redis,
 	ONEST_BAP_MOCKSERVER_URL,
+	logger,
 } from "../../../lib/utils";
 
 import { v4 as uuidv4 } from "uuid";
-import {
-	AGRI_HEALTH_STATUS,
-	BID_AUCTION_STATUS,
-	EQUIPMENT_HIRING_STATUS,
-	SERVICES_DOMAINS,
-} from "../../../lib/utils/apiConstants";
 import { ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
 import { ERROR_MESSAGES } from "../../../lib/utils/responseMessages";
-
-let senarios: string[] = EQUIPMENT_HIRING_STATUS;
 
 export const initiateStatusController = async (
 	req: Request,
@@ -32,6 +25,10 @@ export const initiateStatusController = async (
 			transactionId
 		);
 		if (!on_confirm) {
+			logger.error(
+				"on_confirm doesn't exist for the given transaction_id",
+				transactionId
+			);
 			return send_nack(res, ERROR_MESSAGES.ON_CONFIRM_DOES_NOT_EXISTED);
 		}
 		return intializeRequest(res, next, on_confirm);

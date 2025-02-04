@@ -4,7 +4,7 @@ import {
 	ORDER_STATUS,
 } from "../../../lib/utils/apiConstants";
 import {
-	Fulfillment,
+	logger,
 	redisExistFromServer,
 	redisFetchFromServer,
 	responseBuilder,
@@ -57,8 +57,12 @@ export const statusController = async (
 			return result;
 		}
 		const itemsWithTimeRanges = fetchAllItemsWithTime(on_search_data?.message);
-		console.log(JSON.stringify(itemsWithTimeRanges), "itemsWithTimeRanges");
+
 		if (!on_confirm_data) {
+			logger.error(
+				"on_confirm doesn't exist for the given transaction_id",
+				transaction_id
+			);
 			return send_nack(res, ERROR_MESSAGES.ON_CONFIRM_DOES_NOT_EXISTED);
 		}
 
@@ -78,6 +82,11 @@ export const statusController = async (
 			itemsWithTimeRanges
 		);
 	} catch (error) {
+		logger.error(
+			`statusController: Error occurred for transaction_id: ${req.body.context.transaction_id}`,
+			error
+		);
+
 		return next(error);
 	}
 };
@@ -99,8 +108,6 @@ const statusRequest = async (
 			req.body.context.transaction_id
 		);
 		let next_status = scenario;
-
-		
 
 		const updatedItems = message.order.items.map((item: any) => {
 			const range = itemsWithTimeRanges[item.id]?.range || null;
@@ -149,40 +156,49 @@ const statusRequest = async (
 				},
 			},
 		};
-		// This sends unsolicited on_status calls. 
-		if(domain == "ONDC:ONEST10"){
-			const updatedStatus = [FULFILLMENT_STATES.ASSESSMENT_IN_PROGRESS, FULFILLMENT_STATES.OFFER_EXTENDED];
-			updatedStatus.forEach((status,index) => {
 
+		// This sends unsolicited on_status calls.
+		if (domain == "ONDC:ONEST10") {
+			const updatedStatus = [
+				FULFILLMENT_STATES.ASSESSMENT_IN_PROGRESS,
+				FULFILLMENT_STATES.OFFER_EXTENDED,
+			];
+			updatedStatus.forEach((status, index) => {
 				setTimeout(() => {
-					const ts = new Date()
+					const ts = new Date();
 					// Changes in On_Status Unsolicited.
 					const updatedResponseMessage = {
 						...responseMessage,
 					};
-					updatedResponseMessage.order.fulfillments[0].state.descriptor.code = status;
-					updatedResponseMessage.order.fulfillments[0].state.updated_at = ts.toISOString();
+					updatedResponseMessage.order.fulfillments[0].state.descriptor.code =
+						status;
+					updatedResponseMessage.order.fulfillments[0].state.updated_at =
+						ts.toISOString();
 					updatedResponseMessage.order.state.updated_at = ts.toISOString();
+					logger.info(
+						`Sending unsolicited ON_STATUS (${status}) for transaction_id: ${context.transaction_id}`
+					);
 					sendOnestUnsolicitedOnStatus(
 						res,
-					next,
-					req.body.context,
-					updatedResponseMessage,
-					`${req.body.context.bap_uri}${
-						req.body.context.bap_uri.endsWith("/")
-						? ON_ACTION_KEY.ON_STATUS
-						: `/${ON_ACTION_KEY.ON_STATUS}`
-					}`,
-					`${ON_ACTION_KEY.ON_STATUS}`,
-					"onest",
-					ts,
-					undefined,
-					0
-					)
-				}, ((index+1)*5000)) // Interval of 5 seconds per request.
-			})
+						next,
+						req.body.context,
+						updatedResponseMessage,
+						`${req.body.context.bap_uri}${
+							req.body.context.bap_uri.endsWith("/")
+								? ON_ACTION_KEY.ON_STATUS
+								: `/${ON_ACTION_KEY.ON_STATUS}`
+						}`,
+						`${ON_ACTION_KEY.ON_STATUS}`,
+						"onest",
+						ts,
+						undefined,
+						0
+					);
+				}, (index + 1) * 5000); // Interval of 5 seconds per request.
+			});
 		}
-		// This sends standard on_status call. 
+
+		// This sends standard on_status call.
 		return responseBuilder(
 			res,
 			next,
@@ -198,6 +214,7 @@ const statusRequest = async (
 			ts
 		);
 	} catch (error) {
+		logger.error(`statusRequest: Error occurred for transaction_id: ${req.body.context.transaction_id}`, error);
 		next(error);
 	}
 };

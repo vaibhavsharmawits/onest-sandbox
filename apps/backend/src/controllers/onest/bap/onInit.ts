@@ -1,10 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import fs from "fs";
-import path from "path";
-import YAML from "yaml";
 import { v4 as uuidv4 } from "uuid";
 import {
-	ONEST_EXAMPLES_PATH,
+	logger,
+	onInitDistributorTags,
 	redisFetchFromServer,
 	responseBuilder,
 } from "../../../lib/utils";
@@ -19,10 +17,14 @@ export const onInitController = async (
 			"on_search",
 			req.body.context.transaction_id
 		);
-		const providersItems = on_search?.message?.catalog?.providers[0]?.items;
 
 		return onInitConsultationController(req, res, next);
 	} catch (error) {
+		logger.error(
+			"onInitController: Error occurred for transaction id",
+			req.body.transaction_id,
+			error
+		);
 		return next(error);
 	}
 };
@@ -41,58 +43,6 @@ const onInitConsultationController = (
 		} = req.body;
 
 		const ts = new Date();
-		const distributorTags = [
-			{
-				descriptor: {
-					code: "DISTRIBUTOR_DETAILS",
-					name: "Distributor Details",
-				},
-				list: [
-					{
-						descriptor: {
-							code: "DISTRIBUTOR_ID",
-							name: "Distributor Id",
-						},
-						value: "PNB",
-					},
-					{
-						descriptor: {
-							code: "DISTRIBUTOR_NAME",
-							name: "Distributor Name",
-						},
-						value: "Pay Near By",
-					},
-					{
-						descriptor: {
-							code: "DISTRIBUTOR_PHONE",
-							name: "Distributor Phone",
-						},
-						value: "9123456789",
-					},
-					{
-						descriptor: {
-							code: "DISTRIBUTOR_EMAIL",
-							name: "Distributor Email",
-						},
-						value: "support@pnb.com",
-					},
-					{
-						descriptor: {
-							code: "AGENT_ID",
-							name: "Agent Id",
-						},
-						value: "agent-123",
-					},
-					{
-						descriptor: {
-							code: "AGENT_VERIFIED",
-							name: "Agent Verified",
-						},
-						value: "true",
-					},
-				],
-			},
-		];
 
 		const updatedItems = items.map((item: any) => {
 			delete item?.xinput;
@@ -106,10 +56,10 @@ const onInitConsultationController = (
 				},
 				updated_at: ts.toISOString(),
 			};
-			ff.tags = distributorTags;
+			ff.tags = onInitDistributorTags;
 			return ff;
 		});
-		
+
 		const responseMessage = {
 			order: {
 				status: "Created",
@@ -118,18 +68,7 @@ const onInitConsultationController = (
 				items: updatedItems,
 				fulfillments: updatedFulfillments,
 				quote: quote,
-				// payments: {
-				// 	...payments,
-				// 	params: {
-				// 		params: {
-				// 			amount: quote?.price?.value,
-				// 			currency: quote?.price?.currency,
-				// 			transaction_id: uuidv4,
-				// 		},
-				// 	},
-				// 	status: "PAID",
-				// },
-				payments
+				payments,
 			},
 		};
 
@@ -145,6 +84,12 @@ const onInitConsultationController = (
 			"onest"
 		);
 	} catch (error) {
+		logger.error(
+			"onInitConsultationController: Error occurred for transaction id",
+			req.body.transaction_id,
+			error
+		);
+
 		next(error);
 	}
 };

@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import {
+	confirmItemTags,
+	logger,
 	redisFetchFromServer,
 	responseBuilder,
 	send_nack,
@@ -15,6 +17,11 @@ export const confirmController = (
 	try {
 		confirmConsultationController(req, res, next);
 	} catch (error) {
+		logger.error(
+			"confirmController: Error occurred for transaction_id",
+			req.body.context?.transaction_id,
+			error
+		);
 		return next(error);
 	}
 };
@@ -36,6 +43,10 @@ export const confirmConsultationController = async (
 		);
 
 		if (on_init && on_init?.error) {
+			logger.error(
+				`confirmConsultationController: on_init error for transaction_id ${context?.transaction_id}`,
+				on_init.error
+			);
 			return send_nack(
 				res,
 				on_init?.error?.message
@@ -45,206 +56,22 @@ export const confirmConsultationController = async (
 		}
 
 		if (!on_init) {
+			logger.error(
+				`confirmConsultationController: on_init not found for transaction_id ${context?.transaction_id}`
+			);
 			return send_nack(res, ERROR_MESSAGES.ON_INIT_DOES_NOT_EXISTED);
 		}
 
 		const { items } = order;
-		const itemTags = [
-			{
-				descriptor: {
-					code: "ACADEMIC_QUALIFICATIONS",
-				},
-				list: [
-					{
-						descriptor: {
-							code: "COURSE_NAME",
-						},
-						value: "Class-X",
-					},
-					{
-						descriptor: {
-							code: "MIN_PERCENTAGE",
-						},
-						value: "60",
-					},
-					{
-						descriptor: {
-							code: "MANDATORY_ELIGIBILITY",
-						},
-						value: "true",
-					},
-				],
-			},
-			{
-				descriptor: {
-					code: "ACADEMIC_QUALIFICATIONS",
-				},
-				list: [
-					{
-						descriptor: {
-							code: "COURSE_NAME",
-						},
-						value: "Class-XII",
-					},
-					{
-						descriptor: {
-							code: "MIN_PERCENTAGE",
-						},
-						value: "60",
-					},
-					{
-						descriptor: {
-							code: "MANDATORY_ELIGIBILITY",
-						},
-						value: "true",
-					},
-				],
-			},
-			{
-				descriptor: {
-					code: "ACADEMIC_QUALIFICATIONS",
-				},
-				list: [
-					{
-						descriptor: {
-							code: "COURSE_LEVEL",
-						},
-						value: "Under Graduate",
-					},
-					{
-						descriptor: {
-							code: "MIN_PERCENTAGE",
-						},
-						value: "60",
-					},
-					{
-						descriptor: {
-							code: "MANDATORY_ELIGIBILITY",
-						},
-						value: "true",
-					},
-				],
-			},
-			{
-				descriptor: {
-					code: "ACADEMIC_QUALIFICATIONS",
-				},
-				list: [
-					{
-						descriptor: {
-							code: "COURSE_LEVEL",
-						},
-						value: "Graduate",
-					},
-					{
-						descriptor: {
-							code: "MANDATORY_ELIGIBILITY",
-						},
-						value: "false",
-					},
-				],
-			},
-			{
-				descriptor: {
-					code: "JOB_REQUIREMENTS",
-				},
-				list: [
-					{
-						descriptor: {
-							code: "REQ_EXPERIENCE",
-						},
-						value: "P2Y6M",
-					},
-					{
-						descriptor: {
-							code: "ADD_PROF_SKILL",
-						},
-						value: "android-development",
-					},
-					{
-						descriptor: {
-							code: "ADD_PROF_SKILL",
-						},
-						value: "dev-ops",
-					},
-				],
-			},
-			{
-				descriptor: {
-					code: "JOB_RESPONSIBILITIES",
-				},
-				list: [
-					{
-						descriptor: {
-							code: "RESPONSIBILITY",
-						},
-						value:
-							"Build frontend experiences for our tools (Web, PWA and React Native)",
-					},
-					{
-						descriptor: {
-							code: "RESPONSIBILITY",
-						},
-						value:
-							"Articulate a long term technical direction and vision for building, maintaining, and scaling our web and mobile platforms",
-					},
-					{
-						descriptor: {
-							code: "RESPONSIBILITY",
-						},
-						value:
-							"Create trustworthy user experiences by building interfaces that are simple, easy to comprehend, performant and reliable using modern tools like React, React Native, Typescript, Node.js, Jest and Webpack.",
-					},
-					{
-						descriptor: {
-							code: "RESPONSIBILITY",
-						},
-						value:
-							"Mentor and train other team members on design techniques and coding standards.",
-					},
-				],
-			},
-			{
-				descriptor: {
-					code: "JOB_DETAILS",
-				},
-				list: [
-					{
-						descriptor: {
-							code: "CTC",
-						},
-						value: "2000000",
-					},
-					{
-						descriptor: {
-							code: "POST_START_LOCATION",
-						},
-						value: "Pune",
-					},
-					{
-						descriptor: {
-							code: "WORKING_LOCATION",
-						},
-						value: "Hybrid",
-					},
-					{
-						descriptor: {
-							code: "WORKING_TIME",
-						},
-						value: "Full-Time",
-					},
-				],
-			},
-		];
 
 		const updatedItems = items.map((item: any) => {
 			const updatedItem = {
 				...item,
-				tags: [...item.tags, ...itemTags],
+				tags: [...item.tags, ...confirmItemTags],
 			};
 			return updatedItem;
 		});
-	
+
 		const ts = new Date();
 
 		const updatedFulfillments = order?.fulfillments.map((ff: any) => {
@@ -280,6 +107,11 @@ export const confirmConsultationController = async (
 			"onest"
 		);
 	} catch (error) {
+		logger.error(
+			"confirmConsultationController: Error occurred for transaction_id : ",
+			req.body.context.transaction_id,
+			error
+		);
 		next(error);
 	}
 };

@@ -5,8 +5,8 @@ import {
 	send_nack,
 	checkSelectedItems,
 	quoteCreatorOnest,
+	logger,
 } from "../../../lib/utils";
-import { v4 as uuidv4 } from "uuid";
 import { ERROR_MESSAGES } from "../../../lib/utils/responseMessages";
 import { ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
 
@@ -16,12 +16,17 @@ export const selectController = async (
 	next: NextFunction
 ) => {
 	try {
+		const { transaction_id } = req.body.context;
 		const on_search = await redisFetchFromServer(
 			ON_ACTION_KEY.ON_SEARCH,
-			req.body.context.transaction_id
+			transaction_id
 		);
 
 		if (!on_search) {
+			logger.error(
+				"on_search doesn't exist for the given transaction_id",
+				transaction_id
+			);
 			return send_nack(res, ERROR_MESSAGES.ON_SEARCH_DOES_NOT_EXISTED);
 		}
 
@@ -30,11 +35,16 @@ export const selectController = async (
 
 		const checkItemExistInSearch = await checkSelectedItems(req.body);
 		if (!checkItemExistInSearch) {
+			logger.error(
+				"Selected items do not exist for transaction_id",
+				transaction_id
+			);
 			return send_nack(res, ERROR_MESSAGES.SELECTED_ITEMS_DOES_NOT_EXISTED);
 		}
 
 		return selectConfirmController(req, res, next);
 	} catch (error) {
+		logger.error("Error occured at select Controller", error);
 		return next(error);
 	}
 };
@@ -45,7 +55,6 @@ const selectConfirmController = (
 	next: NextFunction
 ) => {
 	try {
-		console.log("confirmation");
 		const { context, message, providersItems: provider } = req.body;
 		const orderProvider = message.order.provider;
 		const orderItems = message.order.items;
@@ -98,7 +107,7 @@ const selectConfirmController = (
 		message.order.items.forEach((itm: any) => {
 			itm.fulfillment_ids = [provider?.fulfillments?.[0]?.id];
 		});
-		console.log("quoteItems", quoteItems);
+
 		const responseMessage = {
 			order: {
 				provider: {
@@ -129,6 +138,12 @@ const selectConfirmController = (
 			"onest"
 		);
 	} catch (error) {
+		logger.error(
+			"selectConfirmController: Error occurred",
+			req.body.transaction_id,
+			error
+		);
+
 		next(error);
 	}
 };

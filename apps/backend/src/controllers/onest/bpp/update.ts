@@ -1,8 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
 import {
-	quoteCreatorHealthCareService,
-	quoteCreatorService,
 	redisFetchToServer,
 	responseBuilder,
 	send_nack,
@@ -110,7 +108,7 @@ export const updateRequoteController = (
 					: `/${ON_ACTION_KEY.ON_UPDATE}`
 			}`,
 			`${ON_ACTION_KEY.ON_UPDATE}`,
-			"services"
+			"onest"
 		);
 	} catch (error) {
 		next(error);
@@ -147,7 +145,7 @@ export const updatePaymentController = (
 				: `/${ON_ACTION_KEY.ON_UPDATE}`
 		}`,
 		`${ON_ACTION_KEY.ON_UPDATE}`,
-		"services"
+		"onest"
 	);
 };
 
@@ -183,33 +181,6 @@ export const updateRescheduleAndItemsController = (
 				on_confirm_quantity + update_item_quantity;
 		}
 
-		//UPDATE PAYMENT OBJECT AND QUOTE ACCORDING TO ITEMS AND PERSONS
-		const quote =
-			domain === SERVICES_DOMAINS.SERVICES
-				? quoteCreatorService(order?.items, providersItems?.items)
-				: domain === SERVICES_DOMAINS.BID_ACTION_SERVICES
-				? quoteCreatorHealthCareService(
-						order?.items,
-						providersItems?.items,
-						"",
-						order?.fulfillments[0]?.type,
-						"bid_auction_service"
-				  )
-				: domain === SERVICES_DOMAINS.AGRI_EQUIPMENT
-				? quoteCreatorHealthCareService(
-						order?.items,
-						providersItems?.items,
-						providersItems?.offers,
-						order?.fulfillments[0]?.type,
-						"agri-equipment-hiring"
-				  )
-				: quoteCreatorHealthCareService(
-						order?.items,
-						providersItems?.items,
-						"",
-						order?.fulfillments[0]?.type
-				  );
-
 		//UPDATE PAYMENT OBJECT ACCORDING TO QUANTITY
 		const updatedPaymentObj = updatePaymentObject(
 			order?.payments,
@@ -224,7 +195,6 @@ export const updateRescheduleAndItemsController = (
 				id: uuidv4(),
 				ref_order_ids: [on_confirm?.message?.order?.id],
 				payments: updatedPaymentObj,
-				quote,
 			},
 		};
 
@@ -239,7 +209,7 @@ export const updateRescheduleAndItemsController = (
 					: `/${ON_ACTION_KEY.ON_UPDATE}`
 			}`,
 			`${ON_ACTION_KEY.ON_UPDATE}`,
-			"services"
+			"onest"
 		);
 	} catch (error) {
 		next(error);
@@ -306,6 +276,6 @@ export const updateRescheduleController = (
 				: `/${ON_ACTION_KEY.ON_UPDATE}`
 		}`,
 		`${ON_ACTION_KEY.ON_UPDATE}`,
-		"services"
+		"onest"
 	);
 };

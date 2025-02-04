@@ -4,13 +4,11 @@ import {
 	redisFetchFromServer,
 	send_nack,
 	updateFulfillments,
+	logger,
 } from "../../../lib/utils";
 import { ERROR_MESSAGES } from "../../../lib/utils/responseMessages";
 import { ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
-import {
-	ORDER_CACELLED_BY,
-	ORDER_STATUS,
-} from "../../../lib/utils/apiConstants";
+import { ORDER_STATUS } from "../../../lib/utils/apiConstants";
 
 export const cancelController = async (
 	req: Request,
@@ -24,17 +22,16 @@ export const cancelController = async (
 			transaction_id
 		);
 		if (!on_confirm_data) {
+			logger.error(
+				"cancelController: on_confirm_data doesn't exist for transaction id",
+				transaction_id
+			);
 			return send_nack(res, ERROR_MESSAGES.ON_CONFIRM_DOES_NOT_EXISTED);
 		}
 
 		if (on_confirm_data.message.order.id != req.body.message.order_id) {
 			return send_nack(res, ERROR_MESSAGES.ORDER_ID_DOES_NOT_EXISTED);
 		}
-
-		const on_search_data = await redisFetchFromServer(
-			ON_ACTION_KEY.ON_SEARCH,
-			transaction_id
-		);
 
 		cancelRequest(req, res, next, on_confirm_data);
 	} catch (error) {
@@ -59,45 +56,44 @@ const cancelRequest = async (
 			transaction.message.order.quote,
 			ts
 		);
-		const updatedItems = transaction.message.order.items.map(
-			(itm: any) => {
-				const npFeesTags = itm.tags
-					.filter((tag: any) => tag.descriptor.code === "NP_FEES")
+		const updatedItems = transaction.message.order.items.map((itm: any) => {
+			const npFeesTags = itm.tags.filter(
+				(tag: any) => tag.descriptor.code === "NP_FEES"
+			);
 
-				return {
-					...itm,
-					fulfillment_ids: [...itm.fulfillment_ids, "C1"],
-					time: {
-						range: {
-							start: "2023-01-03T13:23:01+00:00",
-							end: "2023-02-03T13:23:01+00:00",
-						},
+			return {
+				...itm,
+				fulfillment_ids: [...itm.fulfillment_ids, "C1"],
+				time: {
+					range: {
+						start: "2023-01-03T13:23:01+00:00",
+						end: "2023-02-03T13:23:01+00:00",
 					},
-					tags: [
-						...npFeesTags,
-						{
-							descriptor: {
-								code: "CANCEL_REQUEST",
-							},
-							list: [
-								{
-									descriptor: {
-										code: "REASON_ID",
-									},
-									value: `${message.cancellation_reason_id}`,
-								},
-								{
-									descriptor: {
-										code: "INITIATED_BY",
-									},
-									value: `${context.bap_id}`,
-								},
-							],
+				},
+				tags: [
+					...npFeesTags,
+					{
+						descriptor: {
+							code: "CANCEL_REQUEST",
 						},
-					],
-				};
-			}
-		);
+						list: [
+							{
+								descriptor: {
+									code: "REASON_ID",
+								},
+								value: `${message.cancellation_reason_id}`,
+							},
+							{
+								descriptor: {
+									code: "INITIATED_BY",
+								},
+								value: `${context.bap_id}`,
+							},
+						],
+					},
+				],
+			};
+		});
 		const responseMessage = {
 			order: {
 				id: req.body.message.order_id,
@@ -146,6 +142,11 @@ const cancelRequest = async (
 			ts
 		);
 	} catch (error) {
+		logger.error(
+			"cancelRequest: Error occurred for transaction id",
+			req.body.transaction_id,
+			error
+		);
 		next(error);
 	}
 };

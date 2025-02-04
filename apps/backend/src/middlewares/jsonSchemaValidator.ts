@@ -1,4 +1,4 @@
-import { redis } from "../lib/utils";
+import { logger, redis } from "../lib/utils";
 import { NextFunction, Request, Response } from "express";
 import { onestSchemaValidator } from "../lib/schema/onest";
 
@@ -18,9 +18,7 @@ type AllActions =
 	| "update"
 	| "on_update"
 	| "cancel"
-	| "on_cancel"
-
-// Exclude "select", "on_select", and "rating" for logistics domain
+	| "on_cancel";
 
 type Domain = "onest";
 
@@ -51,7 +49,7 @@ export const jsonSchemaValidator = <T extends Domain>({
 
 			switch (domain) {
 				case "onest":
-					console.log("domainAction", domainAction);
+					logger.info(`Processing domain action: ${domainAction}`);
 					const validation = onestSchemaValidator(domainAction as AllActions)(
 						req,
 						res,
@@ -59,6 +57,7 @@ export const jsonSchemaValidator = <T extends Domain>({
 					);
 					return validation;
 				default:
+					logger.error(`Unsupported domain encountered: ${domain}`);
 					throw new Error(`Unsupported domain: ${domain}`);
 			}
 		} catch (error) {

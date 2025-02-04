@@ -3,6 +3,8 @@ import {
 	responseBuilder,
 	send_nack,
 	redisFetchFromServer,
+	logger,
+	initXinput,
 } from "../../../lib/utils";
 import { ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
 import { ERROR_MESSAGES } from "../../../lib/utils/responseMessages";
@@ -19,6 +21,10 @@ export const initController = async (
 			transaction_id
 		);
 		if (!on_search) {
+			logger.error(
+				"on_search doesn't exist for the given transaction_id",
+				transaction_id
+			);
 			return send_nack(res, ERROR_MESSAGES.ON_SEARCH_DOES_NOT_EXISTED);
 		}
 		const providersItems = on_search?.message?.catalog?.providers[0]?.items;
@@ -38,12 +44,20 @@ export const initController = async (
 			);
 		}
 		if (!on_select) {
+			logger.error(
+				"on_select doesn't exist for the given transaction_id",
+				transaction_id
+			);
 			return send_nack(res, ERROR_MESSAGES.ON_SELECT_DOES_NOT_EXISTED);
 		}
 		req.body.message.order.quote = on_select?.message?.order?.quote;
 
 		return initConsultationController(req, res, next);
 	} catch (error) {
+		logger.error(
+			`Error occured at init Controller for transaction_id : ${req.body.context.transaction_id}`,
+			error
+		);
 		return next(error);
 	}
 };
@@ -63,32 +77,11 @@ const initConsultationController = (
 
 		let ts = new Date();
 
-		const xinput = {
-			form: {
-				mime_type: "text/html",
-				resubmit: false,
-				url: "https://6vs8xnx5i7.jobhub.co.in/loans-kyc/xinput/formid/a23f2fdfbbb8ac402bfd54f-1",
-			},
-			head: {
-				descriptor: {
-					name: "Application Form",
-				},
-				headings: ["Candidate Details"],
-				index: {
-					cur: 1,
-					max: 2,
-					min: 1,
-				},
-			},
-			required: true,
-		};
-
 		const udpatedItems = items.map((itm: any) => {
 			itm.tags = [...itm?.tags];
-			itm.xinput = xinput;
+			itm.xinput = initXinput;
 			return itm;
 		});
-
 
 		const updatedFulfillments = fulfillments.map((ff: any) => {
 			ff.state = {
@@ -125,6 +118,11 @@ const initConsultationController = (
 			"onest"
 		);
 	} catch (error) {
+		logger.error(
+			"initConsultationController: Error occurred for transaction_id : ",
+			req.body.context.transaction_id,
+			error
+		);
 		next(error);
 	}
 };
