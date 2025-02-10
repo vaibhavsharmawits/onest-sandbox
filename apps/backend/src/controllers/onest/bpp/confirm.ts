@@ -2,12 +2,9 @@ import { NextFunction, Request, Response } from "express";
 import {
 	confirmItemTags,
 	logger,
-	redisFetchFromServer,
 	responseBuilder,
-	send_nack,
 } from "../../../lib/utils";
 import { ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
-import { ERROR_MESSAGES } from "../../../lib/utils/responseMessages";
 
 export const confirmController = (
 	req: Request,
@@ -36,31 +33,6 @@ export const confirmConsultationController = async (
 			context,
 			message: { order },
 		} = req.body;
-
-		const on_init = await redisFetchFromServer(
-			ON_ACTION_KEY.ON_INIT,
-			context?.transaction_id
-		);
-
-		if (on_init && on_init?.error) {
-			logger.error(
-				`confirmConsultationController: on_init error for transaction_id ${context?.transaction_id}`,
-				on_init.error
-			);
-			return send_nack(
-				res,
-				on_init?.error?.message
-					? on_init?.error?.message
-					: ERROR_MESSAGES.ON_INIT_DOES_NOT_EXISTED
-			);
-		}
-
-		if (!on_init) {
-			logger.error(
-				`confirmConsultationController: on_init not found for transaction_id ${context?.transaction_id}`
-			);
-			return send_nack(res, ERROR_MESSAGES.ON_INIT_DOES_NOT_EXISTED);
-		}
 
 		const { items } = order;
 

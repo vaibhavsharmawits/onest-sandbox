@@ -2,6 +2,7 @@ import axios from "axios";
 import { SubscriberDetail } from "../../interfaces";
 import { STAGING_REGISTRY_URL, PREPOD_REGISTRY_URL } from "./constants";
 import { redis } from "./redis";
+import { logger } from "./logger";
 
 export async function getSubscriberDetails(
 	subscriber_id: string,
@@ -51,7 +52,7 @@ export async function getSubscriberDetails(
 								valid_until: data.valid_until,
 							});
 						} catch (error) {
-							console.log("Error processing data:", error);
+							logger.error("Error processing data:", error);
 						}
 					});
 			});

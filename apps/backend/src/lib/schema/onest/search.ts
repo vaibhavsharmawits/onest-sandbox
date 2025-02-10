@@ -229,7 +229,7 @@ export const searchSchema = {
 									},
 								},
 							},
-							required: ["locations"],
+							required: [],
 						},
 						tags: {
 							type: "array",
@@ -278,7 +278,7 @@ export const searchSchema = {
 							minItems: 1,
 						},
 					},
-					required: ["payment", "provider", "tags"],
+					required: ["payment", "tags"],
 				},
 			},
 			required: ["intent"],

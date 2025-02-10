@@ -1,13 +1,13 @@
 import { NextFunction, Request, Response } from "express";
 import {
 	responseBuilder,
-	send_nack,
-	redisFetchFromServer,
 	logger,
 	initXinput,
+	initXinput2,
 } from "../../../lib/utils";
 import { ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
-import { ERROR_MESSAGES } from "../../../lib/utils/responseMessages";
+import { sendOnestUnsolicited } from "../../../lib/utils/sendOnestUnsolicited";
+import { FULFILLMENT_STATES } from "../../../lib/utils/apiConstants";
 
 export const initController = async (
 	req: Request,
@@ -15,41 +15,12 @@ export const initController = async (
 	next: NextFunction
 ) => {
 	try {
-		const { transaction_id } = req.body.context;
-		const on_search = await redisFetchFromServer(
-			ON_ACTION_KEY.ON_SEARCH,
-			transaction_id
-		);
-		if (!on_search) {
-			logger.error(
-				"on_search doesn't exist for the given transaction_id",
-				transaction_id
-			);
-			return send_nack(res, ERROR_MESSAGES.ON_SEARCH_DOES_NOT_EXISTED);
-		}
+		const on_search = res.locals.on_search;
+		const on_select = res.locals.on_select;
+
 		const providersItems = on_search?.message?.catalog?.providers[0]?.items;
 		req.body.providersItems = providersItems;
 
-		const on_select = await redisFetchFromServer(
-			ON_ACTION_KEY.ON_SELECT,
-			transaction_id
-		);
-
-		if (on_select && on_select?.error) {
-			return send_nack(
-				res,
-				on_select?.error?.message
-					? on_select?.error?.message
-					: ERROR_MESSAGES.ON_SELECT_DOES_NOT_EXISTED
-			);
-		}
-		if (!on_select) {
-			logger.error(
-				"on_select doesn't exist for the given transaction_id",
-				transaction_id
-			);
-			return send_nack(res, ERROR_MESSAGES.ON_SELECT_DOES_NOT_EXISTED);
-		}
 		req.body.message.order.quote = on_select?.message?.order?.quote;
 
 		return initConsultationController(req, res, next);
@@ -76,7 +47,7 @@ const initConsultationController = (
 		} = req.body;
 
 		let ts = new Date();
-
+		const domain = context?.domain;
 		const udpatedItems = items.map((itm: any) => {
 			itm.tags = [...itm?.tags];
 			itm.xinput = initXinput;
@@ -104,6 +75,56 @@ const initConsultationController = (
 		};
 
 		delete req.body?.providersItems;
+
+		// This sends unsolicited on_status calls.
+		if (domain == "ONDC:ONEST10") {
+			const updatedStatus = [
+				FULFILLMENT_STATES.APPLICATION_IN_PROGRESS,
+				FULFILLMENT_STATES.APPLICATION_FILLED,
+			];
+			updatedStatus.forEach((status, index) => {
+				setTimeout(() => {
+					const ts = new Date();
+					const updatedResponseMessage = {
+						...responseMessage,
+					};
+					updatedResponseMessage.order.items = responseMessage.order.items.map(
+						(itm: any) => {
+							itm.tags = [...itm?.tags];
+							itm.xinput = initXinput2;
+							if (status === FULFILLMENT_STATES.APPLICATION_FILLED) {
+								delete itm.xinput;
+							}
+							return itm;
+						}
+					);
+					updatedResponseMessage.order.fulfillments[0].state.descriptor.code =
+						status;
+					updatedResponseMessage.order.fulfillments[0].state.updated_at =
+						ts.toISOString();
+					logger.info(
+						`Sending unsolicited on_init action calls for transaction_id: ${context.transaction_id}`
+					);
+					sendOnestUnsolicited(
+						res,
+						next,
+						req.body.context,
+						updatedResponseMessage,
+						`${req.body.context.bap_uri}${
+							req.body.context.bap_uri.endsWith("/")
+								? ON_ACTION_KEY.ON_INIT
+								: `/${ON_ACTION_KEY.ON_INIT}`
+						}`,
+						`${ON_ACTION_KEY.ON_INIT}`,
+						"onest",
+						ts,
+						undefined,
+						0
+					);
+				}, (index + 1) * 3000);
+			});
+		}
+
 		return responseBuilder(
 			res,
 			next,

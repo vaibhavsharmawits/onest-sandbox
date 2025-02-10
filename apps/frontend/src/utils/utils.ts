@@ -19,8 +19,8 @@ export const actionComparator = (
 	a: { action: string },
 	b: { action: string }
 ) => {
-	const precedenceA = precedenceMap[a.action] ?? Infinity; 
-	const precedenceB = precedenceMap[b.action] ?? Infinity; 
+	const precedenceA = precedenceMap[a.action] ?? Infinity;
+	const precedenceB = precedenceMap[b.action] ?? Infinity;
 	return precedenceA - precedenceB;
 };
 
@@ -189,7 +189,6 @@ export const _getNodesAndEdges = (formattedResponse: any, theme: Theme) => {
 			new Date(a.request.context.timestamp).getTime() -
 			new Date(b.request.context.timestamp).getTime()
 	);
-
 	formattedResponse.forEach(
 		(
 			log: {
@@ -290,6 +289,6 @@ export const checker = (
 
 	if (domain === "agrioutput")
 		target = target.filter((item) => item !== "version");
-	console.log("array",arr,target,domain)
+	console.log("array", arr, target, domain);
 	return target.every((v) => arr.includes(v));
 };

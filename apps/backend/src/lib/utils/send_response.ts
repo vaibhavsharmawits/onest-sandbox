@@ -63,9 +63,10 @@ async function send_response(
 				response = await axios.post(uri, res_obj, {
 					headers: { ...headers },
 				});
-				logger.info("bpp response", response.data);
+				logger.info("bpp response", JSON.stringify(response?.data));
 			} catch (error: any) {
 				logger.error("Error details:", error.toJSON ? error.toJSON() : error);
+				throw error;
 			}
 
 			await redis.set(

@@ -1,4 +1,4 @@
-import { DOMAIN, JOBS_TYPE, VERSION } from "./constants";
+import { DOMAIN, JOBS_TYPE, PAYMENTS, VERSION } from "./constants";
 
 export const onCancelSchema = {
 	$id: "onCancelSchema",
@@ -352,15 +352,15 @@ export const onCancelSchema = {
 								},
 								status: {
 									type: "string",
-									enum: ["PAID", "NOT-PAID"],
+									enum: PAYMENTS["status"],
 								},
 								type: {
 									type: "string",
-									enum: ["ON-ORDER", "ON-FULFILLMENT"],
+									enum: PAYMENTS["order_status"],
 								},
 								collected_by: {
 									type: "string",
-									enum: ["BAP", "BPP"],
+									enum: PAYMENTS["collected_by"]
 								},
 								tags: {
 									type: "object",

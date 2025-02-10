@@ -136,7 +136,6 @@ export const responseBuilder = async (
 						timestamp: new Date().toISOString(),
 						response: response.data,
 					};
-
 					await redis.set(
 						`${
 							(async.context! as any).transaction_id

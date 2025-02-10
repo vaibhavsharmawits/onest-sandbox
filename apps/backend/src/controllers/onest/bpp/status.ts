@@ -12,7 +12,7 @@ import {
 } from "../../../lib/utils";
 import { ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
 import { ERROR_MESSAGES } from "../../../lib/utils/responseMessages";
-import { sendOnestUnsolicitedOnStatus } from "../../../lib/utils/sendOnestUnsolicitedOnStatus";
+import { sendOnestUnsolicited } from "../../../lib/utils/sendOnestUnsolicited";
 
 export const statusController = async (
 	req: Request,
@@ -66,13 +66,19 @@ export const statusController = async (
 			return send_nack(res, ERROR_MESSAGES.ON_CONFIRM_DOES_NOT_EXISTED);
 		}
 
-		const on_cancel_exist = await redisExistFromServer(
+		const on_cancel = await redisExistFromServer(
 			ON_ACTION_KEY.ON_CANCEL,
 			transaction_id
 		);
-		if (on_cancel_exist) {
-			scenario = "cancel";
+
+		if (on_cancel) {
+			logger.error(
+				"on_cancel already exists for the given transaction_id",
+				transaction_id
+			);
+			return send_nack(res, ERROR_MESSAGES.CANCELLATION_IS_ALREADY_DONE);
 		}
+
 		return statusRequest(
 			req,
 			res,
@@ -165,36 +171,52 @@ const statusRequest = async (
 			];
 			updatedStatus.forEach((status, index) => {
 				setTimeout(() => {
+					const actionState =
+						status === FULFILLMENT_STATES.OFFER_EXTENDED
+							? ON_ACTION_KEY.ON_UPDATE
+							: ON_ACTION_KEY.ON_STATUS;
+
 					const ts = new Date();
 					// Changes in On_Status Unsolicited.
+
+					if (actionState === ON_ACTION_KEY.ON_UPDATE) {
+						responseMessage.order.items = responseMessage.order.items.map((item: any) => {
+							delete item.time
+							return item;
+						});
+						
+					}
 					const updatedResponseMessage = {
 						...responseMessage,
+						
 					};
+					
 					updatedResponseMessage.order.fulfillments[0].state.descriptor.code =
 						status;
 					updatedResponseMessage.order.fulfillments[0].state.updated_at =
 						ts.toISOString();
 					updatedResponseMessage.order.state.updated_at = ts.toISOString();
 					logger.info(
-						`Sending unsolicited ON_STATUS (${status}) for transaction_id: ${context.transaction_id}`
+						`Sending unsolicited ${actionState} (${status}) for transaction_id: ${context.transaction_id}`
 					);
-					sendOnestUnsolicitedOnStatus(
+
+					sendOnestUnsolicited(
 						res,
 						next,
 						req.body.context,
 						updatedResponseMessage,
 						`${req.body.context.bap_uri}${
 							req.body.context.bap_uri.endsWith("/")
-								? ON_ACTION_KEY.ON_STATUS
-								: `/${ON_ACTION_KEY.ON_STATUS}`
+								? actionState
+								: `/${actionState}`
 						}`,
-						`${ON_ACTION_KEY.ON_STATUS}`,
+						`${actionState}`,
 						"onest",
 						ts,
 						undefined,
 						0
 					);
-				}, (index + 1) * 5000); // Interval of 5 seconds per request.
+				}, (index + 1) * 1000);
 			});
 		}
 
@@ -214,7 +236,10 @@ const statusRequest = async (
 			ts
 		);
 	} catch (error) {
-		logger.error(`statusRequest: Error occurred for transaction_id: ${req.body.context.transaction_id}`, error);
+		logger.error(
+			`statusRequest: Error occurred for transaction_id: ${req.body.context.transaction_id}`,
+			error
+		);
 		next(error);
 	}
 };

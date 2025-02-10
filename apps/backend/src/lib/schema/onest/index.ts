@@ -119,7 +119,6 @@ export const onestSchemaValidator =
 
 		isValid = validate(req.body);
 
-		// console.log('isValid::::: ', isValid)
 		if (!isValid) {
 			console.log(
 				"error json schema",

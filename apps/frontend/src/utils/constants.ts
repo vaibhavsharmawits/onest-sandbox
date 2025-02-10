@@ -544,6 +544,7 @@ export const INITIATE_FIELDS = {
 			type: "select",
 			domainDepended: true,
 			options: {
+				onest: ["fulfillment_state", "contact_and_email"],
 				services: ["payments", "fulfillments", "items"],
 				b2b: ["payments", "fulfillments", "items"],
 				b2c: ["payments", "fulfillments", "items"],

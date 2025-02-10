@@ -1,3 +1,4 @@
+import { PAYMENT_STATUS } from "../../utils/apiConstants";
 import {
 	DOMAIN,
 	FULFILLMENT_STATES,
@@ -6,8 +7,8 @@ import {
 	VERSION,
 } from "./constants";
 
-export const onInitSchema = {
-	$id: "onInitSchema",
+export const onUpdateSchema = {
+	$id: "onUpdateSchema",
 	type: "object",
 	properties: {
 		context: {
@@ -17,18 +18,24 @@ export const onInitSchema = {
 					type: "string",
 					enum: DOMAIN,
 				},
-				action: {
-					type: "string",
-					const: "on_init",
-				},
 				version: {
 					type: "string",
 					const: VERSION,
+				},
+				action: {
+					type: "string",
+					const: "on_update",
 				},
 				bap_id: {
 					type: "string",
 				},
 				bap_uri: {
+					type: "string",
+				},
+				bpp_id: {
+					type: "string",
+				},
+				bpp_uri: {
 					type: "string",
 				},
 				transaction_id: {
@@ -47,7 +54,6 @@ export const onInitSchema = {
 									type: "string",
 								},
 							},
-							required: ["code"],
 						},
 						country: {
 							type: "object",
@@ -56,7 +62,6 @@ export const onInitSchema = {
 									type: "string",
 								},
 							},
-							required: ["code"],
 						},
 					},
 					required: ["city", "country"],
@@ -68,26 +73,20 @@ export const onInitSchema = {
 				ttl: {
 					type: "string",
 				},
-				bpp_id: {
-					type: "string",
-				},
-				bpp_uri: {
-					type: "string",
-				},
 			},
 			required: [
 				"domain",
-				"action",
 				"version",
+				"action",
 				"bap_id",
 				"bap_uri",
+				"bpp_id",
+				"bpp_uri",
 				"transaction_id",
 				"message_id",
 				"location",
 				"timestamp",
 				"ttl",
-				"bpp_id",
-				"bpp_uri",
 			],
 		},
 		message: {
@@ -96,6 +95,13 @@ export const onInitSchema = {
 				order: {
 					type: "object",
 					properties: {
+						id: {
+							type: "string",
+						},
+						status: {
+							type: "string",
+							const: "Active",
+						},
 						provider: {
 							type: "object",
 							properties: {
@@ -113,6 +119,12 @@ export const onInitSchema = {
 									id: {
 										type: "string",
 									},
+									fulfillment_ids: {
+										type: "array",
+										items: {
+											type: "string",
+										},
+									},
 									tags: {
 										type: "array",
 										items: {
@@ -124,9 +136,6 @@ export const onInitSchema = {
 														code: {
 															type: "string",
 														},
-														name: {
-															type: "string",
-														},
 													},
 													required: ["code"],
 												},
@@ -135,24 +144,7 @@ export const onInitSchema = {
 													items: {
 														oneOf: [
 															{
-																properties: {
-																	descriptor: {
-																		type: "object",
-																		properties: {
-																			code: {
-																				type: "string",
-																			},
-																			name: {
-																				type: "string",
-																			},
-																		},
-																		required: ["code"],
-																	},
-																	value: { type: "string" },
-																},
-																required: ["descriptor", "value"],
-															},
-															{
+																type: "object",
 																properties: {
 																	code: {
 																		type: "string",
@@ -163,6 +155,24 @@ export const onInitSchema = {
 																},
 																required: ["code", "value"],
 															},
+															{
+																type: "object",
+																properties: {
+																	descriptor: {
+																		type: "object",
+																		properties: {
+																			code: {
+																				type: "string",
+																			},
+																		},
+																		required: ["code"],
+																	},
+																	value: {
+																		type: "string",
+																	},
+																},
+																required: ["descriptor", "value"],
+															},
 														],
 													},
 												},
@@ -170,74 +180,8 @@ export const onInitSchema = {
 											required: ["descriptor", "list"],
 										},
 									},
-									fulfillment_ids: {
-										type: "array",
-										items: {
-											type: "string",
-										},
-									},
-									xinput: {
-										type: "object",
-										properties: {
-											form: {
-												type: "object",
-												properties: {
-													mime_type: {
-														type: "string",
-													},
-													resubmit: {
-														type: "boolean",
-													},
-													url: {
-														type: "string",
-													},
-												},
-												required: ["mime_type", "resubmit", "url"],
-											},
-											head: {
-												type: "object",
-												properties: {
-													descriptor: {
-														type: "object",
-														properties: {
-															name: {
-																type: "string",
-															},
-														},
-														required: ["name"],
-													},
-													headings: {
-														type: "array",
-														items: {
-															type: "string",
-														},
-													},
-													index: {
-														type: "object",
-														properties: {
-															cur: {
-																type: "integer",
-															},
-															max: {
-																type: "integer",
-															},
-															min: {
-																type: "integer",
-															},
-														},
-														required: ["cur", "max", "min"],
-													},
-												},
-												required: ["descriptor", "headings", "index"],
-											},
-											required: {
-												type: "boolean",
-											},
-										},
-										required: ["form", "head", "required"],
-									},
 								},
-								required: ["id", "fulfillment_ids", "tags"],
+								required: ["id", "fulfillment_ids"],
 							},
 						},
 						fulfillments: {
@@ -245,128 +189,6 @@ export const onInitSchema = {
 							items: {
 								type: "object",
 								properties: {
-									id: {
-										type: "string",
-									},
-									type: {
-										type: "string",
-										enum: JOBS_TYPE,
-									},
-									customer: {
-										type: "object",
-										properties: {
-											contact: {
-												type: "object",
-												properties: {
-													phone: {
-														type: "string",
-													},
-													email: {
-														type: "string",
-													},
-												},
-												required: ["phone", "email"],
-											},
-											person: {
-												type: "object",
-												properties: {
-													name: {
-														type: "string",
-													},
-													gender: {
-														type: "string",
-													},
-													age: {
-														type: "string",
-													},
-													skills: {
-														type: "array",
-														items: {
-															type: "object",
-															properties: {
-																name: {
-																	type: "string",
-																},
-															},
-															required: ["name"],
-														},
-													},
-													languages: {
-														type: "array",
-														items: {
-															type: "object",
-															properties: {
-																name: {
-																	type: "string",
-																},
-															},
-															required: ["name"],
-														},
-													},
-													tags: {
-														type: "array",
-														items: {
-															type: "object",
-															properties: {
-																descriptor: {
-																	type: "object",
-																	properties: {
-																		code: {
-																			type: "string",
-																		},
-																	},
-																	required: ["code"],
-																},
-																list: {
-																	type: "array",
-																	items: {
-																		oneOf: [
-																			{
-																				properties: {
-																					descriptor: {
-																						type: "object",
-																						properties: {
-																							code: {
-																								type: "string",
-																							},
-																							name: {
-																								type: "string",
-																							},
-																						},
-																						required: ["code"],
-																					},
-																					value: {
-																						type: "string",
-																					},
-																				},
-																				required: ["descriptor", "value"],
-																			},
-																			{
-																				properties: {
-																					code: { type: "string" },
-																					value: { type: "string" },
-																				},
-																				required: ["code", "value"],
-																			},
-																		],
-																	},
-																},
-															},
-															required: ["descriptor", "list"],
-														},
-													},
-												},
-												required: [
-													"name",
-													"gender",
-													"age",
-													"skills",
-													"languages",
-												],
-											},
-										},
-										required: ["contact", "person"],
-									},
 									state: {
 										type: "object",
 										properties: {
@@ -375,16 +197,27 @@ export const onInitSchema = {
 												properties: {
 													code: {
 														type: "string",
-														enum: FULFILLMENT_STATES["on_init"],
+														enum: FULFILLMENT_STATES["on_update"],
 													},
 												},
 												required: ["code"],
 											},
+											updated_at: {
+												type: "string",
+												format: "date-time",
+											},
 										},
-										required: ["descriptor"],
+										required: ["descriptor", "updated_at"],
+									},
+									id: {
+										type: "string",
+									},
+									type: {
+										type: "string",
+										enum: JOBS_TYPE,
 									},
 								},
-								required: ["id", "type", "customer", "state"],
+								required: ["id", "type", "state"],
 							},
 						},
 						quote: {
@@ -444,12 +277,27 @@ export const onInitSchema = {
 						payments: {
 							type: "array",
 							properties: {
+								params: {
+									type: "object",
+									properties: {
+										currency: {
+											type: "string",
+										},
+										transaction_id: {
+											type: "string",
+										},
+										amount: {
+											type: "string",
+										},
+									},
+									required: ["currency", "transaction_id", "amount"],
+								},
 								url: {
 									type: "string",
 								},
 								status: {
 									type: "string",
-									const: PAYMENTS["status"],
+									enum: PAYMENTS["status"],
 								},
 								type: {
 									type: "string",
@@ -508,10 +356,18 @@ export const onInitSchema = {
 									required: ["descriptor", "list"],
 								},
 							},
-							required: ["status", "type", "collected_by", "tags"],
+							required: ["params", "status", "type", "collected_by", "tags"],
 						},
 					},
-					required: ["provider", "items", "fulfillments", "quote", "payments"],
+					required: [
+						"id",
+						"status",
+						"provider",
+						"items",
+						"fulfillments",
+						"quote",
+						"payments",
+					],
 				},
 			},
 			required: ["order"],

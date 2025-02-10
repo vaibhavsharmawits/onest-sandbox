@@ -1,4 +1,4 @@
-import { DOMAIN, JOBS_TYPE, VERSION } from "./constants";
+import { DOMAIN, JOBS_TYPE, PAYMENTS, VERSION } from "./constants";
 
 export const onStatusSchema = {
 	$id: "onStatusSchema",
@@ -190,8 +190,7 @@ export const onStatusSchema = {
 														enum: [
 															"APPLICATION_IN_PROGRESS",
 															"ASSESSMENT_IN_PROGRESS",
-															"OFFER_EXTENDED",
-															"OFFER_REJECTED",
+															// "OFFER_EXTENDED",
 														],
 													},
 												},
@@ -292,15 +291,15 @@ export const onStatusSchema = {
 								},
 								status: {
 									type: "string",
-									const: "NOT-PAID",
+									const: PAYMENTS["status"],
 								},
 								type: {
 									type: "string",
-									enum: ["ON-ORDER", "ON-FULFILLMENT"],
+									enum: PAYMENTS["order_status"],
 								},
 								collected_by: {
 									type: "string",
-									enum: ["BAP", "BPP"],
+									enum: PAYMENTS["collected_by"],
 								},
 								tags: {
 									type: "object",

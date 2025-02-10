@@ -43,7 +43,7 @@ export const onSearchSchema = {
 					type: "string",
 					const: VERSION,
 				},
-				bap_id: {
+					bap_id: {
 					type: "string",
 				},
 				bap_uri: {
@@ -158,7 +158,7 @@ export const onSearchSchema = {
 															type: "string",
 														},
 													},
-													required: [ "code"],
+													required: ["code"],
 												},
 												state: {
 													type: "object",
@@ -282,7 +282,7 @@ export const onSearchSchema = {
 															descriptor: {
 																type: "object",
 																properties: {
-																	code: { type: "string" }
+																	code: { type: "string" },
 																},
 																required: ["code"],
 															},

@@ -1,40 +1,17 @@
-import { NextFunction, Request, Response } from "express";
-import { logger, redis, TransactionType, onActionRedisSaver } from "../../../lib/utils";
+import { Request, Response, NextFunction } from "express";
+import { logger, redis, TransactionType } from ".";
 
-export const onSearchController = async (
+export const onActionRedisSaver = async (
 	req: Request,
 	res: Response,
 	next: NextFunction
 ) => {
 	try {
-		await onActionRedisSaver(req, res, next);
-		return res.json({
-			sync: {
-				message: {
-					ack: {
-						status: "ACK",
-					},
-				},
-			},
-		});
-	} catch (error) {
-		logger.error(
-			"onSearchController: Error occurred for transaction id",
-			req.body.transaction_id,
-			error
-		);
-		return next(error);
-	}
-};
-
-const onSearchSelectionController = async (
-	req: Request,
-	res: Response,
-	next: NextFunction
-) => {
-	try {
+		const { context } = req.body;
+		if (process.env.SUBSCRIBER_ID === context.bpp_id) {
+			return next();
+		}
 		var id: number = 0;
-		const { context, message } = req.body;
 		const action = context?.action;
 		const ts = new Date();
 
@@ -46,7 +23,6 @@ const onSearchSelectionController = async (
 			timestamp: new Date().toISOString(),
 			response: {
 				response: { message: { ack: { status: "ACK" } } },
-				timestamp: `${ts.toISOString()}`,
 			},
 		};
 		if (
@@ -76,7 +52,7 @@ const onSearchSelectionController = async (
 		}
 	} catch (error) {
 		logger.error(
-			"onSearchSelectionController: Error occurred for transaction id",
+			"onActionRedisSaver: Error occurred for transaction id",
 			req.body.transaction_id,
 			error
 		);

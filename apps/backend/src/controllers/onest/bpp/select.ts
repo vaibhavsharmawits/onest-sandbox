@@ -17,19 +17,8 @@ export const selectController = async (
 ) => {
 	try {
 		const { transaction_id } = req.body.context;
-		const on_search = await redisFetchFromServer(
-			ON_ACTION_KEY.ON_SEARCH,
-			transaction_id
-		);
-
-		if (!on_search) {
-			logger.error(
-				"on_search doesn't exist for the given transaction_id",
-				transaction_id
-			);
-			return send_nack(res, ERROR_MESSAGES.ON_SEARCH_DOES_NOT_EXISTED);
-		}
-
+		const on_search = res.locals.on_search;
+		
 		const providersItems = on_search?.message?.catalog?.providers[0];
 		req.body.providersItems = providersItems;
 

@@ -80,12 +80,12 @@ export const SandboxRequestSection = () => {
 		if (activeScenario?.scenario)
 			url = url + `&scenario=${activeScenario?.scenario}`;
 
-		setCurl(`curl -X POST \\
-		  ${url} \\
-		-H 'accept: application/json' \\
-		-H 'Content-Type: application/json' \\
-		-H 'authorization: ${authHeader} \\
-		-d '${log}'`);
+		setCurl(`curl -X POST '${url}'\\
+			-H 'accept: application/json'\\
+			-H 'Content-Type: application/json'\\
+			-H 'authorization: ${authHeader}'\\
+			-d '${log}'`);
+			
 		try {
 			const response = await axios.post(url, JSON.parse(log as string), {
 				headers: {

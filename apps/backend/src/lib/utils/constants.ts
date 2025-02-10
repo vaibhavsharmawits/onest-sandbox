@@ -21,7 +21,8 @@ export const ONEST_EXAMPLES_PATH =
 		? "/app/apps/backend/domain-repos/@onest/draft-ONEST10-2.0.0/api/components/Examples/Services_Work_Opportunities_yaml"
 		: "./domain-repos/@onest/draft-ONEST10-2.0.0/api/components/Examples/Services_Work_Opportunities_yaml";
 
-export const MOCKSERVER_ID = "mock.ondc.org/api";
+export const MOCKSERVER_ID =
+	process.env?.SUBSCRIBER_ID || "onest-mock-service.ondc.org";
 
 export const VERSION = {
 	b2bexports: "b2b-exp",
@@ -261,6 +262,26 @@ export const initCustomer = {
 };
 
 export const initXinput = {
+	form: {
+		mime_type: "text/html",
+		resubmit: false,
+		url: "https://6vs8xnx5i7.jobhub.co.in/loans-kyc/xinput/formid/a23f2fdfbbb8ac402bfd54f-1",
+	},
+	head: {
+		descriptor: {
+			name: "Application Form",
+		},
+		headings: ["Candidate Details"],
+		index: {
+			cur: 1,
+			max: 2,
+			min: 1,
+		},
+	},
+	required: true,
+};
+
+export const initXinput2 = {
 	form: {
 		mime_type: "text/html",
 		resubmit: false,

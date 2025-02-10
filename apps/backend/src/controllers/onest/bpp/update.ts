@@ -1,18 +1,15 @@
 import { NextFunction, Request, Response } from "express";
-import { v4 as uuidv4 } from "uuid";
 import {
-	redisFetchToServer,
 	responseBuilder,
+	redisFetchFromServer,
 	send_nack,
 	updateFulfillments,
+	logger,
+	redisFetchMultipleToServer,
 } from "../../../lib/utils";
-import { ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
 import { ERROR_MESSAGES } from "../../../lib/utils/responseMessages";
-import {
-	FULFILLMENT_LABELS,
-	FULFILLMENT_STATES,
-	SERVICES_DOMAINS,
-} from "../../../lib/utils/apiConstants";
+import { ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
+import { ORDER_STATUS } from "../../../lib/utils/apiConstants";
 
 export const updateController = async (
 	req: Request,
@@ -20,181 +17,121 @@ export const updateController = async (
 	next: NextFunction
 ) => {
 	try {
-		let { scenario } = req.query;
-		scenario =
-			scenario === "fulfillments"
-				? "reschedule"
-				: scenario === "items"
-				? "modifyItems"
-				: "payments";
-
-		const on_confirm = await redisFetchToServer(
+		const { transaction_id } = req.body.context;
+		const on_confirm_data = await redisFetchFromServer(
 			ON_ACTION_KEY.ON_CONFIRM,
-			req.body.context.transaction_id
+			transaction_id
 		);
-		if (!on_confirm) {
+
+		const on_status_data = await redisFetchMultipleToServer(
+			ON_ACTION_KEY.ON_STATUS,
+			transaction_id
+		);
+		return send_nack(res, "Something went wrong!!");
+
+		if (!on_confirm_data) {
+			logger.error(
+				"updateController: on_confirm_data doesn't exist for transaction id",
+				transaction_id
+			);
 			return send_nack(res, ERROR_MESSAGES.ON_CONFIRM_DOES_NOT_EXISTED);
 		}
 
-		const on_search = await redisFetchToServer(
-			ON_ACTION_KEY.ON_SEARCH,
-			req.body.context.transaction_id
-		);
-
-		if (!on_search) {
-			return send_nack(res, ERROR_MESSAGES.ON_SEARCH_DOES_NOT_EXISTED);
+		if (on_confirm_data.message.order.id != req.body.message.order_id) {
+			return send_nack(res, ERROR_MESSAGES.ORDER_ID_DOES_NOT_EXISTED);
 		}
 
-		const providersItems = on_search?.message?.catalog?.providers[0];
-		req.body.providersItems = providersItems;
-
-		//UPDATE FULFILLMENTS HERE BECAUSE It IS SAME FOR ALL SACENRIOS
-		const updatedFulfillments = updateFulfillments(
-			req?.body?.message?.order?.fulfillments,
-			ON_ACTION_KEY?.ON_UPDATE
-		);
-		req.body.message.order.fulfillments = updatedFulfillments;
-		req.body.on_confirm = on_confirm;
-
-		switch (scenario) {
-			case "reschedule":
-				updateRescheduleController(req, res, next);
-				break;
-			case "payments":
-				updatePaymentController(req, res, next);
-				break;
-			case "modifyItems":
-				updateRescheduleAndItemsController(req, res, next);
-				break;
-			default:
-				updateRequoteController(req, res, next);
-				break;
-		}
+		updateRequest(req, res, next, on_confirm_data);
 	} catch (error) {
 		return next(error);
 	}
 };
 
-//HANDLE PAYMENTS TARGET
-export const updateRequoteController = (
+const updateRequest = async (
 	req: Request,
 	res: Response,
-	next: NextFunction
+	next: NextFunction,
+	transaction: any
 ) => {
 	try {
-		const { context, message, on_confirm } = req.body;
-		//CREATED COMMON RESPONSE MESSAGE FOR ALL SCENRIO AND UPDATE ACCORDENGLY IN FUNCTIONS
+		const { context, message } = req.body;
+		const ts = new Date();
 
-		const responseMessages = {
-			order: {
-				...message.order,
-				id: uuidv4(),
-				status: FULFILLMENT_STATES.PENDING,
-				ref_order_ids: [on_confirm?.message?.order?.id],
-				provider: {
-					id: on_confirm?.message?.order?.provider.id,
+		const updatedFulfillments = updateFulfillments(
+			transaction.message.order.fulfillments,
+			ON_ACTION_KEY?.ON_CANCEL,
+			"onest",
+			transaction.message.order.quote,
+			ts
+		);
+		const updatedItems = transaction.message.order.items.map((itm: any) => {
+			const npFeesTags = itm.tags.filter(
+				(tag: any) => tag.descriptor.code === "NP_FEES"
+			);
+
+			return {
+				...itm,
+				fulfillment_ids: [...itm.fulfillment_ids, "C1"],
+				time: {
+					range: {
+						start: "2023-01-03T13:23:01+00:00",
+						end: "2023-02-03T13:23:01+00:00",
+					},
 				},
-			},
-		};
-
-		return responseBuilder(
-			res,
-			next,
-			context,
-			responseMessages,
-			`${req.body.context.bap_uri}${
-				req.body.context.bap_uri.endsWith("/")
-					? ON_ACTION_KEY.ON_UPDATE
-					: `/${ON_ACTION_KEY.ON_UPDATE}`
-			}`,
-			`${ON_ACTION_KEY.ON_UPDATE}`,
-			"onest"
-		);
-	} catch (error) {
-		next(error);
-	}
-};
-
-//HANDLE UPDATE PAYMENTS AFTER ITEMS UPDATE
-export const updatePaymentController = (
-	req: Request,
-	res: Response,
-	next: NextFunction
-) => {
-	const { context, message, on_confirm } = req.body;
-	const responseMessages = {
-		order: {
-			...message.order,
-			id: uuidv4(),
-			status: FULFILLMENT_STATES.PENDING,
-			ref_order_ids: [on_confirm?.message?.order?.id],
-			provider: {
-				id: on_confirm?.message?.order?.provider.id,
-			},
-		},
-	};
-
-	return responseBuilder(
-		res,
-		next,
-		context,
-		responseMessages,
-		`${req.body.context.bap_uri}${
-			req.body.context.bap_uri.endsWith("/")
-				? ON_ACTION_KEY.ON_UPDATE
-				: `/${ON_ACTION_KEY.ON_UPDATE}`
-		}`,
-		`${ON_ACTION_KEY.ON_UPDATE}`,
-		"onest"
-	);
-};
-
-//HANDLE FULFILLMENT TARGET (TIME SLOT RESCHEDULE,ITEMS AND PATIENTS)(MODIFY NUMBER OF PATIENTS AND NUMBER OF TEST)
-export const updateRescheduleAndItemsController = (
-	req: Request,
-	res: Response,
-	next: NextFunction
-) => {
-	try {
-		const {
-			context,
-			message: { order },
-			on_confirm,
-			providersItems,
-		} = req.body;
-
-		const domain = context?.domain;
-		//Add total quantity of items using coming request and on_confirm order
-
-		//on_confirm items selected
-		const on_confirm_quantity =
-			on_confirm?.message?.order?.items[0]?.quantity?.selected?.count;
-
-		const update_item_quantity = Number(
-			order?.items[0]?.quantity?.unitized?.measure?.value
-				? order?.items[0]?.quantity?.unitized?.measure?.value
-				: "2"
-		);
-
-		if (order?.items[0]?.quantity?.unitized?.measure?.value) {
-			order.items[0].quantity.unitized.measure.value =
-				on_confirm_quantity + update_item_quantity;
-		}
-
-		//UPDATE PAYMENT OBJECT ACCORDING TO QUANTITY
-		const updatedPaymentObj = updatePaymentObject(
-			order?.payments,
-			(
-				update_item_quantity * parseFloat(order.items[0]?.price?.value)
-			).toString()
-		);
-
+				tags: [
+					...npFeesTags,
+					{
+						descriptor: {
+							code: "CANCEL_REQUEST",
+						},
+						list: [
+							{
+								descriptor: {
+									code: "REASON_ID",
+								},
+								value: `${message.cancellation_reason_id}`,
+							},
+							{
+								descriptor: {
+									code: "INITIATED_BY",
+								},
+								value: `${context.bap_id}`,
+							},
+						],
+					},
+				],
+			};
+		});
 		const responseMessage = {
 			order: {
-				...order,
-				id: uuidv4(),
-				ref_order_ids: [on_confirm?.message?.order?.id],
-				payments: updatedPaymentObj,
+				id: req.body.message.order_id,
+				status: ORDER_STATUS.CANCELLED,
+				provider: {
+					...transaction.message.order.provider,
+				},
+
+				items: updatedItems,
+
+				quote: {
+					...transaction.message.order.quote,
+					price: {
+						...transaction.message.order.quote.price,
+						value: "0.00",
+					},
+					breakup: transaction.message.order.quote.breakup.map((item: any) => ({
+						...item,
+						item: {
+							...item.item,
+							price: {
+								...item.item.price,
+								value: "0.00",
+							},
+						},
+					})),
+				},
+				fulfillments: updatedFulfillments,
+				payments: transaction.message.order.payments,
+				updated_at: ts.toISOString(),
 			},
 		};
 
@@ -205,77 +142,19 @@ export const updateRescheduleAndItemsController = (
 			responseMessage,
 			`${req.body.context.bap_uri}${
 				req.body.context.bap_uri.endsWith("/")
-					? ON_ACTION_KEY.ON_UPDATE
-					: `/${ON_ACTION_KEY.ON_UPDATE}`
+					? ON_ACTION_KEY.ON_CANCEL
+					: `/${ON_ACTION_KEY.ON_CANCEL}`
 			}`,
-			`${ON_ACTION_KEY.ON_UPDATE}`,
-			"onest"
+			`${ON_ACTION_KEY.ON_CANCEL}`,
+			"onest",
+			ts
 		);
 	} catch (error) {
+		logger.error(
+			"updateRequest: Error occurred for transaction id",
+			req.body.transaction_id,
+			error
+		);
 		next(error);
 	}
-};
-
-//UPDATE PAYMENT OBJECT FUNCTION HANDLE HERE
-function updatePaymentObject(payments: any, quotePrice: any) {
-	try {
-		//GET TOTAL AMOUNT OF PAYMENT
-
-		payments.push({
-			...payments[0],
-			id: "PY2",
-			params: {
-				...payments[0].params,
-				amount: quotePrice,
-				transaction_id: uuidv4(),
-			},
-			status: "NOT-PAID",
-		});
-		return payments;
-	} catch (error) {
-		console.log("error ocuured in payment object:", error);
-	}
-}
-
-export const updateRescheduleController = (
-	req: Request,
-	res: Response,
-	next: NextFunction
-) => {
-	const {
-		context,
-		message: { order },
-	} = req.body;
-
-	const responseMessage = {
-		order: {
-			...order,
-			fulfillments: [
-				{
-					...order.fulfillments[0],
-					stops: order.fulfillments[0].stops.map((stop: any) => ({
-						...stop,
-						time:
-							stop.type === "end"
-								? { ...stop.time, label: FULFILLMENT_LABELS.CONFIRMED }
-								: stop.time,
-					})),
-				},
-			],
-		},
-	};
-
-	return responseBuilder(
-		res,
-		next,
-		context,
-		responseMessage,
-		`${req.body.context.bap_uri}${
-			req.body.context.bap_uri.endsWith("/")
-				? ON_ACTION_KEY.ON_UPDATE
-				: `/${ON_ACTION_KEY.ON_UPDATE}`
-		}`,
-		`${ON_ACTION_KEY.ON_UPDATE}`,
-		"onest"
-	);
 };

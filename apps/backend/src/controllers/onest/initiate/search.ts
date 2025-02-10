@@ -13,7 +13,7 @@ import {
 import { ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
 import { ONEST_DOMAINS } from "../../../lib/utils/apiConstants";
 
-export const initiateSearchController = async (
+export const  initiateSearchController = async (
 	req: Request,
 	res: Response,
 	next: NextFunction

@@ -1,13 +1,28 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
+import { logger, onActionRedisSaver } from "../../../lib/utils";
 
-export const onStatusController = (req: Request, res: Response) => {
-	return res.json({
-		sync: {
-			message: {
-				ack: {
-					status: "ACK",
+export const onStatusController = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	try {
+		await onActionRedisSaver(req, res, next);
+		return res.json({
+			sync: {
+				message: {
+					ack: {
+						status: "ACK",
+					},
 				},
 			},
-		},
-	});
+		});
+	} catch (error) {
+		logger.error(
+			"ononStatusControllerController: Error occurred for transaction id",
+			req.body.transaction_id,
+			error
+		);
+		return next(error);
+	}
 };
