@@ -3,14 +3,14 @@ export const ERROR_MESSAGES = {
 	INIT_ALREADY_SENT: "init action call is already sent",
 	CONFIRM_ALREADY_SENT: "confirm action call is already sent",
 	STATUS_ALREADY_SENT: "status action call is already sent",
+	FULFILLMENT_NOT_FOUND: "fulfillment not found",
 	ON_UPDATE_UNSOLICITED_ALREADY_SENT: "on update is already sent. offer has been extended or accepted",
-
 	ON_CONFIRM_DOES_NOT_EXISTED: "on confirm doesn't exist",
 	ON_SEARCH_DOES_NOT_EXISTED: "on search doesn't exist",
 	ON_SELECT_DOES_NOT_EXISTED: "on select doesn't exist",
 	ON_INIT_DOES_NOT_EXISTED: "on init doesn't exist",
 	ON_UPDATE_DOES_NOT_EXISTED: "on update doesn't exist",
-
+	ON_CANCEL_ALREADY_SENT:"on_cancel action call is already sent",
 	ORDER_ID_DOES_NOT_EXISTED: "Order id does not exist!",
 	SELECTED_ITEMS_DOES_NOT_EXISTED: "selected items doesn't exist",
 	APPLICATION_FILLED_STATE_NOT_EXISTED:

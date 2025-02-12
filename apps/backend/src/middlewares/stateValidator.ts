@@ -124,79 +124,81 @@ export const stateValidator =
 									? on_confirm?.error?.message
 									: ERROR_MESSAGES.ON_CONFIRM_DOES_NOT_EXISTED
 							);
-							
-							// if on_update exists, i.e. OFFER_EXTENDED/ACCEPTED, cancellation cannot proceed.
-							const on_update = await checkActionAndLog(
-								transaction_id,
-								ON_ACTION_KEY.ON_UPDATE,
-								ERROR_MESSAGES.ON_UPDATE_UNSOLICITED_ALREADY_SENT
+
+						// if on_update exists, i.e. OFFER_EXTENDED/ACCEPTED, cancellation cannot proceed.
+						const on_update = await checkActionAndLog(
+							transaction_id,
+							ON_ACTION_KEY.ON_UPDATE,
+							ERROR_MESSAGES.ON_UPDATE_UNSOLICITED_ALREADY_SENT
+						);
+						if (on_update)
+							return send_nack(
+								res,
+								`${ERROR_MESSAGES.ON_UPDATE_UNSOLICITED_ALREADY_SENT} and cannot be cancelled for the given transaction_id: ${transaction_id}`
 							);
-							if (on_update)
-								return send_nack(
-									res,
-									on_update?.error?.message
-										? on_update?.error?.message
-										: `${ERROR_MESSAGES.ON_UPDATE_UNSOLICITED_ALREADY_SENT} cannot cancel for the given transaction_id: ${transaction_id}`
-								);
-							res.locals.on_confirm = on_confirm;
+						res.locals.on_confirm = on_confirm;
 					}
 					break;
 				case ACTION_KEY.STATUS:
-					{const on_cancel = await checkActionAndLog(
-						transaction_id,
-						ON_ACTION_KEY.ON_CANCEL,
-						ERROR_MESSAGES.CANCELLATION_IS_ALREADY_DONE
-					)
-					if (on_cancel)
-						return send_nack(
-							res,
-							on_cancel?.error?.message
-								? on_cancel?.error?.message
-								: `${ERROR_MESSAGES.CANCELLATION_IS_ALREADY_DONE} for ${transaction_id}`
+					{
+						const on_cancel = await checkActionAndLog(
+							transaction_id,
+							ON_ACTION_KEY.ON_CANCEL,
+							ERROR_MESSAGES.CANCELLATION_IS_ALREADY_DONE
 						);
-					const on_status = await checkingNextActionCall(
-						transaction_id,
-						ON_ACTION_KEY.ON_STATUS,
-						ERROR_MESSAGES.STATUS_ALREADY_SENT
-					);
-					if (on_status)
-						return send_nack(res, ERROR_MESSAGES.STATUS_ALREADY_SENT);}
-					// Add validation logic for STATUS
+						if (on_cancel)
+							return send_nack(
+								res,
+								on_cancel?.error?.message
+									? on_cancel?.error?.message
+									: `${ERROR_MESSAGES.CANCELLATION_IS_ALREADY_DONE} for ${transaction_id}`
+							);
+						const on_status = await checkingNextActionCall(
+							transaction_id,
+							ON_ACTION_KEY.ON_STATUS,
+							ERROR_MESSAGES.STATUS_ALREADY_SENT
+						);
+						if (on_status)
+							return send_nack(res, ERROR_MESSAGES.STATUS_ALREADY_SENT);
+					}
 					break;
 				case ACTION_KEY.UPDATE:
-					{const fulfillmentState = await redis.get(
-						`${transaction_id}-on_update-fulfillment_state`
-					);
-					if (fulfillmentState != FULFILLMENT_STATES.OFFER_EXTENDED) {
-						logger.error(
-							`${ERROR_MESSAGES.OFFER_EXTENDED_STATE_NOT_EXISTED} for the given transaction_id: ${transaction_id}`
+					{
+						const fulfillmentState = await redis.get(
+							`${transaction_id}-on_update-fulfillment_state`
 						);
-					
-						return send_nack(
-							res,
-							ERROR_MESSAGES.OFFER_EXTENDED_STATE_NOT_EXISTED
+						if (fulfillmentState != FULFILLMENT_STATES.OFFER_EXTENDED) {
+							logger.error(
+								`${ERROR_MESSAGES.OFFER_EXTENDED_STATE_NOT_EXISTED} for the given transaction_id: ${transaction_id}`
+							);
+
+							return send_nack(
+								res,
+								ERROR_MESSAGES.OFFER_EXTENDED_STATE_NOT_EXISTED
+							);
+						}
+						const on_cancel = await checkActionAndLog(
+							transaction_id,
+							ON_ACTION_KEY.ON_CANCEL,
+							ERROR_MESSAGES.CANCELLATION_IS_ALREADY_DONE
 						);
+						if (on_cancel)
+							return send_nack(
+								res,
+								on_cancel?.error?.message
+									? on_cancel?.error?.message
+									: `${ERROR_MESSAGES.CANCELLATION_IS_ALREADY_DONE} for ${transaction_id}`
+							);
+						const on_confirm = await checkActionAndLog(
+							transaction_id,
+							ON_ACTION_KEY.ON_CONFIRM,
+							ERROR_MESSAGES.ON_CONFIRM_DOES_NOT_EXISTED
+						);
+						if (on_confirm.message.order.id != req.body.message.order.id) {
+							return send_nack(res, ERROR_MESSAGES.ORDER_ID_DOES_NOT_EXISTED);
+						}
+						res.locals.on_confirm = on_confirm;
 					}
-					const on_cancel = await checkActionAndLog(
-						transaction_id,
-						ON_ACTION_KEY.ON_CANCEL,
-						ERROR_MESSAGES.CANCELLATION_IS_ALREADY_DONE
-					)
-					if (on_cancel)
-						return send_nack(
-							res,
-							on_cancel?.error?.message
-								? on_cancel?.error?.message
-								: `${ERROR_MESSAGES.CANCELLATION_IS_ALREADY_DONE} for ${transaction_id}`
-						);
-					const on_confirm = await checkActionAndLog(
-						transaction_id,
-						ON_ACTION_KEY.ON_CONFIRM,
-						ERROR_MESSAGES.ON_CONFIRM_DOES_NOT_EXISTED
-					);
-					res.locals.on_confirm = on_confirm;}
-					// const on_confirm
-					// Add validation logic for UPDATE
 					break;
 
 				case ON_ACTION_KEY.ON_SEARCH:
@@ -224,10 +226,33 @@ export const stateValidator =
 					// Add validation logic for ON_CANCEL
 					break;
 				case ON_ACTION_KEY.ON_STATUS:
-					// Add validation logic for ON_STATUS
+					{
+						const on_cancel = await checkingNextActionCall(
+							transaction_id,
+							ON_ACTION_KEY.ON_CANCEL,
+							ERROR_MESSAGES.ON_CANCEL_ALREADY_SENT
+						);
+						if (on_cancel) {
+							return send_nack(
+								res,
+								`${ERROR_MESSAGES.ON_CANCEL_ALREADY_SENT} for ${transaction_id} and the order can't be further updated`
+							);
+						}
+					}
 					break;
 				case ON_ACTION_KEY.ON_UPDATE:
 					{
+						const on_cancel = await checkingNextActionCall(
+							transaction_id,
+							ON_ACTION_KEY.ON_CANCEL,
+							ERROR_MESSAGES.ON_CANCEL_ALREADY_SENT
+						);
+						if (on_cancel) {
+							return send_nack(
+								res,
+								`${ERROR_MESSAGES.ON_CANCEL_ALREADY_SENT} for ${transaction_id} and the order can't be further updated`
+							);
+						}
 						const fulfillmentState =
 							req.body.message.order.fulfillments[0].state.descriptor.code;
 						if (fulfillmentState) {

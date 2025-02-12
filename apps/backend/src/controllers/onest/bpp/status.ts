@@ -66,7 +66,6 @@ export const statusController = async (
 			return send_nack(res, ERROR_MESSAGES.ON_CONFIRM_DOES_NOT_EXISTED);
 		}
 
-	
 		return statusRequest(
 			req,
 			res,
@@ -168,17 +167,24 @@ const statusRequest = async (
 					// Changes in On_Status Unsolicited.
 
 					if (actionState === ON_ACTION_KEY.ON_UPDATE) {
-						responseMessage.order.items = responseMessage.order.items.map((item: any) => {
-							delete item.time
-							return item;
-						});
-						
+						responseMessage.order.items = responseMessage.order.items.map(
+							(item: any) => {
+								delete item.time;
+								return item;
+							}
+						);
+
+						responseMessage.order.documents = [
+							{
+								url: "https://offer_letter_url",
+								label: "offer_letter",
+							},
+						];
 					}
 					const updatedResponseMessage = {
 						...responseMessage,
-						
 					};
-					
+
 					updatedResponseMessage.order.fulfillments[0].state.descriptor.code =
 						status;
 					updatedResponseMessage.order.fulfillments[0].state.updated_at =
