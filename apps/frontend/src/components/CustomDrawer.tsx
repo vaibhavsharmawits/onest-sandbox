@@ -9,7 +9,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import useTheme from "@mui/material/styles/useTheme";
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import Typography from "@mui/material/Typography";
@@ -19,6 +19,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { ALL_DOMAINS } from "../utils";
 import { FormControl, InputLabel, MenuItem, Tooltip } from "@mui/material";
 import { useDomain } from "../utils/hooks";
+import { Link as RouterLink } from "react-router-dom";
 
 const drawerWidth = 200;
 const NAV_LINKS = [
@@ -27,7 +28,6 @@ const NAV_LINKS = [
 		nested: false,
 		path: "/sandbox",
 	},
-
 ];
 
 type NavButtonProps = {
@@ -52,9 +52,16 @@ const NavButton = ({
 	disabled,
 	disabledTooltip,
 }: NavButtonProps) => {
-	const navigate = useNavigate();
 	const location = useLocation();
 	const theme = useTheme();
+
+	const isExternal = link.path.startsWith("http");
+
+	const component = isExternal ? "a" : RouterLink;
+	const componentProps = isExternal
+		? { href: link.path, target: "_blank", rel: "noopener noreferrer" }
+		: { to: link.path };
+
 	return (
 		<Grow in={render} timeout={1000} key={"nonnested-nav-" + index}>
 			<ListItem disablePadding key={index}>
@@ -62,8 +69,9 @@ const NavButton = ({
 					<Tooltip title={disabledTooltip?.text}>
 						<Box sx={{ width: "100%" }}>
 							<ListItemButton
+								component={component}
+								{...componentProps}
 								disabled={disabled}
-								onClick={() => navigate(link.path)}
 								selected={location.pathname === link.path}
 								sx={{
 									bgcolor: theme.palette.primary.dark,
@@ -82,8 +90,9 @@ const NavButton = ({
 					</Tooltip>
 				) : (
 					<ListItemButton
+						component={component}
+						{...componentProps}
 						disabled={disabled}
-						onClick={() => navigate(link.path)}
 						selected={location.pathname === link.path}
 						sx={{
 							bgcolor: theme.palette.primary.dark,
@@ -135,7 +144,9 @@ export const CustomDrawer = ({ children }: CustomDrawerProps) => {
 
 			<Divider />
 			<FormControl fullWidth sx={{ my: 1 }}>
-				<InputLabel id="select-domain-label">{domain ? "" : "Select Domain"}</InputLabel>
+				<InputLabel id="select-domain-label">
+					{domain ? "" : "Select Domain"}
+				</InputLabel>
 				<Select
 					labelId="select-domain-label"
 					label="Domain"
@@ -143,7 +154,7 @@ export const CustomDrawer = ({ children }: CustomDrawerProps) => {
 				>
 					{Object.keys(ALL_DOMAINS).map((domain: string, key: number) => (
 						<MenuItem key={domain + key} value={domain}>
-							{domain === "Subscription"?"Subscription(Print Media)":domain}
+							{domain === "Subscription" ? "Subscription(Print Media)" : domain}
 						</MenuItem>
 					))}
 				</Select>
@@ -192,6 +203,14 @@ export const CustomDrawer = ({ children }: CustomDrawerProps) => {
 					name: "User Guide",
 					nested: false,
 					path: "/user-guide",
+				}}
+				render={mobileOpen}
+			/>
+			<NavButton
+				link={{
+					name: "Analytics",
+					nested: false,
+					path: "https://onest-mock-service.ondc.org/analytics/",
 				}}
 				render={mobileOpen}
 			/>

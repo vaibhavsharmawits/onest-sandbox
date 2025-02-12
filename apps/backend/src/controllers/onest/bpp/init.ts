@@ -121,7 +121,7 @@ const initConsultationController = (
 						undefined,
 						0
 					);
-				}, (index + 1) * 3000);
+				}, (index + 1) * 2000);
 			});
 		}
 
