@@ -30,6 +30,29 @@ export const initiateCancelController = async (
 			);
 			return send_nack(res, ERROR_MESSAGES.ON_CONFIRM_DOES_NOT_EXISTED);
 		}
+
+		const on_update = await redisFetchToServer(
+			ON_ACTION_KEY.ON_UPDATE,
+			transactionId
+		);
+		if(on_update) {
+			logger.error(
+				"offer already extended for transaction id",
+				transactionId
+			);
+			return send_nack(res,ERROR_MESSAGES.ON_UPDATE_UNSOLICITED_ALREADY_SENT)
+		}
+		const on_cancel = await redisFetchToServer(
+			ON_ACTION_KEY.ON_CANCEL,
+			transactionId
+		);
+		if(on_cancel) {
+			logger.error(
+				"order already cancelled for transaction id",
+				transactionId
+			);
+			return send_nack(res,ERROR_MESSAGES.CANCELLATION_IS_ALREADY_DONE)
+		}
 		return intializeRequest(
 			res,
 			next,

@@ -16,24 +16,13 @@ export const cancelController = async (
 	next: NextFunction
 ) => {
 	try {
-		const { transaction_id } = req.body.context;
-		const on_confirm_data = await redisFetchFromServer(
-			ON_ACTION_KEY.ON_CONFIRM,
-			transaction_id
-		);
-		if (!on_confirm_data) {
-			logger.error(
-				"cancelController: on_confirm_data doesn't exist for transaction id",
-				transaction_id
-			);
-			return send_nack(res, ERROR_MESSAGES.ON_CONFIRM_DOES_NOT_EXISTED);
-		}
-
-		if (on_confirm_data.message.order.id != req.body.message.order_id) {
+		const on_confirm = res.locals.on_confirm;
+		if (on_confirm.message.order.id != req.body.message.order_id) {
 			return send_nack(res, ERROR_MESSAGES.ORDER_ID_DOES_NOT_EXISTED);
 		}
 
-		cancelRequest(req, res, next, on_confirm_data);
+		cancelRequest(req, res, next, on_confirm);
+
 	} catch (error) {
 		return next(error);
 	}
@@ -123,7 +112,9 @@ const cancelRequest = async (
 				},
 				fulfillments: updatedFulfillments,
 				payments: transaction.message.order.payments,
-				updated_at: ts.toISOString(),
+				state: {
+					updated_at: ts.toISOString(),
+				} 
 			},
 		};
 

@@ -110,31 +110,92 @@ export const stateValidator =
 					// Add validation logic for CONFIRM
 					break;
 				case ACTION_KEY.CANCEL:
-					// Add validation logic for CANCEL
+					{
+						// Cancellation cannot happen unless the order is confirmed.
+						const on_confirm = await checkActionAndLog(
+							transaction_id,
+							ON_ACTION_KEY.ON_CONFIRM,
+							ERROR_MESSAGES.ON_CONFIRM_DOES_NOT_EXISTED
+						);
+						if (!on_confirm || (on_confirm && on_confirm?.error))
+							return send_nack(
+								res,
+								on_confirm?.error?.message
+									? on_confirm?.error?.message
+									: ERROR_MESSAGES.ON_CONFIRM_DOES_NOT_EXISTED
+							);
+							
+							// if on_update exists, i.e. OFFER_EXTENDED/ACCEPTED, cancellation cannot proceed.
+							const on_update = await checkActionAndLog(
+								transaction_id,
+								ON_ACTION_KEY.ON_UPDATE,
+								ERROR_MESSAGES.ON_UPDATE_UNSOLICITED_ALREADY_SENT
+							);
+							if (on_update)
+								return send_nack(
+									res,
+									on_update?.error?.message
+										? on_update?.error?.message
+										: `${ERROR_MESSAGES.ON_UPDATE_UNSOLICITED_ALREADY_SENT} cannot cancel for the given transaction_id: ${transaction_id}`
+								);
+							res.locals.on_confirm = on_confirm;
+					}
 					break;
 				case ACTION_KEY.STATUS:
+					{const on_cancel = await checkActionAndLog(
+						transaction_id,
+						ON_ACTION_KEY.ON_CANCEL,
+						ERROR_MESSAGES.CANCELLATION_IS_ALREADY_DONE
+					)
+					if (on_cancel)
+						return send_nack(
+							res,
+							on_cancel?.error?.message
+								? on_cancel?.error?.message
+								: `${ERROR_MESSAGES.CANCELLATION_IS_ALREADY_DONE} for ${transaction_id}`
+						);
 					const on_status = await checkingNextActionCall(
 						transaction_id,
 						ON_ACTION_KEY.ON_STATUS,
 						ERROR_MESSAGES.STATUS_ALREADY_SENT
 					);
 					if (on_status)
-						return send_nack(res, ERROR_MESSAGES.STATUS_ALREADY_SENT);
+						return send_nack(res, ERROR_MESSAGES.STATUS_ALREADY_SENT);}
 					// Add validation logic for STATUS
 					break;
 				case ACTION_KEY.UPDATE:
-					const fulfillmentState = await redis.get(
+					{const fulfillmentState = await redis.get(
 						`${transaction_id}-on_update-fulfillment_state`
 					);
 					if (fulfillmentState != FULFILLMENT_STATES.OFFER_EXTENDED) {
 						logger.error(
 							`${ERROR_MESSAGES.OFFER_EXTENDED_STATE_NOT_EXISTED} for the given transaction_id: ${transaction_id}`
 						);
+					
 						return send_nack(
 							res,
 							ERROR_MESSAGES.OFFER_EXTENDED_STATE_NOT_EXISTED
 						);
 					}
+					const on_cancel = await checkActionAndLog(
+						transaction_id,
+						ON_ACTION_KEY.ON_CANCEL,
+						ERROR_MESSAGES.CANCELLATION_IS_ALREADY_DONE
+					)
+					if (on_cancel)
+						return send_nack(
+							res,
+							on_cancel?.error?.message
+								? on_cancel?.error?.message
+								: `${ERROR_MESSAGES.CANCELLATION_IS_ALREADY_DONE} for ${transaction_id}`
+						);
+					const on_confirm = await checkActionAndLog(
+						transaction_id,
+						ON_ACTION_KEY.ON_CONFIRM,
+						ERROR_MESSAGES.ON_CONFIRM_DOES_NOT_EXISTED
+					);
+					res.locals.on_confirm = on_confirm;}
+					// const on_confirm
 					// Add validation logic for UPDATE
 					break;
 
@@ -191,7 +252,7 @@ export const stateValidator =
 		}
 	};
 
-const checkActionAndLog = async (
+export const checkActionAndLog = async (
 	transaction_id: string,
 	action: string,
 	error_message: string

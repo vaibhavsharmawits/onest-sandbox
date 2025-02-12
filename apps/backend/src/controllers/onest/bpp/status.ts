@@ -66,19 +66,7 @@ export const statusController = async (
 			return send_nack(res, ERROR_MESSAGES.ON_CONFIRM_DOES_NOT_EXISTED);
 		}
 
-		const on_cancel = await redisExistFromServer(
-			ON_ACTION_KEY.ON_CANCEL,
-			transaction_id
-		);
-
-		if (on_cancel) {
-			logger.error(
-				"on_cancel already exists for the given transaction_id",
-				transaction_id
-			);
-			return send_nack(res, ERROR_MESSAGES.CANCELLATION_IS_ALREADY_DONE);
-		}
-
+	
 		return statusRequest(
 			req,
 			res,
@@ -216,7 +204,7 @@ const statusRequest = async (
 						undefined,
 						0
 					);
-				}, (index + 1) * 1000);
+				}, (index + 1) * 2000);
 			});
 		}
 

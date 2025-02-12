@@ -3,6 +3,7 @@ export const ERROR_MESSAGES = {
 	INIT_ALREADY_SENT: "init action call is already sent",
 	CONFIRM_ALREADY_SENT: "confirm action call is already sent",
 	STATUS_ALREADY_SENT: "status action call is already sent",
+	ON_UPDATE_UNSOLICITED_ALREADY_SENT: "on update is already sent. offer has been extended or accepted",
 
 	ON_CONFIRM_DOES_NOT_EXISTED: "on confirm doesn't exist",
 	ON_SEARCH_DOES_NOT_EXISTED: "on search doesn't exist",
