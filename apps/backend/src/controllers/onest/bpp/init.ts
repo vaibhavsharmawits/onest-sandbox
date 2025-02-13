@@ -8,6 +8,7 @@ import {
 import { ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
 import { sendOnestUnsolicited } from "../../../lib/utils/sendOnestUnsolicited";
 import { FULFILLMENT_STATES } from "../../../lib/utils/apiConstants";
+import { actionRedisSaver } from "../../../lib/utils/actionRedisSaver";
 
 export const initController = async (
 	req: Request,
@@ -15,6 +16,7 @@ export const initController = async (
 	next: NextFunction
 ) => {
 	try {
+		await actionRedisSaver(req);
 		const on_search = res.locals.on_search;
 		const on_select = res.locals.on_select;
 

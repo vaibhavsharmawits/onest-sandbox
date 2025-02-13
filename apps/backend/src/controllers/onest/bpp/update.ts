@@ -1,5 +1,10 @@
 import { NextFunction, Request, Response } from "express";
-import { responseBuilder, send_nack, logger } from "../../../lib/utils";
+import {
+	responseBuilder,
+	send_nack,
+	logger,
+	actionRedisSaver,
+} from "../../../lib/utils";
 import { ERROR_MESSAGES } from "../../../lib/utils/responseMessages";
 import { ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
 import { ORDER_STATUS, UPDATE_TARGET } from "../../../lib/utils/apiConstants";
@@ -9,6 +14,7 @@ export const updateController = async (
 	next: NextFunction
 ) => {
 	try {
+		await actionRedisSaver(req);
 		const update = req.body.message.order.fulfillments[0];
 		const on_confirm = res.locals.on_confirm;
 		let update_target =

@@ -12,3 +12,4 @@ export * from "./send_response"
 export * from './interfaces'
 export * from "./l2Validator"
 export * from "./onActionRedisSaver"
+export * from "./actionRedisSaver"

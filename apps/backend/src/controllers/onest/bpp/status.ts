@@ -4,6 +4,7 @@ import {
 	ORDER_STATUS,
 } from "../../../lib/utils/apiConstants";
 import {
+	actionRedisSaver,
 	logger,
 	redisExistFromServer,
 	redisFetchFromServer,
@@ -20,6 +21,7 @@ export const statusController = async (
 	next: NextFunction
 ) => {
 	try {
+		await actionRedisSaver(req);
 		let scenario: string = String(req.query.scenario) || "";
 		const { transaction_id } = req.body.context;
 		const on_confirm_data = await redisFetchFromServer(

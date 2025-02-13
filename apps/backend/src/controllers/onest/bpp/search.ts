@@ -10,6 +10,7 @@ import {
 import { ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
 import { ONEST_DOMAINS } from "../../../lib/utils/apiConstants";
 import { redis } from "../../../lib/utils";
+import { actionRedisSaver } from "../../../lib/utils/actionRedisSaver";
 
 export const searchController = async (
 	req: Request,
@@ -17,6 +18,7 @@ export const searchController = async (
 	next: NextFunction
 ) => {
 	try {
+		await actionRedisSaver(req);
 		const domain = req.body.context.domain;
 		let search_type = await redis.get(
 			`${req.body.context.transaction_id}-search_type`

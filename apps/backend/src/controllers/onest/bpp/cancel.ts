@@ -5,6 +5,7 @@ import {
 	send_nack,
 	updateFulfillments,
 	logger,
+	actionRedisSaver,
 } from "../../../lib/utils";
 import { ERROR_MESSAGES } from "../../../lib/utils/responseMessages";
 import { ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
@@ -16,13 +17,13 @@ export const cancelController = async (
 	next: NextFunction
 ) => {
 	try {
+		await actionRedisSaver(req);
 		const on_confirm = res.locals.on_confirm;
 		if (on_confirm.message.order.id != req.body.message.order_id) {
 			return send_nack(res, ERROR_MESSAGES.ORDER_ID_DOES_NOT_EXISTED);
 		}
 
 		cancelRequest(req, res, next, on_confirm);
-
 	} catch (error) {
 		return next(error);
 	}
@@ -114,7 +115,7 @@ const cancelRequest = async (
 				payments: transaction.message.order.payments,
 				state: {
 					updated_at: ts.toISOString(),
-				} 
+				},
 			},
 		};
 

@@ -1,17 +1,19 @@
 import { NextFunction, Request, Response } from "express";
 import {
+	actionRedisSaver,
 	confirmItemTags,
 	logger,
 	responseBuilder,
 } from "../../../lib/utils";
 import { ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
 
-export const confirmController = (
+export const confirmController = async (
 	req: Request,
 	res: Response,
 	next: NextFunction
 ) => {
 	try {
+		await actionRedisSaver(req);
 		confirmConsultationController(req, res, next);
 	} catch (error) {
 		logger.error(

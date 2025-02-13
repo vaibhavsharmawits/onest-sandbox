@@ -9,6 +9,7 @@ import {
 } from "../../../lib/utils";
 import { ERROR_MESSAGES } from "../../../lib/utils/responseMessages";
 import { ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
+import { actionRedisSaver } from "../../../lib/utils/actionRedisSaver";
 
 export const selectController = async (
 	req: Request,
@@ -16,9 +17,10 @@ export const selectController = async (
 	next: NextFunction
 ) => {
 	try {
+		await actionRedisSaver(req);
 		const { transaction_id } = req.body.context;
 		const on_search = res.locals.on_search;
-		
+
 		const providersItems = on_search?.message?.catalog?.providers[0];
 		req.body.providersItems = providersItems;
 
