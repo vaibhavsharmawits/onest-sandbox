@@ -7,7 +7,6 @@ import { statusController } from "./status";
 import { updateController } from "./update";
 import { cancelController } from "./cancel";
 import { jsonSchemaValidator, redisRetriever } from "../../../middlewares";
-import { ratingController } from "./rating";
 import { ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
 import { stateValidator } from "../../../middlewares/stateValidator";
 
@@ -63,7 +62,7 @@ bppRouter.post(
 
 bppRouter.post(
 	"/update",
-	// jsonSchemaValidator({ domain: "onest", action: "update" }),
+	jsonSchemaValidator({ domain: "onest", action: "update" }),
 	stateValidator(ACTION_KEY.UPDATE),
 	redisRetriever,
 	updateController

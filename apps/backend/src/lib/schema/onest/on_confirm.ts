@@ -1,4 +1,10 @@
-import { DOMAIN, JOBS_TYPE, PAYMENTS, VERSION } from "./constants";
+import {
+	DOMAIN,
+	FULFILLMENT_STATES,
+	JOBS_TYPE,
+	PAYMENTS,
+	VERSION,
+} from "./constants";
 
 export const onConfirmSchema = {
 	$id: "onConfirmSchema",
@@ -90,7 +96,7 @@ export const onConfirmSchema = {
 					properties: {
 						status: {
 							type: "string",
-							const: "Created",
+							enum: ["Created", "Active"],
 						},
 						provider: {
 							type: "object",
@@ -190,7 +196,7 @@ export const onConfirmSchema = {
 												properties: {
 													code: {
 														type: "string",
-														const: "APPLICATION_ACCEPTED",
+														enum: FULFILLMENT_STATES["on_confirm"],
 													},
 												},
 												required: ["code"],
@@ -414,6 +420,10 @@ export const onConfirmSchema = {
 							},
 							required: ["params", "status", "type", "collected_by", "tags"],
 						},
+						updated_at: {
+							type: "string",
+							format: "date-time",
+						},
 					},
 					required: [
 						"status",
@@ -422,6 +432,7 @@ export const onConfirmSchema = {
 						"fulfillments",
 						"quote",
 						"payments",
+						"updated_at",
 					],
 				},
 			},

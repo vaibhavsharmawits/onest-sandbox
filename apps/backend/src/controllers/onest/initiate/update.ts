@@ -107,6 +107,7 @@ const intializeRequest = async (
 				bap_uri: ONEST_BAP_MOCKSERVER_URL,
 			},
 			message: {
+				update_target: "fulfillment",
 				order: {
 					id: transaction.message.order.id,
 					fulfillments: [

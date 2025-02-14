@@ -125,7 +125,7 @@ const statusRequest = async (
 					id: fulfillment.id,
 					state: {
 						descriptor: {
-							code: FULFILLMENT_STATES.APPLICATION_IN_PROGRESS,
+							code: FULFILLMENT_STATES.APPLICATION_ACCEPTED,
 						},
 						updated_at: ts.toISOString(),
 					},
@@ -146,9 +146,7 @@ const statusRequest = async (
 				id: message.order.id,
 				status: ORDER_STATUS.ACTIVE,
 				fulfillments: updatedFulfillments,
-				state: {
-					updated_at: ts.toISOString(),
-				},
+				updated_at: ts.toISOString(),
 			},
 		};
 
@@ -179,7 +177,7 @@ const statusRequest = async (
 						responseMessage.order.documents = [
 							{
 								url: "https://offer_letter_url",
-								label: "offer_letter",
+								label: "OFFER_LETTER",
 							},
 						];
 					}
@@ -191,7 +189,7 @@ const statusRequest = async (
 						status;
 					updatedResponseMessage.order.fulfillments[0].state.updated_at =
 						ts.toISOString();
-					updatedResponseMessage.order.state.updated_at = ts.toISOString();
+					updatedResponseMessage.order.updated_at = ts.toISOString();
 					logger.info(
 						`Sending unsolicited ${actionState} (${status}) for transaction_id: ${context.transaction_id}`
 					);

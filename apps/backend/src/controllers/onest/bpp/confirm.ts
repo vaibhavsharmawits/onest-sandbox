@@ -6,6 +6,7 @@ import {
 	responseBuilder,
 } from "../../../lib/utils";
 import { ON_ACTION_KEY } from "../../../lib/utils/actionOnActionKeys";
+import { FULFILLMENT_STATES } from "../../../lib/utils/apiConstants";
 
 export const confirmController = async (
 	req: Request,
@@ -51,7 +52,7 @@ export const confirmConsultationController = async (
 		const updatedFulfillments = order?.fulfillments.map((ff: any) => {
 			ff.state = {
 				descriptor: {
-					code: "APPLICATION_ACCEPTED",
+					code: FULFILLMENT_STATES.APPLICATION_SUBMITTED
 				},
 				updated_at: ts.toISOString(),
 			};
@@ -63,7 +64,7 @@ export const confirmConsultationController = async (
 				...order,
 				fulfillments: updatedFulfillments,
 				items: updatedItems,
-				state: { ...order.state, updated_at: ts.toISOString() },
+				updated_at: ts.toISOString()
 			},
 		};
 

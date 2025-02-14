@@ -15,6 +15,7 @@ import { searchIncSchema } from "./search_inc";
 import { onSearchIncSchema } from "./on_search_inc";
 import { cancelSchema } from "./cancel";
 import { onCancelSchema } from "./on_cancel";
+import { updateSchema } from "./update";
 
 export const onestSchemaValidator =
 	(
@@ -89,9 +90,9 @@ export const onestSchemaValidator =
 			case "on_status":
 				validate = ajv.compile(onStatusSchema);
 				break;
-			// case "update":
-			// 	validate = ajv.compile(updateSchema);
-			// 	break;
+			case "update":
+				validate = ajv.compile(updateSchema);
+				break;
 			// case "on_update":
 			// 	validate = ajv.compile(onUpdateSchema);
 			// 	break;

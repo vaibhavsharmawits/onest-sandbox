@@ -100,7 +100,7 @@ export const onUpdateSchema = {
 						},
 						status: {
 							type: "string",
-							const: "Active",
+							enum: ["Active", "Completed"],
 						},
 						provider: {
 							type: "object",
@@ -358,6 +358,27 @@ export const onUpdateSchema = {
 							},
 							required: ["params", "status", "type", "collected_by", "tags"],
 						},
+						updated_at: {
+							type: "string",
+							format: "date-time",
+						},
+						documents: {
+							type: "array",
+							items: {
+								type: "object",
+								properties: {
+									url: {
+										type: "string",
+									},
+									label: {
+										type: "string",
+										enum: ["OFFER_LETTER"],
+									},
+								},
+								required: ["url", "label"],
+								additionalProperties: false,
+							},
+						},
 					},
 					required: [
 						"id",
@@ -367,6 +388,7 @@ export const onUpdateSchema = {
 						"fulfillments",
 						"quote",
 						"payments",
+						"updated_at",
 					],
 				},
 			},

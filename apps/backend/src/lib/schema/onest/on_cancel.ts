@@ -360,7 +360,7 @@ export const onCancelSchema = {
 								},
 								collected_by: {
 									type: "string",
-									enum: PAYMENTS["collected_by"]
+									enum: PAYMENTS["collected_by"],
 								},
 								tags: {
 									type: "object",
@@ -413,6 +413,10 @@ export const onCancelSchema = {
 							},
 							required: ["params", "status", "type", "collected_by", "tags"],
 						},
+						updated_at: {
+							type: "string",
+							format: "date-time",
+						},
 					},
 					required: [
 						"status",
@@ -421,6 +425,7 @@ export const onCancelSchema = {
 						"fulfillments",
 						"quote",
 						"payments",
+						"updated_at",
 					],
 				},
 			},

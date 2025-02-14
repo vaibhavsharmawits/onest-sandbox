@@ -74,11 +74,11 @@ const updateRequest = async (
 				break;
 		}
 		target_fulfillment.state.updated_at = ts.toISOString();
-		responseMessage.order.state.updated_at = ts.toISOString();
+		responseMessage.order.updated_at = ts.toISOString();
 		responseMessage.order.documents = [
 			{
 				url: "https://offer_letter_url",
-				label: "offer_letter",
+				label: "OFFER_LETTER",
 			},
 		];
 

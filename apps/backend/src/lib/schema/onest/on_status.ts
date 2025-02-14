@@ -1,4 +1,10 @@
-import { DOMAIN, JOBS_TYPE, PAYMENTS, VERSION } from "./constants";
+import {
+	DOMAIN,
+	FULFILLMENT_STATES,
+	JOBS_TYPE,
+	PAYMENTS,
+	VERSION,
+} from "./constants";
 
 export const onStatusSchema = {
 	$id: "onStatusSchema",
@@ -90,7 +96,7 @@ export const onStatusSchema = {
 					properties: {
 						status: {
 							type: "string",
-							const: "Active",
+							enum: ["Completed", "Active"],
 						},
 						provider: {
 							type: "object",
@@ -187,11 +193,7 @@ export const onStatusSchema = {
 												properties: {
 													code: {
 														type: "string",
-														enum: [
-															"APPLICATION_IN_PROGRESS",
-															"ASSESSMENT_IN_PROGRESS",
-															// "OFFER_EXTENDED",
-														],
+														enum: FULFILLMENT_STATES["on_status"],
 													},
 												},
 												required: ["code"],
@@ -352,6 +354,10 @@ export const onStatusSchema = {
 							},
 							required: ["params", "status", "type", "collected_by", "tags"],
 						},
+						updated_at: {
+							type: "string",
+							format: "date-time",
+						},
 					},
 					required: [
 						"status",
@@ -360,6 +366,7 @@ export const onStatusSchema = {
 						"fulfillments",
 						"quote",
 						"payments",
+						"updated_at",
 					],
 				},
 			},

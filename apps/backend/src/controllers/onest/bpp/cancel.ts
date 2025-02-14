@@ -113,9 +113,7 @@ const cancelRequest = async (
 				},
 				fulfillments: updatedFulfillments,
 				payments: transaction.message.order.payments,
-				state: {
-					updated_at: ts.toISOString(),
-				},
+				updated_at: ts.toISOString(),
 			},
 		};
 

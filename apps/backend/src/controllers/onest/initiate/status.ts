@@ -70,9 +70,7 @@ const intializeRequest = async (
 				bap_uri: ONEST_BAP_MOCKSERVER_URL,
 			},
 			message: {
-				order: {
-					id: transaction.message.order.id,
-				},
+				order_id: transaction.message.order.id,
 			},
 		};
 
