@@ -4,7 +4,6 @@ import {
 	send_response,
 	send_nack,
 	redisFetchToServer,
-	redis,
 	ONEST_BAP_MOCKSERVER_URL,
 	logger,
 } from "../../../lib/utils";
@@ -24,19 +23,6 @@ export const initiateStatusController = async (
 			ON_ACTION_KEY.ON_CONFIRM,
 			transactionId
 		);
-
-		const on_cancel = await redisFetchToServer(
-			ON_ACTION_KEY.ON_CANCEL,
-			transactionId
-		);
-
-		if (on_cancel) {
-			logger.error(
-				"on_cancel already exists for the given transaction_id",
-				transactionId
-			);
-			return send_nack(res, ERROR_MESSAGES.CANCELLATION_IS_ALREADY_DONE);
-		}
 
 		if (!on_confirm) {
 			logger.error(

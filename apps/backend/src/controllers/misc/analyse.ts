@@ -91,10 +91,11 @@ export const analyseController = async (req: Request, res: Response) => {
 				if (
 					action === "on_status" ||
 					action === "on_init" ||
-					action === "on_update"
+					action === "on_update" ||
+					action === "status"
 				) {
 					// Keep all sorted objects for on_status
-					const withResponse = group.filter((obj:any) => obj.response);
+					const withResponse = group.filter((obj: any) => obj.response);
 					prioritized.push(...withResponse);
 				} else {
 					// Find object with response

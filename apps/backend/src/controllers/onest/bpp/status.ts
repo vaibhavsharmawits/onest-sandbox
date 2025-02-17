@@ -6,7 +6,7 @@ import {
 import {
 	actionRedisSaver,
 	logger,
-	redisExistFromServer,
+	redis,
 	redisFetchFromServer,
 	responseBuilder,
 	send_nack,
@@ -28,6 +28,24 @@ export const statusController = async (
 			ON_ACTION_KEY.ON_CONFIRM,
 			transaction_id
 		);
+
+		let ffStateAndOrderStatus: any = await redis.get(
+			`${transaction_id}-ff_state_and_order_status`
+		);
+
+		ffStateAndOrderStatus = ffStateAndOrderStatus
+			? JSON.parse(ffStateAndOrderStatus)
+			: {};
+
+		if (
+			ffStateAndOrderStatus?.fulfillment_state === FULFILLMENT_STATES.CANCELLED
+		) {
+			const on_cancel_data = await redisFetchFromServer(
+				ON_ACTION_KEY.ON_CANCEL,
+				transaction_id
+			);
+			req.body.on_cancel = on_cancel_data;
+		}
 
 		const on_search_data = await redisFetchFromServer(
 			ON_ACTION_KEY.ON_SEARCH,
@@ -74,7 +92,8 @@ export const statusController = async (
 			next,
 			on_confirm_data,
 			scenario,
-			itemsWithTimeRanges
+			itemsWithTimeRanges,
+			ffStateAndOrderStatus
 		);
 	} catch (error) {
 		logger.error(
@@ -92,19 +111,21 @@ const statusRequest = async (
 	next: NextFunction,
 	transaction: any,
 	scenario: string,
-	itemsWithTimeRanges: any
+	itemsWithTimeRanges: any,
+	ffStateAndOrderStatus: any
 ) => {
 	try {
 		const { context, message } = transaction;
+		const { transaction_id } = context;
 		context.action = ON_ACTION_KEY.ON_STATUS;
 		const domain = context?.domain;
-		const on_status = await redisFetchFromServer(
-			ON_ACTION_KEY.ON_STATUS,
-			req.body.context.transaction_id
-		);
 		let next_status = scenario;
+		const on_cancel = req.body.on_cancel;
+		const fulfillmentState = ffStateAndOrderStatus?.fulfillment_state;
+		const orderStatus = ffStateAndOrderStatus?.order_status;
+		let quote = message.order.quote;
 
-		const updatedItems = message.order.items.map((item: any) => {
+		let updatedItems = message.order.items.map((item: any) => {
 			const range = itemsWithTimeRanges[item.id]?.range || null;
 			const updatedItem = {
 				...item,
@@ -118,14 +139,19 @@ const statusRequest = async (
 
 		const ts = new Date();
 		scenario = scenario ? scenario : next_status;
-		const updatedFulfillments = message.order.fulfillments.map(
+
+		let updatedFulfillments = message.order.fulfillments.map(
 			(fulfillment: any) => {
 				const updatedFulfillment = {
 					...fulfillment,
 					id: fulfillment.id,
 					state: {
 						descriptor: {
-							code: FULFILLMENT_STATES.APPLICATION_ACCEPTED,
+							code: `${
+								fulfillmentState === FULFILLMENT_STATES.APPLICATION_SUBMITTED
+									? FULFILLMENT_STATES.APPLICATION_ACCEPTED
+									: fulfillmentState
+							}`,
 						},
 						updated_at: ts.toISOString(),
 					},
@@ -139,19 +165,82 @@ const statusRequest = async (
 			}
 		);
 
+		// if on_status is requested after on_cancel
+		if (fulfillmentState === FULFILLMENT_STATES.CANCELLED) {
+			updatedItems = on_cancel.message.order.items.map((item: any) => {
+				const range = itemsWithTimeRanges[item.id]?.range || null;
+				const updatedItem = {
+					...item,
+					time: {
+						range: range,
+					},
+					tags: [...message.order.items[0].tags, ...item.tags],
+				};
+				return updatedItem;
+			});
+
+			updatedFulfillments = on_cancel.message.order.fulfillments.map(
+				(fulfillment: any) => {
+					const updatedFulfillment = {
+						...fulfillment,
+						id: fulfillment.id,
+						state: {
+							descriptor: {
+								code: FULFILLMENT_STATES.CANCELLED,
+							},
+							updated_at: ts.toISOString(),
+						},
+					};
+
+					return updatedFulfillment;
+				}
+			);
+			quote = on_cancel.message.order.quote;
+		}
+
+		// change here for on_cancel
 		const responseMessage: any = {
 			order: {
 				...message.order,
+				quote: quote,
 				items: updatedItems,
 				id: message.order.id,
-				status: ORDER_STATUS.ACTIVE,
+				status: `${
+					orderStatus == ORDER_STATUS.CREATED
+						? ORDER_STATUS.ACTIVE
+						: orderStatus
+				}`,
 				fulfillments: updatedFulfillments,
 				updated_at: ts.toISOString(),
 			},
 		};
 
+		// Adding if the on_status is requested after on_update
+		if (
+			["OFFER_ACCEPTED", "OFFER_REJECTED", "OFFER_EXTENDED"].includes(
+				fulfillmentState
+			)
+		) {
+			responseMessage.order.documents = [
+				{
+					url: "https://offer_letter_url",
+					label: "OFFER_LETTER",
+				},
+			];
+		}
+
 		// This sends unsolicited on_status calls.
-		if (domain == "ONDC:ONEST10") {
+		const unsolicitedStatusSend = await redis.get(
+			`${transaction_id}-unsolicitedStatusSend`
+		);
+
+		if (
+			!(unsolicitedStatusSend === "true") &&
+			fulfillmentState != FULFILLMENT_STATES.CANCELLED &&
+			domain == "ONDC:ONEST10"
+		) {
+			await redis.set(`${transaction_id}-unsolicitedStatusSend`, "true");
+
 			const updatedStatus = [
 				FULFILLMENT_STATES.ASSESSMENT_IN_PROGRESS,
 				FULFILLMENT_STATES.OFFER_EXTENDED,
@@ -164,8 +253,8 @@ const statusRequest = async (
 							: ON_ACTION_KEY.ON_STATUS;
 
 					const ts = new Date();
-					// Changes in On_Status Unsolicited.
 
+					// For on_update
 					if (actionState === ON_ACTION_KEY.ON_UPDATE) {
 						responseMessage.order.items = responseMessage.order.items.map(
 							(item: any) => {

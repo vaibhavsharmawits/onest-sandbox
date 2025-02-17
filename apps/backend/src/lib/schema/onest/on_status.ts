@@ -96,7 +96,7 @@ export const onStatusSchema = {
 					properties: {
 						status: {
 							type: "string",
-							enum: ["Completed", "Active"],
+							enum: ["Completed", "Active", "Cancelled"],
 						},
 						provider: {
 							type: "object",
@@ -213,7 +213,7 @@ export const onStatusSchema = {
 										enum: JOBS_TYPE,
 									},
 								},
-								required: ["id", "type", "state"],
+								required: ["id", "state"],
 							},
 						},
 						quote: {

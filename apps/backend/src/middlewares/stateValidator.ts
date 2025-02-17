@@ -140,27 +140,6 @@ export const stateValidator =
 					}
 					break;
 				case ACTION_KEY.STATUS:
-					{
-						const on_cancel = await checkActionAndLog(
-							transaction_id,
-							ON_ACTION_KEY.ON_CANCEL,
-							ERROR_MESSAGES.CANCELLATION_IS_ALREADY_DONE
-						);
-						if (on_cancel)
-							return send_nack(
-								res,
-								on_cancel?.error?.message
-									? on_cancel?.error?.message
-									: `${ERROR_MESSAGES.CANCELLATION_IS_ALREADY_DONE} for ${transaction_id}`
-							);
-						const on_status = await checkingNextActionCall(
-							transaction_id,
-							ON_ACTION_KEY.ON_STATUS,
-							ERROR_MESSAGES.STATUS_ALREADY_SENT
-						);
-						if (on_status)
-							return send_nack(res, ERROR_MESSAGES.STATUS_ALREADY_SENT);
-					}
 					break;
 				case ACTION_KEY.UPDATE:
 					{
@@ -220,22 +199,51 @@ export const stateValidator =
 					}
 					break;
 				case ON_ACTION_KEY.ON_CONFIRM:
+					{
+						const fulfillmentState =
+							req.body.message.order.fulfillments[0].state.descriptor.code;
+						const orderStatus = req.body.message.order.status;
+						if (fulfillmentState && orderStatus) {
+							await redis.set(
+								`${transaction_id}-ff_state_and_order_status`,
+								JSON.stringify({
+									fulfillment_state: fulfillmentState,
+									order_status: orderStatus,
+								})
+							);
+						}
+					}
 					// Add validation logic for ON_CONFIRM
 					break;
 				case ON_ACTION_KEY.ON_CANCEL:
+					{
+						const fulfillmentState =
+							req.body.message.order.fulfillments[0].state.descriptor.code;
+						const orderStatus = req.body.message.order.status;
+						if (fulfillmentState && orderStatus) {
+							await redis.set(
+								`${transaction_id}-ff_state_and_order_status`,
+								JSON.stringify({
+									fulfillment_state: fulfillmentState,
+									order_status: orderStatus,
+								})
+							);
+						}
+					}
 					// Add validation logic for ON_CANCEL
 					break;
 				case ON_ACTION_KEY.ON_STATUS:
 					{
-						const on_cancel = await checkingNextActionCall(
-							transaction_id,
-							ON_ACTION_KEY.ON_CANCEL,
-							ERROR_MESSAGES.ON_CANCEL_ALREADY_SENT
-						);
-						if (on_cancel) {
-							return send_nack(
-								res,
-								`${ERROR_MESSAGES.ON_CANCEL_ALREADY_SENT} for ${transaction_id} and the order can't be further updated`
+						const fulfillmentState =
+							req.body.message.order.fulfillments[0].state.descriptor.code;
+						const orderStatus = req.body.message.order.status;
+						if (fulfillmentState && orderStatus) {
+							await redis.set(
+								`${transaction_id}-ff_state_and_order_status`,
+								JSON.stringify({
+									fulfillment_state: fulfillmentState,
+									order_status: orderStatus,
+								})
 							);
 						}
 					}
@@ -259,6 +267,17 @@ export const stateValidator =
 							await redis.set(
 								`${transaction_id}-on_update-fulfillment_state`,
 								fulfillmentState
+							);
+						}
+
+						const orderStatus = req.body.message.order.status;
+						if (fulfillmentState && orderStatus) {
+							await redis.set(
+								`${transaction_id}-ff_state_and_order_status`,
+								JSON.stringify({
+									fulfillment_state: fulfillmentState,
+									order_status: orderStatus,
+								})
 							);
 						}
 					}
