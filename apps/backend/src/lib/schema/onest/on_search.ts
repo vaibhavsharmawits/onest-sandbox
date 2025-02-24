@@ -43,10 +43,16 @@ export const onSearchSchema = {
 					type: "string",
 					const: VERSION,
 				},
-					bap_id: {
+				bap_id: {
 					type: "string",
 				},
 				bap_uri: {
+					type: "string",
+				},
+				bpp_id: {
+					type: "string",
+				},
+				bpp_uri: {
 					type: "string",
 				},
 				transaction_id: {
@@ -71,6 +77,8 @@ export const onSearchSchema = {
 				"version",
 				"bap_id",
 				"bap_uri",
+				"bpp_id",
+				"bpp_uri",
 				"transaction_id",
 				"message_id",
 				"timestamp",
@@ -78,6 +86,7 @@ export const onSearchSchema = {
 			],
 		},
 		message: {
+			additionalProperties: false,
 			type: "object",
 			properties: {
 				catalog: {
@@ -151,9 +160,6 @@ export const onSearchSchema = {
 												city: {
 													type: "object",
 													properties: {
-														// name: {
-														// 	type: "string",
-														// },
 														code: {
 															type: "string",
 														},
@@ -163,9 +169,6 @@ export const onSearchSchema = {
 												state: {
 													type: "object",
 													properties: {
-														// name: {
-														// 	type: "string",
-														// },
 														code: {
 															type: "string",
 														},
@@ -262,6 +265,78 @@ export const onSearchSchema = {
 													},
 													required: ["range", "label", "timestamp"],
 												},
+												creator: {
+													type: "object",
+													additionalProperties: false,
+													properties: {
+														descriptor: {
+															type: "object",
+															properties: {
+																name: { type: "string" },
+																code: { type: "string" },
+																short_desc: { type: "string" },
+																long_desc: { type: "string" },
+																media: {
+																	type: "array",
+																	items: {
+																		type: "object",
+																		properties: {
+																			mimetype: { type: "string" },
+																			url: { type: "string" },
+																		},
+																		required: ["mimetype", "url"],
+																	},
+																},
+																images: {
+																	type: "array",
+																	items: {
+																		type: "object",
+																		properties: {
+																			url: { type: "string" },
+																		},
+																		required: ["url"],
+																	},
+																},
+															},
+															required: [
+																"name",
+																"code",
+																"short_desc",
+																"long_desc",
+															],
+														},
+														address: { type: "string" },
+														state: {
+															type: "object",
+															properties: {
+																code: { type: "string" },
+															},
+															required: ["code"],
+														},
+														city: {
+															type: "object",
+															properties: {
+																code: { type: "string" },
+															},
+															required: ["code"],
+														},
+														contact: {
+															type: "object",
+															properties: {
+																phone: { type: "string" },
+																email: { type: "string" },
+															},
+															required: ["phone", "email"],
+														},
+													},
+													required: [
+														"descriptor",
+														"address",
+														"state",
+														"city",
+														"contact",
+													],
+												},
 												location_ids: {
 													type: "array",
 													items: {
@@ -342,6 +417,7 @@ export const onSearchSchema = {
 												"location_ids",
 												"fulfillment_ids",
 												"price",
+												"creator",
 											],
 										},
 									},

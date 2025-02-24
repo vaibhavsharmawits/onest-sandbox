@@ -49,6 +49,12 @@ export const onSearchIncSchema = {
 				bap_uri: {
 					type: "string",
 				},
+				bpp_id: {
+					type: "string",
+				},
+				bpp_uri: {
+					type: "string",
+				},
 				transaction_id: {
 					type: "string",
 				},
@@ -71,6 +77,8 @@ export const onSearchIncSchema = {
 				"version",
 				"bap_id",
 				"bap_uri",
+				"bpp_id",
+				"bpp_uri",
 				"transaction_id",
 				"message_id",
 				"timestamp",
