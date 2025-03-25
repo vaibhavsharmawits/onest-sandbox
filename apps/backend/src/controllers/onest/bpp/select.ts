@@ -94,9 +94,8 @@ const selectConfirmController = (
 				price: providerItem?.price,
 			};
 		});
-
 		message.order.items.forEach((itm: any) => {
-			itm.fulfillment_ids = [provider?.fulfillments?.[0]?.id];
+			itm.fulfillment_ids = [message?.order?.fulfillments?.[0]?.id];
 		});
 
 		const responseMessage = {
@@ -106,8 +105,8 @@ const selectConfirmController = (
 				},
 				fulfillments: [
 					{
-						id: provider?.fulfillments?.[0]?.id,
-						type: provider?.fulfillments?.[0]?.type,
+						id: message?.order?.fulfillments?.[0]?.id,
+						type: message?.order?.fulfillments?.[0]?.type,
 					},
 				],
 				items: [...message.order.items],
