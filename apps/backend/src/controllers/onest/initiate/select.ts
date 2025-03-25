@@ -53,7 +53,7 @@ const intializeRequest = async (
 		const { transaction_id } = context;
 		const { id } = providers?.[0];
 		let items = [];
-
+		const selected_fulfillment_id = providers?.[0]?.items[0]?.fulfillment_ids[0]
 		items = providers[0].items = providers?.[0]?.items.map(
 			({ id, tags }: { id: string; tags: any[] }) => ({
 				id,
@@ -82,8 +82,8 @@ const intializeRequest = async (
 					},
 					fulfillments: [
 						{
-							id: providers[0]?.fulfillments?.[0]?.id,
-							type: providers[0]?.fulfillments?.[0]?.type,
+							id: selected_fulfillment_id,
+							type: providers?.[0]?.fulfillments?.find((fulfillment: any) => fulfillment.id === selected_fulfillment_id)?.type
 						},
 					],
 					items: [
