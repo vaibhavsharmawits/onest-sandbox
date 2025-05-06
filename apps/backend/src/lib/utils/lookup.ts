@@ -3,6 +3,7 @@ import { SubscriberDetail } from "../../interfaces";
 import { STAGING_REGISTRY_URL, PREPOD_REGISTRY_URL } from "./constants";
 import { redis } from "./redis";
 import { logger } from "./logger";
+import { createAuthHeader } from "./responseAuth";
 
 export async function getSubscriberDetails(
 	subscriber_id: string,
@@ -12,27 +13,35 @@ export async function getSubscriberDetails(
 	const cachedData = await redis.get(
 		`subscriber_data-${subscriber_id}-${unique_key_id}`
 	);
+	
 	let subscribers = cachedData ? JSON.parse(cachedData) : [];
-
+		
 	// Determine the appropriate URL based on the environment
 	const url = env === "prepod" ? PREPOD_REGISTRY_URL : STAGING_REGISTRY_URL;
 
 	if (subscribers.length === 0) {
 		try {
+			const payload = {
+				subscriber_id,
+				ukId:unique_key_id,
+			};
+			const headers = await createAuthHeader(payload)
 			// Fetch data from both endpoints
-			const [stagingResponse, prepodResponse] = await Promise.all([
-				axios.post(STAGING_REGISTRY_URL, {
-					subscriber_id,
-					ukId: unique_key_id,
-				}),
-				axios.post(PREPOD_REGISTRY_URL, {
-					subscriber_id,
-					ukId: unique_key_id,
-				}),
+			const [stagingResponse] = await Promise.all([
+				axios.post(STAGING_REGISTRY_URL, payload,
+					{
+						headers: {
+						  "Content-Type": "application/json",
+						  "Authorization": headers,
+						},
+					  }
+				),
 			]);
+			console.log("stagingResponse",stagingResponse);
+			
 
 			// Process and concatenate data from both responses
-			[stagingResponse.data, prepodResponse.data].forEach((responseData) => {
+			[stagingResponse.data].forEach((responseData) => {
 				responseData
 					.map((data: object) => {
 						const { subscriber_url, ...subscriberData } =
